@@ -1,0 +1,11 @@
+{
+  "promptDelete": false,
+  "newFileLocation": "current",
+  "useTab": false,
+  "tabSize": 2,
+  "attachmentFolderPath": "./assets",
+  "showLineNumber": false,
+  "spellcheck": true,
+  "defaultViewMode": "source",
+  "livePreview": true
+}

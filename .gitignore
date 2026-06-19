@@ -1,0 +1,28 @@
+# Quartz
+.quartz/
+public/
+
+# Node
+node_modules/
+
+# Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Meta-Kim (governance internals)
+.meta-kim/state/
+.meta-kim/backups/
+
+# Claude Code local config
+.claude/settings.local.json
+
+# Codex local config
+.codex/hooks.json

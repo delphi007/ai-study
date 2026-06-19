@@ -1,0 +1,2438 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "settings.json",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L1",
+      "id": "claude_settings_json",
+      "community": 8,
+      "norm_label": "settings.json"
+    },
+    {
+      "label": "hooks",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L2",
+      "id": "claude_settings_hooks",
+      "community": 8,
+      "norm_label": "hooks"
+    },
+    {
+      "label": "PreToolUse",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L3",
+      "id": "claude_settings_hooks_pretooluse",
+      "community": 8,
+      "norm_label": "pretooluse"
+    },
+    {
+      "label": "hooks.json",
+      "file_type": "code",
+      "source_file": ".codex/hooks.json",
+      "source_location": "L1",
+      "id": "codex_hooks_json",
+      "community": 9,
+      "norm_label": "hooks.json"
+    },
+    {
+      "label": "hooks",
+      "file_type": "code",
+      "source_file": ".codex/hooks.json",
+      "source_location": "L2",
+      "id": "codex_hooks_hooks",
+      "community": 9,
+      "norm_label": "hooks"
+    },
+    {
+      "label": "PreToolUse",
+      "file_type": "code",
+      "source_file": ".codex/hooks.json",
+      "source_location": "L3",
+      "id": "codex_hooks_hooks_pretooluse",
+      "community": 9,
+      "norm_label": "pretooluse"
+    },
+    {
+      "label": "active-run.json",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L1",
+      "id": "meta_kim_state_default_active_run_json",
+      "community": 1,
+      "norm_label": "active-run.json"
+    },
+    {
+      "label": "schemaVersion",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L2",
+      "id": "default_active_run_schemaversion",
+      "community": 1,
+      "norm_label": "schemaversion"
+    },
+    {
+      "label": "active",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L3",
+      "id": "default_active_run_active",
+      "community": 1,
+      "norm_label": "active"
+    },
+    {
+      "label": "runId",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L4",
+      "id": "default_active_run_runid",
+      "community": 1,
+      "norm_label": "runid"
+    },
+    {
+      "label": "triggeredBy",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L5",
+      "id": "default_active_run_triggeredby",
+      "community": 1,
+      "norm_label": "triggeredby"
+    },
+    {
+      "label": "currentStage",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L6",
+      "id": "default_active_run_currentstage",
+      "community": 1,
+      "norm_label": "currentstage"
+    },
+    {
+      "label": "currentStageKey",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L7",
+      "id": "default_active_run_currentstagekey",
+      "community": 1,
+      "norm_label": "currentstagekey"
+    },
+    {
+      "label": "stageIndex",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L8",
+      "id": "default_active_run_stageindex",
+      "community": 1,
+      "norm_label": "stageindex"
+    },
+    {
+      "label": "stageTotal",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L9",
+      "id": "default_active_run_stagetotal",
+      "community": 1,
+      "norm_label": "stagetotal"
+    },
+    {
+      "label": "percent",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L10",
+      "id": "default_active_run_percent",
+      "community": 1,
+      "norm_label": "percent"
+    },
+    {
+      "label": "completed",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L11",
+      "id": "default_active_run_completed",
+      "community": 1,
+      "norm_label": "completed"
+    },
+    {
+      "label": "next",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L12",
+      "id": "default_active_run_next",
+      "community": 1,
+      "norm_label": "next"
+    },
+    {
+      "label": "blockedOn",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L13",
+      "id": "default_active_run_blockedon",
+      "community": 1,
+      "norm_label": "blockedon"
+    },
+    {
+      "label": "startedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L14",
+      "id": "default_active_run_startedat",
+      "community": 1,
+      "norm_label": "startedat"
+    },
+    {
+      "label": "updatedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L15",
+      "id": "default_active_run_updatedat",
+      "community": 1,
+      "norm_label": "updatedat"
+    },
+    {
+      "label": "lastUserVisibleNotice",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L16",
+      "id": "default_active_run_lastuservisiblenotice",
+      "community": 1,
+      "norm_label": "lastuservisiblenotice"
+    },
+    {
+      "label": "surfaceMode",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L17",
+      "id": "default_active_run_surfacemode",
+      "community": 1,
+      "norm_label": "surfacemode"
+    },
+    {
+      "label": "resolvedOutputLanguage",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L18",
+      "id": "default_active_run_resolvedoutputlanguage",
+      "community": 1,
+      "norm_label": "resolvedoutputlanguage"
+    },
+    {
+      "label": "languageResolution",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L19",
+      "id": "default_active_run_languageresolution",
+      "community": 1,
+      "norm_label": "languageresolution"
+    },
+    {
+      "label": "language",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L20",
+      "id": "default_active_run_languageresolution_language",
+      "community": 1,
+      "norm_label": "language"
+    },
+    {
+      "label": "source",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L21",
+      "id": "default_active_run_languageresolution_source",
+      "community": 1,
+      "norm_label": "source"
+    },
+    {
+      "label": "publicSurface",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L23",
+      "id": "default_active_run_publicsurface",
+      "community": 6,
+      "norm_label": "publicsurface"
+    },
+    {
+      "label": "primaryDisplay",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L24",
+      "id": "default_active_run_publicsurface_primarydisplay",
+      "community": 6,
+      "norm_label": "primarydisplay"
+    },
+    {
+      "label": "nativeEnhancementAllowed",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L25",
+      "id": "default_active_run_publicsurface_nativeenhancementallowed",
+      "community": 6,
+      "norm_label": "nativeenhancementallowed"
+    },
+    {
+      "label": "popupRequired",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L26",
+      "id": "default_active_run_publicsurface_popuprequired",
+      "community": 6,
+      "norm_label": "popuprequired"
+    },
+    {
+      "label": "hiddenInternalFields",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L27",
+      "id": "default_active_run_publicsurface_hiddeninternalfields",
+      "community": 6,
+      "norm_label": "hiddeninternalfields"
+    },
+    {
+      "label": "publicLabels",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L35",
+      "id": "default_active_run_publiclabels",
+      "community": 1,
+      "norm_label": "publiclabels"
+    },
+    {
+      "label": "stagePurpose",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L36",
+      "id": "default_active_run_stagepurpose",
+      "community": 1,
+      "norm_label": "stagepurpose"
+    },
+    {
+      "label": "stagePurposeKey",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L37",
+      "id": "default_active_run_stagepurposekey",
+      "community": 1,
+      "norm_label": "stagepurposekey"
+    },
+    {
+      "label": "post-copy-init.json",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L1",
+      "id": "meta_kim_state_default_post_copy_init_json",
+      "community": 5,
+      "norm_label": "post-copy-init.json"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L2",
+      "id": "default_post_copy_init_status",
+      "community": 5,
+      "norm_label": "status"
+    },
+    {
+      "label": "updatedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L3",
+      "id": "default_post_copy_init_updatedat",
+      "community": 5,
+      "norm_label": "updatedat"
+    },
+    {
+      "label": "scriptMtimeMs",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L4",
+      "id": "default_post_copy_init_scriptmtimems",
+      "community": 5,
+      "norm_label": "scriptmtimems"
+    },
+    {
+      "label": "mode",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L5",
+      "id": "default_post_copy_init_mode",
+      "community": 5,
+      "norm_label": "mode"
+    },
+    {
+      "label": "startedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L6",
+      "id": "default_post_copy_init_startedat",
+      "community": 5,
+      "norm_label": "startedat"
+    },
+    {
+      "label": "spine-state.json",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L1",
+      "id": "meta_kim_state_default_spine_spine_state_json",
+      "community": 3,
+      "norm_label": "spine-state.json"
+    },
+    {
+      "label": "active",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L2",
+      "id": "spine_spine_state_active",
+      "community": 3,
+      "norm_label": "active"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L3",
+      "id": "spine_spine_state_version",
+      "community": 3,
+      "norm_label": "version"
+    },
+    {
+      "label": "runId",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L4",
+      "id": "spine_spine_state_runid",
+      "community": 3,
+      "norm_label": "runid"
+    },
+    {
+      "label": "triggeredAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L5",
+      "id": "spine_spine_state_triggeredat",
+      "community": 3,
+      "norm_label": "triggeredat"
+    },
+    {
+      "label": "stageRuntimeControl",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L6",
+      "id": "spine_spine_state_stageruntimecontrol",
+      "community": 4,
+      "norm_label": "stageruntimecontrol"
+    },
+    {
+      "label": "activationMode",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L7",
+      "id": "spine_spine_state_stageruntimecontrol_activationmode",
+      "community": 4,
+      "norm_label": "activationmode"
+    },
+    {
+      "label": "driverMode",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L8",
+      "id": "spine_spine_state_stageruntimecontrol_drivermode",
+      "community": 4,
+      "norm_label": "drivermode"
+    },
+    {
+      "label": "hookGateMode",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L9",
+      "id": "spine_spine_state_stageruntimecontrol_hookgatemode",
+      "community": 4,
+      "norm_label": "hookgatemode"
+    },
+    {
+      "label": "promptFingerprint",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L10",
+      "id": "spine_spine_state_stageruntimecontrol_promptfingerprint",
+      "community": 4,
+      "norm_label": "promptfingerprint"
+    },
+    {
+      "label": "userLanguage",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L11",
+      "id": "spine_spine_state_stageruntimecontrol_userlanguage",
+      "community": 4,
+      "norm_label": "userlanguage"
+    },
+    {
+      "label": "factGatePolicy",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L12",
+      "id": "spine_spine_state_stageruntimecontrol_factgatepolicy",
+      "community": 4,
+      "norm_label": "factgatepolicy"
+    },
+    {
+      "label": "executionLeasePolicy",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L13",
+      "id": "spine_spine_state_stageruntimecontrol_executionleasepolicy",
+      "community": 4,
+      "norm_label": "executionleasepolicy"
+    },
+    {
+      "label": "createdAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L14",
+      "id": "spine_spine_state_stageruntimecontrol_createdat",
+      "community": 4,
+      "norm_label": "createdat"
+    },
+    {
+      "label": "currentStage",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L16",
+      "id": "spine_spine_state_currentstage",
+      "community": 3,
+      "norm_label": "currentstage"
+    },
+    {
+      "label": "stages",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L17",
+      "id": "spine_spine_state_stages",
+      "community": 0,
+      "norm_label": "stages"
+    },
+    {
+      "label": "critical",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L18",
+      "id": "spine_spine_state_stages_critical",
+      "community": 0,
+      "norm_label": "critical"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L19",
+      "id": "spine_spine_state_critical_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "completedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L20",
+      "id": "spine_spine_state_critical_completedat",
+      "community": 0,
+      "norm_label": "completedat"
+    },
+    {
+      "label": "fetch",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L22",
+      "id": "spine_spine_state_stages_fetch",
+      "community": 0,
+      "norm_label": "fetch"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L23",
+      "id": "spine_spine_state_fetch_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "completedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L24",
+      "id": "spine_spine_state_fetch_completedat",
+      "community": 0,
+      "norm_label": "completedat"
+    },
+    {
+      "label": "thinking",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L26",
+      "id": "spine_spine_state_stages_thinking",
+      "community": 0,
+      "norm_label": "thinking"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L27",
+      "id": "spine_spine_state_thinking_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "completedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L28",
+      "id": "spine_spine_state_thinking_completedat",
+      "community": 0,
+      "norm_label": "completedat"
+    },
+    {
+      "label": "execution",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L30",
+      "id": "spine_spine_state_stages_execution",
+      "community": 0,
+      "norm_label": "execution"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L31",
+      "id": "spine_spine_state_execution_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "completedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L32",
+      "id": "spine_spine_state_execution_completedat",
+      "community": 0,
+      "norm_label": "completedat"
+    },
+    {
+      "label": "review",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L34",
+      "id": "spine_spine_state_stages_review",
+      "community": 0,
+      "norm_label": "review"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L35",
+      "id": "spine_spine_state_review_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "completedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L36",
+      "id": "spine_spine_state_review_completedat",
+      "community": 0,
+      "norm_label": "completedat"
+    },
+    {
+      "label": "meta_review",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L38",
+      "id": "spine_spine_state_stages_meta_review",
+      "community": 0,
+      "norm_label": "meta_review"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L39",
+      "id": "spine_spine_state_meta_review_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "completedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L40",
+      "id": "spine_spine_state_meta_review_completedat",
+      "community": 0,
+      "norm_label": "completedat"
+    },
+    {
+      "label": "verification",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L42",
+      "id": "spine_spine_state_stages_verification",
+      "community": 0,
+      "norm_label": "verification"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L43",
+      "id": "spine_spine_state_verification_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "completedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L44",
+      "id": "spine_spine_state_verification_completedat",
+      "community": 0,
+      "norm_label": "completedat"
+    },
+    {
+      "label": "evolution",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L46",
+      "id": "spine_spine_state_stages_evolution",
+      "community": 0,
+      "norm_label": "evolution"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L47",
+      "id": "spine_spine_state_evolution_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "completedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L48",
+      "id": "spine_spine_state_evolution_completedat",
+      "community": 0,
+      "norm_label": "completedat"
+    },
+    {
+      "label": "taskClassification",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L51",
+      "id": "spine_spine_state_taskclassification",
+      "community": 3,
+      "norm_label": "taskclassification"
+    },
+    {
+      "label": "triggerReason",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L52",
+      "id": "spine_spine_state_triggerreason",
+      "community": 3,
+      "norm_label": "triggerreason"
+    },
+    {
+      "label": "dispatchedAgents",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L53",
+      "id": "spine_spine_state_dispatchedagents",
+      "community": 3,
+      "norm_label": "dispatchedagents"
+    },
+    {
+      "label": "dispatchChain",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L54",
+      "id": "spine_spine_state_dispatchchain",
+      "community": 3,
+      "norm_label": "dispatchchain"
+    },
+    {
+      "label": "controlState",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L55",
+      "id": "spine_spine_state_controlstate",
+      "community": 3,
+      "norm_label": "controlstate"
+    },
+    {
+      "label": "gateState",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L56",
+      "id": "spine_spine_state_gatestate",
+      "community": 3,
+      "norm_label": "gatestate"
+    },
+    {
+      "label": "surfaceState",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L57",
+      "id": "spine_spine_state_surfacestate",
+      "community": 3,
+      "norm_label": "surfacestate"
+    },
+    {
+      "label": "choiceSurfaceState",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L58",
+      "id": "spine_spine_state_choicesurfacestate",
+      "community": 3,
+      "norm_label": "choicesurfacestate"
+    },
+    {
+      "label": "queryBypass",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L59",
+      "id": "spine_spine_state_querybypass",
+      "community": 3,
+      "norm_label": "querybypass"
+    },
+    {
+      "label": "latestUserInputLanguage",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L60",
+      "id": "spine_spine_state_latestuserinputlanguage",
+      "community": 3,
+      "norm_label": "latestuserinputlanguage"
+    },
+    {
+      "label": "executionStarted",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L61",
+      "id": "spine_spine_state_executionstarted",
+      "community": 3,
+      "norm_label": "executionstarted"
+    },
+    {
+      "label": "criticalFetchLoopCount",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L62",
+      "id": "spine_spine_state_criticalfetchloopcount",
+      "community": 3,
+      "norm_label": "criticalfetchloopcount"
+    },
+    {
+      "label": "criticalFetchLoopMax",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L63",
+      "id": "spine_spine_state_criticalfetchloopmax",
+      "community": 3,
+      "norm_label": "criticalfetchloopmax"
+    },
+    {
+      "label": "intentCard",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L64",
+      "id": "spine_spine_state_intentcard",
+      "community": 3,
+      "norm_label": "intentcard"
+    },
+    {
+      "label": "intentConfirmationState",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L65",
+      "id": "spine_spine_state_intentconfirmationstate",
+      "community": 3,
+      "norm_label": "intentconfirmationstate"
+    },
+    {
+      "label": "intentConfirmationTimestamp",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L66",
+      "id": "spine_spine_state_intentconfirmationtimestamp",
+      "community": 3,
+      "norm_label": "intentconfirmationtimestamp"
+    },
+    {
+      "label": "intentCorrectionPayload",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L67",
+      "id": "spine_spine_state_intentcorrectionpayload",
+      "community": 3,
+      "norm_label": "intentcorrectionpayload"
+    },
+    {
+      "label": "skippedHooks",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L68",
+      "id": "spine_spine_state_skippedhooks",
+      "community": 3,
+      "norm_label": "skippedhooks"
+    },
+    {
+      "label": "status.json",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L1",
+      "id": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "community": 2,
+      "norm_label": "status.json"
+    },
+    {
+      "label": "schemaVersion",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L2",
+      "id": "meta_2026_06_19t14_55_21_065z_status_schemaversion",
+      "community": 2,
+      "norm_label": "schemaversion"
+    },
+    {
+      "label": "active",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L3",
+      "id": "meta_2026_06_19t14_55_21_065z_status_active",
+      "community": 2,
+      "norm_label": "active"
+    },
+    {
+      "label": "runId",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L4",
+      "id": "meta_2026_06_19t14_55_21_065z_status_runid",
+      "community": 2,
+      "norm_label": "runid"
+    },
+    {
+      "label": "triggeredBy",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L5",
+      "id": "meta_2026_06_19t14_55_21_065z_status_triggeredby",
+      "community": 2,
+      "norm_label": "triggeredby"
+    },
+    {
+      "label": "currentStage",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L6",
+      "id": "meta_2026_06_19t14_55_21_065z_status_currentstage",
+      "community": 2,
+      "norm_label": "currentstage"
+    },
+    {
+      "label": "currentStageKey",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L7",
+      "id": "meta_2026_06_19t14_55_21_065z_status_currentstagekey",
+      "community": 2,
+      "norm_label": "currentstagekey"
+    },
+    {
+      "label": "stageIndex",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L8",
+      "id": "meta_2026_06_19t14_55_21_065z_status_stageindex",
+      "community": 2,
+      "norm_label": "stageindex"
+    },
+    {
+      "label": "stageTotal",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L9",
+      "id": "meta_2026_06_19t14_55_21_065z_status_stagetotal",
+      "community": 2,
+      "norm_label": "stagetotal"
+    },
+    {
+      "label": "percent",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L10",
+      "id": "meta_2026_06_19t14_55_21_065z_status_percent",
+      "community": 2,
+      "norm_label": "percent"
+    },
+    {
+      "label": "completed",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L11",
+      "id": "meta_2026_06_19t14_55_21_065z_status_completed",
+      "community": 2,
+      "norm_label": "completed"
+    },
+    {
+      "label": "next",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L12",
+      "id": "meta_2026_06_19t14_55_21_065z_status_next",
+      "community": 2,
+      "norm_label": "next"
+    },
+    {
+      "label": "blockedOn",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L13",
+      "id": "meta_2026_06_19t14_55_21_065z_status_blockedon",
+      "community": 2,
+      "norm_label": "blockedon"
+    },
+    {
+      "label": "startedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L14",
+      "id": "meta_2026_06_19t14_55_21_065z_status_startedat",
+      "community": 2,
+      "norm_label": "startedat"
+    },
+    {
+      "label": "updatedAt",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L15",
+      "id": "meta_2026_06_19t14_55_21_065z_status_updatedat",
+      "community": 2,
+      "norm_label": "updatedat"
+    },
+    {
+      "label": "lastUserVisibleNotice",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L16",
+      "id": "meta_2026_06_19t14_55_21_065z_status_lastuservisiblenotice",
+      "community": 2,
+      "norm_label": "lastuservisiblenotice"
+    },
+    {
+      "label": "surfaceMode",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L17",
+      "id": "meta_2026_06_19t14_55_21_065z_status_surfacemode",
+      "community": 2,
+      "norm_label": "surfacemode"
+    },
+    {
+      "label": "resolvedOutputLanguage",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L18",
+      "id": "meta_2026_06_19t14_55_21_065z_status_resolvedoutputlanguage",
+      "community": 2,
+      "norm_label": "resolvedoutputlanguage"
+    },
+    {
+      "label": "languageResolution",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L19",
+      "id": "meta_2026_06_19t14_55_21_065z_status_languageresolution",
+      "community": 2,
+      "norm_label": "languageresolution"
+    },
+    {
+      "label": "language",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L20",
+      "id": "meta_2026_06_19t14_55_21_065z_status_languageresolution_language",
+      "community": 2,
+      "norm_label": "language"
+    },
+    {
+      "label": "source",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L21",
+      "id": "meta_2026_06_19t14_55_21_065z_status_languageresolution_source",
+      "community": 2,
+      "norm_label": "source"
+    },
+    {
+      "label": "publicSurface",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L23",
+      "id": "meta_2026_06_19t14_55_21_065z_status_publicsurface",
+      "community": 7,
+      "norm_label": "publicsurface"
+    },
+    {
+      "label": "primaryDisplay",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L24",
+      "id": "meta_2026_06_19t14_55_21_065z_status_publicsurface_primarydisplay",
+      "community": 7,
+      "norm_label": "primarydisplay"
+    },
+    {
+      "label": "nativeEnhancementAllowed",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L25",
+      "id": "meta_2026_06_19t14_55_21_065z_status_publicsurface_nativeenhancementallowed",
+      "community": 7,
+      "norm_label": "nativeenhancementallowed"
+    },
+    {
+      "label": "popupRequired",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L26",
+      "id": "meta_2026_06_19t14_55_21_065z_status_publicsurface_popuprequired",
+      "community": 7,
+      "norm_label": "popuprequired"
+    },
+    {
+      "label": "hiddenInternalFields",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L27",
+      "id": "meta_2026_06_19t14_55_21_065z_status_publicsurface_hiddeninternalfields",
+      "community": 7,
+      "norm_label": "hiddeninternalfields"
+    },
+    {
+      "label": "publicLabels",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L35",
+      "id": "meta_2026_06_19t14_55_21_065z_status_publiclabels",
+      "community": 2,
+      "norm_label": "publiclabels"
+    },
+    {
+      "label": "stagePurpose",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L36",
+      "id": "meta_2026_06_19t14_55_21_065z_status_stagepurpose",
+      "community": 2,
+      "norm_label": "stagepurpose"
+    },
+    {
+      "label": "stagePurposeKey",
+      "file_type": "code",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L37",
+      "id": "meta_2026_06_19t14_55_21_065z_status_stagepurposekey",
+      "community": 2,
+      "norm_label": "stagepurposekey"
+    },
+    {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "id": "agents_md",
+      "community": 10,
+      "norm_label": "agents.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "id": "ai_study_agents_graphify",
+      "community": 10,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "id": "claude_md",
+      "community": 11,
+      "norm_label": "claude.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "id": "ai_study_claude_graphify",
+      "community": 11,
+      "norm_label": "graphify"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "claude_settings_json",
+      "target": "claude_settings_hooks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "claude_settings_hooks",
+      "target": "claude_settings_hooks_pretooluse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/hooks.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "codex_hooks_json",
+      "target": "codex_hooks_hooks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/hooks.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "codex_hooks_hooks",
+      "target": "codex_hooks_hooks_pretooluse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_schemaversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_active",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_runid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_triggeredby",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_currentstage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_currentstagekey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_stageindex",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_stagetotal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_percent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_completed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_next",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_blockedon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_startedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_updatedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_lastuservisiblenotice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_surfacemode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_resolvedoutputlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_languageresolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_publicsurface",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_publiclabels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_stagepurpose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_active_run_json",
+      "target": "default_active_run_stagepurposekey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "default_active_run_languageresolution",
+      "target": "default_active_run_languageresolution_language",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "default_active_run_languageresolution",
+      "target": "default_active_run_languageresolution_source",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "default_active_run_publicsurface",
+      "target": "default_active_run_publicsurface_primarydisplay",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "default_active_run_publicsurface",
+      "target": "default_active_run_publicsurface_nativeenhancementallowed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "default_active_run_publicsurface",
+      "target": "default_active_run_publicsurface_popuprequired",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/active-run.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "default_active_run_publicsurface",
+      "target": "default_active_run_publicsurface_hiddeninternalfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_post_copy_init_json",
+      "target": "default_post_copy_init_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_post_copy_init_json",
+      "target": "default_post_copy_init_updatedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_post_copy_init_json",
+      "target": "default_post_copy_init_scriptmtimems",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_post_copy_init_json",
+      "target": "default_post_copy_init_mode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/post-copy-init.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_post_copy_init_json",
+      "target": "default_post_copy_init_startedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_active",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_version",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_runid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_triggeredat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_stageruntimecontrol",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_currentstage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_stages",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_taskclassification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_triggerreason",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_dispatchedagents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_dispatchchain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_controlstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_gatestate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_surfacestate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_choicesurfacestate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_querybypass",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_latestuserinputlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_executionstarted",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_criticalfetchloopcount",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_criticalfetchloopmax",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_intentcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_intentconfirmationstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_intentconfirmationtimestamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_intentcorrectionpayload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_spine_spine_state_json",
+      "target": "spine_spine_state_skippedhooks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "spine_spine_state_stageruntimecontrol",
+      "target": "spine_spine_state_stageruntimecontrol_activationmode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "spine_spine_state_stageruntimecontrol",
+      "target": "spine_spine_state_stageruntimecontrol_drivermode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "spine_spine_state_stageruntimecontrol",
+      "target": "spine_spine_state_stageruntimecontrol_hookgatemode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "spine_spine_state_stageruntimecontrol",
+      "target": "spine_spine_state_stageruntimecontrol_promptfingerprint",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "spine_spine_state_stageruntimecontrol",
+      "target": "spine_spine_state_stageruntimecontrol_userlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "spine_spine_state_stageruntimecontrol",
+      "target": "spine_spine_state_stageruntimecontrol_factgatepolicy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "spine_spine_state_stageruntimecontrol",
+      "target": "spine_spine_state_stageruntimecontrol_executionleasepolicy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "spine_spine_state_stageruntimecontrol",
+      "target": "spine_spine_state_stageruntimecontrol_createdat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages",
+      "target": "spine_spine_state_stages_critical",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages",
+      "target": "spine_spine_state_stages_fetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages",
+      "target": "spine_spine_state_stages_thinking",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages",
+      "target": "spine_spine_state_stages_execution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages",
+      "target": "spine_spine_state_stages_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages",
+      "target": "spine_spine_state_stages_meta_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages",
+      "target": "spine_spine_state_stages_verification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages",
+      "target": "spine_spine_state_stages_evolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_critical",
+      "target": "spine_spine_state_critical_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_critical",
+      "target": "spine_spine_state_critical_completedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_fetch",
+      "target": "spine_spine_state_fetch_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_fetch",
+      "target": "spine_spine_state_fetch_completedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_thinking",
+      "target": "spine_spine_state_thinking_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_thinking",
+      "target": "spine_spine_state_thinking_completedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_execution",
+      "target": "spine_spine_state_execution_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_execution",
+      "target": "spine_spine_state_execution_completedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_review",
+      "target": "spine_spine_state_review_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_review",
+      "target": "spine_spine_state_review_completedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_meta_review",
+      "target": "spine_spine_state_meta_review_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_meta_review",
+      "target": "spine_spine_state_meta_review_completedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_verification",
+      "target": "spine_spine_state_verification_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_verification",
+      "target": "spine_spine_state_verification_completedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_evolution",
+      "target": "spine_spine_state_evolution_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/spine/spine-state.json",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "spine_spine_state_stages_evolution",
+      "target": "spine_spine_state_evolution_completedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_schemaversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_active",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_runid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_triggeredby",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_currentstage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_currentstagekey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_stageindex",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_stagetotal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_percent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_completed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_next",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_blockedon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_startedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_updatedat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_lastuservisiblenotice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_surfacemode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_resolvedoutputlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_languageresolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_publicsurface",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_publiclabels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_stagepurpose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "meta_kim_state_default_runs_meta_2026_06_19t14_55_21_065z_status_json",
+      "target": "meta_2026_06_19t14_55_21_065z_status_stagepurposekey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "meta_2026_06_19t14_55_21_065z_status_languageresolution",
+      "target": "meta_2026_06_19t14_55_21_065z_status_languageresolution_language",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "meta_2026_06_19t14_55_21_065z_status_languageresolution",
+      "target": "meta_2026_06_19t14_55_21_065z_status_languageresolution_source",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "meta_2026_06_19t14_55_21_065z_status_publicsurface",
+      "target": "meta_2026_06_19t14_55_21_065z_status_publicsurface_primarydisplay",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "meta_2026_06_19t14_55_21_065z_status_publicsurface",
+      "target": "meta_2026_06_19t14_55_21_065z_status_publicsurface_nativeenhancementallowed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "meta_2026_06_19t14_55_21_065z_status_publicsurface",
+      "target": "meta_2026_06_19t14_55_21_065z_status_publicsurface_popuprequired",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "meta_2026_06_19t14_55_21_065z_status_publicsurface",
+      "target": "meta_2026_06_19t14_55_21_065z_status_publicsurface_hiddeninternalfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "agents_md",
+      "target": "ai_study_agents_graphify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "claude_md",
+      "target": "ai_study_claude_graphify",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

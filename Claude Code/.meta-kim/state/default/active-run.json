@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "active": true,
+  "runId": "meta-2026-06-19T15-48-21-645Z",
+  "triggeredBy": "natural_language_product_build",
+  "currentStage": "Critical",
+  "currentStageKey": "critical",
+  "stageIndex": 1,
+  "stageTotal": 8,
+  "percent": 12,
+  "completed": [],
+  "next": "Fetch",
+  "blockedOn": null,
+  "startedAt": "2026-06-19T15:48:21.645Z",
+  "updatedAt": "2026-06-19T15:48:21.646Z",
+  "lastUserVisibleNotice": null,
+  "surfaceMode": "public",
+  "resolvedOutputLanguage": "zh-CN",
+  "languageResolution": {
+    "language": "zh-CN",
+    "source": "latest_user_input"
+  },
+  "publicSurface": {
+    "primaryDisplay": "conversation_notice",
+    "nativeEnhancementAllowed": true,
+    "popupRequired": false,
+    "hiddenInternalFields": [
+      "Preflight",
+      "nativeChoiceSurface",
+      "conversation_fallback",
+      "packet_id",
+      "protocol_trace"
+    ]
+  },
+  "publicLabels": null,
+  "stagePurpose": null,
+  "stagePurposeKey": "critical"
+}

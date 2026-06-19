@@ -1,0 +1,42 @@
+{
+  "/Users/delphi/work/ai-study/.claude/settings.json": {
+    "mtime": 1781880941.0566115,
+    "ast_hash": "9276b535256dc065bd7b8b84e15abd95",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/.codex/hooks.json": {
+    "mtime": 1781880941.0966394,
+    "ast_hash": "0dd55154350abd4b5bf181a4cbd7857e",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/.meta-kim/state/default/active-run.json": {
+    "mtime": 1781880921.070622,
+    "ast_hash": "1b42dec77131370497458426c54240ed",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/.meta-kim/state/default/post-copy-init.json": {
+    "mtime": 1781880921.061221,
+    "ast_hash": "303405f7c5455fca3af067ebfb7d6dd2",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/.meta-kim/state/default/spine/spine-state.json": {
+    "mtime": 1781880921.0663798,
+    "ast_hash": "11a9380284d677a238e09263a3c1731e",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/.meta-kim/state/default/runs/meta-2026-06-19T14-55-21-065Z/status.json": {
+    "mtime": 1781880921.0711257,
+    "ast_hash": "1b42dec77131370497458426c54240ed",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/AGENTS.md": {
+    "mtime": 1781880941.0964446,
+    "ast_hash": "a993bd9a8466b705f520b2a269a544bc",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/CLAUDE.md": {
+    "mtime": 1781880941.0564613,
+    "ast_hash": "da79aa9343cd2b362206f03762160abc",
+    "semantic_hash": ""
+  }
+}

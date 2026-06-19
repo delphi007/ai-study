@@ -1,0 +1,102 @@
+{
+  "/Users/delphi/work/ai-study/Claude Code/.claude/settings.json": {
+    "mtime": 1781884103.483555,
+    "ast_hash": "9276b535256dc065bd7b8b84e15abd95",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/.claude/project-task-state.json": {
+    "mtime": 1781883720.2206824,
+    "ast_hash": "311cd22d55283b760dfd0d802bae9d8a",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/.codex/hooks.json": {
+    "mtime": 1781884103.5305219,
+    "ast_hash": "0dd55154350abd4b5bf181a4cbd7857e",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/.meta-kim/state/default/active-run.json": {
+    "mtime": 1781884101.6468482,
+    "ast_hash": "b21c0816e252609d0fa254052c1c30b6",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/.meta-kim/state/default/post-copy-init.json": {
+    "mtime": 1781884101.642041,
+    "ast_hash": "6e107e8d0c2d2718b2c1af165ef54118",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/.meta-kim/state/default/spine/spine-state.json": {
+    "mtime": 1781884101.6462822,
+    "ast_hash": "31c5cf379303bec3502bc2d6da487bb9",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/.meta-kim/state/default/runs/meta-2026-06-19T15-48-21-645Z/status.json": {
+    "mtime": 1781884101.6468573,
+    "ast_hash": "b21c0816e252609d0fa254052c1c30b6",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/01-Skills \u6280\u80fd\u7cfb\u7edf.md": {
+    "mtime": 1781883649.6977606,
+    "ast_hash": "748256cf34ec1921227c107c87e679c6",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/06-Hooks \u94a9\u5b50\u7cfb\u7edf.md": {
+    "mtime": 1781883383.338962,
+    "ast_hash": "7732f424af9a7e0488f7cd1ff665d620",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/04-Agents \u4ee3\u7406\u7cfb\u7edf.md": {
+    "mtime": 1781883653.7625792,
+    "ast_hash": "3e9e1834a8d00fbd0baa69d37e2b9ec7",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/00-Claude Code \u5165\u95e8\u6982\u89c8.md": {
+    "mtime": 1781883646.938404,
+    "ast_hash": "22d278ad9dd412f2d3611dbd2969def8",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/09-Slash Commands \u659c\u6760\u547d\u4ee4.md": {
+    "mtime": 1781883500.7909002,
+    "ast_hash": "9c7cd76e05984d0770a514f982395097",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/08-Workflows \u5de5\u4f5c\u6d41\u7f16\u6392.md": {
+    "mtime": 1781883462.8033257,
+    "ast_hash": "806deb9f81f4522a594bb27a111ffded",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/05-Memory \u8bb0\u5fc6\u7cfb\u7edf.md": {
+    "mtime": 1781883376.7466605,
+    "ast_hash": "95bf882428c70121a56f302b037e55fa",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/10-Plan Mode \u89c4\u5212\u6a21\u5f0f.md": {
+    "mtime": 1781883600.9941032,
+    "ast_hash": "34c41515119c9b0fdde903d8f647065b",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/AGENTS.md": {
+    "mtime": 1781884103.530289,
+    "ast_hash": "a993bd9a8466b705f520b2a269a544bc",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/03-Tools \u5de5\u5177\u7cfb\u7edf.md": {
+    "mtime": 1781883363.8875864,
+    "ast_hash": "9d71f9a1b5a0ba0a86ada5d631f7b74c",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/07-\u914d\u7f6e\u4e0e\u9879\u76ee\u7ba1\u7406.md": {
+    "mtime": 1781883658.0636828,
+    "ast_hash": "6cfa19c2ba187fd9f2896280e7d4fd3e",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/02-MCP \u6a21\u578b\u4e0a\u4e0b\u6587\u534f\u8bae.md": {
+    "mtime": 1781883356.3279347,
+    "ast_hash": "f666965ec72d02ecc5f5a129e27a85d3",
+    "semantic_hash": ""
+  },
+  "/Users/delphi/work/ai-study/Claude Code/CLAUDE.md": {
+    "mtime": 1781884103.482971,
+    "ast_hash": "da79aa9343cd2b362206f03762160abc",
+    "semantic_hash": ""
+  }
+}
