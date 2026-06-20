@@ -38,6 +38,57 @@ Meta_Kim 就是干这个的。**它不是另一只手，而是在手上面加了
 
 > Meta_Kim 的核心是一套**8 阶段执行脊柱（8-stage spine）**，每个阶段都有明确的输入、输出和放行条件。复杂任务会叠加**11 阶段业务工作流**和**动态发牌机制**。
 
+### ⚡ 关键认知：Meta_Kim 的本质
+
+> **Meta_Kim 不是一段确定性的程序代码，而是一套"用 JSON packet 串起来的多次 LLM 调用"的编排框架。**
+
+你看到的所有"治理概念"——8 阶段、发牌、门、协议 packet——**最终都是 LLM 调用的 prompt 设计艺术**。但并不是 100% 都靠 AI 判断，关键路径上的硬约束仍由本地代码守住。
+
+```mermaid
+flowchart TB
+    subgraph local["本地进程（Node.js）— 30% 判断"]
+        L1[拼装 Prompt<br/>把 packet 拼成自然语言]
+        L2[调用 LLM API]
+        L3[解析 + 落盘<br/>JSON schema 校验]
+        L1 --> L2 --> L3
+    end
+
+    subgraph ai["远端 AI — 70% 判断"]
+        A1[读 Prompt]
+        A2[理解当前状态]
+        A3[判断门控是否放行]
+        A4[生成结构化产物]
+        A1 --> A2 --> A3 --> A4
+    end
+
+    L2 -->|"HTTP request"| A1
+    A4 -->|"HTTP response"| L3
+
+    style local fill:#60a5fa,color:#000
+    style ai fill:#fbbf24,color:#000
+    style A3 fill:#f87171,color:#fff
+```
+
+**具体分工**：
+
+| 判断内容 | 由谁判断 | 比例 | 例子 |
+|---------|---------|------|------|
+| 必填字段是否非空 | **本地 JS** | 100% | `if (!state.intentPacket?.realIntent) return "missing_real_intent"` |
+| 路线是否成立（owner + weapon + dependency 配齐） | **本地 JS** | 100% | 协议 schema 校验 |
+| "意图是否清晰到可以执行" | **AI** | 100% | Critical 阶段 prompt 调用 |
+| "选择哪条路径、哪个 owner" | **AI** | 100% | Thinking 阶段 prompt 调用 |
+| "findings 是否真实、可证伪" | **AI** | 100% | meta-prism 做 Adversarial verify |
+| "是否触发 Pause / Fix / Risk 牌" | **AI** | 100% | 发牌机制 prompt 调用 |
+| "是否值得写入 canonical 源" | **AI 判定 + Warden 审批** | 50:50 | Evolution 写回 |
+
+**所以"治理"的实现机制是**：
+- **本地**用结构化 JSON packet 串起多次 LLM 调用（30% 的硬逻辑）
+- **AI** 在每次 prompt 调用中做真正的语义判断（70% 的软决策）
+- **本地 hard gate** 守住结构性安全（防 AI 漏判造成灾难）
+- **JSON schema** 强制 AI 输出有结构、可校验、可重放
+
+> 💡 **这一认知对后续阅读很关键**：当你看到"8 阶段"、"发牌"、"门"这些概念时，知道它们最终是 prompt 模板的精妙设计 + JSON schema 的严格约束——这正是 Meta_Kim 的创新点：**把"每一步要喂给 AI 什么 prompt"这个问题工程化、可验证化、可沉淀化**。
+
 ### 架构全景图
 
 ```mermaid

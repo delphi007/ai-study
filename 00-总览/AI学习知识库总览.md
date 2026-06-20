@@ -7,7 +7,7 @@
 | 专题 | 描述 | 进度 |
 |------|------|------|
 | [[Claude Code/00-Claude Code 入门概览\|Claude Code 基本使用]] | Claude Code CLI 的完整使用方法 | ✅ 12 篇文章 |
-| [[Meta_Kim/00-Meta_Kim 入门概览\|Meta_Kim 治理框架]] | AI 编码的治理层——意图、能力、分发、审查、验证、进化 | ✅ 7 篇文章 |
+| [[Meta_Kim/00-Meta_Kim 入门概览\|Meta_Kim 治理框架]] | AI 编码的治理层——意图、能力、分发、审查、验证、进化 | ✅ 8 篇文章 |
 
 ## 专题目录树
 
@@ -33,7 +33,8 @@ Meta_Kim/                            ← Meta_Kim 治理框架专题
 ├── 03-协议、门与动态发牌.md         ← ─┘
 ├── 04-三层记忆与进化闭环.md         ←    持久化与进化层
 ├── 05-场景判断：何时用 meta-theory.md ←   实战决策层
-└── 06-实战案例：一次完整的 8 阶段运行.md ← 运行产物层
+├── 06-实战案例：一次完整的 8 阶段运行.md ← 运行产物层
+└── 07-用户上下文Agent的创建与演进.md ←     Agent 生命周期层
 ```
 
 | # | 文章 | 核心内容 | 层 |
@@ -62,6 +63,7 @@ Meta_Kim/                            ← Meta_Kim 治理框架专题
 | 04 | [[Meta_Kim/04-三层记忆与进化闭环\|三层记忆与进化]] | Memory + Graphify + SQL 三层记忆、Evolution 写回、Scar 机制 | 持久化与进化 |
 | 05 | [[Meta_Kim/05-场景判断：何时用 meta-theory\|场景判断]] | 三步判断法、场景速查、入口路径规则、/meta-theory vs 普通 Prompt | 实战决策 |
 | 06 | [[Meta_Kim/06-实战案例：一次完整的 8 阶段运行\|实战案例]] | 真实 governed run 全链路追踪、运行产物分析、CC 底层映射 | 运行产物 |
+| 07 | [[Meta_Kim/07-用户上下文Agent的创建与演进\|Agent 创建与演进]] | Type B 管线、GapDecision 路由、Agent 文件位置、6 维度演进 + Scar 机制 | Agent 生命周期 |
 
 ## 如何使用本库
 
