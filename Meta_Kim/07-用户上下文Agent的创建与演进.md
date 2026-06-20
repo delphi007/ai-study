@@ -259,9 +259,9 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    S1["1. 定义候选<br/>GeneratedAgentSpec<br/>+ 10/10 scorecard"] --> S2["2. Warden 审批<br/>不允许自动写回<br/>canonical 源"]
-    S2 --> S3["3. 宿主重载<br/>写入 .claude/agents/<br/>CC 自动发现并加载"]
-    S3 --> S4["4. live invocation proof<br/>下一次 run 中真正被调用<br/>并产出调用证据"]
+    S1["① 定义候选<br/>GeneratedAgentSpec<br/>+ 10/10 scorecard"] --> S2["② Warden 审批<br/>不允许自动写回<br/>canonical 源"]
+    S2 --> S3["③ 宿主重载<br/>写入 .claude/agents/<br/>CC 自动发现并加载"]
+    S3 --> S4["④ live invocation proof<br/>下一次 run 中真正被调用<br/>并产出调用证据"]
     S4 -->|"证据充分"| CLOSED[生命周期闭环保存在]
     S4 -->|"证据不足"| S1
 
@@ -347,6 +347,24 @@ Evolution 检测到:
 ```
 
 ---
+
+## ✅ 最佳实践
+
+1. **DO**：创建项目专属 agent 前，先确认全局 agent（如 meta-prism、meta-scout）确实无法覆盖——避免重复
+2. **DO**：每个 agent 定义必须包含 `own` 和 `do_not_touch`——边界清晰比功能完整更重要
+3. **DO**：agent 创建后保留 `PROJECT_CUSTOMIZATION.md` 或 manifest 条目作为创建证据——方便后续 Type B 管线迭代或回滚
+4. **DON'T**：不要为一次性任务创建 agent——用 `worker_task_only` 或现有 agent 的 skill 绑定
+5. **DON'T**：不要让 agent 的 SOUL.md 膨胀超过 300 行——这是 Stew-All 死亡模式的信号，应及时触发 Type B 拆分
+6. **TIP**：每次 Evolution 写回前先在 compaction 包中记录当前 agent 的能力缺口——下次 run 的 Fetch 阶段会自动发现这些缺口
+
+## ⚠️ 常见陷阱
+
+| 陷阱 | 表现 | 解决方案 |
+|------|------|---------|
+| Stew-All 死亡模式 | 一个 agent 什么都管（SOUL.md > 300 行，无关领域 > 2），结果什么都管不好 | boundaryDrift 信号触发 Type B 拆分——拆成 2-3 个独立 agent |
+| Shattered 死亡模式 | 过度拆分导致 agent 之间边界模糊，协作成本超过单体 | 检查 handoff 链是否有 >4 跳的情况，合并过于细碎的 agent |
+| Agent 创建后从未被调用 | `capabilityInvocationTruthPacket` 中状态为 `selected_not_invoked` | **生命周期未完成**——必须在下一次 run 中真正调用并产出 evidence |
+| 跳过全局 provider 检查 | Type B 创建 agent 之前没有查 `canonical/agents/` 和全局能力索引 | Fetch 阶段的 `globalCandidateChecked` 字段必须非空 |
 
 ## 🔗 关联概念
 
