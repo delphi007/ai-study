@@ -71,6 +71,13 @@ claude_count=$(find "$CONTENT_DIR/Claude Code" -name "*.md" | wc -l | tr -d ' ')
 meta_kim_count=$(find "$CONTENT_DIR/Meta_Kim" -name "*.md" | wc -l | tr -d ' ')
 echo "   ✅ 已同步 Claude Code ${claude_count} 篇 + Meta_Kim ${meta_kim_count} 篇"
 
+# ─── Step 1.5: 内容质量校验 ─────────────────────────────
+step "1.5/5 内容质量校验..."
+
+bash "$VAULT_ROOT/scripts/validate.sh" || err "内容校验失败，部署中止。请修复问题后重试。"
+
+echo "   ✅ 校验通过"
+
 # ─── Step 2: Quartz 构建 ────────────────────────────────
 step "2/5 Quartz 构建静态站..."
 
