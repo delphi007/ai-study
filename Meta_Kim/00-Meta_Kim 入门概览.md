@@ -89,6 +89,232 @@ flowchart TB
 
 > 💡 **这一认知对后续阅读很关键**：当你看到"8 阶段"、"发牌"、"门"这些概念时，知道它们最终是 prompt 模板的精妙设计 + JSON schema 的严格约束——这正是 Meta_Kim 的创新点：**把"每一步要喂给 AI 什么 prompt"这个问题工程化、可验证化、可沉淀化**。
 
+### 🔄 闭环：Prompt → LLM 响应 → 状态文件
+
+一个自然的问题是：**AI 回复了之后，本地具体是怎么把响应变成状态文件的？** 用真实链路来解释。
+
+#### 两种运行模式
+
+Meta_Kim 在 CC 中的运行和 `npm run meta:theory:demo` 的 CLI demo 不是同一层。前者依赖 **AI 的回复被 CC 的 Stop hook 自动扫描和落盘**；后者是 **Node.js 脚本直接拼装和写入 JSON**。但核心架构是一样的：
+
+```mermaid
+flowchart TD
+    subgraph mode_a["模式 A：Claude Code 真实会话"]
+        A1["1. meta-theory SKILL.md<br/>作为 CC prompt 加载"]
+        A2["2. CC 每轮对话都是<br/>AI 用 SKILL.md 的规则来推理"]
+        A3["3. AI 回复中包含<br/>8 阶段的自然语言声明"]
+        A4["4. Stop hook 扫描<br/>对话 transcript"]
+        A5["5. 正则匹配找出<br/>当前阶段 + findings"]
+        A6["6. 写入 compaction 包"]
+        A1 --> A2 --> A3 --> A4 --> A5 --> A6
+    end
+
+    subgraph mode_b["模式 B：npm run meta:theory:demo（Node.js 脚本）"]
+        B1["1. buildOrchestrationReport<br/>在内存中拼装 50+ packet"]
+        B2["2. assembleRunArtifact<br/>合并为 3.5MB JSON"]
+        B3["3. writeFile 落盘<br/>到 governed-executions/"]
+        B4["4. persistDecisionRuns<br/>索引到 SQLite"]
+        B1 --> B2 --> B3 --> B4
+    end
+
+    style mode_a fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff
+    style mode_b fill:#14532d,stroke:#22c55e,color:#dcfce7
+```
+
+#### 模式 A 详解：Stop hook 如何从 AI 回复中提取状态
+
+这是最接近你问题的场景——**AI 在 CC 里说话，说完了，本地怎么知道它说了什么**。
+
+**1. AI 在对话中输出了这样的自然语言**：
+
+```
+## Stage: Critical → Fetch — intent locked, 3 success criteria defined
+
+## Findings Review
+- CRITICAL: authMiddleware.ts 缺少 token 过期检查
+- MEDIUM: orderService.ts 圈复杂度 = 34, 建议 ≤ 10
+```
+
+**2. CC 会话结束时，Stop hook 自动触发**：
+
+`stop-compaction.mjs`（实际源码）读取 CC 传给它的 **对话 transcript 路径**，用正则扫描：
+
+```javascript
+// 来自 .claude/hooks/stop-compaction.mjs 第 35-43 行 — 真实代码
+const STAGE_PATTERNS = {
+  Critical:     /\b(Critical|clarify|intentPacket|需求澄清|明确意图)\b/gi,
+  Fetch:        /\b(Fetch|搜索|capability|能力搜索|findskill)\b/gi,
+  Thinking:     /\b(Thinking|规划|dispatchBoard|分派|owner|Task Card)\b/gi,
+  Execution:    /\b(Execution|执行|分派执行|dispatch|Worker Task)\b/gi,
+  Review:       /\b(Review|审查|reviewPacket|findings)\b/gi,
+  "Meta-Review": /\b(Meta-Review|元审查|review.*standard)\b/gi,
+  Verification: /\b(Verification|验证|verified|verify.*gate)\b/gi,
+  Evolution:    /\b(Evolution|进化|writeback|evolutionWriteback)\b/gi,
+};
+```
+
+**3. 扫描出状态后，写入 compaction 包**：
+
+```javascript
+// 同样来自 stop-compaction.mjs — 真实代码
+const compaction = {
+  packetVersion: "1.0",
+  runRef: "run-1781789885047",
+  profile: "default",
+  stageState: {
+    current: "Review",              // ← 从 transcript 正则匹配得出
+    completed: ["Critical", "Fetch", "Thinking", "Execution", "Review", "Meta-Review", "Verification"],
+    resumeFrom: "Review",
+    stepNumber: 5
+  },
+  openFindings: [],                 // ← 从 transcript 中的 'findings' 匹配得出
+  verifyGateState: "verified",      // ← 从 'verified' 关键词匹配得出
+  writebackDecision: {
+    decision: "none",
+    targets: [],
+    continuityOnly: true
+  }
+};
+```
+
+**4. 写到文件**：
+
+```
+.meta-kim/state/default/compaction/run-1781789885047.json  ← 完整 compaction
+.meta-kim/state/default/compaction/latest.json              ← 指针
+```
+
+#### 模式 B 详解：demo 脚本如何拼装和落盘
+
+这是你之前跑 `npm run meta:theory:demo` 的真实路径：
+
+**Step 1 — 分类入口**：
+```javascript
+// run-meta-theory-governed-execution.mjs 第 8432 行
+const task = taskArg ?? positional[0] ?? null;
+// task = "What should this project become as a product?"
+const classify = classifyMetaTheoryEntry(task);
+// → { taskClass: "A", requestClass: "execute", governanceFlow: "complex_dev" }
+```
+
+**Step 2 — 拼装所有 packet（无 LLM 调用，demo 是纯合成）**：
+```javascript
+// 第 5892 行: buildCoreLoopArtifact
+// 内部拼装 50+ 个 packet 结构:
+//   intentPacket.realIntent = "Run Meta_Kim governed execution for: ..."
+//   fetchPacket.capabilityMatches = 2
+//   thinkingPacket.owner = "meta-conductor"
+//   executionResult.mainThreadRole = "scope_delegate_review_synthesize"
+//   reviewPacket.findings = [{ severity: "medium", ... }]
+//   verificationResult.status = "pass"
+//   evolutionWritebackDecision.decision = "none-with-reason"
+```
+
+**Step 3 — 合并为一个 JSON 并落盘**：
+```javascript
+// 第 8070 行附近
+const artifact = { /* 50+ packet 全部合并 */ };
+await fs.writeFile(
+  ".meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json",
+  JSON.stringify(artifact, null, 2)  // 3.5 MB
+);
+```
+
+**Step 4 — 生成人类可读报告并索引到 SQLite**：
+```javascript
+await fs.writeFile(
+  ".meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.zh-CN.md",
+  markdownReport  // 25 KB
+);
+await persistDecisionRuns({ dbPath, decisionResults });
+```
+
+#### 一个具体 packet 的完整流转示例
+
+以 `intentPacket` 为例，追踪它从产生到落盘的全过程：
+
+```
+1. Prompt（喂给 AI）
+   ┌─────────────────────────────────────────────────┐
+   │ Critical 阶段: 先锁定真实目标、成功标准、      │
+   │ 非目标和权限边界，再进入证据收集。              │
+   │                                                 │
+   │ 输出格式: {                                     │
+   │   "realIntent": "string (锁定真实意图)",        │
+   │   "successCriteria": ["string (可验收标准)"],   │
+   │   "nonGoals": ["string (排除范围)"],            │
+   │   "blockingUnknowns": ["string (阻塞项)"]       │
+   │ }                                               │
+   └─────────────────────────────────────────────────┘
+            │
+            ▼ LLM 调用 → AI 回复
+   ┌─────────────────────────────────────────────────┐
+   │ {                                               │
+   │   "realIntent": "Run governed execution for:    │
+   │     What should this project become?",          │
+   │   "successCriteria": [                          │
+   │     "artifact validates without claiming        │
+   │      release-grade public readiness"            │
+   │   ],                                            │
+   │   "nonGoals": [                                 │
+   │     "Do not require private docs, publish,      │
+   │      deploy"                                    │
+   │   ],                                            │
+   │   "blockingUnknowns": []                        │
+   │ }                                               │
+   └─────────────────────────────────────────────────┘
+            │
+            ▼ 本地 Node.js 脚本处理
+   ┌─────────────────────────────────────────────────┐
+   │ // 1. JSON.parse(aiResponse)                    │
+   │ const parsed = JSON.parse(llmOutput)            │
+   │                                                 │
+   │ // 2. 硬门: 检查必填字段非空                    │
+   │ if (!parsed.realIntent)                          │
+   │   return "missing_real_intent"                  │
+   │                                                 │
+   │ // 3. 合并到 artifact                           │
+   │ artifact.intentPacket = parsed                  │
+   │                                                 │
+   │ // 4. 落盘                                      │
+   │ await fs.writeFile(                             │
+   │   ".meta-kim/.../meta-run-xxx.json",            │
+   │   JSON.stringify(artifact, null, 2)             │
+   │ )                                               │
+   └─────────────────────────────────────────────────┘
+            │
+            ▼ 写入的文件
+   .meta-kim/state/default/
+   └── governed-executions/
+       ├── meta-run-ac39aed4aaca.json       ← intentPacket 在其中的 intentPacket 字段
+       ├── meta-run-ac39aed4aaca.zh-CN.md   ← 报告中的人类可读版本
+       └── latest.json                       ← 指针: { "runId": "meta-run-ac39aed4aaca", ... }
+```
+
+#### 状态文件层全景
+
+最终所有"AI 输出"和"本地处理"都物化到这些文件中：
+
+```
+.meta-kim/state/default/
+├── compaction/                    ← Stop hook 自动写入（模式 A）
+│   ├── latest.json                ← 当前 compaction 状态
+│   └── run-1781789885047.json     ← 历史 compaction
+├── governed-executions/           ← demo/脚本写入（模式 B）
+│   ├── meta-run-ac39aed4aaca.json ← 完整的 3.5MB artifact（50+ packet）
+│   ├── meta-run-ac39aed4aaca.zh-CN.md ← 人类可读报告
+│   ├── capability-inventory.json  ← 能力清单（496 条）
+│   └── latest.json                ← 指针
+├── capability-index/              ← 能力索引
+│   ├── capability-search-index.tsv
+│   └── global-capabilities.json
+├── profile.json                   ← profile 元信息
+└── spine/                         ← spine 状态（实时阶段的轻量记录）
+    └── spine-state.json
+```
+
+> **一句话总结**：Meta_Kim 的"状态文件"有两种产生方式——CC 会话中是通过 **Stop hook 扫描 AI 的对话 transcript** 用正则提取阶段信息后写入 compaction 包；demo 模式是通过 **Node.js 脚本在内存中合成 50+ packet** 后直接 `writeFile`。两种方式的最终产物都是 `.meta-kim/state/` 下的结构化 JSON。**核心流程始终是：Prompt（喂给 AI 的治理规则）→ LLM 调用 → AI 回复（自然语言或 JSON）→ 本地解析（正则/JSON.parse）→ 落盘（state 文件）。**
+
 ### 架构全景图
 
 ```mermaid
