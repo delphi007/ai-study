@@ -367,9 +367,29 @@ graph TD
 Meta_Kim 的设计基于四个相互咬合的核心机制：
 
 ```mermaid
-flowchart LR
-    C1[Critical] --> F1[Fetch] --> T1[Thinking] --> E1[Execution]
-    E1 --> R1[Review] --> MR1[Meta-Review] --> V1[Verification] --> EV1[Evolution]
+flowchart TB
+    subgraph sgA["① 8 大流程（隐形骨架）"]
+        C1[Critical] --> F1[Fetch] --> T1[Thinking] --> E1[Execution]
+        E1 --> R1[Review] --> MR1[Meta-Review] --> V1[Verification] --> EV1[Evolution]
+    end
+
+    subgraph sgB["② 协议（Packet）"]
+        P1["intentPacket"] --> P2["dispatchBoard"] --> P3["workerTaskPacket"]
+        P3 --> P4["reviewPacket"] --> P5["verificationResult"] --> P6["evolutionWriteback"]
+    end
+
+    subgraph sgC["③ 门（Gate）"]
+        G1["planning gate"] --> G2["metaReview gate"] --> G3["verify gate"]
+        G3 --> G4["summary gate"] --> G5["publicDisplay gate"]
+    end
+
+    subgraph sgD["④ 发牌（Cards）"]
+        D1["Clarify"] --> D2["Verify"] --> D3["Fix"] --> D4["Risk"] --> D5["Pause"]
+    end
+
+    sgA --> sgB
+    sgB --> sgC
+    sgC --> sgD
 
     style C1 fill:#fbbf24,color:#000
     style F1 fill:#34d399,color:#000
@@ -379,12 +399,6 @@ flowchart LR
     style MR1 fill:#a78bfa,color:#fff
     style V1 fill:#34d399,color:#000
     style EV1 fill:#fbbf24,color:#000
-```
-<p align="center"><strong>↓ 8 大流程推进到哪，协议就跟到哪 ↓</strong></p>
-```mermaid
-flowchart LR
-    P1["intentPacket"] --> P2["dispatchBoard"] --> P3["workerTaskPacket"]
-    P3 --> P4["reviewPacket"] --> P5["verificationResult"] --> P6["evolutionWriteback"]
 
     style P1 fill:#16a34a,color:#fff
     style P2 fill:#16a34a,color:#fff
@@ -392,23 +406,12 @@ flowchart LR
     style P4 fill:#16a34a,color:#fff
     style P5 fill:#16a34a,color:#fff
     style P6 fill:#16a34a,color:#fff
-```
-<p align="center"><strong>↓ 协议到了，门判定能不能放行 ↓</strong></p>
-```mermaid
-flowchart LR
-    G1["planning gate"] --> G2["metaReview gate"] --> G3["verify gate"]
-    G3 --> G4["summary gate"] --> G5["publicDisplay gate"]
 
     style G1 fill:#dc2626,color:#fff
     style G2 fill:#dc2626,color:#fff
     style G3 fill:#dc2626,color:#fff
     style G4 fill:#dc2626,color:#fff
     style G5 fill:#dc2626,color:#fff
-```
-<p align="center"><strong>↓ 门不放行？发牌动态调整路径 ↓</strong></p>
-```mermaid
-flowchart LR
-    D1["Clarify"] --> D2["Verify"] --> D3["Fix"] --> D4["Risk"] --> D5["Pause"]
 
     style D1 fill:#f59e0b,color:#000
     style D2 fill:#f59e0b,color:#000
