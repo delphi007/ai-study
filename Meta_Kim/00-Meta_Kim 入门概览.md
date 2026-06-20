@@ -367,52 +367,54 @@ graph TD
 Meta_Kim 的设计基于四个相互咬合的核心机制：
 
 ```mermaid
-flowchart TB
-    subgraph a["8 大流程<br/>（隐形骨架）"]
-        direction LR
-        C1[Critical<br/>澄清需求]
-        F1[Fetch<br/>搜索能力]
-        T1[Thinking<br/>规划方案]
-        E1[Execution<br/>分派执行]
-        R1[Review<br/>审查]
-        MR1[Meta-Review<br/>元审查]
-        V1[Verification<br/>验证]
-        EV1[Evolution<br/>进化]
-    end
+flowchart LR
+    C1[Critical] --> F1[Fetch] --> T1[Thinking] --> E1[Execution]
+    E1 --> R1[Review] --> MR1[Meta-Review] --> V1[Verification] --> EV1[Evolution]
 
-    subgraph b["协议<br/>（Packet）"]
-        direction LR
-        P1[intentPacket]
-        P2[dispatchBoard]
-        P3[workerTaskPacket]
-        P4[reviewPacket]
-        P5[verificationResult]
-        P6[evolutionWriteback]
-    end
+    style C1 fill:#fbbf24,color:#000
+    style F1 fill:#34d399,color:#000
+    style T1 fill:#60a5fa,color:#000
+    style E1 fill:#f87171,color:#fff
+    style R1 fill:#a78bfa,color:#fff
+    style MR1 fill:#a78bfa,color:#fff
+    style V1 fill:#34d399,color:#000
+    style EV1 fill:#fbbf24,color:#000
+```
+<p align="center"><strong>↓ 8 大流程推进到哪，协议就跟到哪 ↓</strong></p>
+```mermaid
+flowchart LR
+    P1["intentPacket"] --> P2["dispatchBoard"] --> P3["workerTaskPacket"]
+    P3 --> P4["reviewPacket"] --> P5["verificationResult"] --> P6["evolutionWriteback"]
 
-    subgraph c["门<br/>（Gate）"]
-        direction LR
-        G1[planning gate]
-        G2[metaReview gate]
-        G3[verify gate]
-        G4[summary gate]
-        G5[publicDisplay gate]
-    end
+    style P1 fill:#16a34a,color:#fff
+    style P2 fill:#16a34a,color:#fff
+    style P3 fill:#16a34a,color:#fff
+    style P4 fill:#16a34a,color:#fff
+    style P5 fill:#16a34a,color:#fff
+    style P6 fill:#16a34a,color:#fff
+```
+<p align="center"><strong>↓ 协议到了，门判定能不能放行 ↓</strong></p>
+```mermaid
+flowchart LR
+    G1["planning gate"] --> G2["metaReview gate"] --> G3["verify gate"]
+    G3 --> G4["summary gate"] --> G5["publicDisplay gate"]
 
-    subgraph d["发牌<br/>（Cards）"]
-        direction LR
-        D1[Clarify / Execute]
-        D2[Verify / Fix]
-        D3[Risk / Rollback]
-        D4[Nudge / Pause]
-    end
+    style G1 fill:#dc2626,color:#fff
+    style G2 fill:#dc2626,color:#fff
+    style G3 fill:#dc2626,color:#fff
+    style G4 fill:#dc2626,color:#fff
+    style G5 fill:#dc2626,color:#fff
+```
+<p align="center"><strong>↓ 门不放行？发牌动态调整路径 ↓</strong></p>
+```mermaid
+flowchart LR
+    D1["Clarify"] --> D2["Verify"] --> D3["Fix"] --> D4["Risk"] --> D5["Pause"]
 
-    a --> b --> c --> d
-
-    style a fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff
-    style b fill:#14532d,stroke:#22c55e,color:#dcfce7
-    style c fill:#7f1d1d,stroke:#dc2626,color:#fecaca
-    style d fill:#78350f,stroke:#f59e0b,color:#fef3c7
+    style D1 fill:#f59e0b,color:#000
+    style D2 fill:#f59e0b,color:#000
+    style D3 fill:#f59e0b,color:#000
+    style D4 fill:#f59e0b,color:#000
+    style D5 fill:#f59e0b,color:#000
 ```
 
 > **8 大流程负责推进，门负责准入，协议负责交付，发牌负责动态介入。**
