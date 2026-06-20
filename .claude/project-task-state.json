@@ -1,7 +1,7 @@
 {
   "version": 1,
   "created_at": "2026-06-19T15:16:07.015273Z",
-  "updated_at": "2026-06-20T11:34:04.889509Z",
+  "updated_at": "2026-06-20T13:22:54.805182Z",
   "sessions": [
     {
       "session_id": "unknown",
@@ -278,6 +278,44 @@
         {
           "description": "completeness-intro-seen ] && echo \\\"yes\\\" || echo \\\"no\\\")\\necho \\\"LAKE_INTRO: $_",
           "completed_at": "2026-06-20T11:34:04.889092Z"
+        }
+      ],
+      "remaining_tasks": [
+        {
+          "description": "in progress",
+          "status": "pending"
+        }
+      ],
+      "note": "auto-save from Stop hook, 400 transcript lines"
+    },
+    {
+      "session_id": "unknown",
+      "date": "2026-06-20",
+      "started_at": "2026-06-20T11:43:20.699243Z",
+      "current_task": "",
+      "completed_tasks": [
+        {
+          "description": "completes, or if the user tells you to cancel the skill or leave plan mode.\\n\\nI",
+          "completed_at": "2026-06-20T11:43:20.698902Z"
+        }
+      ],
+      "remaining_tasks": [
+        {
+          "description": "in progress",
+          "status": "pending"
+        }
+      ],
+      "note": "auto-save from Stop hook, 400 transcript lines"
+    },
+    {
+      "session_id": "unknown",
+      "date": "2026-06-20",
+      "started_at": "2026-06-20T13:22:54.805182Z",
+      "current_task": "",
+      "completed_tasks": [
+        {
+          "description": "completeness-intro-seen\\n```\\n\\nOnly run `open` if yes. Always run `touch`.\\n\\nI",
+          "completed_at": "2026-06-20T13:22:54.804890Z"
         }
       ],
       "remaining_tasks": [

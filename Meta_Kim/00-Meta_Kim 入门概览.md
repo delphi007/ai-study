@@ -367,9 +367,9 @@ graph TD
 Meta_Kim 的设计基于四个相互咬合的核心机制：
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph a["8 大流程<br/>（隐形骨架）"]
-        direction TB
+        direction LR
         C1[Critical<br/>澄清需求]
         F1[Fetch<br/>搜索能力]
         T1[Thinking<br/>规划方案]
@@ -381,7 +381,7 @@ flowchart LR
     end
 
     subgraph b["协议<br/>（Packet）"]
-        direction TB
+        direction LR
         P1[intentPacket]
         P2[dispatchBoard]
         P3[workerTaskPacket]
@@ -391,7 +391,7 @@ flowchart LR
     end
 
     subgraph c["门<br/>（Gate）"]
-        direction TB
+        direction LR
         G1[planning gate]
         G2[metaReview gate]
         G3[verify gate]
@@ -400,7 +400,7 @@ flowchart LR
     end
 
     subgraph d["发牌<br/>（Cards）"]
-        direction TB
+        direction LR
         D1[Clarify / Execute]
         D2[Verify / Fix]
         D3[Risk / Rollback]
