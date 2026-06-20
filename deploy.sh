@@ -34,20 +34,32 @@ err()  { echo -e "${RED}❌ $1${NC}"; exit 1; }
 # ─── Step 1: 同步 Vault 内容到 Quartz ───────────────────
 step "1/5 同步 Vault 文章到 Quartz content..."
 
+# 清除旧内容
+rm -rf "$CONTENT_DIR/00-总览"    2>/dev/null
+rm -rf "$CONTENT_DIR/Claude Code" 2>/dev/null
+rm -rf "$CONTENT_DIR/Meta_Kim"    2>/dev/null
+rm -rf "$CONTENT_DIR/模板"         2>/dev/null
+
 # 确保必要目录存在
-mkdir -p "$CONTENT_DIR/00-总览"               2>/dev/null
-mkdir -p "$CONTENT_DIR/Claude Code"           2>/dev/null
-rm -rf "$CONTENT_DIR/00-总览"/*               2>/dev/null
-rm -rf "$CONTENT_DIR/Claude Code"/*           2>/dev/null
+mkdir -p "$CONTENT_DIR/00-总览"
+mkdir -p "$CONTENT_DIR/Claude Code"
+mkdir -p "$CONTENT_DIR/Meta_Kim"
+mkdir -p "$CONTENT_DIR/模板"
 
-# 复制文章
-cp "$VAULT_ROOT/00-总览/AI学习知识库总览.md"  "$CONTENT_DIR/00-总览/"
-cp "$VAULT_ROOT/Claude Code/0"*.md            "$CONTENT_DIR/Claude Code/"
-cp "$VAULT_ROOT/Claude Code/1"*.md            "$CONTENT_DIR/Claude Code/"
+# 复制 00-总览
+cp "$VAULT_ROOT/00-总览"/*.md "$CONTENT_DIR/00-总览/"
 
-# 移除不需要的构建文件
+# 复制 Claude Code（排除 AGENTS.md / CLAUDE.md 等非文章）
+cp "$VAULT_ROOT/Claude Code/0"*.md "$CONTENT_DIR/Claude Code/" 2>/dev/null || true
+cp "$VAULT_ROOT/Claude Code/1"*.md "$CONTENT_DIR/Claude Code/" 2>/dev/null || true
 rm -f "$CONTENT_DIR/Claude Code/AGENTS.md"
 rm -f "$CONTENT_DIR/Claude Code/CLAUDE.md"
+
+# 复制 Meta_Kim
+cp "$VAULT_ROOT/Meta_Kim/"*.md "$CONTENT_DIR/Meta_Kim/"
+
+# 复制模板
+cp "$VAULT_ROOT/模板/"*.md "$CONTENT_DIR/模板/" 2>/dev/null || true
 
 # 确保首页存在
 if [ ! -f "$CONTENT_DIR/index.md" ]; then
@@ -55,8 +67,9 @@ if [ ! -f "$CONTENT_DIR/index.md" ]; then
   cp /dev/null "$CONTENT_DIR/index.md"  # Quartz 会生成默认内容
 fi
 
-article_count=$(find "$CONTENT_DIR/Claude Code" -name "*.md" | wc -l | tr -d ' ')
-echo "   ✅ 已同步 ${article_count} 篇文章"
+claude_count=$(find "$CONTENT_DIR/Claude Code" -name "*.md" | wc -l | tr -d ' ')
+meta_kim_count=$(find "$CONTENT_DIR/Meta_Kim" -name "*.md" | wc -l | tr -d ' ')
+echo "   ✅ 已同步 Claude Code ${claude_count} 篇 + Meta_Kim ${meta_kim_count} 篇"
 
 # ─── Step 2: Quartz 构建 ────────────────────────────────
 step "2/5 Quartz 构建静态站..."
