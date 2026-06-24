@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>09-Slash Commands 斜杠命令</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="09-Slash Commands 斜杠命令"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="09-Slash Commands 斜杠命令"/><meta name="twitter:description" content="Slash Commands 斜杠命令系统 📖 概念 Slash Commands（斜杠命令）是 Claude Code 的快捷指令系统。以 / 开头输入的命令会触发预定义的操作——从代码审查（/review）到会话压缩（/compact）到项目初始化（/init）。Slash Commands 是”高频操作的快捷键”——不需要用自然语言描述，一个 / 加几个字母就能触发复杂的预定义工作流。 Slash Commands 不是自然语言对话的替代，而是高频操作的加速器。你可以想象它像 Photoshop 的快捷键——熟练用户用 Ctrl+Z 撤销而不是去菜单找，同样，熟练的 Claude Co..."/><meta property="og:description" content="Slash Commands 斜杠命令系统 📖 概念 Slash Commands（斜杠命令）是 Claude Code 的快捷指令系统。以 / 开头输入的命令会触发预定义的操作——从代码审查（/review）到会话压缩（/compact）到项目初始化（/init）。Slash Commands 是”高频操作的快捷键”——不需要用自然语言描述，一个 / 加几个字母就能触发复杂的预定义工作流。 Slash Commands 不是自然语言对话的替代，而是高频操作的加速器。你可以想象它像 Photoshop 的快捷键——熟练用户用 Ctrl+Z 撤销而不是去菜单找，同样，熟练的 Claude Co..."/><meta property="og:image:alt" content="Slash Commands 斜杠命令系统 📖 概念 Slash Commands（斜杠命令）是 Claude Code 的快捷指令系统。以 / 开头输入的命令会触发预定义的操作——从代码审查（/review）到会话压缩（/compact）到项目初始化（/init）。Slash Commands 是”高频操作的快捷键”——不需要用自然语言描述，一个 / 加几个字母就能触发复杂的预定义工作流。 Slash Commands 不是自然语言对话的替代，而是高频操作的加速器。你可以想象它像 Photoshop 的快捷键——熟练用户用 Ctrl+Z 撤销而不是去菜单找，同样，熟练的 Claude Co..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/claude-code/09-slash-commands-斜杠命令"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/claude-code/09-slash-commands-斜杠命令"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Slash Commands 斜杠命令系统 📖 概念 Slash Commands（斜杠命令）是 Claude Code 的快捷指令系统。以 / 开头输入的命令会触发预定义的操作——从代码审查（/review）到会话压缩（/compact）到项目初始化（/init）。Slash Commands 是”高频操作的快捷键”——不需要用自然语言描述，一个 / 加几个字母就能触发复杂的预定义工作流。 Slash Commands 不是自然语言对话的替代，而是高频操作的加速器。你可以想象它像 Photoshop 的快捷键——熟练用户用 Ctrl+Z 撤销而不是去菜单找，同样，熟练的 Claude Co..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/claude-code/09-slash-commands-斜杠命令-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/claude-code/09-slash-commands-斜杠命令-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/claude-code/09-slash-commands-斜杠命令-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="claude-code/09-slash-commands-斜杠命令" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-10" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-10" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../claude-code/">Claude Code</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>09-Slash Commands 斜杠命令</a></div></nav><h1 class="article-title">09-Slash Commands 斜杠命令</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/claude-code" class="internal internal-link tag-link">claude-code</a><span class="note-properties-separator">, </span><a href="../tags/commands" class="internal internal-link tag-link">commands</a><span class="note-properties-separator">, </span><a href="../tags/命令" class="internal internal-link tag-link">命令</a><span class="note-properties-separator">, </span><a href="../tags/斜杠命令" class="internal internal-link tag-link">斜杠命令</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-19T16:32:52.000Z">2026年6月20日</time><span>22分钟阅读</span></p><ul class="tags"><li><a href="../tags/claude-code" class="internal tag-link">claude-code</a></li><li><a href="../tags/commands" class="internal tag-link">commands</a></li><li><a href="../tags/命令" class="internal tag-link">命令</a></li><li><a href="../tags/斜杠命令" class="internal tag-link">斜杠命令</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="slash-commands-斜杠命令系统">Slash Commands 斜杠命令系统<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#slash-commands-斜杠命令系统" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Slash Commands（斜杠命令）是 Claude Code 的<strong>快捷指令系统</strong>。以 <code>/</code> 开头输入的命令会触发预定义的操作——从代码审查（<code>/review</code>）到会话压缩（<code>/compact</code>）到项目初始化（<code>/init</code>）。Slash Commands 是”高频操作的快捷键”——不需要用自然语言描述，一个 <code>/</code> 加几个字母就能触发复杂的预定义工作流。</p>
+</blockquote>
+<p>Slash Commands 不是自然语言对话的替代，而是<strong>高频操作的加速器</strong>。你可以想象它像 Photoshop 的快捷键——熟练用户用 <code>Ctrl+Z</code> 撤销而不是去菜单找，同样，熟练的 Claude Code 用户用 <code>/review</code> 审查代码而不是说”帮我审查当前的变更”。</p>
+<h3 id="命令的类别">命令的类别<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#命令的类别" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>类别</th><th>命令</th><th>说明</th></tr></thead><tbody><tr><td><strong>代码审查</strong></td><td><code>/review</code>, <code>/code-review</code>, <code>/security-review</code>, <code>/simplify</code></td><td>审查和优化代码</td></tr><tr><td><strong>会话管理</strong></td><td><code>/goal</code>, <code>/compact</code>, <code>/clear</code>, <code>/context</code></td><td>管理会话目标、上下文和状态</td></tr><tr><td><strong>项目管理</strong></td><td><code>/init</code>, <code>/memory</code>, <code>/tasks</code>, <code>/loop</code>, <code>/save-progress</code></td><td>管理项目配置、记忆和进度</td></tr><tr><td><strong>配置</strong></td><td><code>/config</code>, <code>/keybindings</code>, <code>/permissions</code>, <code>/hooks</code></td><td>配置 Claude Code</td></tr><tr><td><strong>执行</strong></td><td><code>/run</code>, <code>/verify</code>, <code>/test</code>, <code>/workflows</code></td><td>运行和验证</td></tr><tr><td><strong>信息</strong></td><td><code>/help</code>, <code>/status</code>, <code>/doctor</code>, <code>/version</code></td><td>查看信息和诊断</td></tr><tr><td><strong>自定义</strong></td><td><code>.claude/commands/&lt;name>.md</code></td><td>用户自定义命令</td></tr></tbody></table></div>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Slash Commands 通过<strong>命令注册表 + 参数解析 + 上下文注入</strong>三层机制工作。内置命令编译在 CLI 中；自定义命令从 <code>.claude/commands/</code> 或 <code>~/.claude/commands/</code> 加载。</p>
+</blockquote>
+<h3 id="命令执行流程">命令执行流程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#命令执行流程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant User as 用户输入 \&quot;/review\&quot;\n    participant CLI as CLI 入口\n    participant Registry as 命令注册表\n    participant Command as 匹配的命令\n    participant Session as 当前会话\n    \n    User->>CLI: /review\n    CLI->>Registry: 解析 \&quot;/review\&quot;\n    Registry-->>CLI: 返回命令定义 + 参数模板\n    CLI->>Command: 加载命令逻辑\n    Command-->>CLI: 生成执行提示词\n    CLI->>Session: 注入提示词作为新对话轮次\n    Session-->>User: 执行命令结果&quot;">sequenceDiagram
+    participant User as 用户输入 &quot;/review&quot;
+    participant CLI as CLI 入口
+    participant Registry as 命令注册表
+    participant Command as 匹配的命令
+    participant Session as 当前会话
+    
+    User->>CLI: /review
+    CLI->>Registry: 解析 &quot;/review&quot;
+    Registry-->>CLI: 返回命令定义 + 参数模板
+    CLI->>Command: 加载命令逻辑
+    Command-->>CLI: 生成执行提示词
+    CLI->>Session: 注入提示词作为新对话轮次
+    Session-->>User: 执行命令结果
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="命令解析规则">命令解析规则<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#命令解析规则" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>输入：/review --comment --fix
+  │         │        │
+  │         │        └── 标志：同时应用修复
+  │         └── 标志：发布为 PR 评论
+  └── 命令名：review
+
+输入：/loop 5m /verify
+  │       │    │
+  │       │    └── 参数：要循环的命令
+  │       └── 参数：间隔 5 分钟
+  └── 命令名：loop
+</code></pre>
+<h3 id="自定义命令定义">自定义命令定义<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#自定义命令定义" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>自定义命令是一个 Markdown 文件，内容是在触发时注入给 AI 的提示词：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># .claude/commands/deploy.md</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## Description</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">部署当前分支到 Staging 环境。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">触发词：/deploy</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## Instructions</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">当用户使用 /deploy 命令时，执行以下部署流程：</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">1.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 检查当前分支是否干净（git status）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">2.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 运行完整测试套件（npm test）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">3.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 构建生产版本（npm run build）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">4.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 如果全部通过，触发 Staging 部署</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">5.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 输出部署结果和访问 URL</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 参数</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> --force：跳过测试直接部署（危险，需二次确认）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> --dry-run：预览部署计划但不执行</span></span></code></pre></figure>
+<h2 id="-目录树位置">📂 目录树位置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-目录树位置" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>内置命令编译在 CLI 内（无文件）。自定义命令存储为 Markdown 文件。</p>
+</blockquote>
+<pre><code>项目根目录/
+└── .claude/
+    └── commands/                   ← 项目自定义命令
+        ├── deploy.md               ←   /deploy 命令
+        ├── review-all.md           ←   /review-all 命令
+        └── new-feature.md          ←   /new-feature 命令
+
+用户全局目录 (~/.claude/)：
+~/.claude/
+└── commands/                       ← 全局自定义命令（所有项目可用）
+    ├── daily-standup.md             ←   /daily-standup 命令
+    └── format-all.md                ←   /format-all 命令
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>文件/位置</th><th>作用</th><th>触发方式</th></tr></thead><tbody><tr><td>内置命令</td><td>CLI 编译的功能（60+ 个）</td><td><code>/命令名</code></td></tr><tr><td><code>.claude/commands/&lt;name>.md</code></td><td>项目自定义命令（团队共享）</td><td><code>/&lt;name></code></td></tr><tr><td><code>~/.claude/commands/&lt;name>.md</code></td><td>全局自定义命令（个人）</td><td><code>/&lt;name></code></td></tr></tbody></table></div>
+<p><strong>命令优先级</strong>：项目自定义 > 全局自定义 > 内置命令。同名命令按此顺序覆盖。</p>
+<p><strong>与 Skills、Hooks、Workflows 的目录关系</strong>：</p>
+<pre><code>.claude/
+├── commands/                ← 自定义命令（手动 / 触发）
+├── skills/                  ← 自定义技能（自然语言触发）
+├── hooks/                   ← Hook 脚本（事件自动触发）
+└── workflows/               ← Workflow 脚本（Workflow() 工具触发）
+</code></pre>
+<p>触发机制对比：</p>
+<ul>
+<li>Commands：用户显式输入 <code>/命令名</code></li>
+<li>Skills：用户自然语言匹配触发词</li>
+<li>Hooks：生命周期事件自动触发</li>
+<li>Workflows：通过 <code>Workflow()</code> 工具在对话中调用</li>
+</ul>
+<h2 id="-为什么重要">💡 为什么重要<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-为什么重要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>效率提升</strong>：<code>/review</code> 比”帮我审查当前代码变更”快 10 倍输入</li>
+<li><strong>标准化操作</strong>：团队用统一的 <code>/deploy</code> 而不是各自描述部署流程</li>
+<li><strong>可组合</strong>：<code>/loop 5m /verify</code> 组合命令创造新行为</li>
+<li><strong>学习曲线平滑</strong>：新成员用 <code>/help</code> 发现所有可用命令</li>
+</ul>
+<h2 id="-实战示例">🎯 实战示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-实战示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1用自定义命令标准化团队工作流">示例 1：用自定义命令标准化团队工作流<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1用自定义命令标准化团队工作流" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：团队有固定的功能开发流程——从分支创建到 PR 创建的标准化步骤。你希望一条命令自动执行整个流程。</p>
+<p><strong>操作步骤</strong>：</p>
+<p>创建 <code>.claude/commands/new-feature.md</code>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># /new-feature</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## Description</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">创建新功能分支并完成初始设置。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">触发：/new-feature --feature &lt;功能名> [--from &lt;基线分支>]</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## Instructions</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">当用户触发 /new-feature 时，执行：</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">1.</span><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation"> **拉取最新代码**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">：</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">   ```bash</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">   git fetch origin</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">   git checkout </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">基线分支或main</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">   git pull origin </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">基线分支</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span></span></code></pre></figure>
+<ol start="2">
+<li>
+<p><strong>创建功能分支</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">git</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> checkout</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> -b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> feature/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">功能</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">名</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span></span></code></pre></figure>
+</li>
+<li>
+<p><strong>生成任务计划</strong>：
+在 <code>docs/features/&lt;功能名>/</code> 下创建：</p>
+<ul>
+<li><code>task_plan.md</code> — 分解为文件级别的实现任务</li>
+<li><code>findings.md</code> — 记录实现过程中的发现和决策</li>
+</ul>
+</li>
+<li>
+<p><strong>更新 CLAUDE.md</strong>：
+在 CLAUDE.md 中添加此功能的关键上下文（模块名、关键文件、约束）。</p>
+</li>
+<li>
+<p><strong>输出摘要</strong>：</p>
+<ul>
+<li>分支名：feature/&lt;功能名></li>
+<li>基线提交：<commit hash></commit></li>
+<li>任务计划路径：docs/features/&lt;功能名>/task_plan.md</li>
+<li>下一步：开始实现第一个任务</li>
+</ul>
+</li>
+</ol>
+<pre><code>
+**使用**：
+
+```bash
+/new-feature --feature user-avatar-upload
+</code></pre>
+<p><strong>结果</strong>：</p>
+<pre><code>✅ feature/user-avatar-upload 分支已从 main (a3f2c1e) 创建
+📋 任务计划：docs/features/user-avatar-upload/task_plan.md
+   - 5 个子任务已分解
+📝 CLAUDE.md 已更新，添加本功能的上下文
+💡 下一步：开始实现 Task 1 — 创建文件上传组件
+</code></pre>
+<p><strong>原理分析</strong>：自定义命令将团队<strong>隐性流程</strong>（“创建功能分支后要写 task_plan、更新 CLAUDE.md”）转化为<strong>显式脚本</strong>。新成员用 <code>/new-feature</code> 时自动遵循流程，不会遗漏步骤。这是”团队标准化”的典型应用。</p>
+<h3 id="示例-2组合命令实现持续验证循环">示例 2：组合命令实现持续验证循环<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2组合命令实现持续验证循环" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你正在进行大规模重构，希望在开发过程中持续自动验证，一旦测试失败立即知道。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/loop</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 2m</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> /verify</span></span></code></pre></figure>
+<p><strong>结果</strong>：Claude Code 每 2 分钟自动运行一次验证（检查 lint、类型、测试），结果呈现在对话中。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 等价于手动执行：</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">while</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function"> true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">do</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">  sleep</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 120</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">  # 触发 /verify：运行类型检查 + lint + 相关测试</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">done</span></span></code></pre></figure>
+<p><strong>组合变体</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 每次代码变更后自动审查</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/loop</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 5m</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> /code-review</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --effort</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> low</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 每 30 分钟检查一次依赖安全</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/loop</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 30m</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;检查所有依赖的安全漏洞&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 监控 CI 状态</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/loop</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 3m</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;检查当前分支的最新 CI 运行状态&quot;</span></span></code></pre></figure>
+<p><strong>原理分析</strong>：<code>/loop</code> 是元命令——它接收另一个命令作为参数并周期性执行。这种<strong>命令组合</strong>能力让简单命令产生复杂行为：<code>/loop</code> + <code>/verify</code> = 持续集成代理，<code>/loop</code> + <code>/code-review</code> = 持续代码审查。不需要 Workflow 脚本就能实现持续监控。</p>
+<h3 id="示例-3用命令管理项目知识多命令协作">示例 3：用命令管理项目知识——多命令协作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-3用命令管理项目知识多命令协作" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：项目初期，你希望快速初始化项目结构、配置 Claude Code、建立知识基线。三条命令接力完成。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 第一步：初始化项目 Claude Code 配置</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/init</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → 分析项目结构，自动生成 CLAUDE.md</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 第二步：记录关键决策</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/memory</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;记录项目技术选型：</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">- 前端：React 18 + TypeScript + Vite + Tailwind CSS</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">- 后端：Node.js + Express + Prisma + PostgreSQL</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">- 测试：Vitest（前端）+ Jest（后端）</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">- CI/CD：GitHub Actions，部署到 Vercel（前端）+ Railway（后端）</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">- 禁止使用 any 类型，禁止硬编码配置值&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 第三步：保存初始进度</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/save-progress</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → 写入 .claude/project-task-state.json</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 第四步：查看当前状态</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/status</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → 显示：项目、会话、Memory、配置摘要</span></span></code></pre></figure>
+<p><strong>结果</strong>：四条命令接力，5 分钟内完成项目知识初始化。后续所有协作中，AI 自动理解项目技术栈、遵循约定、记住上下文。</p>
+<p><strong>原理分析</strong>：<code>/init</code>、<code>/memory</code>、<code>/save-progress</code>、<code>/status</code> 构成项目知识管理的命令链。每条命令专注一件事，组合使用时产生系统性效果。这是 Slash Commands 的最佳实践——不是一条命令包揽一切，而是小而专注的命令可组合。</p>
+<hr/>
+<h2 id="-goal-命令详解">🎯 /goal 命令详解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-goal-命令详解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p><code>/goal</code> 是 Claude Code 的<strong>会话目标设定命令</strong>。它让用户在会话开始时（或任务切换时）用一句话锁定当前会话要达成的核心目标。这不是一个”执行命令”——它不触发任何代码生成或文件操作，而是向 AI 注入高优先级的意图锚点，影响整个会话的行为方向。</p>
+</blockquote>
+<h3 id="为什么需要-goal">为什么需要 /goal<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#为什么需要-goal" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Claude Code 的普通对话是<strong>逐轮反应式</strong>的——AI 每轮根据上下文决定下一步。这在简单任务中足够，但在复杂长任务中容易<strong>偏离方向</strong>：AI 可能在实现细节中迷失，忘记了最初是要做什么。</p>
+<p><code>/goal</code> 通过在系统提示词中显式注入目标，形成<strong>持续的意图约束</strong>。AI 在做每一步决策时都会参照这个目标，判断”当前动作是否在朝目标前进”。</p>
+<h3 id="goal-与-普通对话plan-mode-的区别">/goal 与 普通对话、Plan Mode 的区别<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#goal-与-普通对话plan-mode-的区别" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>机制</th><th>介入时机</th><th style="text-align:center;">约束强度</th><th>产出物</th></tr></thead><tbody><tr><td><strong>普通对话</strong></td><td>逐轮</td><td style="text-align:center;">弱</td><td>即时回复</td></tr><tr><td><strong>/goal</strong></td><td>会话级</td><td style="text-align:center;">中</td><td>无（意图注入）</td></tr><tr><td><strong>Plan Mode</strong></td><td>任务级</td><td style="text-align:center;">强</td><td>plan.md 文件</td></tr><tr><td><strong>CLAUDE.md</strong></td><td>项目级</td><td style="text-align:center;">强</td><td>持久化指令</td></tr></tbody></table></div>
+<h3 id="goal-的生效机制">/goal 的生效机制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#goal-的生效机制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>用户输入：/goal 完成优惠券服务的单元测试覆盖到 85%
+         │
+         ▼
+    CLI 解析命令 → 生成意图注入提示词
+         │
+         ▼
+    注入到当前会话系统提示词（高优先级）
+         │
+         ▼
+    AI 后续每轮的决策都参照此目标
+    - 偏离目标时自我纠正
+    - 完成目标后主动告知用户
+</code></pre>
+<h3 id="如何用得好">如何用得好<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#如何用得好" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>1. 目标要具体，可验证</strong></p>
+<pre><code>❌ /goal 做好测试                     ← 无法验证
+❌ /goal 提高代码质量                  ← 太模糊
+✅ /goal 将订单模块的单元测试覆盖率从 45% 提升到 85%
+✅ /goal 修复 src/api/ 下所有 TypeScript strict mode 错误
+</code></pre>
+<p>好的目标包含<strong>范围</strong>（订单模块）+ <strong>指标</strong>（覆盖率 45%→85%）。AI 和你在事后都能清楚判断”目标达成了没”。</p>
+<p><strong>2. 聚焦单一目标</strong></p>
+<pre><code>❌ /goal 重构支付模块、添加日志、修复 ESLint 警告、升级依赖
+   → 这不是一个目标，是四个任务的混杂。AI 会无法判断优先级。
+
+✅ 一个会话 /goal 一个目标，完成后 /goal 切换下一个
+</code></pre>
+<p><strong>3. 含成功标准</strong></p>
+<pre><code>/目标                            成功标准
+──────────────────────────────────────────────────
+/goal 迁移所有 API 端点           → 32 个端点全部从 REST 迁到 GraphQL，旧端点移除
+/goal 性能优化                   → P99 延迟从 2s 降到 500ms 以下
+/goal 文档补充                   → 所有 public API 函数都有 JSDoc，覆盖率 100%
+</code></pre>
+<p><strong>4. 会话中途可以用 /goal 重新定向</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 会话开始</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 完成用户注册功能</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># ... 工作进行中 ...</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 发现注册功能依赖邮箱服务，切换目标</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 先完成邮箱验证服务的封装，验证通过后再继续注册功能</span></span></code></pre></figure>
+<p><strong>5. 结合其它命令形成工作流</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 将订单模块覆盖率提升到</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 85%</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/test</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">                         # → 先看当前覆盖率基线</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/verify</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">                       # → 运行当前测试看看哪些没覆盖</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># ... 写测试代码 ...</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/verify</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">                       # → 检查覆盖率是否达标</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 达标 → /goal 完成 ✓</span></span></code></pre></figure>
+<h3 id="️-注意事项">⚠️ 注意事项<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-注意事项" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>注意点</th><th>说明</th></tr></thead><tbody><tr><td><strong>不是执行命令</strong></td><td><code>/goal</code> 不触发任何代码生成，它只是设定方向。设定后你仍然需要继续对话来推进工作</td></tr><tr><td><strong>不替代 Plan Mode</strong></td><td>复杂多步骤任务（5+ 文件变更）仍应使用 Plan Mode 生成结构化计划。<code>/goal</code> 适合中等复杂度的聚焦任务</td></tr><tr><td><strong>目标丢失</strong></td><td>上下文压缩（<code>/compact</code>）后目标仍在，但压缩如果裁掉了关键上下文可能影响 AI 对目标的理解。可重新 <code>/goal</code> 一次</td></tr><tr><td><strong>跨会话不持久</strong></td><td><code>/goal</code> 只在当前会话有效。新会话需要重新设定。持久化项目级目标应写入 <code>CLAUDE.md</code></td></tr><tr><td><strong>不要过度约束</strong></td><td>目标太窄可能限制 AI 的创造力。例如 <code>/goal 用 for 循环优化查询</code> 不如 <code>/goal 将查询延迟降到 50ms 以下</code>（后者允许 AI 选择更好的方案）</td></tr></tbody></table></div>
+<h3 id="-使用案例">🎯 使用案例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-使用案例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="案例-1bug-修复聚焦">案例 1：Bug 修复聚焦<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#案例-1bug-修复聚焦" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><strong>场景</strong>：用户反馈登录页在 Safari 上白屏，Chrome 正常。你需要在复杂的前端项目中定位并修复这个浏览器兼容问题。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 修复</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> Safari</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 浏览器上登录页白屏的兼容性</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> Bug，Chrome/Firefox/Safari</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 三端验证通过</span></span></code></pre></figure>
+<p><strong>AI 收到目标后</strong>：</p>
+<ol>
+<li>自动聚焦于 <code>login</code> 相关文件和 Safari 兼容性问题</li>
+<li>检查是否使用了 Safari 不支持的 CSS 属性（如 <code>:has()</code> 旧版）或 JS API</li>
+<li>不会趁机”顺便重构一下登录页的样式”（目标约束）</li>
+<li>修完后会在 Chrome/Firefox/Safari 三端验证</li>
+</ol>
+<p><strong>为什么这个目标好</strong>：</p>
+<ul>
+<li>范围明确：登录页 + Safari</li>
+<li>可验证：三端都通过才算完成</li>
+<li>避免范围蔓延：不会趁机重构整个前端</li>
+</ul>
+<h4 id="案例-2渐进式重构">案例 2：渐进式重构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#案例-2渐进式重构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><strong>场景</strong>：<code>src/services/</code> 目录下有 50+ 个文件，你打算分批重构。先做第一批：把 5 个最常用的工具函数迁移到 TypeScript strict mode。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 将</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> src/utils/</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 下</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 5</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 个核心工具函数（date,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> string,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> array,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> object,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> http）</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">迁移为</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> TypeScript</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> strict</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 模式，零</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> any，所有函数显式标注入参和返回类型</span></span></code></pre></figure>
+<p><strong>AI 的工作方式</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 1. 先扫描现状</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;列出 src/utils/ 下所有文件的 TypeScript 严格程度&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 2. 逐个迁移</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;从 date.ts 开始，改为 strict 模式，修复所有类型错误&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 3. 每完成一个检查目标</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;✅ date.ts 已迁移，0 个 any，所有类型显式标注。继续 string.ts？&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 4. 全部完成后</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;5 个文件全部迁移完成。src/utils/ 目录 strict 覆盖率：5/5 ✅&quot;</span></span></code></pre></figure>
+<p><strong>为什么这个目标好</strong>：</p>
+<ul>
+<li>可量化：5 个文件，完成后即达成</li>
+<li>质量标准明确：零 any、显式类型</li>
+<li>范围有界：只做 utils/，不动 services/</li>
+</ul>
+<h4 id="案例-3会话中途重新定向处理意外发现">案例 3：会话中途重新定向——处理意外发现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#案例-3会话中途重新定向处理意外发现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><strong>场景</strong>：你正在开发新功能，AI 在分析代码时发现了一个 SQL 注入漏洞。你决定暂停原任务，先修漏洞。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 原始目标</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 添加批量用户导入功能（CSV</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 上传</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> +</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 校验</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> +</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 入库）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># AI 发现漏洞后：</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;⚠️ 在 src/routes/admin/users.ts:45 发现 SQL 拼接，</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">用户输入直接拼入查询语句，存在注入风险。要继续原任务还是先修复？&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 重新定向</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 先修复</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> src/routes/admin/users.ts:45</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 的</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> SQL</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 注入漏洞，</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">将其改为参数化查询，添加输入校验，写测试验证修复</span></span></code></pre></figure>
+<p><strong>修复完成后</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 回到原目标</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 继续添加批量用户导入功能（CSV</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 上传</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> +</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 校验</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> +</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 入库）</span></span></code></pre></figure>
+<p><strong>为什么这个模式好</strong>：</p>
+<ul>
+<li><code>/goal</code> 支持会话中途灵活切换</li>
+<li>新目标同样具体可验证</li>
+<li>做完后回到原目标，不会忘记之前做到哪了</li>
+</ul>
+<h4 id="案例-4与其它命令配合目标驱动工作流">案例 4：与其它命令配合——目标驱动工作流<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#案例-4与其它命令配合目标驱动工作流" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><strong>场景</strong>：你需要完成一个 API 端点从 JavaScript 到 TypeScript 的迁移。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 1. 设定目标</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/goal</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 将</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> GET</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> /api/users/:id</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 端点从</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> JS</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 迁移到</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> TS</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> strict</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 模式，</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">包含完整的请求/响应类型、Zod</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 校验和错误处理</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 2. 了解现状</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;分析 src/routes/users.js 的当前逻辑和依赖&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 3. 实现（AI 在目标约束下工作）</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;开始迁移，先创建类型定义，再改路由&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 4. 持续验证</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">/verify</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">                     # 运行类型检查 + 相关测试</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 5. 验收</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;检查这次迁移是否满足目标：strict mode、完整类型、Zod 校验、错误处理&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># AI 自我检查：</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;✅ strict mode：tsconfig 覆盖，零隐式 any</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> ✅ 类型定义：IUser、IUserResponse、IErrorResponse 已定义</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> ✅ Zod 校验：params.id 和 响应结构已校验</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> ✅ 错误处理：404/400/500 已覆盖</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> 🎯 /goal 完成&quot;</span></span></code></pre></figure>
+<hr/>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：为团队高频操作创建自定义命令（<code>/deploy</code>、<code>/new-feature</code>、<code>/review-all</code>）</li>
+<li><strong>DO</strong>：自定义命令文件写清楚 Description、Instructions、参数说明</li>
+<li><strong>DO</strong>：使用 <code>/help</code> 发现可用命令——新版本可能添加了新命令</li>
+<li><strong>DON’T</strong>：把复杂的多步骤逻辑塞进一条命令——复杂编排用 Workflows</li>
+<li><strong>DON’T</strong>：自定义命令覆盖内置命令的同名——可能让团队成员困惑</li>
+<li><strong>TIP</strong>：<code>/loop</code> + 任意命令 = 持续自动化，是最高效的命令组合模式</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>命令不存在</td><td>输入 <code>/xxx</code> 无反应</td><td><code>/help</code> 查看可用命令列表；检查自定义命令文件格式</td></tr><tr><td>自定义命令未生效</td><td><code>.claude/commands/deploy.md</code> 存在但 <code>/deploy</code> 无反应</td><td>检查文件位置和扩展名（必须 <code>.md</code>），重启 Claude Code</td></tr><tr><td>命令覆盖冲突</td><td>项目命令和全局命令同名，行为不符合预期</td><td>理解优先级：项目 > 全局 > 内置</td></tr><tr><td><code>/loop</code> 过频</td><td>短间隔触发过多会话，消耗 tokens</td><td>根据任务的实际变化速度设置间隔（CI 状态 3min，依赖检查 30min）</td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../claude-code/07-配置与项目管理" class="internal internal-link alias" data-slug="claude-code/07-配置与项目管理">配置与项目管理</a> — 命令存储在 <code>.claude/commands/</code> 下</li>
+<li><a href="../claude-code/08-workflows-工作流编排" class="internal internal-link alias" data-slug="claude-code/08-workflows-工作流编排">Workflows 工作流编排</a> — 复杂编排用 Workflows，简单操作用 Commands</li>
+<li><a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">Skills 技能系统</a> — Commands 手动触发，Skills 自然语言触发</li>
+<li><a href="../claude-code/05-memory-记忆系统" class="internal internal-link alias" data-slug="claude-code/05-memory-记忆系统">Memory 记忆系统</a> — <code>/memory</code> 命令管理记忆</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>官方文档：<a href="https://docs.anthropic.com/en/docs/claude-code/slash-commands" class="external external-link">Claude Code Slash Commands<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><code>/help</code> 命令：查看所有可用命令</li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>下一步</strong>：阅读 <a href="../claude-code/10-plan-mode-规划模式" class="internal internal-link alias" data-slug="claude-code/10-plan-mode-规划模式">Plan Mode 规划模式</a> 了解结构化项目规划机制。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-10" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#slash-commands-斜杠命令系统" data-for="slash-commands-斜杠命令系统">Slash Commands 斜杠命令系统</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-2"><a href="#命令的类别" data-for="命令的类别">命令的类别</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#命令执行流程" data-for="命令执行流程">命令执行流程</a></li><li class="depth-2"><a href="#命令解析规则" data-for="命令解析规则">命令解析规则</a></li><li class="depth-2"><a href="#自定义命令定义" data-for="自定义命令定义">自定义命令定义</a></li><li class="depth-1"><a href="#-目录树位置" data-for="-目录树位置">📂 目录树位置</a></li><li class="depth-1"><a href="#-为什么重要" data-for="-为什么重要">💡 为什么重要</a></li><li class="depth-1"><a href="#-实战示例" data-for="-实战示例">🎯 实战示例</a></li><li class="depth-2"><a href="#示例-1用自定义命令标准化团队工作流" data-for="示例-1用自定义命令标准化团队工作流">示例 1：用自定义命令标准化团队工作流</a></li><li class="depth-2"><a href="#示例-2组合命令实现持续验证循环" data-for="示例-2组合命令实现持续验证循环">示例 2：组合命令实现持续验证循环</a></li><li class="depth-2"><a href="#示例-3用命令管理项目知识多命令协作" data-for="示例-3用命令管理项目知识多命令协作">示例 3：用命令管理项目知识——多命令协作</a></li><li class="depth-1"><a href="#-goal-命令详解" data-for="-goal-命令详解">🎯 /goal 命令详解</a></li><li class="depth-2"><a href="#为什么需要-goal" data-for="为什么需要-goal">为什么需要 /goal</a></li><li class="depth-2"><a href="#goal-与-普通对话plan-mode-的区别" data-for="goal-与-普通对话plan-mode-的区别">/goal 与 普通对话、Plan Mode 的区别</a></li><li class="depth-2"><a href="#goal-的生效机制" data-for="goal-的生效机制">/goal 的生效机制</a></li><li class="depth-2"><a href="#如何用得好" data-for="如何用得好">如何用得好</a></li><li class="depth-2"><a href="#️-注意事项" data-for="️-注意事项">⚠️ 注意事项</a></li><li class="depth-2"><a href="#-使用案例" data-for="-使用案例">🎯 使用案例</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../claude-code/00-claude-code-入门概览" class="internal">00-Claude Code 入门概览</a></li><li><a href="../claude-code/07-配置与项目管理" class="internal">07-配置与项目管理</a></li><li><a href="../claude-code/08-workflows-工作流编排" class="internal">08-Workflows 工作流编排</a></li><li><a href="../claude-code/10-plan-mode-规划模式" class="internal">10-Plan Mode 规划模式</a></li><li><a href="../claude-code/11-prompt-engineering-提示词工程" class="internal">11-Prompt Engineering 提示词工程</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

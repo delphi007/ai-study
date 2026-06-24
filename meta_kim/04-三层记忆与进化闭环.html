@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>04-三层记忆与进化闭环</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="04-三层记忆与进化闭环"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="04-三层记忆与进化闭环"/><meta name="twitter:description" content="三层记忆与进化闭环 📖 概念 Meta_Kim 的记忆不止”记下来”——它是一套三层分工的长期记忆与进化体系：第一层 Memory 驱动 Agent 持续升级，第二层 Graphify 构建项目代码知识图谱，第三层 SQL 实现向量级会话检索。三层共同作用，让 agent 越用越聪明，且对项目越来越熟。 配合 Evolution 阶段的写回机制，每一轮 governed run 的经验都会被沉淀为结构性升级：可复用模式写入 memory，失败记录成伤疤，能力缺口标记追踪，agent 边界调整写回 canonical。不沉淀经验的 run 等于白干。 🔧 工作原理 三层记忆全景 flowch..."/><meta property="og:description" content="三层记忆与进化闭环 📖 概念 Meta_Kim 的记忆不止”记下来”——它是一套三层分工的长期记忆与进化体系：第一层 Memory 驱动 Agent 持续升级，第二层 Graphify 构建项目代码知识图谱，第三层 SQL 实现向量级会话检索。三层共同作用，让 agent 越用越聪明，且对项目越来越熟。 配合 Evolution 阶段的写回机制，每一轮 governed run 的经验都会被沉淀为结构性升级：可复用模式写入 memory，失败记录成伤疤，能力缺口标记追踪，agent 边界调整写回 canonical。不沉淀经验的 run 等于白干。 🔧 工作原理 三层记忆全景 flowch..."/><meta property="og:image:alt" content="三层记忆与进化闭环 📖 概念 Meta_Kim 的记忆不止”记下来”——它是一套三层分工的长期记忆与进化体系：第一层 Memory 驱动 Agent 持续升级，第二层 Graphify 构建项目代码知识图谱，第三层 SQL 实现向量级会话检索。三层共同作用，让 agent 越用越聪明，且对项目越来越熟。 配合 Evolution 阶段的写回机制，每一轮 governed run 的经验都会被沉淀为结构性升级：可复用模式写入 memory，失败记录成伤疤，能力缺口标记追踪，agent 边界调整写回 canonical。不沉淀经验的 run 等于白干。 🔧 工作原理 三层记忆全景 flowch..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/meta_kim/04-三层记忆与进化闭环"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/meta_kim/04-三层记忆与进化闭环"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="三层记忆与进化闭环 📖 概念 Meta_Kim 的记忆不止”记下来”——它是一套三层分工的长期记忆与进化体系：第一层 Memory 驱动 Agent 持续升级，第二层 Graphify 构建项目代码知识图谱，第三层 SQL 实现向量级会话检索。三层共同作用，让 agent 越用越聪明，且对项目越来越熟。 配合 Evolution 阶段的写回机制，每一轮 governed run 的经验都会被沉淀为结构性升级：可复用模式写入 memory，失败记录成伤疤，能力缺口标记追踪，agent 边界调整写回 canonical。不沉淀经验的 run 等于白干。 🔧 工作原理 三层记忆全景 flowch..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/meta_kim/04-三层记忆与进化闭环-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/meta_kim/04-三层记忆与进化闭环-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/meta_kim/04-三层记忆与进化闭环-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="meta_kim/04-三层记忆与进化闭环" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-17" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-17" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../meta_kim/">Meta_Kim</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>04-三层记忆与进化闭环</a></div></nav><h1 class="article-title">04-三层记忆与进化闭环</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/meta-kim" class="internal internal-link tag-link">meta-kim</a><span class="note-properties-separator">, </span><a href="../tags/记忆" class="internal internal-link tag-link">记忆</a><span class="note-properties-separator">, </span><a href="../tags/进化" class="internal internal-link tag-link">进化</a><span class="note-properties-separator">, </span><a href="../tags/graphify" class="internal internal-link tag-link">graphify</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-24T17:12:16.547Z">2026年6月25日</time><span>12分钟阅读</span></p><ul class="tags"><li><a href="../tags/meta-kim" class="internal tag-link">meta-kim</a></li><li><a href="../tags/记忆" class="internal tag-link">记忆</a></li><li><a href="../tags/进化" class="internal tag-link">进化</a></li><li><a href="../tags/graphify" class="internal tag-link">graphify</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="三层记忆与进化闭环">三层记忆与进化闭环<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#三层记忆与进化闭环" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Meta_Kim 的记忆不止”记下来”——它是一套三层分工的<strong>长期记忆与进化体系</strong>：第一层 Memory 驱动 Agent 持续升级，第二层 Graphify 构建项目代码知识图谱，第三层 SQL 实现向量级会话检索。三层共同作用，让 agent 越用越聪明，且对项目越来越熟。</p>
+</blockquote>
+<p>配合 Evolution 阶段的写回机制，每一轮 governed run 的经验都会被沉淀为结构性升级：可复用模式写入 memory，失败记录成伤疤，能力缺口标记追踪，agent 边界调整写回 canonical。<strong>不沉淀经验的 run 等于白干。</strong></p>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="三层记忆全景">三层记忆全景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#三层记忆全景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TB\n    subgraph memory[\&quot;第一层：Memory（Agent 升级记忆）\&quot;]\n        M_IN[运行结束前&lt;br/>读取 memory] --> M_JUDGE[判断 Agent&lt;br/>是否需要升级]\n        M_JUDGE --> M_OUT[更新边界&lt;br/>调整能力]\n    end\n\n    subgraph graphify[\&quot;第二层：Graphify（代码知识图谱）\&quot;]\n        G_IN[源文件 > 20 时&lt;br/>自动生成图谱] --> G_COMPRESS[子图提取&lt;br/>最高 71x 压缩]\n        G_COMPRESS --> G_QUERY[Agent 基于图谱&lt;br/>事实回答]\n    end\n\n    subgraph sql[\&quot;第三层：SQL（向量级会话检索）\&quot;]\n        S_IN[会话关键信息&lt;br/>存为向量] --> S_INDEX[SQLite + sqlite-vec&lt;br/>向量索引]\n        S_INDEX --> S_RECALL[语义相似度&lt;br/>精准召回]\n    end\n\n    memory &lt;--> graphify\n    graphify &lt;--> sql\n    sql &lt;--> memory\n\n    GOAL1[降低幻觉&lt;br/>基于事实而非编造]\n    GOAL2[减少 token&lt;br/>压缩代替全文读取]\n\n    memory --> GOAL1\n    graphify --> GOAL1\n    graphify --> GOAL2\n    sql --> GOAL2\n\n    style memory fill:#fbbf24,color:#000\n    style graphify fill:#34d399,color:#000\n    style sql fill:#60a5fa,color:#000\n    style GOAL1 fill:#dc2626,color:#fff\n    style GOAL2 fill:#dc2626,color:#fff&quot;">flowchart TB
+    subgraph memory[&quot;第一层：Memory（Agent 升级记忆）&quot;]
+        M_IN[运行结束前&lt;br/>读取 memory] --> M_JUDGE[判断 Agent&lt;br/>是否需要升级]
+        M_JUDGE --> M_OUT[更新边界&lt;br/>调整能力]
+    end
+
+    subgraph graphify[&quot;第二层：Graphify（代码知识图谱）&quot;]
+        G_IN[源文件 > 20 时&lt;br/>自动生成图谱] --> G_COMPRESS[子图提取&lt;br/>最高 71x 压缩]
+        G_COMPRESS --> G_QUERY[Agent 基于图谱&lt;br/>事实回答]
+    end
+
+    subgraph sql[&quot;第三层：SQL（向量级会话检索）&quot;]
+        S_IN[会话关键信息&lt;br/>存为向量] --> S_INDEX[SQLite + sqlite-vec&lt;br/>向量索引]
+        S_INDEX --> S_RECALL[语义相似度&lt;br/>精准召回]
+    end
+
+    memory &lt;--> graphify
+    graphify &lt;--> sql
+    sql &lt;--> memory
+
+    GOAL1[降低幻觉&lt;br/>基于事实而非编造]
+    GOAL2[减少 token&lt;br/>压缩代替全文读取]
+
+    memory --> GOAL1
+    graphify --> GOAL1
+    graphify --> GOAL2
+    sql --> GOAL2
+
+    style memory fill:#fbbf24,color:#000
+    style graphify fill:#34d399,color:#000
+    style sql fill:#60a5fa,color:#000
+    style GOAL1 fill:#dc2626,color:#fff
+    style GOAL2 fill:#dc2626,color:#fff
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="第一层memoryagent-升级记忆">第一层：Memory（Agent 升级记忆）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一层memoryagent-升级记忆" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>负责什么</strong></td><td>Agent 的升级和持续学习</td></tr><tr><td><strong>存储位置</strong></td><td><code>~/.claude/projects/&lt;hash>/memory/</code></td></tr><tr><td><strong>工作机制</strong></td><td>每次运行结束前，系统读取 memory 判断 agent 是否需要升级、边界是否需要调整</td></tr><tr><td><strong>核心价值</strong></td><td>让 agent 越用越聪明，而不是每次都从零开始</td></tr><tr><td><strong>激活方式</strong></td><td>自动——AI 在每次会话中自动读写 memory</td></tr><tr><td><strong>CC 底层实现</strong></td><td>直接使用 [[Claude Code/05-Memory 记忆系统</td></tr></tbody></table></div>
+<p>Memory 文件轻量但关键。它不是”记住一切”，而是记住<strong>决策依据</strong>：上次为什么选择了方案 A 而不是方案 B？这个 agent 的能力边界上次被证明不足够在哪里？这些记录驱动 Evolution 阶段的升级决策。</p>
+<h3 id="第二层graphify项目级-llm-wiki">第二层：Graphify（项目级 LLM Wiki）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二层graphify项目级-llm-wiki" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>负责什么</strong></td><td>项目级别的代码知识图谱</td></tr><tr><td><strong>存储位置</strong></td><td><code>graphify-out/graph.json</code>（NetworkX 节点链接格式）</td></tr><tr><td><strong>工作机制</strong></td><td>git hook 在 commit/checkout 时自动重建；Agent 通过子图提取代替原始文件读取</td></tr><tr><td><strong>核心价值</strong></td><td>降低幻觉（基于图谱事实回答）+ 减少 token（最高 71 倍压缩）</td></tr><tr><td><strong>激活方式</strong></td><td><code>node setup.mjs</code> 可选 Python 步骤安装</td></tr></tbody></table></div>
+<p><strong>质量门槛</strong>（达不到则回退到直接文件读取）：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指标</th><th>阈值</th><th>处理</th></tr></thead><tbody><tr><td>模糊节点比例</td><td>> 30%</td><td>标记为低质量图谱，回退到文件读取</td></tr><tr><td>总节点数</td><td>&lt; 10</td><td>图谱太稀疏，回退到 Glob/Grep</td></tr><tr><td>上帝节点（入度过高）</td><td>存在</td><td>标记为串行瓶颈</td></tr></tbody></table></div>
+<p><strong>CC 底层实现</strong>：Graphify 通过 CC 的 git hooks（post-commit/checkout 触发重建）+ CC 子 agent 上下文注入（通过 <code>subagent-context.mjs</code> 给子 agent 注入图谱短提示，不会把整份 <code>graph.json</code> 塞进上下文）。</p>
+<h3 id="第三层sql向量级会话检索">第三层：SQL（向量级会话检索）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三层sql向量级会话检索" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>负责什么</strong></td><td>项目会话的向量级存储和检索</td></tr><tr><td><strong>存储方式</strong></td><td>SQLite + 向量扩展（sqlite-vec）</td></tr><tr><td><strong>工作机制</strong></td><td>把每次会话的关键信息存为向量，下次通过语义相似度检索</td></tr><tr><td><strong>核心价值</strong></td><td>跨会话连续性——上次聊到哪了这次能接上；语义检索而非关键词匹配</td></tr><tr><td><strong>激活方式</strong></td><td><code>node setup.mjs</code> 安装 MCP Memory Service + 各工具端 memory hooks</td></tr></tbody></table></div>
+<p><strong>跨工具端支持</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>工具端</th><th>Hook 注册方式</th></tr></thead><tbody><tr><td><strong>Claude Code</strong></td><td>SessionStart Hook + Stop 记忆保存 Hook，自动注册</td></tr><tr><td><strong>Codex</strong></td><td><code>~/.codex/hooks.json</code> 桥接（SessionStart、UserPromptSubmit、Stop）</td></tr><tr><td><strong>OpenClaw</strong></td><td><code>~/.openclaw/hooks/mcp-memory-service</code> managed hook</td></tr><tr><td><strong>Cursor</strong></td><td><code>~/.cursor/hooks.json</code> 桥接（beforeSubmitPrompt、stop）</td></tr></tbody></table></div>
+<p><strong>CC 底层实现</strong>：通过 CC MCP + CC Hooks 实现。<code>.mcp.json</code> 注册 MCP Memory server（<code>http://localhost:8000</code>）；lifecycle hooks（SessionStart/Stop）自动写回会话记忆。</p>
+<h3 id="evolution-闭环从经验到升级">Evolution 闭环：从经验到升级<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#evolution-闭环从经验到升级" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>三层记忆是存储，Evolution 是<strong>把存储变成行动</strong>。</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    INPUT[需求进来] --> SPINE[隐形骨架启动]\n    SPINE --> CARD[动态发牌决策]\n    CARD --> DISPATCH[分派给专业 Agent]\n    DISPATCH --> REVIEW[审查 + 验证]\n    REVIEW --> |通过| EVOLVE[经验沉淀&lt;br/>Evolution 阶段]\n    REVIEW --> |不通过| FIX[修复 + 再审查]\n    FIX --> REVIEW\n    EVOLVE --> UPGRADE[Agent 能力升级]\n    UPGRADE --> |发现能力缺口| CREATE[Type B 管线&lt;br/>自动创建新 Agent]\n    UPGRADE --> |边界需要调整| BOUNDARY[调整 Agent 边界]\n    UPGRADE --> |失败需要记录| SCAR[写入 Scar&lt;br/>防止重复犯错]\n    CREATE --> INPUT2[下一轮更强]\n    BOUNDARY --> INPUT2\n    SCAR --> INPUT2\n\n    style INPUT fill:#fbbf24,color:#000\n    style EVOLVE fill:#34d399,color:#000\n    style CREATE fill:#f87171,color:#fff\n    style INPUT2 fill:#fbbf24,color:#000&quot;">flowchart TD
+    INPUT[需求进来] --> SPINE[隐形骨架启动]
+    SPINE --> CARD[动态发牌决策]
+    CARD --> DISPATCH[分派给专业 Agent]
+    DISPATCH --> REVIEW[审查 + 验证]
+    REVIEW --> |通过| EVOLVE[经验沉淀&lt;br/>Evolution 阶段]
+    REVIEW --> |不通过| FIX[修复 + 再审查]
+    FIX --> REVIEW
+    EVOLVE --> UPGRADE[Agent 能力升级]
+    UPGRADE --> |发现能力缺口| CREATE[Type B 管线&lt;br/>自动创建新 Agent]
+    UPGRADE --> |边界需要调整| BOUNDARY[调整 Agent 边界]
+    UPGRADE --> |失败需要记录| SCAR[写入 Scar&lt;br/>防止重复犯错]
+    CREATE --> INPUT2[下一轮更强]
+    BOUNDARY --> INPUT2
+    SCAR --> INPUT2
+
+    style INPUT fill:#fbbf24,color:#000
+    style EVOLVE fill:#34d399,color:#000
+    style CREATE fill:#f87171,color:#fff
+    style INPUT2 fill:#fbbf24,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h4 id="evolution-写回目标">Evolution 写回目标<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#evolution-写回目标" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>缺口/发现类型</th><th>进化目标</th><th>写入载体</th></tr></thead><tbody><tr><td>prompt gap</td><td>升级 canonical skill 或 reference contract</td><td><code>canonical/skills/</code>、<code>config/contracts/</code></td></tr><tr><td>agent boundary gap</td><td>升级目标 agent 定义 / SOUL.md</td><td><code>canonical/agents/*.md</code></td></tr><tr><td>capability gap</td><td><code>capabilityGapPacket</code> → Type B 创建 agent</td><td><code>canonical/agents/</code> + 同步到工具端</td></tr><tr><td>dependency gap</td><td>依赖注册和兼容性校验器</td><td><code>config/capability-index/dependency-project-registry.json</code></td></tr><tr><td>runtime/OS gap</td><td>runtime 矩阵或 OS 矩阵</td><td><code>config/runtime-capability-matrix.json</code>、<code>config/os-compatibility-matrix.json</code></td></tr><tr><td>失败模式</td><td>Scar（伤疤）记录</td><td><code>config/governance/</code> + agent SOUL.md</td></tr></tbody></table></div>
+<h4 id="scar伤疤机制">Scar（伤疤）机制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#scar伤疤机制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>当同一种失败出现第二次时，不是再修一次，而是：</p>
+<ol>
+<li>判断为 <strong>bottom_design_failure</strong>（底层设计缺陷）</li>
+<li>回到 Critical / Fetch / Thinking 改目标合同、路径设计、owner/weapon 选择</li>
+<li>写入 <strong>Scar</strong>：<code>failurePattern</code>（失败模式）+ <code>preventionRule</code>（预防规则）+ <code>test</code>（回归测试）+ <code>nextRunReuseKey</code>（下次复用键）</li>
+<li>下次遇到类似模式时，Scar 自动触发预防规则</li>
+</ol>
+<p><strong>这防止了”同一个坑跳两次”——第一次是经验，第二次就是系统缺陷了。</strong></p>
+<h2 id="-为什么重要">💡 为什么重要<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-为什么重要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>不遗忘</strong>：三层记忆各司其职，确保上次学到的下次还在</li>
+<li><strong>不编造</strong>：Graphify 让 agent 基于代码事实回答，而不是凭”记忆”瞎编</li>
+<li><strong>不重复犯错</strong>：Scar 机制让每次失败都变成可执行的预防规则</li>
+<li><strong>不吃老本</strong>：Evolution 不是”记下来就好”——必须变成结构性升级（agent 定义、skill、合约、配置）</li>
+</ul>
+<h2 id="-实战示例">🎯 实战示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-实战示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1memory-驱动的-agent-升级">示例 1：Memory 驱动的 Agent 升级<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1memory-驱动的-agent-升级" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：meta-prism 在上次审查中漏掉了一个 SQL 注入漏洞</p>
+<p><strong>Evolution 流程</strong>：</p>
+<ol>
+<li>Review 阶段发现漏审 → 分析为什么 meta-prism 没发现</li>
+<li>Evolution 阶段：升级 meta-prism 的审查标准——增加 SQL 注入检查项</li>
+<li>写回 <code>canonical/agents/meta-prism.md</code> 的 SOUL.md 部分</li>
+<li>同步到工具端（<code>npm run meta:sync</code>）</li>
+<li>下次 meta-prism 审查时自动包含 SQL 注入检查</li>
+</ol>
+<h3 id="示例-2graphify-降低幻觉">示例 2：Graphify 降低幻觉<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2graphify-降低幻觉" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：agent 需要回答”这个项目的认证流程是怎么实现的”</p>
+<p><strong>没有 Graphify</strong>：agent 凭训练数据中的印象猜测，可能把 A 项目的流程说成 B 项目的</p>
+<p><strong>有 Graphify</strong>：</p>
+<ol>
+<li>Agent 先查询 Graphify：<code>python -m graphify query &quot;认证流程&quot;</code></li>
+<li>Graphify 返回子图：AuthController → UserModel → JWTService → Middleware 的关系图</li>
+<li>Agent 基于子图事实回答，不凭记忆编造</li>
+<li>Token 消耗：子图提取比全文读取压缩了最高 71 倍</li>
+</ol>
+<h3 id="示例-3scar-防止重复犯错">示例 3：Scar 防止重复犯错<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-3scar-防止重复犯错" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：两次因为同样的 hook 配置错误导致部署失败</p>
+<p><strong>Evolution 流程</strong>：</p>
+<ol>
+<li>第二次失败时触发 <strong>Same-Type Failure Design Gate</strong>：这不是偶然，是设计缺陷</li>
+<li>写入 Scar：
+<ul>
+<li><code>failurePattern</code>：hook 配置中的 <code>preToolUse</code> 正则表达式缺少锚定导致误匹配</li>
+<li><code>preventionRule</code>：所有 hook 正则必须用 <code>^...$</code> 锚定</li>
+<li><code>test</code>：新增 hook 配置校验脚本</li>
+<li><code>nextRunReuseKey</code>：<code>scar-hook-regex-anchor-check</code></li>
+</ul>
+</li>
+<li>下次任何 hook 配置变更时，系统自动检查这个 Scar</li>
+</ol>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：每次 Evolution 阶段认真给出 <code>writebackDecision</code>——哪怕答案是”本轮无可沉淀”，也要说明原因</li>
+<li><strong>DO</strong>：项目源文件 > 20 时启用 Graphify——它的 ROI 在这种情况下已经明显为正</li>
+<li><strong>DON’T</strong>：不要跳过 Scar 写入——第二次同类失败说明需要系统级修复，不能再用一次性补丁</li>
+<li><strong>TIP</strong>：用 <code>npm run meta:query:runs -- --owner &lt;agent></code> 查看历史 run，追溯 agent 能力进化轨迹</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>以为三层记忆很重</td><td>担心资源消耗不敢全开</td><td>Memory 几个 markdown 文件，Graphify 源文件 > 20 才启用，SQL 用本地 SQLite——三层加起来远小于每次从零读项目的 token 消耗</td></tr><tr><td>跳过 Evolution 写回</td><td>run 结束时不给出 writebackDecision</td><td>每个 run 必须给出写回决策，哪怕是 <code>none-with-reason</code></td></tr><tr><td>忽视 Scar</td><td>同类错误出现第二次还在原地修</td><td>第二次同类错误 = 系统设计缺陷，必须写入 Scar + 改设计</td></tr><tr><td>Graphify 图谱质量低</td><td>模糊节点 > 30% 仍使用图谱</td><td>质量门槛硬性规定：模糊节点 > 30% 回退到文件读取</td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../meta_kim/01-8-阶段脊柱与路径分类" class="internal internal-link alias" data-slug="meta_kim/01-8-阶段脊柱与路径分类">8 阶段脊柱</a> — Evolution 是 8 阶段的最后一环</li>
+<li><a href="../meta_kim/02-元角色体系与能力优先分发" class="internal internal-link alias" data-slug="meta_kim/02-元角色体系与能力优先分发">元角色体系</a> — meta-librarian（记忆管理）和 meta-chrysalis（进化执行）</li>
+<li><a href="../meta_kim/03-协议、门与动态发牌" class="internal internal-link alias" data-slug="meta_kim/03-协议、门与动态发牌">协议、门与发牌</a> — evolutionWriteback 协议和 publicDisplay gate</li>
+<li><a href="../claude-code/05-memory-记忆系统" class="internal internal-link alias" data-slug="claude-code/05-memory-记忆系统">CC Memory</a> — 第一层记忆的底层实现</li>
+<li><a href="../claude-code/06-hooks-钩子系统" class="internal internal-link alias" data-slug="claude-code/06-hooks-钩子系统">CC Hooks</a> — Graphify git hooks 和 memory hooks 的底层实现</li>
+<li><a href="../claude-code/02-mcp-模型上下文协议" class="internal internal-link alias" data-slug="claude-code/02-mcp-模型上下文协议">CC MCP</a> — 第三层 SQL 记忆的 MCP Memory Service</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><code>config/contracts/evolution-contract.json</code>：Evolution 阶段的完整协议</li>
+<li><code>config/contracts/scar-protocol.md</code>：Scar 机制的详细规范</li>
+<li>Meta_Kim README 三层记忆章节</li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>下一步</strong>：阅读 <a href="../meta_kim/05-场景判断：何时用-meta-theory" class="internal internal-link alias" data-slug="meta_kim/05-场景判断：何时用-meta-theory">场景判断：何时用 meta-theory</a>，这是本专题的实战决策篇——基于前面 4 篇文章的全部知识，给你一个清晰的判断框架。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-17" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#三层记忆与进化闭环" data-for="三层记忆与进化闭环">三层记忆与进化闭环</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#三层记忆全景" data-for="三层记忆全景">三层记忆全景</a></li><li class="depth-2"><a href="#第一层memoryagent-升级记忆" data-for="第一层memoryagent-升级记忆">第一层：Memory（Agent 升级记忆）</a></li><li class="depth-2"><a href="#第二层graphify项目级-llm-wiki" data-for="第二层graphify项目级-llm-wiki">第二层：Graphify（项目级 LLM Wiki）</a></li><li class="depth-2"><a href="#第三层sql向量级会话检索" data-for="第三层sql向量级会话检索">第三层：SQL（向量级会话检索）</a></li><li class="depth-2"><a href="#evolution-闭环从经验到升级" data-for="evolution-闭环从经验到升级">Evolution 闭环：从经验到升级</a></li><li class="depth-1"><a href="#-为什么重要" data-for="-为什么重要">💡 为什么重要</a></li><li class="depth-1"><a href="#-实战示例" data-for="-实战示例">🎯 实战示例</a></li><li class="depth-2"><a href="#示例-1memory-驱动的-agent-升级" data-for="示例-1memory-驱动的-agent-升级">示例 1：Memory 驱动的 Agent 升级</a></li><li class="depth-2"><a href="#示例-2graphify-降低幻觉" data-for="示例-2graphify-降低幻觉">示例 2：Graphify 降低幻觉</a></li><li class="depth-2"><a href="#示例-3scar-防止重复犯错" data-for="示例-3scar-防止重复犯错">示例 3：Scar 防止重复犯错</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../meta_kim/00-meta_kim-入门概览" class="internal">00-Meta_Kim 入门概览</a></li><li><a href="../meta_kim/03-协议、门与动态发牌" class="internal">03-协议、门与动态发牌</a></li><li><a href="../meta_kim/05-场景判断：何时用-meta-theory" class="internal">05-场景判断：何时用 meta-theory</a></li><li><a href="../meta_kim/06-实战案例：一次完整的-8-阶段运行" class="internal">06-实战案例：一次完整的 8 阶段运行</a></li><li><a href="../meta_kim/07-用户上下文agent的创建与演进" class="internal">07-用户上下文Agent的创建与演进</a></li><li><a href="../meta_kim/08-runtime-运行时：跨宿主的执行引擎与适配层" class="internal">08-Runtime 运行时：跨宿主的执行引擎与适配层</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

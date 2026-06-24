@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>03-Tools 工具系统</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="03-Tools 工具系统"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="03-Tools 工具系统"/><meta name="twitter:description" content="Tools 工具系统 📖 概念 Tools 是 Claude Code 与外界交互的执行单元。它们是 AI 的”手和眼睛”——读写文件、执行命令、搜索代码、访问网络。每一个 Tool 是一个定义明确的函数，有严格的输入 Schema 和输出格式。Claude Code 通过调用工具来获取信息、修改文件、执行操作，从而完成用户的任务。 Tools 是 Claude Code 能力的基础层。Skills 通过编排 Tools 实现复杂工作流，MCP 通过协议暴露外部 Tools，Agents 通过组合 Tools 来执行任务。理解 Tools 是理解整个 Claude Code 架构的关键。 工..."/><meta property="og:description" content="Tools 工具系统 📖 概念 Tools 是 Claude Code 与外界交互的执行单元。它们是 AI 的”手和眼睛”——读写文件、执行命令、搜索代码、访问网络。每一个 Tool 是一个定义明确的函数，有严格的输入 Schema 和输出格式。Claude Code 通过调用工具来获取信息、修改文件、执行操作，从而完成用户的任务。 Tools 是 Claude Code 能力的基础层。Skills 通过编排 Tools 实现复杂工作流，MCP 通过协议暴露外部 Tools，Agents 通过组合 Tools 来执行任务。理解 Tools 是理解整个 Claude Code 架构的关键。 工..."/><meta property="og:image:alt" content="Tools 工具系统 📖 概念 Tools 是 Claude Code 与外界交互的执行单元。它们是 AI 的”手和眼睛”——读写文件、执行命令、搜索代码、访问网络。每一个 Tool 是一个定义明确的函数，有严格的输入 Schema 和输出格式。Claude Code 通过调用工具来获取信息、修改文件、执行操作，从而完成用户的任务。 Tools 是 Claude Code 能力的基础层。Skills 通过编排 Tools 实现复杂工作流，MCP 通过协议暴露外部 Tools，Agents 通过组合 Tools 来执行任务。理解 Tools 是理解整个 Claude Code 架构的关键。 工..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/claude-code/03-tools-工具系统"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/claude-code/03-tools-工具系统"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Tools 工具系统 📖 概念 Tools 是 Claude Code 与外界交互的执行单元。它们是 AI 的”手和眼睛”——读写文件、执行命令、搜索代码、访问网络。每一个 Tool 是一个定义明确的函数，有严格的输入 Schema 和输出格式。Claude Code 通过调用工具来获取信息、修改文件、执行操作，从而完成用户的任务。 Tools 是 Claude Code 能力的基础层。Skills 通过编排 Tools 实现复杂工作流，MCP 通过协议暴露外部 Tools，Agents 通过组合 Tools 来执行任务。理解 Tools 是理解整个 Claude Code 架构的关键。 工..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/claude-code/03-tools-工具系统-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/claude-code/03-tools-工具系统-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/claude-code/03-tools-工具系统-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="claude-code/03-tools-工具系统" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-4" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-4" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../claude-code/">Claude Code</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>03-Tools 工具系统</a></div></nav><h1 class="article-title">03-Tools 工具系统</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/claude-code" class="internal internal-link tag-link">claude-code</a><span class="note-properties-separator">, </span><a href="../tags/tools" class="internal internal-link tag-link">tools</a><span class="note-properties-separator">, </span><a href="../tags/工具" class="internal internal-link tag-link">工具</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-19T16:32:52.000Z">2026年6月20日</time><span>26分钟阅读</span></p><ul class="tags"><li><a href="../tags/claude-code" class="internal tag-link">claude-code</a></li><li><a href="../tags/tools" class="internal tag-link">tools</a></li><li><a href="../tags/工具" class="internal tag-link">工具</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="tools-工具系统">Tools 工具系统<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tools-工具系统" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Tools 是 Claude Code 与外界交互的<strong>执行单元</strong>。它们是 AI 的”手和眼睛”——读写文件、执行命令、搜索代码、访问网络。每一个 Tool 是一个定义明确的函数，有严格的输入 Schema 和输出格式。Claude Code 通过调用工具来获取信息、修改文件、执行操作，从而完成用户的任务。</p>
+</blockquote>
+<p>Tools 是 Claude Code 能力的基础层。Skills 通过编排 Tools 实现复杂工作流，MCP 通过协议暴露外部 Tools，Agents 通过组合 Tools 来执行任务。理解 Tools 是理解整个 Claude Code 架构的关键。</p>
+<h3 id="工具的类别">工具的类别<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工具的类别" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>类别</th><th>工具</th><th>说明</th></tr></thead><tbody><tr><td><strong>文件操作</strong></td><td><code>Read</code>, <code>Write</code>, <code>Edit</code>, <code>Glob</code>, <code>Grep</code></td><td>读写和搜索文件</td></tr><tr><td><strong>命令执行</strong></td><td><code>Bash</code></td><td>执行 Shell 命令</td></tr><tr><td><strong>网络访问</strong></td><td><code>WebSearch</code>, <code>WebFetch</code></td><td>搜索和抓取网络内容</td></tr><tr><td><strong>代理管理</strong></td><td><code>Agent</code>, <code>TaskCreate</code>, <code>TaskUpdate</code></td><td>管理子代理和任务</td></tr><tr><td><strong>交互控制</strong></td><td><code>AskUserQuestion</code>, <code>EnterPlanMode</code></td><td>与用户交互和规划</td></tr><tr><td><strong>记忆持久化</strong></td><td><code>Write</code>（写入 memory 目录）</td><td>持久化记忆</td></tr><tr><td><strong>MCP 工具</strong></td><td><code>mcp__&lt;server>__&lt;tool></code></td><td>通过 MCP 协议接入的外部工具</td></tr></tbody></table></div>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>工具调用的核心是一个<strong>安全的执行沙箱</strong>：每个工具调用都经过 Schema 验证、权限检查、超时控制、结果回传四个阶段的严格管理。</p>
+</blockquote>
+<h3 id="工具调用生命周期">工具调用生命周期<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工具调用生命周期" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant AI as AI 推理引擎\n    participant Harness as Harness（调度层）\n    participant Sandbox as 沙箱\n    participant FS as 文件系统/Shell/网络\n    \n    AI->>Harness: 决定调用 Tool X (args)\n    Harness->>Harness: Schema 验证参数\n    alt 参数不合法\n        Harness-->>AI: 返回验证错误\n    else 参数合法\n        Harness->>Harness: 权限检查\n        alt 需要用户确认\n            Harness->>AI: 请求用户授权\n        else 已授权\n            Harness->>Sandbox: 在沙箱中执行\n            Sandbox->>FS: 实际操作\n            FS-->>Sandbox: 结果\n            Sandbox-->>Harness: 执行结果\n            Harness-->>AI: 返回结果\n        end\n    end&quot;">sequenceDiagram
+    participant AI as AI 推理引擎
+    participant Harness as Harness（调度层）
+    participant Sandbox as 沙箱
+    participant FS as 文件系统/Shell/网络
+    
+    AI->>Harness: 决定调用 Tool X (args)
+    Harness->>Harness: Schema 验证参数
+    alt 参数不合法
+        Harness-->>AI: 返回验证错误
+    else 参数合法
+        Harness->>Harness: 权限检查
+        alt 需要用户确认
+            Harness->>AI: 请求用户授权
+        else 已授权
+            Harness->>Sandbox: 在沙箱中执行
+            Sandbox->>FS: 实际操作
+            FS-->>Sandbox: 结果
+            Sandbox-->>Harness: 执行结果
+            Harness-->>AI: 返回结果
+        end
+    end
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="核心机制">核心机制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心机制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>
+<p><strong>Schema 验证</strong>：每个工具的输入参数都有 JSON Schema 定义，调用前必须通过验证。不合法参数会被立即拒绝，不会进入执行阶段。</p>
+</li>
+<li>
+<p><strong>权限分级</strong>：</p>
+<ul>
+<li><code>allow</code>：自动执行，不询问用户</li>
+<li><code>ask</code>：每次执行前询问用户确认</li>
+<li><code>deny</code>：禁止执行</li>
+<li>权限可按工具、命令模式、路径等粒度配置</li>
+</ul>
+</li>
+<li>
+<p><strong>沙箱隔离</strong>：命令执行在受控的沙箱环境中运行，有超时限制（默认 120 秒），防止无限循环或资源耗尽。</p>
+</li>
+<li>
+<p><strong>结果回传</strong>：工具执行结果以结构化方式返回给 AI，AI 评估结果后决定下一步行动（继续调用工具、询问用户、完成任务）。</p>
+</li>
+</ol>
+<h3 id="工具调用的决策逻辑">工具调用的决策逻辑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工具调用的决策逻辑" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>AI 不会盲目调用工具。它根据以下优先级决策：</p>
+<ol>
+<li><strong>信息获取优先</strong>：先用 <code>Read</code>、<code>Glob</code>、<code>Grep</code> 理解现状，再决定修改</li>
+<li><strong>最小权限原则</strong>：选择能满足需求的最安全工具</li>
+<li><strong>原子操作偏好</strong>：优先使用专用工具（<code>Edit</code> 而非 <code>Bash sed</code>）</li>
+<li><strong>幂等性意识</strong>：对可能重复的操作（如 <code>Write</code>）保持谨慎</li>
+</ol>
+<h2 id="-目录树位置">📂 目录树位置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-目录树位置" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>工具系统没有独立的目录。内置工具编译在 CLI 中，MCP 工具通过 <code>settings.json</code> 注册，Hook 脚本可增强工具行为。</p>
+</blockquote>
+<pre><code>项目根目录/
+├── .claude/
+│   ├── settings.json              ← 工具权限配置 (permissions.allow/ask/deny)
+│   │   { &quot;permissions&quot;: { &quot;allow&quot;: [...], &quot;ask&quot;: [...], &quot;deny&quot;: [...] } }
+│   ├── settings.local.json        ← 本地工具权限覆盖
+│   └── hooks/                     ← 通过 Hook 增强工具行为
+│       └── *.sh / *.js / *.py     ← PreToolUse / PostToolUse 脚本
+└── mcp-servers/                   ← 自定义 MCP Server（扩展工具集）
+    └── &lt;name>/index.ts
+
+用户全局目录 (~/.claude/)：
+~/.claude/
+├── settings.json                  ← 全局默认工具权限
+└── projects/&lt;hash>/memory/        ← 通过 Write 工具写入 Memory
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>相关文件</th><th>与工具的关系</th><th>配置内容</th></tr></thead><tbody><tr><td><code>.claude/settings.json</code> → <code>permissions</code></td><td>控制工具的<strong>调用权限</strong></td><td>allow/ask/deny 规则（按工具、命令模式、路径）</td></tr><tr><td><code>.claude/settings.json</code> → <code>mcpServers</code></td><td>注册<strong>扩展工具</strong></td><td>MCP Server 连接配置，暴露 <code>mcp__*</code> 工具</td></tr><tr><td><code>.claude/settings.json</code> → <code>hooks</code></td><td>增强工具<strong>执行行为</strong></td><td>PreToolUse / PostToolUse 脚本</td></tr><tr><td><code>.claude/hooks/*.sh</code></td><td>Hook 脚本<strong>物理存储</strong></td><td>安全检查、自动格式化等自定义逻辑</td></tr><tr><td><code>mcp-servers/</code></td><td>自定义 MCP Server <strong>源码</strong></td><td>将内部 API 封装为 AI 可调用的工具</td></tr></tbody></table></div>
+<p><strong>工具的分类存储</strong>：</p>
+<ul>
+<li><strong>内置工具</strong>（Read, Write, Edit, Bash, Grep, Glob, WebSearch, WebFetch, Agent, TaskCreate 等）：编译在 Claude Code CLI 二进制/包中，无独立文件</li>
+<li><strong>MCP 工具</strong>（mcp__*）：通过 <code>settings.json</code> → <code>mcpServers</code> 注册，实际逻辑在外部进程中</li>
+<li><strong>Hook 增强</strong>：通过 <code>settings.json</code> → <code>hooks</code> 注册，脚本存储在 <code>.claude/hooks/</code> 或 <code>~/.claude/hooks/</code></li>
+</ul>
+<h2 id="-为什么重要">💡 为什么重要<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-为什么重要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>从”对话”到”行动”</strong>：Tools 让 AI 从”给建议”升级为”执行任务”</li>
+<li><strong>安全可控的执行边界</strong>：通过权限分级和沙箱机制，用户精确控制 AI 能做什么</li>
+<li><strong>工具组合的涌现能力</strong>：单个工具简单，但组合使用能完成复杂工作流</li>
+<li><strong>可扩展的工具生态</strong>：MCP 允许无限扩展工具集</li>
+</ul>
+<h2 id="-工具的扩展机制">🔌 工具的扩展机制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工具的扩展机制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Claude Code 的工具集<strong>不是封闭的</strong>。它通过三种核心机制支持工具扩展：<strong>MCP 协议</strong>添加全新工具类型、<strong>Hooks</strong> 增强现有工具行为、<strong>Skills</strong> 将工具编排模式固化为可复用的复合工具。</p>
+</blockquote>
+<h3 id="扩展方式总览">扩展方式总览<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#扩展方式总览" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>扩展方式</th><th>机制</th><th>扩展能力</th><th>典型场景</th></tr></thead><tbody><tr><td><strong>MCP Server</strong></td><td>外部进程暴露 Tools</td><td>✅ 添加全新工具类型</td><td>接入 GitHub API、数据库、Jira、内部系统</td></tr><tr><td><strong>Hooks</strong></td><td>事件拦截/增强</td><td>✅ 修改工具行为</td><td>自动格式化、安全检查、变更日志</td></tr><tr><td><strong>Skills</strong></td><td>编排现有工具</td><td>✅ 定义复合工具模式</td><td>代码审查流程、部署工作流、项目脚手架</td></tr></tbody></table></div>
+<p>三种机制互补而非互斥——一个完整的扩展方案通常组合使用：MCP 添加外部能力，Skills 编排工具调用，Hooks 在关键节点做自动化增强。</p>
+<h3 id="方式一mcp-server--添加全新工具主要扩展方式">方式一：MCP Server — 添加全新工具（主要扩展方式）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方式一mcp-server--添加全新工具主要扩展方式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>MCP 是工具扩展的<strong>最主要方式</strong>。任何有 API 的外部服务都可以封装为一个 MCP Server，其暴露的 Tools 自动被 Claude Code 发现并注册为 <code>mcp__&lt;server>__&lt;tool></code> 工具。</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;graph TD\n    subgraph \&quot;Claude Code 工具层\&quot;\n        BT[Built-in Tools&lt;br/>Read, Write, Edit, Bash, ...]\n        MT[MCP Tools&lt;br/>mcp__github__*, mcp__db__*, ...]\n    end\n    \n    subgraph \&quot;MCP Server 进程\&quot;\n        GHS[GitHub MCP Server&lt;br/>create_issue, search_repos, ...]\n        DBS[Postgres MCP Server&lt;br/>query, list_tables, ...]\n        CS[Custom MCP Server&lt;br/>your_custom_tools, ...]\n    end\n    \n    subgraph \&quot;外部世界\&quot;\n        GitHub[GitHub API]\n        DB[(PostgreSQL)]\n        Internal[Internal API / 微服务 / 云资源]\n    end\n    \n    MT --> GHS\n    MT --> DBS\n    MT --> CS\n    GHS --> GitHub\n    DBS --> DB\n    CS --> Internal&quot;">graph TD
+    subgraph &quot;Claude Code 工具层&quot;
+        BT[Built-in Tools&lt;br/>Read, Write, Edit, Bash, ...]
+        MT[MCP Tools&lt;br/>mcp__github__*, mcp__db__*, ...]
+    end
+    
+    subgraph &quot;MCP Server 进程&quot;
+        GHS[GitHub MCP Server&lt;br/>create_issue, search_repos, ...]
+        DBS[Postgres MCP Server&lt;br/>query, list_tables, ...]
+        CS[Custom MCP Server&lt;br/>your_custom_tools, ...]
+    end
+    
+    subgraph &quot;外部世界&quot;
+        GitHub[GitHub API]
+        DB[(PostgreSQL)]
+        Internal[Internal API / 微服务 / 云资源]
+    end
+    
+    MT --> GHS
+    MT --> DBS
+    MT --> CS
+    GHS --> GitHub
+    DBS --> DB
+    CS --> Internal
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p><strong>扩展流程</strong>：</p>
+<ol>
+<li><strong>配置</strong>：在 <code>settings.json</code> 中添加 MCP Server 条目（本地进程或远程 URL）</li>
+<li><strong>协商</strong>：Claude Code 启动时自动连接 Server，交换协议版本和能力列表</li>
+<li><strong>注册</strong>：Server 暴露的 Tools 以 <code>mcp__&lt;serverName>__&lt;toolName></code> 格式注册到工具表</li>
+<li><strong>调用</strong>：AI 在需要时像调用内置工具一样调用 MCP 工具，Harness 层通过 JSON-RPC 转发请求</li>
+<li><strong>返回</strong>：MCP Server 执行实际操作（调用 API、查询数据库等），结果原路返回给 AI</li>
+</ol>
+<p><strong>快速接入示例</strong>——将 Jira 变为 Claude Code 的工具：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// .claude/settings.json</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;mcpServers&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;jira&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;stdio&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;command&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;npx&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;args&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;-y&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;@anthropic/mcp-server-jira&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;env&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;JIRA_URL&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;https://your-company.atlassian.net&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;JIRA_TOKEN&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;${JIRA_TOKEN}&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p>配置后，Claude Code 自动获得 10+ 个 Jira 工具：</p>
+<pre><code>mcp__jira__search_issues    — 按 JQL 搜索 Issue
+mcp__jira__create_issue     — 创建 Issue（含描述、指派人、优先级）
+mcp__jira__get_sprint       — 查看 Sprint 进度和燃尽图数据
+mcp__jira__transition_issue — 变更 Issue 状态（如 To Do → In Progress）
+mcp__jira__add_comment      — 在 Issue 下添加评论
+... 及其他
+</code></pre>
+<h3 id="方式二hooks--增强现有工具行为">方式二：Hooks — 增强现有工具行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方式二hooks--增强现有工具行为" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Hooks 不添加新工具，但能<strong>修改工具的执行逻辑</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Hook 事件</th><th>时机</th><th>增强能力</th></tr></thead><tbody><tr><td><code>PreToolUse</code></td><td>工具执行<strong>前</strong></td><td>验证参数、阻止危险操作、修改参数</td></tr><tr><td><code>PostToolUse</code></td><td>工具执行<strong>后</strong></td><td>自动格式化、记录变更日志、触发通知</td></tr></tbody></table></div>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;hooks&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;PreToolUse&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;matcher&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Bash&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;command&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;python3 .claude/hooks/validate-command.py&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;description&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Shell 执行前自动安全检查：阻止 rm -rf / 等危险命令&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;PostToolUse&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;matcher&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Write|Edit&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;command&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;bash .claude/hooks/add-change-log.sh&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;description&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;文件修改后自动写入 CHANGELOG 条目&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p>本质上，Hooks 让你可以在不修改 Claude Code 源码的情况下，在工具调用链中插入自定义逻辑。</p>
+<h3 id="方式三skills--将工具编排固化为复合工具">方式三：Skills — 将工具编排固化为复合工具<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方式三skills--将工具编排固化为复合工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Skills 不创建底层工具，但它们将<strong>工具编排模式</strong>固化为可复用的”高级工具”。一个 Skill 本质上是一组指令，告诉 AI 在面对特定任务时应该如何组合调用现有工具。</p>
+<pre><code>Skill &quot;代码审查&quot; 内部编排逻辑：
+  Step 1: Bash(&quot;git diff origin/main&quot;)     → 获取变更列表
+  Step 2: Grep(&quot;TODO|FIXME|HACK&quot;)           → 检查技术债务标记
+  Step 3: Read(&lt;changed files>)             → 逐文件审查
+  Step 4: Bash(&quot;npx eslint &lt;changed>&quot;)       → 运行 Linter
+  Step 5: Bash(&quot;npm test -- --related&quot;)      → 运行相关测试
+  Step 6: Write(review-report.md)            → 生成审查报告
+</code></pre>
+<p>用户只需说”审查代码”，以上 6 步工具编排自动执行。Skills 让<strong>工具编排知识</strong>可被命名、存储、共享和复用。</p>
+<h3 id="扩展能力对比">扩展能力对比<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#扩展能力对比" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th style="text-align:center;">MCP</th><th style="text-align:center;">Hooks</th><th style="text-align:center;">Skills</th></tr></thead><tbody><tr><td>添加全新工具</td><td style="text-align:center;">✅ 是</td><td style="text-align:center;">❌ 不添加</td><td style="text-align:center;">❌ 不添加</td></tr><tr><td>修改工具行为</td><td style="text-align:center;">❌ 不修改</td><td style="text-align:center;">✅ 拦截/增强</td><td style="text-align:center;">❌ 不修改</td></tr><tr><td>编排工具模式</td><td style="text-align:center;">❌ 不编排</td><td style="text-align:center;">❌ 不编排</td><td style="text-align:center;">✅ 定义工作流</td></tr><tr><td>开发方式</td><td style="text-align:center;">任意语言（独立进程）</td><td style="text-align:center;">任意语言（脚本）</td><td style="text-align:center;">Markdown</td></tr><tr><td>生效范围</td><td style="text-align:center;">所有 MCP 兼容应用</td><td style="text-align:center;">当前项目/全局</td><td style="text-align:center;">项目/全局</td></tr><tr><td>实现难度</td><td style="text-align:center;">⭐⭐⭐⭐</td><td style="text-align:center;">⭐⭐</td><td style="text-align:center;">⭐</td></tr><tr><td>复用性</td><td style="text-align:center;">跨应用</td><td style="text-align:center;">项目级</td><td style="text-align:center;">项目级/全局</td></tr></tbody></table></div>
+<h3 id="自定义-mcp-server-开发速览">自定义 MCP Server 开发速览<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#自定义-mcp-server-开发速览" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>除了使用社区 MCP Server，你也可以用 TypeScript 或 Python 创建自己的 MCP Server。核心步骤：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="typescript" data-theme="github-light github-dark"><code data-language="typescript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// custom-mcp-server/src/index.ts</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="keyword"> { Server } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;@modelcontextprotocol/sdk/server/index.js&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="keyword"> { StdioServerTransport } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;@modelcontextprotocol/sdk/server/stdio.js&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> server</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> Server</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">({</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;my-custom-tools&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  version: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;1.0.0&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">});</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 注册工具：自动化部署</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">server.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">setRequestHandler</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;tools/list&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> ({</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  tools: [{</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;deploy_to_staging&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;将指定分支部署到 Staging 环境&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    inputSchema: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;object&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      properties: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        branch: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;要部署的分支名&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        services: { </span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">          type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;array&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">          items: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, enum: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;api&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;worker&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;frontend&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      required: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;branch&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }, {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;get_deploy_status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;查询最近的部署状态&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    inputSchema: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;object&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      properties: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        environment: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, enum: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;staging&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;production&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      required: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;environment&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}));</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 注册工具处理函数</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">server.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">setRequestHandler</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;tools/call&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">request</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="normal">arguments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">args</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> request.params;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  </span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">  switch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> (name) {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    case</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;deploy_to_staging&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">:</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">      // 调用内部 CI/CD API</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { result: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">`部署 ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">args</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="property">branch</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">} 到 Staging 已触发`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> };</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    case</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;get_deploy_status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">:</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">      // 查询部署状态 API</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { result: { status: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;success&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, deployedAt: </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> Date</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">().</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">toISOString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">() } };</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">});</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 启动服务</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> transport</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> StdioServerTransport</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">();</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> server.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">connect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">(transport);</span></span></code></pre></figure>
+<p>配置后即可使用：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;把 feature/payment 分支的 api 和 worker 部署到 Staging&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → AI 调用 mcp__my-custom-tools__deploy_to_staging({branch: &quot;feature/payment&quot;, services: [&quot;api&quot;, &quot;worker&quot;]})</span></span></code></pre></figure>
+<h2 id="-实战示例">🎯 实战示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-实战示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1自动化代码迁移">示例 1：自动化代码迁移<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1自动化代码迁移" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你需要将一个使用 <code>moment.js</code> 的项目迁移到 <code>date-fns</code>。这涉及修改 30+ 个文件中的导入语句和 API 调用。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;将项目从 moment.js 迁移到 date-fns：</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">1. 扫描所有使用 moment 的文件</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">2. 分析每个文件中 moment 的具体用法</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">3. 逐个文件替换导入语句和 API 调用</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">4. 安装 date-fns 并移除 moment</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">5. 运行测试验证&quot;</span></span></code></pre></figure>
+<p><strong>工具调用链</strong>：</p>
+<pre><code>Grep(&quot;moment&quot;)                    → 发现 34 个文件
+  ├── Read(src/utils/date.ts)     → 分析 moment 用法
+  ├── Edit(src/utils/date.ts)     → 替换为 date-fns
+  ├── Read(src/components/...)    → 逐个分析
+  ├── Edit(src/components/...)    → 逐个替换
+  ├── ...
+  └── Bash(&quot;npm test&quot;)            → 验证迁移结果
+Bash(&quot;npm uninstall moment&quot;)      
+Bash(&quot;npm install date-fns&quot;)      
+</code></pre>
+<p><strong>结果</strong>：Claude Code 系统化地：</p>
+<ol>
+<li>用 Grep 定位所有引用（不遗漏）</li>
+<li>用 Read 逐个分析（理解上下文）</li>
+<li>用 Edit 精确替换（不引入错误）</li>
+<li>用 Bash 运行测试（验证正确性）</li>
+</ol>
+<p><strong>原理分析</strong>：这个示例展示了<strong>工具组合的力量</strong>。单一工具（如批量 sed）可能会错误替换（如注释中的 moment），但 Claude Code 通过 Read → 理解 → Edit 的循环，确保每次替换都是上下文感知的。工具的”理解-执行-验证”循环产生了远超单个工具简单叠加的效果。</p>
+<h3 id="示例-2跨项目的依赖审计与更新">示例 2：跨项目的依赖审计与更新<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2跨项目的依赖审计与更新" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你管理一个 monorepo，有 5 个子项目。需要检查所有项目的依赖安全性，识别过时的包，生成更新计划。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;审计所有子项目的依赖：</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">1. 列出所有 package.json 文件</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">2. 分析每个项目的主要依赖和版本</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">3. 用 npm audit 检查安全漏洞</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">4. 检查哪些包有主版本更新</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">5. 生成一份依赖健康报告，按紧急程度排序&quot;</span></span></code></pre></figure>
+<p><strong>工具调用链</strong>：</p>
+<pre><code>Glob(&quot;**/package.json&quot;)                    → 发现 5 个 package.json
+  ├── Read(packages/api/package.json)      → 分析依赖
+  ├── Bash(&quot;cd packages/api &amp;&amp; npm audit --json&quot;)
+  ├── Bash(&quot;cd packages/api &amp;&amp; npm outdated --json&quot;)
+  ├── Read(packages/worker/package.json)
+  ├── Bash(&quot;cd packages/worker &amp;&amp; npm audit --json&quot;)
+  ├── ...
+  └── Write(docs/dependency-audit.md)      → 生成报告
+</code></pre>
+<p><strong>生成的报告</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># 依赖健康报告 - 2026-06-19</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 🔴 紧急（安全漏洞）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 包 | 当前版本 | 漏洞 | 修复版本 | 影响项目 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">|----|---------|------|---------|---------|</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| lodash | 4.17.20 | CVE-2026-XXXX | 4.17.22 | api, worker |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| axios | 1.6.0 | CVE-2026-YYYY | 1.7.0 | frontend |</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 🟡 建议更新（主版本过时）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 包 | 当前 | 最新 | 影响项目 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">|----|------|------|---------|</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| typescript | 5.0 | 5.8 | 全部 |</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 🟢 健康</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">14 个包无需操作</span></span></code></pre></figure>
+<p><strong>原理分析</strong>：这个示例展示了 Tools 在<strong>项目规划</strong>中的价值。通过 Glob 发现所有相关文件、Bash 执行审计命令、Read 理解依赖关系、Write 生成可操作的报告——工具组合将”手动查半天”变成了”一句话完成”。</p>
+<h3 id="示例-3渐进式重构数据库-schema-变更">示例 3：渐进式重构——数据库 Schema 变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-3渐进式重构数据库-schema-变更" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你需要为 user 表添加 <code>avatar_url</code> 和 <code>bio</code> 字段。这涉及：数据库 migration、后端 Model 更新、API Schema 更新、前端类型更新、测试数据更新。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;为 user 表添加 avatar_url (TEXT) 和 bio (TEXT) 字段：</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">1. 读取当前的 schema、Model、API 类型定义</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">2. 生成数据库 migration 文件</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">3. 更新所有相关的 TypeScript 类型</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">4. 更新 API 验证 Schema</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">5. 更新测试 fixtures</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">6. 确保所有引用处都更新了&quot;</span></span></code></pre></figure>
+<p><strong>工具调用链</strong>：</p>
+<pre><code>Read(prisma/schema.prisma)                 → 理解当前 Schema
+  ├── Edit(prisma/schema.prisma)           → 添加字段定义
+  ├── Bash(&quot;npx prisma migrate dev --name add_user_profile&quot;)
+  ├── Read(src/types/user.ts)              → 分析类型定义
+  ├── Edit(src/types/user.ts)              → 添加 avatar_url, bio
+  ├── Grep(&quot;IUser|UserType|userSchema&quot;)    → 找到所有引用
+  ├── Read(src/validators/user.ts)         
+  ├── Edit(src/validators/user.ts)         → 更新验证 Schema
+  ├── Read(tests/fixtures/users.ts)
+  ├── Edit(tests/fixtures/users.ts)        → 更新测试数据
+  └── Bash(&quot;npm test -- --testPathPattern=user&quot;)
+</code></pre>
+<p><strong>结果</strong>：Claude Code 确保：</p>
+<ol>
+<li>Migration 文件正确（数据库层）</li>
+<li>TypeScript 类型更新（类型层）</li>
+<li>API 验证更新（接口层）</li>
+<li>测试数据更新（测试层）</li>
+<li>所有层之间保持一致</li>
+</ol>
+<p><strong>原理分析</strong>：这展示了 <strong>“全栈变更”</strong> 的能力——Tools 让 AI 能同时操作数据库（Bash → prisma migrate）、后端代码（Edit）、类型系统（Edit）、测试（Edit + Bash）。关键是 AI 理解各层之间的关系，确保变更的一致性。如果手动做，最容易出错的就是”改了数据库但忘记更新类型”，但 AI 通过全文搜索（Grep）和系统化编辑避免了这种遗漏。</p>
+<h3 id="示例-4用自定义-mcp-server-扩展工具集--内部系统集成">示例 4：用自定义 MCP Server 扩展工具集 — 内部系统集成<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-4用自定义-mcp-server-扩展工具集--内部系统集成" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你所在的公司有一套内部 CI/CD 系统（API 地址 <code>https://cicd.internal.company.com/api</code>）和一套内部文档平台。你希望 Claude Code 能直接触发部署、查询构建状态、搜索内部文档——就像操作内置工具一样。</p>
+<p><strong>操作步骤</strong>：</p>
+<p><strong>第一步：创建 TypeScript MCP Server</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="typescript" data-theme="github-light github-dark"><code data-language="typescript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// mcp-servers/internal-tools/src/index.ts</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="keyword"> { Server } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;@modelcontextprotocol/sdk/server/index.js&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="keyword"> { StdioServerTransport } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;@modelcontextprotocol/sdk/server/stdio.js&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> server</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> Server</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">({</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;internal-tools&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  version: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;1.0.0&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">});</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> INTERNAL_API</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;https://cicd.internal.company.com/api&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> DOCS_API</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;https://docs.internal.company.com/api&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> TOKEN</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> process.env.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">INTERNAL_API_TOKEN</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// ─── 工具 1：触发部署 ───</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">server.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">setRequestHandler</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;tools/list&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> ({</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  tools: [{</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;trigger_deploy&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;触发指定服务部署到指定环境&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    inputSchema: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;object&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      properties: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        service: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, enum: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;api&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;worker&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;frontend&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;admin&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        environment: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, enum: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;dev&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;staging&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;production&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        branch: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Git 分支名&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        dryRun: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;boolean&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;仅预览，不实际部署&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      required: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;service&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;environment&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;branch&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }, {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;get_deploy_history&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;查询服务的最近部署记录&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    inputSchema: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;object&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      properties: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        service: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        limit: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;number&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, default: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      required: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;service&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }, {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;rollback_service&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;回滚服务到上一个版本&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    inputSchema: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;object&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      properties: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        service: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        environment: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        reason: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;回滚原因（记录到审计日志）&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      required: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;service&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;environment&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;reason&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }, {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;search_internal_docs&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;搜索内部技术文档和 Runbook&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    inputSchema: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;object&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      properties: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        query: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        docType: { type: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, enum: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;runbook&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;architecture&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;api-guide&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;all&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      required: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;query&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}));</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// ─── 处理函数 ───</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">server.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">setRequestHandler</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;tools/call&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> (</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">request</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="normal">arguments</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">args</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> request.params;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> headers</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { Authorization: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">`Bearer ${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">TOKEN</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Content-Type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;application/json&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> };</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">  switch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> (name) {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    case</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;trigger_deploy&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> (args.environment </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">===</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;production&quot;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &amp;&amp;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> !</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">args.dryRun) {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">        return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { result: { blocked: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, reason: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;生产部署需要额外的审批流程。请通过内部 Dashboard 操作或设置 dryRun 为 true 预览。&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> } };</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      }</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> res</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> fetch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">`${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">INTERNAL_API</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">}/deployments`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        method: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;POST&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, headers,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        body: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">JSON</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">stringify</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">({ service: args.service, env: args.environment, branch: args.branch, dryRun: args.dryRun })</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      });</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { result: </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> res.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">json</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">() };</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    case</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;get_deploy_history&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> res</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> fetch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">`${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">INTERNAL_API</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">}/deployments?service=${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">args</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="property">service</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">}&amp;limit=${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">args</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="property">limit</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, { headers });</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { result: </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> res.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">json</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">() };</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    case</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;rollback_service&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> res</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> fetch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">`${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">INTERNAL_API</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">}/rollbacks`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        method: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;POST&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, headers,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        body: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">JSON</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">stringify</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">({ service: args.service, env: args.environment, reason: args.reason })</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      });</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { result: </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> res.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">json</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">() };</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    case</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;search_internal_docs&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> res</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> fetch</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">`${</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">DOCS_API</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">}/search?q=${</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">encodeURIComponent</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">(</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">args</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="property">query</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">)</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="keyword">}&amp;type=${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">args</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="punctuation">.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="property">docType</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> ||</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;all&quot;}&amp;limit=5`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, { headers });</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { result: </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> res.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">json</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">() };</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">});</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 启动</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> server.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">connect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> StdioServerTransport</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">());</span></span></code></pre></figure>
+<p><strong>第二步：配置到项目</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// .claude/settings.json</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;mcpServers&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;internal-tools&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;stdio&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;command&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;node&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;args&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;./mcp-servers/internal-tools/dist/index.js&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;env&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: { </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;INTERNAL_API_TOKEN&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;${INTERNAL_API_TOKEN}&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>第三步：使用</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;把 feature/payment-refactor 分支的 api 和 worker 部署到 staging，</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">先 dry run 预览变更，确认没问题后真实部署&quot;</span></span></code></pre></figure>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;api 服务在 staging 报错，查一下最近 5 次部署记录，</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">然后搜索内部 runbook 看有没有对应的故障排查文档&quot;</span></span></code></pre></figure>
+<p><strong>结果</strong>：Claude Code 通过扩展工具自动：</p>
+<ol>
+<li>第一次调用：<code>mcp__internal-tools__trigger_deploy({service: &quot;api&quot;, environment: &quot;staging&quot;, branch: &quot;feature/payment-refactor&quot;, dryRun: true})</code> → 预览部署计划</li>
+<li>用户确认后，第二次调用：<code>dryRun: false</code> → 真实触发部署</li>
+<li>故障时：<code>mcp__internal-tools__get_deploy_history({service: &quot;api&quot;, limit: 5})</code> + <code>mcp__internal-tools__search_internal_docs({query: &quot;api staging error&quot;})</code> → 同时获取部署历史和故障排查文档</li>
+</ol>
+<p><strong>原理分析</strong>：这个示例展示了 Tools 扩展的<strong>完整流程</strong>——从编写 MCP Server 到配置到使用。核心洞察：</p>
+<ol>
+<li><strong>安全边界在 Server 层实现</strong>：生产部署被 Server 代码拦截（非 AI 自觉），这比权限配置更可靠</li>
+<li><strong>工具是 API 的薄封装</strong>：MCP Server 本质上是将 HTTP API 转换为 AI 可调用的函数签名——Schema 定义了参数类型和枚举值，AI 天然理解如何正确调用</li>
+<li><strong>一处编写，全团队复用</strong>：这个 MCP Server 提交到 Git 后，所有团队成员配置即可获得相同的内部工具集</li>
+<li><strong>工具组合效应</strong>：<code>get_deploy_history</code> + <code>search_internal_docs</code> 可以组合使用（查部署历史 + 查 Runbook），AI 能根据上下文灵活组合</li>
+</ol>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：优先使用社区 MCP Server（GitHub、Jira、Postgres 等），它们已处理了认证、分页、错误重试等边缘情况</li>
+<li><strong>DO</strong>：自定义 MCP Server 时，在 Server 层实现安全边界（如生产环境保护），而非仅依赖 AI 的权限配置</li>
+<li><strong>DO</strong>：为 MCP 工具提供清晰的 <code>description</code> 和 <code>enum</code> 约束——这直接决定 AI 调用工具的准确性</li>
+<li><strong>DON’T</strong>：在一个 MCP Server 中暴露过多不相关的工具——保持内聚，如 <code>internal-cicd</code> 和 <code>internal-docs</code> 分开</li>
+<li><strong>DON’T</strong>：过度使用 <code>Bash</code> 做文件操作——<code>Write</code>/<code>Edit</code> 更精确、可回滚</li>
+<li><strong>TIP</strong>：用 <code>description</code> 参数让工具调用的意图更清晰，方便审计</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>命令注入风险</td><td>用户输入被拼接到 Shell 命令</td><td>使用 <code>Edit</code>/<code>Write</code> 代替 <code>Bash</code> 做文件操作</td></tr><tr><td>超时导致失败</td><td>长时间构建或测试被中断</td><td>使用 <code>run_in_background</code> + <code>timeout</code> 延长</td></tr><tr><td>部分修改不一致</td><td>改了 Schema 但没更新所有引用</td><td>在指令中明确要求”找到所有引用并更新”</td></tr><tr><td>不可逆的批量编辑</td><td><code>replace_all</code> 替换了不该替换的内容</td><td>先用 <code>Grep</code> 预览匹配项，确认后再用 <code>replace_all</code></td></tr><tr><td>MCP 工具未注册</td><td>MCP Server 启动失败，工具不出现</td><td>检查环境变量是否设置、进程是否能启动；用 <code>claude mcp list</code> 诊断</td></tr><tr><td>MCP 工具 Schema 不精确</td><td>AI 调用参数错误率高</td><td>在 MCP Server 中使用 <code>enum</code> 约束、清晰的 <code>description</code>、完整的 <code>required</code> 字段</td></tr><tr><td>自定义 MCP Server 不可复用</td><td>仅在当前机器可用，团队成员无法使用</td><td>将 MCP Server 放在项目仓库中（如 <code>mcp-servers/</code>），通过相对路径配置</td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../claude-code/00-claude-code-入门概览" class="internal internal-link alias" data-slug="claude-code/00-claude-code-入门概览">Claude Code 入门概览</a> — Tools 在整体架构中的位置</li>
+<li><a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">Skills 技能系统</a> — Skills 是 Tools 的编排层，可将工具组合固化为可复用模式</li>
+<li><a href="../claude-code/02-mcp-模型上下文协议" class="internal internal-link alias" data-slug="claude-code/02-mcp-模型上下文协议">MCP 协议</a> — <strong>MCP 是 Tools 扩展的主要机制</strong>，通过 MCP Server 无限扩充工具集</li>
+<li><a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">Agents 代理系统</a> — Agent 通过组合 Tools 执行任务</li>
+<li><a href="../claude-code/06-hooks-钩子系统" class="internal internal-link alias" data-slug="claude-code/06-hooks-钩子系统">Hooks 钩子系统</a> — Hooks 增强现有工具行为（PreToolUse/PostToolUse）</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>官方文档：<a href="https://docs.anthropic.com/en/docs/claude-code/tools" class="external external-link">Claude Code Tool Use<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>下一步</strong>：阅读 <a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">Agents 代理系统</a> 了解多代理协作机制。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-4" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#tools-工具系统" data-for="tools-工具系统">Tools 工具系统</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-2"><a href="#工具的类别" data-for="工具的类别">工具的类别</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#工具调用生命周期" data-for="工具调用生命周期">工具调用生命周期</a></li><li class="depth-2"><a href="#核心机制" data-for="核心机制">核心机制</a></li><li class="depth-2"><a href="#工具调用的决策逻辑" data-for="工具调用的决策逻辑">工具调用的决策逻辑</a></li><li class="depth-1"><a href="#-目录树位置" data-for="-目录树位置">📂 目录树位置</a></li><li class="depth-1"><a href="#-为什么重要" data-for="-为什么重要">💡 为什么重要</a></li><li class="depth-1"><a href="#-工具的扩展机制" data-for="-工具的扩展机制">🔌 工具的扩展机制</a></li><li class="depth-2"><a href="#扩展方式总览" data-for="扩展方式总览">扩展方式总览</a></li><li class="depth-2"><a href="#方式一mcp-server--添加全新工具主要扩展方式" data-for="方式一mcp-server--添加全新工具主要扩展方式">方式一：MCP Server — 添加全新工具（主要扩展方式）</a></li><li class="depth-2"><a href="#方式二hooks--增强现有工具行为" data-for="方式二hooks--增强现有工具行为">方式二：Hooks — 增强现有工具行为</a></li><li class="depth-2"><a href="#方式三skills--将工具编排固化为复合工具" data-for="方式三skills--将工具编排固化为复合工具">方式三：Skills — 将工具编排固化为复合工具</a></li><li class="depth-2"><a href="#扩展能力对比" data-for="扩展能力对比">扩展能力对比</a></li><li class="depth-2"><a href="#自定义-mcp-server-开发速览" data-for="自定义-mcp-server-开发速览">自定义 MCP Server 开发速览</a></li><li class="depth-1"><a href="#-实战示例" data-for="-实战示例">🎯 实战示例</a></li><li class="depth-2"><a href="#示例-1自动化代码迁移" data-for="示例-1自动化代码迁移">示例 1：自动化代码迁移</a></li><li class="depth-2"><a href="#示例-2跨项目的依赖审计与更新" data-for="示例-2跨项目的依赖审计与更新">示例 2：跨项目的依赖审计与更新</a></li><li class="depth-2"><a href="#示例-3渐进式重构数据库-schema-变更" data-for="示例-3渐进式重构数据库-schema-变更">示例 3：渐进式重构——数据库 Schema 变更</a></li><li class="depth-2"><a href="#示例-4用自定义-mcp-server-扩展工具集--内部系统集成" data-for="示例-4用自定义-mcp-server-扩展工具集--内部系统集成">示例 4：用自定义 MCP Server 扩展工具集 — 内部系统集成</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../claude-code/00-claude-code-入门概览" class="internal">00-Claude Code 入门概览</a></li><li><a href="../claude-code/01-skills-技能系统" class="internal">01-Skills 技能系统</a></li><li><a href="../claude-code/02-mcp-模型上下文协议" class="internal">02-MCP 模型上下文协议</a></li><li><a href="../claude-code/04-agents-代理系统" class="internal">04-Agents 代理系统</a></li><li><a href="../claude-code/06-hooks-钩子系统" class="internal">06-Hooks 钩子系统</a></li><li><a href="../claude-code/07-配置与项目管理" class="internal">07-配置与项目管理</a></li><li><a href="../claude-code/11-prompt-engineering-提示词工程" class="internal">11-Prompt Engineering 提示词工程</a></li><li><a href="../meta_kim/06-实战案例：一次完整的-8-阶段运行" class="internal">06-实战案例：一次完整的 8 阶段运行</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

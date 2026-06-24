@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>00-Meta_Kim 入门概览</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="00-Meta_Kim 入门概览"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="00-Meta_Kim 入门概览"/><meta name="twitter:description" content="Meta_Kim 入门概览 📖 概念 Meta_Kim 是面向持续性 AI 编码工作的治理层（Governance Layer），它在 AI 编码助手之上增加了意图确认、能力搜索、边界分发、审查验证和经验沉淀，把混乱的 AI 编码变成可审查、可验证、可沉淀的执行。 Meta_Kim 不是又一个 AI 编码工具，也不是另一个模型。它是一套可运行的工程纪律系统——用 agents、skills、contracts、hooks、scripts 和证据门，把复杂任务从”一锅乱炖”变成可治理执行。 一句话总结 先搞清楚要干什么 → 再决定谁去干 → 干完审查 → 审完沉淀经验 → 经验反哺下一轮。 核..."/><meta property="og:description" content="Meta_Kim 入门概览 📖 概念 Meta_Kim 是面向持续性 AI 编码工作的治理层（Governance Layer），它在 AI 编码助手之上增加了意图确认、能力搜索、边界分发、审查验证和经验沉淀，把混乱的 AI 编码变成可审查、可验证、可沉淀的执行。 Meta_Kim 不是又一个 AI 编码工具，也不是另一个模型。它是一套可运行的工程纪律系统——用 agents、skills、contracts、hooks、scripts 和证据门，把复杂任务从”一锅乱炖”变成可治理执行。 一句话总结 先搞清楚要干什么 → 再决定谁去干 → 干完审查 → 审完沉淀经验 → 经验反哺下一轮。 核..."/><meta property="og:image:alt" content="Meta_Kim 入门概览 📖 概念 Meta_Kim 是面向持续性 AI 编码工作的治理层（Governance Layer），它在 AI 编码助手之上增加了意图确认、能力搜索、边界分发、审查验证和经验沉淀，把混乱的 AI 编码变成可审查、可验证、可沉淀的执行。 Meta_Kim 不是又一个 AI 编码工具，也不是另一个模型。它是一套可运行的工程纪律系统——用 agents、skills、contracts、hooks、scripts 和证据门，把复杂任务从”一锅乱炖”变成可治理执行。 一句话总结 先搞清楚要干什么 → 再决定谁去干 → 干完审查 → 审完沉淀经验 → 经验反哺下一轮。 核..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/meta_kim/00-meta_kim-入门概览"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/meta_kim/00-meta_kim-入门概览"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Meta_Kim 入门概览 📖 概念 Meta_Kim 是面向持续性 AI 编码工作的治理层（Governance Layer），它在 AI 编码助手之上增加了意图确认、能力搜索、边界分发、审查验证和经验沉淀，把混乱的 AI 编码变成可审查、可验证、可沉淀的执行。 Meta_Kim 不是又一个 AI 编码工具，也不是另一个模型。它是一套可运行的工程纪律系统——用 agents、skills、contracts、hooks、scripts 和证据门，把复杂任务从”一锅乱炖”变成可治理执行。 一句话总结 先搞清楚要干什么 → 再决定谁去干 → 干完审查 → 审完沉淀经验 → 经验反哺下一轮。 核..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/meta_kim/00-meta_kim-入门概览-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/meta_kim/00-meta_kim-入门概览-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/meta_kim/00-meta_kim-入门概览-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="meta_kim/00-meta_kim-入门概览" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-13" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-13" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../meta_kim/">Meta_Kim</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>00-Meta_Kim 入门概览</a></div></nav><h1 class="article-title">00-Meta_Kim 入门概览</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/meta-kim" class="internal internal-link tag-link">meta-kim</a><span class="note-properties-separator">, </span><a href="../tags/入门" class="internal internal-link tag-link">入门</a><span class="note-properties-separator">, </span><a href="../tags/治理" class="internal internal-link tag-link">治理</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-24T17:12:16.545Z">2026年6月25日</time><span>23分钟阅读</span></p><ul class="tags"><li><a href="../tags/meta-kim" class="internal tag-link">meta-kim</a></li><li><a href="../tags/入门" class="internal tag-link">入门</a></li><li><a href="../tags/治理" class="internal tag-link">治理</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="meta_kim-入门概览">Meta_Kim 入门概览<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta_kim-入门概览" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Meta_Kim 是面向持续性 AI 编码工作的<strong>治理层（Governance Layer）</strong>，它在 AI 编码助手之上增加了意图确认、能力搜索、边界分发、审查验证和经验沉淀，把混乱的 AI 编码变成可审查、可验证、可沉淀的执行。</p>
+</blockquote>
+<p>Meta_Kim 不是又一个 AI 编码工具，也不是另一个模型。它是一套<strong>可运行的工程纪律系统</strong>——用 agents、skills、contracts、hooks、scripts 和证据门，把复杂任务从”一锅乱炖”变成可治理执行。</p>
+<h3 id="一句话总结">一句话总结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#一句话总结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<blockquote>
+<p><strong>先搞清楚要干什么 → 再决定谁去干 → 干完审查 → 审完沉淀经验 → 经验反哺下一轮。</strong></p>
+</blockquote>
+<h3 id="核心问题">核心问题<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心问题" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>AI 编码现在最难的已经不是让模型改文件。真正难的是：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>问题</th><th>没有 Meta_Kim 时</th><th>Meta_Kim 的做法</th></tr></thead><tbody><tr><td>先做什么？</td><td>一个超长聊天回复试图包办所有事</td><td>任务经过意图→能力→owner→审查→验证→写回</td></tr><tr><td>由什么能力负责？</td><td>因为某个工具能用，所以就直接用它</td><td>因为某个能力适合当前任务、工具端、OS、依赖和风险才选它</td></tr><tr><td>怎么证明真的做对？</td><td>命令跑绿就被误认为目标完成</td><td>证据必须回到用户真实目标上验收</td></tr><tr><td>经验怎么复用？</td><td>好经验沉没在聊天记录里</td><td>可复用经验沉淀成 skill、agent、script、contract</td></tr></tbody></table></div>
+<h3 id="打个比方">打个比方<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#打个比方" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>你现在用的 Claude Code 本质上是”手”——能写代码、能改文件。但谁来决定先改哪个文件？改完谁来检查？检查出了问题谁来修？修完了怎么保证下次不会再犯同样的错？</p>
+<p>Meta_Kim 就是干这个的。<strong>它不是另一只手，而是在手上面加了一层大脑</strong>：用可运行的 agents、skills、contracts、hooks、scripts 和证据门，把复杂任务管起来。</p>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Meta_Kim 的核心是一套<strong>8 阶段执行脊柱（8-stage spine）</strong>，每个阶段都有明确的输入、输出和放行条件。复杂任务会叠加<strong>11 阶段业务工作流</strong>和<strong>动态发牌机制</strong>。</p>
+</blockquote>
+<h3 id="-关键认知meta_kim-的本质">⚡ 关键认知：Meta_Kim 的本质<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关键认知meta_kim-的本质" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<blockquote>
+<p><strong>Meta_Kim 不是一段确定性的程序代码，而是一套”用 JSON packet 串起来的多次 LLM 调用”的编排框架。</strong></p>
+</blockquote>
+<p>你看到的所有”治理概念”——8 阶段、发牌、门、协议 packet——<strong>最终都是 LLM 调用的 prompt 设计艺术</strong>。但并不是 100% 都靠 AI 判断，关键路径上的硬约束仍由本地代码守住。</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TB\n    subgraph local[\&quot;本地进程（Node.js）— 30% 判断\&quot;]\n        L1[拼装 Prompt&lt;br/>把 packet 拼成自然语言]\n        L2[调用 LLM API]\n        L3[解析 + 落盘&lt;br/>JSON schema 校验]\n        L1 --> L2 --> L3\n    end\n\n    subgraph ai[\&quot;远端 AI — 70% 判断\&quot;]\n        A1[读 Prompt]\n        A2[理解当前状态]\n        A3[判断门控是否放行]\n        A4[生成结构化产物]\n        A1 --> A2 --> A3 --> A4\n    end\n\n    L2 -->|\&quot;HTTP request\&quot;| A1\n    A4 -->|\&quot;HTTP response\&quot;| L3\n\n    style local fill:#60a5fa,color:#000\n    style ai fill:#fbbf24,color:#000\n    style A3 fill:#f87171,color:#fff&quot;">flowchart TB
+    subgraph local[&quot;本地进程（Node.js）— 30% 判断&quot;]
+        L1[拼装 Prompt&lt;br/>把 packet 拼成自然语言]
+        L2[调用 LLM API]
+        L3[解析 + 落盘&lt;br/>JSON schema 校验]
+        L1 --> L2 --> L3
+    end
+
+    subgraph ai[&quot;远端 AI — 70% 判断&quot;]
+        A1[读 Prompt]
+        A2[理解当前状态]
+        A3[判断门控是否放行]
+        A4[生成结构化产物]
+        A1 --> A2 --> A3 --> A4
+    end
+
+    L2 -->|&quot;HTTP request&quot;| A1
+    A4 -->|&quot;HTTP response&quot;| L3
+
+    style local fill:#60a5fa,color:#000
+    style ai fill:#fbbf24,color:#000
+    style A3 fill:#f87171,color:#fff
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p><strong>具体分工</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>判断内容</th><th>由谁判断</th><th>比例</th><th>例子</th></tr></thead><tbody><tr><td>必填字段是否非空</td><td><strong>本地 JS</strong></td><td>100%</td><td><code>if (!state.intentPacket?.realIntent) return &quot;missing_real_intent&quot;</code></td></tr><tr><td>路线是否成立（owner + weapon + dependency 配齐）</td><td><strong>本地 JS</strong></td><td>100%</td><td>协议 schema 校验</td></tr><tr><td>”意图是否清晰到可以执行”</td><td><strong>AI</strong></td><td>100%</td><td>Critical 阶段 prompt 调用</td></tr><tr><td>”选择哪条路径、哪个 owner”</td><td><strong>AI</strong></td><td>100%</td><td>Thinking 阶段 prompt 调用</td></tr><tr><td>”findings 是否真实、可证伪”</td><td><strong>AI</strong></td><td>100%</td><td>meta-prism 做 Adversarial verify</td></tr><tr><td>”是否触发 Pause / Fix / Risk 牌”</td><td><strong>AI</strong></td><td>100%</td><td>发牌机制 prompt 调用</td></tr><tr><td>”是否值得写入 canonical 源”</td><td><strong>AI 判定 + Warden 审批</strong></td><td>50:50</td><td>Evolution 写回</td></tr></tbody></table></div>
+<p><strong>所以”治理”的实现机制是</strong>：</p>
+<ul>
+<li><strong>本地</strong>用结构化 JSON packet 串起多次 LLM 调用（30% 的硬逻辑）</li>
+<li><strong>AI</strong> 在每次 prompt 调用中做真正的语义判断（70% 的软决策）</li>
+<li><strong>本地 hard gate</strong> 守住结构性安全（防 AI 漏判造成灾难）</li>
+<li><strong>JSON schema</strong> 强制 AI 输出有结构、可校验、可重放</li>
+</ul>
+<blockquote>
+<p>💡 <strong>这一认知对后续阅读很关键</strong>：当你看到”8 阶段”、“发牌”、“门”这些概念时，知道它们最终是 prompt 模板的精妙设计 + JSON schema 的严格约束——这正是 Meta_Kim 的创新点：<strong>把”每一步要喂给 AI 什么 prompt”这个问题工程化、可验证化、可沉淀化</strong>。</p>
+</blockquote>
+<h3 id="-闭环prompt--llm-响应--状态文件">🔄 闭环：Prompt → LLM 响应 → 状态文件<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-闭环prompt--llm-响应--状态文件" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>一个自然的问题是：<strong>AI 回复了之后，本地具体是怎么把响应变成状态文件的？</strong> 用真实链路来解释。</p>
+<h4 id="两种运行模式">两种运行模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#两种运行模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>Meta_Kim 在 CC 中的运行和 <code>npm run meta:theory:demo</code> 的 CLI demo 不是同一层。前者依赖 <strong>AI 的回复被 CC 的 Stop hook 自动扫描和落盘</strong>；后者是 <strong>Node.js 脚本直接拼装和写入 JSON</strong>。但核心架构是一样的：</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    subgraph mode_a[\&quot;模式 A：Claude Code 真实会话\&quot;]\n        A1[\&quot;① meta-theory SKILL.md&lt;br/>作为 CC prompt 加载\&quot;]\n        A2[\&quot;② CC 每轮对话都是&lt;br/>AI 用 SKILL.md 的规则来推理\&quot;]\n        A3[\&quot;③ AI 回复中包含&lt;br/>8 阶段的自然语言声明\&quot;]\n        A4[\&quot;④ Stop hook 扫描&lt;br/>对话 transcript\&quot;]\n        A5[\&quot;⑤ 正则匹配找出&lt;br/>当前阶段 + findings\&quot;]\n        A6[\&quot;⑥ 写入 compaction 包\&quot;]\n        A1 --> A2 --> A3 --> A4 --> A5 --> A6\n    end\n\n    subgraph mode_b[\&quot;模式 B：npm run meta:theory:demo（Node.js 脚本）\&quot;]\n        B1[\&quot;① buildOrchestrationReport&lt;br/>在内存中拼装 50+ packet\&quot;]\n        B2[\&quot;② assembleRunArtifact&lt;br/>合并为 3.5MB JSON\&quot;]\n        B3[\&quot;③ writeFile 落盘&lt;br/>到 governed-executions/\&quot;]\n        B4[\&quot;④ persistDecisionRuns&lt;br/>索引到 SQLite\&quot;]\n        B1 --> B2 --> B3 --> B4\n    end\n\n    style mode_a fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff\n    style mode_b fill:#14532d,stroke:#22c55e,color:#dcfce7&quot;">flowchart TD
+    subgraph mode_a[&quot;模式 A：Claude Code 真实会话&quot;]
+        A1[&quot;① meta-theory SKILL.md&lt;br/>作为 CC prompt 加载&quot;]
+        A2[&quot;② CC 每轮对话都是&lt;br/>AI 用 SKILL.md 的规则来推理&quot;]
+        A3[&quot;③ AI 回复中包含&lt;br/>8 阶段的自然语言声明&quot;]
+        A4[&quot;④ Stop hook 扫描&lt;br/>对话 transcript&quot;]
+        A5[&quot;⑤ 正则匹配找出&lt;br/>当前阶段 + findings&quot;]
+        A6[&quot;⑥ 写入 compaction 包&quot;]
+        A1 --> A2 --> A3 --> A4 --> A5 --> A6
+    end
+
+    subgraph mode_b[&quot;模式 B：npm run meta:theory:demo（Node.js 脚本）&quot;]
+        B1[&quot;① buildOrchestrationReport&lt;br/>在内存中拼装 50+ packet&quot;]
+        B2[&quot;② assembleRunArtifact&lt;br/>合并为 3.5MB JSON&quot;]
+        B3[&quot;③ writeFile 落盘&lt;br/>到 governed-executions/&quot;]
+        B4[&quot;④ persistDecisionRuns&lt;br/>索引到 SQLite&quot;]
+        B1 --> B2 --> B3 --> B4
+    end
+
+    style mode_a fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff
+    style mode_b fill:#14532d,stroke:#22c55e,color:#dcfce7
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h4 id="模式-a-详解stop-hook-如何从-ai-回复中提取状态">模式 A 详解：Stop hook 如何从 AI 回复中提取状态<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模式-a-详解stop-hook-如何从-ai-回复中提取状态" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>这是最接近你问题的场景——<strong>AI 在 CC 里说话，说完了，本地怎么知道它说了什么</strong>。</p>
+<p><strong>1. AI 在对话中输出了这样的自然语言</strong>：</p>
+<pre><code>## Stage: Critical → Fetch — intent locked, 3 success criteria defined
+
+## Findings Review
+- CRITICAL: authMiddleware.ts 缺少 token 过期检查
+- MEDIUM: orderService.ts 圈复杂度 = 34, 建议 ≤ 10
+</code></pre>
+<p><strong>2. CC 会话结束时，Stop hook 自动触发</strong>：</p>
+<p><code>stop-compaction.mjs</code>（实际源码）读取 CC 传给它的 <strong>对话 transcript 路径</strong>，用正则扫描：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="javascript" data-theme="github-light github-dark"><code data-language="javascript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 来自 .claude/hooks/stop-compaction.mjs 第 35-43 行 — 真实代码</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> STAGE_PATTERNS</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  Critical:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="regexp">     /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="punctuation">(Critical</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">clarify</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">intentPacket</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">需求澄清</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">明确意图)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">gi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  Fetch:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="regexp">        /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="punctuation">(Fetch</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">搜索</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">capability</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">能力搜索</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">findskill)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">gi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  Thinking:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="regexp">     /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="punctuation">(Thinking</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">规划</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">dispatchBoard</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">分派</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">owner</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">Task Card)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">gi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  Execution:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="regexp">    /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="punctuation">(Execution</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">执行</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">分派执行</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">dispatch</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">Worker Task)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">gi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  Review:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="regexp">       /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="punctuation">(Review</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">审查</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">reviewPacket</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">findings)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">gi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;Meta-Review&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="regexp"> /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="punctuation">(Meta-Review</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">元审查</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">review</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">.</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">*</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">standard)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">gi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  Verification:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="regexp"> /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="punctuation">(Verification</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">验证</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">verified</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">verify</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">.</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">*</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">gate)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">gi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  Evolution:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="regexp">    /</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="punctuation">(Evolution</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">进化</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">writeback</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">evolutionWriteback)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">\b</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">gi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">};</span></span></code></pre></figure>
+<p><strong>3. 扫描出状态后，写入 compaction 包</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="javascript" data-theme="github-light github-dark"><code data-language="javascript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 同样来自 stop-compaction.mjs — 真实代码</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> compaction</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  packetVersion: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;1.0&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  runRef: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;run-1781789885047&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  profile: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;default&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  stageState: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    current: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Review&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,              </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// ← 从 transcript 正则匹配得出</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    completed: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Critical&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Fetch&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Thinking&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Execution&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Review&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Meta-Review&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Verification&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">],</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    resumeFrom: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Review&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    stepNumber: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">5</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  openFindings: [],                 </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// ← 从 transcript 中的 'findings' 匹配得出</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  verifyGateState: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;verified&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,      </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// ← 从 'verified' 关键词匹配得出</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  writebackDecision: {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    decision: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;none&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    targets: [],</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    continuityOnly: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">true</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">};</span></span></code></pre></figure>
+<p><strong>4. 写到文件</strong>：</p>
+<pre><code>.meta-kim/state/default/compaction/run-1781789885047.json  ← 完整 compaction
+.meta-kim/state/default/compaction/latest.json              ← 指针
+</code></pre>
+<h4 id="模式-b-详解demo-脚本如何拼装和落盘">模式 B 详解：demo 脚本如何拼装和落盘<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模式-b-详解demo-脚本如何拼装和落盘" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>这是你之前跑 <code>npm run meta:theory:demo</code> 的真实路径：</p>
+<p><strong>Step 1 — 分类入口</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="javascript" data-theme="github-light github-dark"><code data-language="javascript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// run-meta-theory-governed-execution.mjs 第 8432 行</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> task</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> taskArg </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">??</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> positional[</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">] </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">??</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> null</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// task = &quot;What should this project become as a product?&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> classify</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> classifyMetaTheoryEntry</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">(task);</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// → { taskClass: &quot;A&quot;, requestClass: &quot;execute&quot;, governanceFlow: &quot;complex_dev&quot; }</span></span></code></pre></figure>
+<p><strong>Step 2 — 拼装所有 packet（无 LLM 调用，demo 是纯合成）</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="javascript" data-theme="github-light github-dark"><code data-language="javascript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 第 5892 行: buildCoreLoopArtifact</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 内部拼装 50+ 个 packet 结构:</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">//   intentPacket.realIntent = &quot;Run Meta_Kim governed execution for: ...&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">//   fetchPacket.capabilityMatches = 2</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">//   thinkingPacket.owner = &quot;meta-conductor&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">//   executionResult.mainThreadRole = &quot;scope_delegate_review_synthesize&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">//   reviewPacket.findings = [{ severity: &quot;medium&quot;, ... }]</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">//   verificationResult.status = &quot;pass&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">//   evolutionWritebackDecision.decision = &quot;none-with-reason&quot;</span></span></code></pre></figure>
+<p><strong>Step 3 — 合并为一个 JSON 并落盘</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="javascript" data-theme="github-light github-dark"><code data-language="javascript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 第 8070 行附近</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> artifact</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">/* 50+ packet 全部合并 */</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> };</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> fs.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">writeFile</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">  JSON</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">stringify</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">(artifact, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">null</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 3.5 MB</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">);</span></span></code></pre></figure>
+<p><strong>Step 4 — 生成人类可读报告并索引到 SQLite</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="javascript" data-theme="github-light github-dark"><code data-language="javascript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> fs.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">writeFile</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.zh-CN.md&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">  markdownReport  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 25 KB</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">);</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> persistDecisionRuns</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">({ dbPath, decisionResults });</span></span></code></pre></figure>
+<h4 id="一个具体-packet-的完整流转示例">一个具体 packet 的完整流转示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#一个具体-packet-的完整流转示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>以 <code>intentPacket</code> 为例，追踪它从产生到落盘的全过程：</p>
+<pre><code>1. Prompt（喂给 AI）
+   ┌─────────────────────────────────────────────────┐
+   │ Critical 阶段: 先锁定真实目标、成功标准、      │
+   │ 非目标和权限边界，再进入证据收集。              │
+   │                                                 │
+   │ 输出格式: {                                     │
+   │   &quot;realIntent&quot;: &quot;string (锁定真实意图)&quot;,        │
+   │   &quot;successCriteria&quot;: [&quot;string (可验收标准)&quot;],   │
+   │   &quot;nonGoals&quot;: [&quot;string (排除范围)&quot;],            │
+   │   &quot;blockingUnknowns&quot;: [&quot;string (阻塞项)&quot;]       │
+   │ }                                               │
+   └─────────────────────────────────────────────────┘
+            │
+            ▼ LLM 调用 → AI 回复
+   ┌─────────────────────────────────────────────────┐
+   │ {                                               │
+   │   &quot;realIntent&quot;: &quot;Run governed execution for:    │
+   │     What should this project become?&quot;,          │
+   │   &quot;successCriteria&quot;: [                          │
+   │     &quot;artifact validates without claiming        │
+   │      release-grade public readiness&quot;            │
+   │   ],                                            │
+   │   &quot;nonGoals&quot;: [                                 │
+   │     &quot;Do not require private docs, publish,      │
+   │      deploy&quot;                                    │
+   │   ],                                            │
+   │   &quot;blockingUnknowns&quot;: []                        │
+   │ }                                               │
+   └─────────────────────────────────────────────────┘
+            │
+            ▼ 本地 Node.js 脚本处理
+   ┌─────────────────────────────────────────────────┐
+   │ // 1. JSON.parse(aiResponse)                    │
+   │ const parsed = JSON.parse(llmOutput)            │
+   │                                                 │
+   │ // 2. 硬门: 检查必填字段非空                    │
+   │ if (!parsed.realIntent)                          │
+   │   return &quot;missing_real_intent&quot;                  │
+   │                                                 │
+   │ // 3. 合并到 artifact                           │
+   │ artifact.intentPacket = parsed                  │
+   │                                                 │
+   │ // 4. 落盘                                      │
+   │ await fs.writeFile(                             │
+   │   &quot;.meta-kim/.../meta-run-xxx.json&quot;,            │
+   │   JSON.stringify(artifact, null, 2)             │
+   │ )                                               │
+   └─────────────────────────────────────────────────┘
+            │
+            ▼ 写入的文件
+   .meta-kim/state/default/
+   └── governed-executions/
+       ├── meta-run-ac39aed4aaca.json       ← intentPacket 在其中的 intentPacket 字段
+       ├── meta-run-ac39aed4aaca.zh-CN.md   ← 报告中的人类可读版本
+       └── latest.json                       ← 指针: { &quot;runId&quot;: &quot;meta-run-ac39aed4aaca&quot;, ... }
+</code></pre>
+<h4 id="状态文件层全景">状态文件层全景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#状态文件层全景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>最终所有”AI 输出”和”本地处理”都物化到这些文件中：</p>
+<pre><code>.meta-kim/state/default/
+├── compaction/                    ← Stop hook 自动写入（模式 A）
+│   ├── latest.json                ← 当前 compaction 状态
+│   └── run-1781789885047.json     ← 历史 compaction
+├── governed-executions/           ← demo/脚本写入（模式 B）
+│   ├── meta-run-ac39aed4aaca.json ← 完整的 3.5MB artifact（50+ packet）
+│   ├── meta-run-ac39aed4aaca.zh-CN.md ← 人类可读报告
+│   ├── capability-inventory.json  ← 能力清单（496 条）
+│   └── latest.json                ← 指针
+├── capability-index/              ← 能力索引
+│   ├── capability-search-index.tsv
+│   └── global-capabilities.json
+├── profile.json                   ← profile 元信息
+└── spine/                         ← spine 状态（实时阶段的轻量记录）
+    └── spine-state.json
+</code></pre>
+<blockquote>
+<p><strong>一句话总结</strong>：Meta_Kim 的”状态文件”有两种产生方式——CC 会话中是通过 <strong>Stop hook 扫描 AI 的对话 transcript</strong> 用正则提取阶段信息后写入 compaction 包；demo 模式是通过 <strong>Node.js 脚本在内存中合成 50+ packet</strong> 后直接 <code>writeFile</code>。两种方式的最终产物都是 <code>.meta-kim/state/</code> 下的结构化 JSON。<strong>核心流程始终是：Prompt（喂给 AI 的治理规则）→ LLM 调用 → AI 回复（自然语言或 JSON）→ 本地解析（正则/JSON.parse）→ 落盘（state 文件）。</strong></p>
+</blockquote>
+<h3 id="架构全景图">架构全景图<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#架构全景图" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;graph TD\n    subgraph user[\&quot;👤 用户层\&quot;]\n        INPUT[自然语言任务输入]\n    end\n\n    subgraph governance[\&quot;🏛️ Meta_Kim 治理层\&quot;]\n        SPINE[8 阶段执行脊柱]\n        CARDS[动态发牌机制]\n        GATES[门 Gate]\n        PACKETS[协议 Packet]\n        AGENTS[9 个元角色]\n    end\n\n    subgraph runtime[\&quot;🖥️ AI 编码助手层\&quot;]\n        CC[Claude Code]\n        CODEX[Codex]\n        CURSOR[Cursor]\n        OC[OpenClaw]\n    end\n\n    subgraph infra[\&quot;⚙️ 基础设施层\&quot;]\n        MEMORY[Memory 记忆]\n        GRAPH[Graphify 图谱]\n        SQL[SQL 向量检索]\n        MCP[MCP 外部服务]\n        HOOKS[Hooks 自动化]\n    end\n\n    INPUT --> SPINE\n    SPINE --> CARDS\n    CARDS --> GATES\n    GATES --> PACKETS\n    PACKETS --> AGENTS\n    AGENTS --> runtime\n    runtime --> infra\n\n    style governance fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff\n    style SPINE fill:#7c3aed,color:#fff\n    style CARDS fill:#f59e0b,color:#000\n    style GATES fill:#dc2626,color:#fff\n    style PACKETS fill:#16a34a,color:#fff\n    style AGENTS fill:#60a5fa,color:#000&quot;">graph TD
+    subgraph user[&quot;👤 用户层&quot;]
+        INPUT[自然语言任务输入]
+    end
+
+    subgraph governance[&quot;🏛️ Meta_Kim 治理层&quot;]
+        SPINE[8 阶段执行脊柱]
+        CARDS[动态发牌机制]
+        GATES[门 Gate]
+        PACKETS[协议 Packet]
+        AGENTS[9 个元角色]
+    end
+
+    subgraph runtime[&quot;🖥️ AI 编码助手层&quot;]
+        CC[Claude Code]
+        CODEX[Codex]
+        CURSOR[Cursor]
+        OC[OpenClaw]
+    end
+
+    subgraph infra[&quot;⚙️ 基础设施层&quot;]
+        MEMORY[Memory 记忆]
+        GRAPH[Graphify 图谱]
+        SQL[SQL 向量检索]
+        MCP[MCP 外部服务]
+        HOOKS[Hooks 自动化]
+    end
+
+    INPUT --> SPINE
+    SPINE --> CARDS
+    CARDS --> GATES
+    GATES --> PACKETS
+    PACKETS --> AGENTS
+    AGENTS --> runtime
+    runtime --> infra
+
+    style governance fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff
+    style SPINE fill:#7c3aed,color:#fff
+    style CARDS fill:#f59e0b,color:#000
+    style GATES fill:#dc2626,color:#fff
+    style PACKETS fill:#16a34a,color:#fff
+    style AGENTS fill:#60a5fa,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="四大核心机制">四大核心机制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#四大核心机制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Meta_Kim 的设计基于四个相互咬合的核心机制：</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TB\n    subgraph sgA[\&quot;① 8 大流程（隐形骨架）\&quot;]\n        C1[Critical] --> F1[Fetch] --> T1[Thinking] --> E1[Execution]\n        E1 --> R1[Review] --> MR1[Meta-Review] --> V1[Verification] --> EV1[Evolution]\n    end\n\n    subgraph sgB[\&quot;② 协议（Packet）\&quot;]\n        P1[\&quot;intentPacket\&quot;] --> P2[\&quot;dispatchBoard\&quot;] --> P3[\&quot;workerTaskPacket\&quot;]\n        P3 --> P4[\&quot;reviewPacket\&quot;] --> P5[\&quot;verificationResult\&quot;] --> P6[\&quot;evolutionWriteback\&quot;]\n    end\n\n    subgraph sgC[\&quot;③ 门（Gate）\&quot;]\n        G1[\&quot;planning gate\&quot;] --> G2[\&quot;metaReview gate\&quot;] --> G3[\&quot;verify gate\&quot;]\n        G3 --> G4[\&quot;summary gate\&quot;] --> G5[\&quot;publicDisplay gate\&quot;]\n    end\n\n    subgraph sgD[\&quot;④ 发牌（Cards）\&quot;]\n        D1[\&quot;Clarify\&quot;] --> D2[\&quot;Verify\&quot;] --> D3[\&quot;Fix\&quot;] --> D4[\&quot;Risk\&quot;] --> D5[\&quot;Pause\&quot;]\n    end\n\n    sgA --> sgB\n    sgB --> sgC\n    sgC --> sgD\n\n    style C1 fill:#fbbf24,color:#000\n    style F1 fill:#34d399,color:#000\n    style T1 fill:#60a5fa,color:#000\n    style E1 fill:#f87171,color:#fff\n    style R1 fill:#a78bfa,color:#fff\n    style MR1 fill:#a78bfa,color:#fff\n    style V1 fill:#34d399,color:#000\n    style EV1 fill:#fbbf24,color:#000\n\n    style P1 fill:#16a34a,color:#fff\n    style P2 fill:#16a34a,color:#fff\n    style P3 fill:#16a34a,color:#fff\n    style P4 fill:#16a34a,color:#fff\n    style P5 fill:#16a34a,color:#fff\n    style P6 fill:#16a34a,color:#fff\n\n    style G1 fill:#dc2626,color:#fff\n    style G2 fill:#dc2626,color:#fff\n    style G3 fill:#dc2626,color:#fff\n    style G4 fill:#dc2626,color:#fff\n    style G5 fill:#dc2626,color:#fff\n\n    style D1 fill:#f59e0b,color:#000\n    style D2 fill:#f59e0b,color:#000\n    style D3 fill:#f59e0b,color:#000\n    style D4 fill:#f59e0b,color:#000\n    style D5 fill:#f59e0b,color:#000&quot;">flowchart TB
+    subgraph sgA[&quot;① 8 大流程（隐形骨架）&quot;]
+        C1[Critical] --> F1[Fetch] --> T1[Thinking] --> E1[Execution]
+        E1 --> R1[Review] --> MR1[Meta-Review] --> V1[Verification] --> EV1[Evolution]
+    end
+
+    subgraph sgB[&quot;② 协议（Packet）&quot;]
+        P1[&quot;intentPacket&quot;] --> P2[&quot;dispatchBoard&quot;] --> P3[&quot;workerTaskPacket&quot;]
+        P3 --> P4[&quot;reviewPacket&quot;] --> P5[&quot;verificationResult&quot;] --> P6[&quot;evolutionWriteback&quot;]
+    end
+
+    subgraph sgC[&quot;③ 门（Gate）&quot;]
+        G1[&quot;planning gate&quot;] --> G2[&quot;metaReview gate&quot;] --> G3[&quot;verify gate&quot;]
+        G3 --> G4[&quot;summary gate&quot;] --> G5[&quot;publicDisplay gate&quot;]
+    end
+
+    subgraph sgD[&quot;④ 发牌（Cards）&quot;]
+        D1[&quot;Clarify&quot;] --> D2[&quot;Verify&quot;] --> D3[&quot;Fix&quot;] --> D4[&quot;Risk&quot;] --> D5[&quot;Pause&quot;]
+    end
+
+    sgA --> sgB
+    sgB --> sgC
+    sgC --> sgD
+
+    style C1 fill:#fbbf24,color:#000
+    style F1 fill:#34d399,color:#000
+    style T1 fill:#60a5fa,color:#000
+    style E1 fill:#f87171,color:#fff
+    style R1 fill:#a78bfa,color:#fff
+    style MR1 fill:#a78bfa,color:#fff
+    style V1 fill:#34d399,color:#000
+    style EV1 fill:#fbbf24,color:#000
+
+    style P1 fill:#16a34a,color:#fff
+    style P2 fill:#16a34a,color:#fff
+    style P3 fill:#16a34a,color:#fff
+    style P4 fill:#16a34a,color:#fff
+    style P5 fill:#16a34a,color:#fff
+    style P6 fill:#16a34a,color:#fff
+
+    style G1 fill:#dc2626,color:#fff
+    style G2 fill:#dc2626,color:#fff
+    style G3 fill:#dc2626,color:#fff
+    style G4 fill:#dc2626,color:#fff
+    style G5 fill:#dc2626,color:#fff
+
+    style D1 fill:#f59e0b,color:#000
+    style D2 fill:#f59e0b,color:#000
+    style D3 fill:#f59e0b,color:#000
+    style D4 fill:#f59e0b,color:#000
+    style D5 fill:#f59e0b,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<blockquote>
+<p><strong>8 大流程推进到哪，协议就跟到哪。</strong>
+<strong>协议到了，门判定能不能放行。</strong>
+<strong>门不放行？发牌动态调整路径。</strong></p>
+</blockquote>
+<h3 id="先拆开核心概念">先拆开核心概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#先拆开核心概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>概念</th><th>它是什么</th><th>它不是什么</th></tr></thead><tbody><tr><td><strong>隐形骨架</strong></td><td>表层流程下面必然存在的后台框架节点</td><td>一张先天写死的职责清单</td></tr><tr><td><strong>8 大流程</strong></td><td>隐形骨架在执行层露出的人可读主链</td><td>全部治理逻辑本身</td></tr><tr><td><strong>11 阶段业务工作流</strong></td><td>复杂 run 被判断后叠加的 run 包装递进方式</td><td>8 大流程的替代物</td></tr><tr><td><strong>发牌</strong></td><td>围绕 8 大流程和 agent 单元做动态管控</td><td>简单派任务</td></tr><tr><td><strong>门</strong></td><td>放行条件</td><td>阶段本身</td></tr><tr><td><strong>协议</strong></td><td>节点必须交出的结构化东西</td><td>口号或抽象价值观</td></tr><tr><td><strong>agent 单元治理</strong></td><td>让边界、能力、升级、回滚有抓手</td><td>角色菜单</td></tr><tr><td><strong>三层记忆体系</strong></td><td>memory / graphify / SQL 分工协作的长期记忆</td><td>一份大杂烩笔记</td></tr></tbody></table></div>
+<h3 id="before--after">Before / After<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#before--after" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>没有 Meta_Kim</th><th>使用 Meta_Kim</th></tr></thead><tbody><tr><td>一个超长聊天回复试图包办所有事</td><td>任务会经过意图、能力、owner、审查、验证、写回</td></tr><tr><td>因为某个工具能用，所以就直接用它</td><td>因为某个能力适合当前任务、工具端、OS、依赖和风险，才选择它</td></tr><tr><td>命令跑绿就被误认为目标完成</td><td>证据必须回到用户真实目标上验收</td></tr><tr><td>好经验沉没在聊天记录里</td><td>可复用经验会沉淀成 skill、agent、script、contract 或一次性任务</td></tr></tbody></table></div>
+<h3 id="9-个元角色一览">9 个元角色一览<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#9-个元角色一览" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Meta_Kim 有 9 个分工明确的治理 agent，各管一摊：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>角色</th><th>职责</th><th>不管什么</th></tr></thead><tbody><tr><td><strong>meta-warden</strong></td><td>协调、仲裁、最终综合</td><td>不直接写代码</td></tr><tr><td><strong>meta-conductor</strong></td><td>工作流、节奏控制</td><td>不做安全检查</td></tr><tr><td><strong>meta-genesis</strong></td><td>Agent 设计、SOUL.md</td><td>不管工具选型</td></tr><tr><td><strong>meta-artisan</strong></td><td>技能、MCP、工具匹配</td><td>不管 agent 人设</td></tr><tr><td><strong>meta-sentinel</strong></td><td>安全、权限、回滚</td><td>不管节奏编排</td></tr><tr><td><strong>meta-librarian</strong></td><td>记忆、连续性</td><td>不管代码执行</td></tr><tr><td><strong>meta-prism</strong></td><td>质量审查、反糊弄</td><td>不管能力搜索</td></tr><tr><td><strong>meta-scout</strong></td><td>外部能力发现</td><td>不管内部协调</td></tr><tr><td><strong>meta-chrysalis</strong></td><td>演化写回、scar 记录、递归安全门</td><td>不演化自己，也不绕过 Warden gate</td></tr></tbody></table></div>
+<h2 id="-为什么重要">💡 为什么重要<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-为什么重要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>解决的问题</strong>：AI 编码中”做对了但做错了方向”、“改了但没验证”、“这次学到的下次又忘了”三大顽疾</li>
+<li><strong>带来的价值</strong>：
+<ul>
+<li><strong>意图不跑偏</strong>：Critical 阶段锁定真实意图和成功标准</li>
+<li><strong>能力不浪费</strong>：Fetch 先搜索已有能力，避免重复发明</li>
+<li><strong>执行有边界</strong>：每个子任务有明确 owner、依赖关系、交付物</li>
+<li><strong>质量可追溯</strong>：Review + Meta-Review 双重审查，每个 finding 都要闭合</li>
+<li><strong>经验可复用</strong>：Evolution 把经验沉淀成结构性升级</li>
+</ul>
+</li>
+<li><strong>不使用时的影响</strong>：复杂任务容易迷失方向；经验无法跨会话积累；质量靠自觉而不是靠系统</li>
+</ul>
+<h2 id="-实战示例">🎯 实战示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-实战示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1用-meta_kim-治理一次代码审查">示例 1：用 Meta_Kim 治理一次代码审查<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1用-meta_kim-治理一次代码审查" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你有一个跨越多文件的重构 PR 需要审查</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 直接说出你的需求（不需要 /meta-theory 前缀）</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;帮我审查这次重构的质量、安全性和架构合规性&quot;</span></span></code></pre></figure>
+<p><strong>结果</strong>：Meta_Kim 会自动：</p>
+<ol>
+<li>Critical — 确认审查范围和成功标准</li>
+<li>Fetch — 搜索可用审查能力（meta-prism、git diff、lint 工具）</li>
+<li>Thinking — 规划审查维度（正确性、安全、性能），分配 owner</li>
+<li>Execution — 并行执行各维度审查</li>
+<li>Review — meta-prism 做质量审查</li>
+<li>Meta-Review — 确认审查标准本身没偏</li>
+<li>Verification — 每个 finding 验证是否真实</li>
+<li>Evolution — 记录审查模式，沉淀经验</li>
+</ol>
+<p><strong>原理分析</strong>：不需要你手动指定”用 meta-prism 审安全性，用 xxx 审性能”，Meta_Kim 自动走完 8 阶段，最后给你一份每个 finding 都有证据支撑的审查报告。</p>
+<h3 id="示例-2单文件修改不需要-meta_kim">示例 2：单文件修改，不需要 Meta_Kim<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2单文件修改不需要-meta_kim" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你只需要修改一个函数内部的逻辑</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 直接问 Claude Code 就好</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;把 src/utils/format.ts 里的 formatDate 函数改成支持 ISO 8601 格式&quot;</span></span></code></pre></figure>
+<p><strong>原理分析</strong>：这种简单任务走 Meta_Kim 的 full spine 是”大炮打蚊子”。直接让 Claude Code 改就行。判断标准见 <a href="../meta_kim/05-场景判断：何时用-meta-theory" class="internal internal-link alias" data-slug="meta_kim/05-场景判断：何时用-meta-theory">场景判断</a>。</p>
+<h3 id="示例-33-分钟证明链">示例 3：3 分钟证明链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-33-分钟证明链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你想快速验证 Meta_Kim 到底做了什么</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> meta:theory:demo</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">        # 跑一次示例 governed run</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> meta:run-status:latest</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">  # 查看最新 run 的状态</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> meta:theory:report</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> --run-id</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> latest</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">  # 生成报告</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> run</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> meta:delivery:bundle</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">    # 查看交付物打包</span></span></code></pre></figure>
+<p><strong>结果</strong>：这四条命令会展示五件事：</p>
+<ol>
+<li>模糊需求变成明确意图和成功标准</li>
+<li>先搜索能力，再决定谁执行</li>
+<li>复杂任务拆成有边界的 worker task</li>
+<li>Review 和 Verification 留下产物证据</li>
+<li>兼容证据保持分层，smoke 不会被冒充成 live proof</li>
+</ol>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：复杂跨文件任务直接用自然语言描述，让 Meta_Kim 自动走治理路线</li>
+<li><strong>DO</strong>：简单单文件修改直接用普通 Prompt，不要过度治理</li>
+<li><strong>DON’T</strong>：不要显式输入 <code>/meta-theory</code> 作为日常入口——斜杠命令只是维护者快捷方式</li>
+<li><strong>TIP</strong>：安装后跑一次 <code>npm run meta:theory:demo</code> 理解 governed run 的全流程</li>
+<li><strong>TIP</strong>：先理解 8 大流程，再理解 11 阶段工作流，最后看发牌机制</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>大炮打蚊子</td><td>改一行代码也走完整治理</td><td>单文件简单修改直接用普通 Prompt</td></tr><tr><td>以为 /meta-theory 是唯一入口</td><td>每次都手动输入斜杠命令</td><td>自然语言就会触发，斜杠命令只是维护者快捷方式</td></tr><tr><td>混淆 8 大流程和 11 阶段</td><td>觉得有两套矛盾流程</td><td>8 大流程是骨架（执行逻辑），11 阶段是骨架之上的业务递进</td></tr><tr><td>认为 Meta_Kim 是另一个 AI</td><td>期望 Meta_Kim 自己写代码</td><td>Meta_Kim 是治理层，不是代码生成器；代码仍由 Claude Code 等助手生成</td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../meta_kim/01-8-阶段脊柱与路径分类" class="internal internal-link alias" data-slug="meta_kim/01-8-阶段脊柱与路径分类">8 阶段脊柱与路径分类</a> — 深入理解执行脊柱和三种路径</li>
+<li><a href="../meta_kim/02-元角色体系与能力优先分发" class="internal internal-link alias" data-slug="meta_kim/02-元角色体系与能力优先分发">元角色体系与能力优先分发</a> — 9 个元角色怎么分工协作</li>
+<li><a href="../meta_kim/03-协议、门与动态发牌" class="internal internal-link alias" data-slug="meta_kim/03-协议、门与动态发牌">协议、门与动态发牌</a> — Packet、Gate、Card 三种治理工具</li>
+<li><a href="../meta_kim/04-三层记忆与进化闭环" class="internal internal-link alias" data-slug="meta_kim/04-三层记忆与进化闭环">三层记忆与进化闭环</a> — 记忆体系和经验沉淀</li>
+<li><a href="../meta_kim/05-场景判断：何时用-meta-theory" class="internal internal-link alias" data-slug="meta_kim/05-场景判断：何时用-meta-theory">场景判断：何时用 meta-theory</a> — 实战决策框架</li>
+<li><a href="../claude-code/00-claude-code-入门概览" class="internal internal-link alias" data-slug="claude-code/00-claude-code-入门概览">Claude Code 入门概览</a> — Meta_Kim 运行的宿主平台</li>
+<li><a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">Skills 技能系统</a> — meta-theory 本身就是 CC 的一个 skill</li>
+<li><a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">Agents 代理系统</a> — 9 个元角色在 CC 中的运作方式</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Meta_Kim 仓库：<a href="https://github.com/KimYx0207/Meta_Kim" class="external external-link">https://github.com/KimYx0207/Meta_Kim<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>README.zh-CN.md：Meta_Kim 中文完整文档</li>
+<li>方法依据论文：<a href="https://zenodo.org/records/18957649%EF%BC%88DOI" class="external external-link">https://zenodo.org/records/18957649（DOI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>: 10.5281/zenodo.18957649）</li>
+<li>飞书知识库：<a href="https://my.feishu.cn/wiki/OhQ8wqntFihcI1kWVDlcNdpznFf" class="external external-link">https://my.feishu.cn/wiki/OhQ8wqntFihcI1kWVDlcNdpznFf<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>下一步</strong>：阅读 <a href="../meta_kim/01-8-阶段脊柱与路径分类" class="internal internal-link alias" data-slug="meta_kim/01-8-阶段脊柱与路径分类">8 阶段脊柱与路径分类</a>，深入理解 Meta_Kim 如何对任务进行分类和路由——这是理解”哪些 Prompt 会走治理、哪些不会”的关键。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-13" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#meta_kim-入门概览" data-for="meta_kim-入门概览">Meta_Kim 入门概览</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-2"><a href="#一句话总结" data-for="一句话总结">一句话总结</a></li><li class="depth-2"><a href="#核心问题" data-for="核心问题">核心问题</a></li><li class="depth-2"><a href="#打个比方" data-for="打个比方">打个比方</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#-关键认知meta_kim-的本质" data-for="-关键认知meta_kim-的本质">⚡ 关键认知：Meta_Kim 的本质</a></li><li class="depth-2"><a href="#-闭环prompt--llm-响应--状态文件" data-for="-闭环prompt--llm-响应--状态文件">🔄 闭环：Prompt → LLM 响应 → 状态文件</a></li><li class="depth-2"><a href="#架构全景图" data-for="架构全景图">架构全景图</a></li><li class="depth-2"><a href="#四大核心机制" data-for="四大核心机制">四大核心机制</a></li><li class="depth-2"><a href="#先拆开核心概念" data-for="先拆开核心概念">先拆开核心概念</a></li><li class="depth-2"><a href="#before--after" data-for="before--after">Before / After</a></li><li class="depth-2"><a href="#9-个元角色一览" data-for="9-个元角色一览">9 个元角色一览</a></li><li class="depth-1"><a href="#-为什么重要" data-for="-为什么重要">💡 为什么重要</a></li><li class="depth-1"><a href="#-实战示例" data-for="-实战示例">🎯 实战示例</a></li><li class="depth-2"><a href="#示例-1用-meta_kim-治理一次代码审查" data-for="示例-1用-meta_kim-治理一次代码审查">示例 1：用 Meta_Kim 治理一次代码审查</a></li><li class="depth-2"><a href="#示例-2单文件修改不需要-meta_kim" data-for="示例-2单文件修改不需要-meta_kim">示例 2：单文件修改，不需要 Meta_Kim</a></li><li class="depth-2"><a href="#示例-33-分钟证明链" data-for="示例-33-分钟证明链">示例 3：3 分钟证明链</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../meta_kim/01-8-阶段脊柱与路径分类" class="internal">01-8 阶段脊柱与路径分类</a></li><li><a href="../meta_kim/02-元角色体系与能力优先分发" class="internal">02-元角色体系与能力优先分发</a></li><li><a href="../meta_kim/05-场景判断：何时用-meta-theory" class="internal">05-场景判断：何时用 meta-theory</a></li><li><a href="../meta_kim/06-实战案例：一次完整的-8-阶段运行" class="internal">06-实战案例：一次完整的 8 阶段运行</a></li><li><a href="../meta_kim/08-runtime-运行时：跨宿主的执行引擎与适配层" class="internal">08-Runtime 运行时：跨宿主的执行引擎与适配层</a></li><li><a href="../" class="internal">AI 学习知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

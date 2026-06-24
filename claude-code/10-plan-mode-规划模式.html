@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>10-Plan Mode 规划模式</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="10-Plan Mode 规划模式"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="10-Plan Mode 规划模式"/><meta name="twitter:description" content="Plan Mode 规划模式 📖 概念 Plan Mode（规划模式）是 Claude Code 的结构化规划机制。它强制 AI 在动手写代码之前，先完成需求分析、方案设计、实施计划，并将计划以文件形式持久化。用户审查和批准计划后，AI 才进入执行阶段。这就像”建筑师先画图纸，施工队再动工”——杜绝了”上手就写，写到一半发现方向错了”的问题。 Plan Mode 通过两个内置工具实现：EnterPlanMode（进入规划模式，只读探索 + 设计）和 ExitPlanMode（退出规划模式，提交计划供用户审批）。 Plan Mode vs 通常对话 vs Workflows 机制适用场景产出物..."/><meta property="og:description" content="Plan Mode 规划模式 📖 概念 Plan Mode（规划模式）是 Claude Code 的结构化规划机制。它强制 AI 在动手写代码之前，先完成需求分析、方案设计、实施计划，并将计划以文件形式持久化。用户审查和批准计划后，AI 才进入执行阶段。这就像”建筑师先画图纸，施工队再动工”——杜绝了”上手就写，写到一半发现方向错了”的问题。 Plan Mode 通过两个内置工具实现：EnterPlanMode（进入规划模式，只读探索 + 设计）和 ExitPlanMode（退出规划模式，提交计划供用户审批）。 Plan Mode vs 通常对话 vs Workflows 机制适用场景产出物..."/><meta property="og:image:alt" content="Plan Mode 规划模式 📖 概念 Plan Mode（规划模式）是 Claude Code 的结构化规划机制。它强制 AI 在动手写代码之前，先完成需求分析、方案设计、实施计划，并将计划以文件形式持久化。用户审查和批准计划后，AI 才进入执行阶段。这就像”建筑师先画图纸，施工队再动工”——杜绝了”上手就写，写到一半发现方向错了”的问题。 Plan Mode 通过两个内置工具实现：EnterPlanMode（进入规划模式，只读探索 + 设计）和 ExitPlanMode（退出规划模式，提交计划供用户审批）。 Plan Mode vs 通常对话 vs Workflows 机制适用场景产出物..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/claude-code/10-plan-mode-规划模式"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/claude-code/10-plan-mode-规划模式"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Plan Mode 规划模式 📖 概念 Plan Mode（规划模式）是 Claude Code 的结构化规划机制。它强制 AI 在动手写代码之前，先完成需求分析、方案设计、实施计划，并将计划以文件形式持久化。用户审查和批准计划后，AI 才进入执行阶段。这就像”建筑师先画图纸，施工队再动工”——杜绝了”上手就写，写到一半发现方向错了”的问题。 Plan Mode 通过两个内置工具实现：EnterPlanMode（进入规划模式，只读探索 + 设计）和 ExitPlanMode（退出规划模式，提交计划供用户审批）。 Plan Mode vs 通常对话 vs Workflows 机制适用场景产出物..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/claude-code/10-plan-mode-规划模式-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/claude-code/10-plan-mode-规划模式-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/claude-code/10-plan-mode-规划模式-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="claude-code/10-plan-mode-规划模式" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-11" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-11" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../claude-code/">Claude Code</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>10-Plan Mode 规划模式</a></div></nav><h1 class="article-title">10-Plan Mode 规划模式</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/claude-code" class="internal internal-link tag-link">claude-code</a><span class="note-properties-separator">, </span><a href="../tags/plan-mode" class="internal internal-link tag-link">plan-mode</a><span class="note-properties-separator">, </span><a href="../tags/规划" class="internal internal-link tag-link">规划</a><span class="note-properties-separator">, </span><a href="../tags/结构化" class="internal internal-link tag-link">结构化</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-19T16:32:52.000Z">2026年6月20日</time><span>16分钟阅读</span></p><ul class="tags"><li><a href="../tags/claude-code" class="internal tag-link">claude-code</a></li><li><a href="../tags/plan-mode" class="internal tag-link">plan-mode</a></li><li><a href="../tags/规划" class="internal tag-link">规划</a></li><li><a href="../tags/结构化" class="internal tag-link">结构化</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="plan-mode-规划模式">Plan Mode 规划模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#plan-mode-规划模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Plan Mode（规划模式）是 Claude Code 的<strong>结构化规划机制</strong>。它强制 AI 在动手写代码之前，先完成需求分析、方案设计、实施计划，并将计划以文件形式持久化。用户审查和批准计划后，AI 才进入执行阶段。这就像”建筑师先画图纸，施工队再动工”——杜绝了”上手就写，写到一半发现方向错了”的问题。</p>
+</blockquote>
+<p>Plan Mode 通过两个内置工具实现：<code>EnterPlanMode</code>（进入规划模式，只读探索 + 设计）和 <code>ExitPlanMode</code>（退出规划模式，提交计划供用户审批）。</p>
+<h3 id="plan-mode-vs-通常对话-vs-workflows">Plan Mode vs 通常对话 vs Workflows<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#plan-mode-vs-通常对话-vs-workflows" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>机制</th><th>适用场景</th><th>产出物</th><th>用户参与</th></tr></thead><tbody><tr><td><strong>普通对话</strong></td><td>简单问题、单文件修改</td><td>直接执行</td><td>实时观察</td></tr><tr><td><strong>Plan Mode</strong></td><td>复杂功能、架构决策、多文件变更</td><td>计划文件（plan.md）</td><td>审批计划 + 批准执行</td></tr><tr><td><strong>Workflows</strong></td><td>超大规模多 Agent 编排</td><td>Workflow 脚本 + 执行结果</td><td>审批脚本 + 观察进度</td></tr></tbody></table></div>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Plan Mode 通过<strong>两阶段生命周期</strong>工作：探索阶段（只读）和规划阶段（只写计划）。两个阶段都不做实际代码修改，确保”想清楚再动手”。</p>
+</blockquote>
+<h3 id="plan-mode-生命周期">Plan Mode 生命周期<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#plan-mode-生命周期" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant User as 用户\n    participant AI as AI\n    participant Tools as 工具层\n    participant PlanFile as 计划文件\n\n    User->>AI: 复杂任务（多文件、架构决策）\n    AI->>AI: 判断：符合 Plan Mode 触发条件\n    AI->>Tools: EnterPlanMode()\n    Note over AI,Tools: 进入只读探索模式\n\n    AI->>Tools: Glob / Grep / Read（探索代码库）\n    Tools-->>AI: 代码库信息\n    AI->>AI: 设计实现方案\n    AI->>PlanFile: 写入计划文件\n    AI->>Tools: ExitPlanMode()\n    Note over AI,Tools: 提交计划等待审批\n\n    PlanFile-->>User: 审查计划内容\n    User->>AI: 批准 / 修改要求\n    alt 批准\n        AI->>Tools: 按计划执行代码修改\n    else 需要修改\n        AI->>AI: 调整计划，重新提交\n    end&quot;">sequenceDiagram
+    participant User as 用户
+    participant AI as AI
+    participant Tools as 工具层
+    participant PlanFile as 计划文件
+
+    User->>AI: 复杂任务（多文件、架构决策）
+    AI->>AI: 判断：符合 Plan Mode 触发条件
+    AI->>Tools: EnterPlanMode()
+    Note over AI,Tools: 进入只读探索模式
+
+    AI->>Tools: Glob / Grep / Read（探索代码库）
+    Tools-->>AI: 代码库信息
+    AI->>AI: 设计实现方案
+    AI->>PlanFile: 写入计划文件
+    AI->>Tools: ExitPlanMode()
+    Note over AI,Tools: 提交计划等待审批
+
+    PlanFile-->>User: 审查计划内容
+    User->>AI: 批准 / 修改要求
+    alt 批准
+        AI->>Tools: 按计划执行代码修改
+    else 需要修改
+        AI->>AI: 调整计划，重新提交
+    end
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="plan-mode-的触发条件">Plan Mode 的触发条件<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#plan-mode-的触发条件" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>AI 在以下情况应自动进入 Plan Mode：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>触发条件</th><th>示例</th></tr></thead><tbody><tr><td><strong>新功能实现</strong>（3+ 文件）</td><td>“添加用户认证系统”</td></tr><tr><td><strong>多种可能方案</strong></td><td>”实现缓存层”（Redis? 内存? 文件?）</td></tr><tr><td><strong>架构级变更</strong></td><td>”将单体拆分为微服务”</td></tr><tr><td><strong>影响现有行为</strong></td><td>”修改支付流程”</td></tr><tr><td><strong>多文件变更</strong>（5+ 文件）</td><td>“升级所有 API 端点的错误处理”</td></tr></tbody></table></div>
+<h3 id="计划文件的标准结构">计划文件的标准结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#计划文件的标准结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># Plan: &lt;功能名称></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 1. 需求分析</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 核心用例</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 非目标（本期明确不做的事）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 2. 方案设计</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 数据模型设计</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 路由 / API 设计</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 关键设计决策</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 3. 文件变更清单</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [</span><span style="--shiki-light:#032F62;--shiki-light-text-decoration:underline;--shiki-dark:#DBEDFF;--shiki-dark-text-decoration:underline;" data-token-type="string">新增</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] 文件列表</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [</span><span style="--shiki-light:#032F62;--shiki-light-text-decoration:underline;--shiki-dark:#DBEDFF;--shiki-dark-text-decoration:underline;" data-token-type="string">修改</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] 文件列表</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 4. 实施步骤（有序）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 1: ...</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 2: ...</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 5. 风险与缓解</span></span></code></pre></figure>
+<h2 id="-目录树位置">📂 目录树位置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-目录树位置" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Plan Mode 的持久化计划文件存储在 <code>.claude/plans/</code> 下，运行时状态由 <code>.meta-kim/state/</code> 管理。</p>
+</blockquote>
+<pre><code>项目根目录/
+└── .claude/
+    └── plans/                      ← Plan Mode 生成的计划文件
+        └── &lt;plan-name>.md          ← 单个计划的完整内容（需求 + 方案 + 步骤）
+
+会话级（自动管理）：
+.meta-kim/state/&lt;profile>/runs/&lt;runId>/
+├── plan.md                         ← 当前会话的执行中计划
+└── progress.md                     ← 计划执行进度跟踪
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>位置</th><th>作用</th><th>生命周期</th></tr></thead><tbody><tr><td><code>.claude/plans/&lt;name>.md</code></td><td>持久化的计划文档</td><td>创建后保留，可作为项目文档提交 Git</td></tr><tr><td><code>EnterPlanMode</code> / <code>ExitPlanMode</code></td><td>内置工具（编译在 CLI 中）</td><td>触发/退出规划模式</td></tr></tbody></table></div>
+<p><strong>Plan Mode 与其它概念的目录关系</strong>：</p>
+<pre><code>.claude/
+├── plans/                  ← Plan Mode：设计阶段产出
+├── commands/               ← 可创建 /plan 快捷命令
+├── workflows/              ← Workflows：执行阶段编排
+│                           ←   典型工作流：Plan Mode 设计 → Workflows 执行
+└── skills/                 ← 可在 Plan Mode 中利用 Skills 做专项分析
+</code></pre>
+<h2 id="-为什么重要">💡 为什么重要<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-为什么重要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>方向正确</strong>：先设计再实施，避免”写了半天发现走错路”</li>
+<li><strong>团队对齐</strong>：计划文件是团队的沟通工具——设计方案在代码之前被审查</li>
+<li><strong>复杂度管理</strong>：将大功能分解为文件级步骤，可追踪、可回滚</li>
+<li><strong>知识沉淀</strong>：计划文件本身就是项目文档，解释”为什么这样做”</li>
+</ul>
+<h2 id="-实战示例">🎯 实战示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-实战示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1新功能实现从需求到计划">示例 1：新功能实现——从需求到计划<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1新功能实现从需求到计划" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你需要在电商平台中添加”优惠券系统”。涉及：数据模型、管理后台、用户端使用、订单计算、过期处理。不能”上手就写”。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;为电商平台设计优惠券系统。包括：优惠券类型（满减/折扣）、</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">使用条件（最低金额、指定商品/分类）、有效期、使用次数限制。</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">先进入 Plan Mode 设计完整方案，我审批后再实现。&quot;</span></span></code></pre></figure>
+<p><strong>AI 进入 Plan Mode 后产出的计划</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># Plan: 优惠券系统</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 1. 需求分析</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">### 核心用例</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 管理员创建优惠券（类型、条件、有效期、数量）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 用户在下单时输入优惠码</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 系统校验优惠码有效性并计算折扣</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 订单完成后扣减优惠券使用次数</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">### 非目标（本期不做）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> ❌ 自动发券（营销引擎）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> ❌ 分享裂变券</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> ❌ 优惠券叠加规则（本期只支持单券）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 2. 数据模型</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Coupon {</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  id, code, type (FIXED_AMOUNT | PERCENTAGE),</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  discountValue, minOrderAmount,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  applicableProducts (JSON: product IDs or null=all),</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  applicableCategories (JSON: category IDs or null=all),</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  maxUses, usedCount,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  startsAt, expiresAt,</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  isActive, createdAt</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 3. 文件变更清单（11 个文件）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">[</span><span style="--shiki-light:#032F62;--shiki-light-text-decoration:underline;--shiki-dark:#DBEDFF;--shiki-dark-text-decoration:underline;" data-token-type="string">新增文件</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">]</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">1.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> src/types/coupon.ts</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">2.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> src/validators/coupon.ts</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">3.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> src/services/coupon.ts</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">4.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> src/routes/admin/coupons.ts</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">5.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> src/routes/api/coupon.ts</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">6.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> tests/services/coupon.test.ts</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">7.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> tests/routes/admin/coupons.test.ts</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">[</span><span style="--shiki-light:#032F62;--shiki-light-text-decoration:underline;--shiki-dark:#DBEDFF;--shiki-dark-text-decoration:underline;" data-token-type="string">修改文件</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">]</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">8.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> prisma/schema.prisma（+ Coupon 模型）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">9.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> src/services/order.ts（+ applyCoupon 方法）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">10.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> src/routes/api/orders.ts（+ 接收 couponCode）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">11.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> src/app.ts（+ 注册路由）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 4. 实施步骤（6 步）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 1: 数据模型 — prisma schema + migration</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 2: 类型定义 — TypeScript types + Zod validators</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 3: 核心逻辑 — CouponService（校验、计算、扣减）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 4: 管理 API — CRUD 接口</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 5: 用户端 — 下单时应用优惠券</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 6: 测试 — 10 个关键测试用例</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 5. 设计决策</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 优惠券使用次数在高并发下用数据库行锁保证准确</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> applicableProducts/applicableCategories 存 JSON（简化查询，≤100 项）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 折扣计算放在 CouponService 中，OrderService 只调用</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 6. 风险</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 高：并发使用优惠券时超用 → 行锁 + 事务</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 中：JSON 字段查询性能 → 限制列表长度 ≤ 100</span></span></code></pre></figure>
+<p><strong>用户审批 → 批准后 AI 按 6 步顺序实施。</strong></p>
+<p><strong>原理分析</strong>：Plan Mode 的核心价值在”审批点”——用户在代码被写之前看到了完整的方案（数据模型、文件清单、设计决策、风险）。这避免了”AI 写了一大堆代码，审查时发现数据模型设计错了然后全部重来”的浪费。</p>
+<h3 id="示例-2架构变更拆分单体-service-层">示例 2：架构变更——拆分单体 Service 层<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2架构变更拆分单体-service-层" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：当前项目的 <code>src/services/</code> 膨胀到 50+ 个服务文件，API 路由和业务逻辑耦合严重。你考虑将核心业务逻辑抽成独立的 service 包。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;当前 services/ 目录过于庞大（50+ 文件）。我想将核心业务逻辑</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">拆分为独立的包。进入 Plan Mode 设计方案。&quot;</span></span></code></pre></figure>
+<p><strong>AI 在 Plan Mode 中的分析</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># Plan: Service 层拆分</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 1. 现状分析（Explore 阶段）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">当前 src/services/ 包含 53 个文件，分为以下领域：</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 领域 | 文件数 | 外部依赖 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">|------|:-----:|------|</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 用户（auth, profile, permissions） | 8 | prisma, redis |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 订单（order, cart, payment, refund） | 12 | prisma, 用户服务 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 商品（product, inventory, category） | 10 | prisma, redis |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 通知（email, push, sms, template） | 7 | 外部 API |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 通用（logger, cache, queue, storage） | 11 | 各种 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 其他 | 5 | 混合 |</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 2. 拆分方案（npm workspace）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">packages/</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── core/                 ← 共享类型和工具</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── service-user/         ← 用户领域</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── service-order/        ← 订单领域</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── service-product/      ← 商品领域</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── service-notification/ ← 通知领域</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">└── service-infra/        ← 通用基础设施</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 3. 迁移策略：分批进行，保持系统始终可运行</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Phase 1: 抽离 core 包（共享类型）        ← 无依赖</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Phase 2: 迁移 service-infra               ← 最独立</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Phase 3: 迁移 service-user                ← 被其它依赖，优先迁</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Phase 4: 迁移 service-product             ← 依赖 user</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Phase 5: 迁移 service-order               ← 依赖 user + product</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Phase 6: 迁移 service-notification        ← 最独立，最后迁</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">每阶段：移动文件 → 更新导入路径 → npm test → git commit</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 4. 风险与回滚</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 每阶段独立提交，失败可单独回滚</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> TypeScript 路径别名（@core/</span><span style="--shiki-light:#24292E;--shiki-light-font-style:italic;--shiki-dark:#E1E4E8;--shiki-dark-font-style:italic;" data-token-type="punctuation">*, @service-user/*</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">）简化导入</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 迁移期间保留原 services/ 的重新导出，确保平滑过渡</span></span></code></pre></figure>
+<p><strong>原理分析</strong>：这种规模的架构变更，没有 Plan Mode 就是灾难。Plan Mode 强制 AI 先分析依赖图（Explore → 读文件 → 理解依赖），再设计分阶段方案。“分批进行，保持系统始终可运行”这个策略来自 Plan Mode 的结构化分析——AI 发现了文件间的依赖关系后，按依赖链路从底层到高层排序迁移顺序。</p>
+<h3 id="示例-3多方案对比缓存策略选型">示例 3：多方案对比——缓存策略选型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-3多方案对比缓存策略选型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：应用的数据库查询 P99 延迟 > 2s，需要引入缓存。不确定该用 Redis 还是内存缓存。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;应用数据库查询出现性能瓶颈（P99 延迟 > 2s）。</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">进入 Plan Mode，设计两种缓存方案并对比推荐。&quot;</span></span></code></pre></figure>
+<p><strong>AI 的 Plan Mode 输出</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># Plan: 缓存策略选型与实现</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 1. 问题定位</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 查询 | 频率 | P50 | P99 | 数据变化 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">|------|:---:|-----|-----|:------:|</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| GET /api/products | 500/s | 120ms | 2.1s | 每小时 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| GET /api/products/:id | 200/s | 80ms | 1.5s | 每小时 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| GET /api/categories | 300/s | 60ms | 0.8s | 每天 |</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 2. 方案对比</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">### 方案 A：Redis 缓存</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">✅ 分布式支持，多实例共享 ｜ ❌ 引入外部依赖，运维成本增加</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">### 方案 B：Node.js 内存缓存（lru-cache）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">✅ 零依赖，零网络延迟 ｜ ❌ 多实例不共享，重启丢失</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 维度 | Redis | 内存缓存 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">|------|:-----:|:-------:|</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| P99 降低 | 90% ↓ | 95% ↓ |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 运维复杂度 | +1 服务 | 0 |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 分布式一致性 | ✅ | ❌ |</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">| 实现工作量 | 2 天 | 0.5 天 |</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 3. 推荐：分层缓存</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">请求 → 内存缓存 (L1, TTL=30s) → Redis (L2, TTL=5min) → 数据库</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> L1 提供极致速度（进程内）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> L2 提供分布式一致性</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 数据更新时通过 Redis Pub/Sub 广播失效事件</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 抽象 CacheService 接口，L1/L2 可独立替换</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 4. 实施步骤</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 1: 定义 CacheService 接口</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 2: 实现 Redis 适配器</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 3: 实现内存缓存适配器</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 4: 实现分层缓存组合器</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 5: 在 ProductService 中接入</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 6: 压测验证（k6 脚本）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Step 7: 灰度发布（10% → 50% → 100%）</span></span></code></pre></figure>
+<p><strong>原理分析</strong>：这个 Plan 展示了 Plan Mode 的<strong>决策支持</strong>能力。不是”用 Redis”或”不用 Redis”的二元选择，而是通过对比矩阵发现两种方案的互补性（Redis 的分布式 + 内存的速度），设计了”组合方案”。“分层缓存”这个架构决策来自 Plan Mode 的结构化对比。</p>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：复杂功能（3+ 新文件或 5+ 修改文件）主动进入 Plan Mode</li>
+<li><strong>DO</strong>：计划文件中写清楚：数据模型、文件变更清单、步骤顺序、设计决策、风险</li>
+<li><strong>DO</strong>：Plan Mode 的”探索”阶段充分利用——多读代码、理解现有架构再设计</li>
+<li><strong>DON’T</strong>：为单文件修改或简单 Bug 修复进入 Plan Mode——过度规划</li>
+<li><strong>DON’T</strong>：跳过用户审批直接执行——Plan Mode 的价值就是”审批点”</li>
+<li><strong>TIP</strong>：将完成的 <code>.claude/plans/</code> 文件提交 Git——它们是项目技术文档的重要组成</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>过早退出</td><td>Plan Mode 中未完成探索就开始设计</td><td>确保理解了所有相关文件后再 ExitPlanMode</td></tr><tr><td>计划过细</td><td>计划文件变成”伪代码”，失去设计视角</td><td>计划描述”要做什么、为什么”，不描述”每行代码怎么写”</td></tr><tr><td>审批形同虚设</td><td>用户不看计划直接批准</td><td>计划中突出设计决策和风险——让审批有价值</td></tr><tr><td>计划与执行脱节</td><td>执行时偏离计划</td><td>执行阶段引用计划文件，发现偏离时主动提出 Plan Amend</td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../claude-code/08-workflows-工作流编排" class="internal internal-link alias" data-slug="claude-code/08-workflows-工作流编排">Workflows 工作流编排</a> — Plan Mode 设计，Workflows 执行</li>
+<li><a href="../claude-code/07-配置与项目管理" class="internal internal-link alias" data-slug="claude-code/07-配置与项目管理">配置与项目管理</a> — <code>.claude/plans/</code> 是项目知识资产</li>
+<li><a href="../claude-code/05-memory-记忆系统" class="internal internal-link alias" data-slug="claude-code/05-memory-记忆系统">Memory 记忆系统</a> — Plan Mode 的重要设计决策应沉淀为 Memory</li>
+<li><a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">Agents 代理系统</a> — Plan Mode 中可用 Explore Agent 探索代码库</li>
+<li><a href="../claude-code/09-slash-commands-斜杠命令" class="internal internal-link alias" data-slug="claude-code/09-slash-commands-斜杠命令">Slash Commands 斜杠命令</a> — 创建 <code>/plan</code> 自定义命令快速触发</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>官方文档：<a href="https://docs.anthropic.com/en/docs/claude-code/plan-mode" class="external external-link">Claude Code Plan Mode<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>🎉 Claude Code 专题完成！</strong> 你已学完 11 篇文章，从入门概览到配置管理。
+回到 <a href="../00-总览/ai学习知识库总览" class="internal internal-link alias" data-slug="00-总览/ai学习知识库总览">AI学习知识库总览</a> 查看完整知识地图。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-11" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#plan-mode-规划模式" data-for="plan-mode-规划模式">Plan Mode 规划模式</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-2"><a href="#plan-mode-vs-通常对话-vs-workflows" data-for="plan-mode-vs-通常对话-vs-workflows">Plan Mode vs 通常对话 vs Workflows</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#plan-mode-生命周期" data-for="plan-mode-生命周期">Plan Mode 生命周期</a></li><li class="depth-2"><a href="#plan-mode-的触发条件" data-for="plan-mode-的触发条件">Plan Mode 的触发条件</a></li><li class="depth-2"><a href="#计划文件的标准结构" data-for="计划文件的标准结构">计划文件的标准结构</a></li><li class="depth-1"><a href="#-目录树位置" data-for="-目录树位置">📂 目录树位置</a></li><li class="depth-1"><a href="#-为什么重要" data-for="-为什么重要">💡 为什么重要</a></li><li class="depth-1"><a href="#-实战示例" data-for="-实战示例">🎯 实战示例</a></li><li class="depth-2"><a href="#示例-1新功能实现从需求到计划" data-for="示例-1新功能实现从需求到计划">示例 1：新功能实现——从需求到计划</a></li><li class="depth-2"><a href="#示例-2架构变更拆分单体-service-层" data-for="示例-2架构变更拆分单体-service-层">示例 2：架构变更——拆分单体 Service 层</a></li><li class="depth-2"><a href="#示例-3多方案对比缓存策略选型" data-for="示例-3多方案对比缓存策略选型">示例 3：多方案对比——缓存策略选型</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../claude-code/00-claude-code-入门概览" class="internal">00-Claude Code 入门概览</a></li><li><a href="../claude-code/04-agents-代理系统" class="internal">04-Agents 代理系统</a></li><li><a href="../claude-code/07-配置与项目管理" class="internal">07-配置与项目管理</a></li><li><a href="../claude-code/08-workflows-工作流编排" class="internal">08-Workflows 工作流编排</a></li><li><a href="../claude-code/09-slash-commands-斜杠命令" class="internal">09-Slash Commands 斜杠命令</a></li><li><a href="../claude-code/11-prompt-engineering-提示词工程" class="internal">11-Prompt Engineering 提示词工程</a></li><li><a href="../meta_kim/06-实战案例：一次完整的-8-阶段运行" class="internal">06-实战案例：一次完整的 8 阶段运行</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

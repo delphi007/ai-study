@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>02-元角色体系与能力优先分发</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="02-元角色体系与能力优先分发"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="02-元角色体系与能力优先分发"/><meta name="twitter:description" content="元角色体系与能力优先分发 📖 概念 Meta_Kim 的 元角色体系 由 9 个专业治理 agent 组成，每个 agent 拥有明确的职责边界、拒绝清单和能力负载。它们不直接写代码，而是负责治理：协调、搜索、匹配、审查、验证、沉淀。工作执行由它们发现的外部专业 provider（skill、MCP、tool、command）完成。 核心理念是能力优先分发（Capability-First Dispatch）： 先定义需要什么能力（capability） 再搜索谁声明了这个能力（agent / skill / MCP tool / command / runtime tool） 最后派给最匹..."/><meta property="og:description" content="元角色体系与能力优先分发 📖 概念 Meta_Kim 的 元角色体系 由 9 个专业治理 agent 组成，每个 agent 拥有明确的职责边界、拒绝清单和能力负载。它们不直接写代码，而是负责治理：协调、搜索、匹配、审查、验证、沉淀。工作执行由它们发现的外部专业 provider（skill、MCP、tool、command）完成。 核心理念是能力优先分发（Capability-First Dispatch）： 先定义需要什么能力（capability） 再搜索谁声明了这个能力（agent / skill / MCP tool / command / runtime tool） 最后派给最匹..."/><meta property="og:image:alt" content="元角色体系与能力优先分发 📖 概念 Meta_Kim 的 元角色体系 由 9 个专业治理 agent 组成，每个 agent 拥有明确的职责边界、拒绝清单和能力负载。它们不直接写代码，而是负责治理：协调、搜索、匹配、审查、验证、沉淀。工作执行由它们发现的外部专业 provider（skill、MCP、tool、command）完成。 核心理念是能力优先分发（Capability-First Dispatch）： 先定义需要什么能力（capability） 再搜索谁声明了这个能力（agent / skill / MCP tool / command / runtime tool） 最后派给最匹..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/meta_kim/02-元角色体系与能力优先分发"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/meta_kim/02-元角色体系与能力优先分发"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="元角色体系与能力优先分发 📖 概念 Meta_Kim 的 元角色体系 由 9 个专业治理 agent 组成，每个 agent 拥有明确的职责边界、拒绝清单和能力负载。它们不直接写代码，而是负责治理：协调、搜索、匹配、审查、验证、沉淀。工作执行由它们发现的外部专业 provider（skill、MCP、tool、command）完成。 核心理念是能力优先分发（Capability-First Dispatch）： 先定义需要什么能力（capability） 再搜索谁声明了这个能力（agent / skill / MCP tool / command / runtime tool） 最后派给最匹..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/meta_kim/02-元角色体系与能力优先分发-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/meta_kim/02-元角色体系与能力优先分发-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/meta_kim/02-元角色体系与能力优先分发-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="meta_kim/02-元角色体系与能力优先分发" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-15" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-15" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../meta_kim/">Meta_Kim</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>02-元角色体系与能力优先分发</a></div></nav><h1 class="article-title">02-元角色体系与能力优先分发</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/meta-kim" class="internal internal-link tag-link">meta-kim</a><span class="note-properties-separator">, </span><a href="../tags/元角色" class="internal internal-link tag-link">元角色</a><span class="note-properties-separator">, </span><a href="../tags/agent" class="internal internal-link tag-link">agent</a><span class="note-properties-separator">, </span><a href="../tags/能力分发" class="internal internal-link tag-link">能力分发</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-24T17:12:16.546Z">2026年6月25日</time><span>15分钟阅读</span></p><ul class="tags"><li><a href="../tags/meta-kim" class="internal tag-link">meta-kim</a></li><li><a href="../tags/元角色" class="internal tag-link">元角色</a></li><li><a href="../tags/agent" class="internal tag-link">agent</a></li><li><a href="../tags/能力分发" class="internal tag-link">能力分发</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="元角色体系与能力优先分发">元角色体系与能力优先分发<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#元角色体系与能力优先分发" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Meta_Kim 的 <strong>元角色体系</strong> 由 9 个专业治理 agent 组成，每个 agent 拥有明确的职责边界、拒绝清单和能力负载。它们不直接写代码，而是负责<strong>治理</strong>：协调、搜索、匹配、审查、验证、沉淀。工作执行由它们发现的<strong>外部专业 provider</strong>（skill、MCP、tool、command）完成。</p>
+</blockquote>
+<p>核心理念是<strong>能力优先分发（Capability-First Dispatch）</strong>：</p>
+<ol>
+<li>先定义需要什么<strong>能力</strong>（capability）</li>
+<li>再搜索谁<strong>声明</strong>了这个能力（agent / skill / MCP tool / command / runtime tool）</li>
+<li>最后<strong>派给</strong>最匹配的 owner</li>
+</ol>
+<p>这与传统思路相反——传统是”我知道 agent X 能干什么，所以调 agent X”。Meta_Kim 的思路是”这个任务需要什么能力？世界上谁有这个能力？那就派给谁。”</p>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="9-个元角色全景">9 个元角色全景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#9-个元角色全景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    WARDEN[meta-warden&lt;br/>协调/仲裁/综合] --> CONDUCTOR[meta-conductor&lt;br/>工作流/节奏]\n    WARDEN --> GENESIS[meta-genesis&lt;br/>Agent 设计]\n    WARDEN --> ARTISAN[meta-artisan&lt;br/>技能/工具匹配]\n    WARDEN --> SENTINEL[meta-sentinel&lt;br/>安全/权限/回滚]\n    WARDEN --> LIBRARIAN[meta-librarian&lt;br/>记忆/连续性]\n    WARDEN --> PRISM[meta-prism&lt;br/>质量审查]\n    WARDEN --> SCOUT[meta-scout&lt;br/>外部能力发现]\n    WARDEN --> CHRYSALIS[meta-chrysalis&lt;br/>演化写回]\n\n    GENESIS -.-> |SOUL.md 设计| ARTISAN\n    ARTISAN -.-> |技能负载反馈| GENESIS\n    CONDUCTOR -.-> |任务看板| WARDEN\n    SENTINEL -.-> |安全拦截| WARDEN\n    PRISM -.-> |审查报告| WARDEN\n    SCOUT -.-> |能力候选| ARTISAN\n    LIBRARIAN -.-> |上下文记忆| WARDEN\n    CHRYSALIS -.-> |scar / 写回建议| WARDEN\n\n    style WARDEN fill:#7c3aed,color:#fff\n    style CONDUCTOR fill:#60a5fa,color:#000\n    style GENESIS fill:#fbbf24,color:#000\n    style ARTISAN fill:#34d399,color:#000\n    style SENTINEL fill:#f87171,color:#fff\n    style LIBRARIAN fill:#a78bfa,color:#fff\n    style PRISM fill:#fb923c,color:#000\n    style SCOUT fill:#2dd4bf,color:#000\n    style CHRYSALIS fill:#84cc16,color:#000&quot;">flowchart TD
+    WARDEN[meta-warden&lt;br/>协调/仲裁/综合] --> CONDUCTOR[meta-conductor&lt;br/>工作流/节奏]
+    WARDEN --> GENESIS[meta-genesis&lt;br/>Agent 设计]
+    WARDEN --> ARTISAN[meta-artisan&lt;br/>技能/工具匹配]
+    WARDEN --> SENTINEL[meta-sentinel&lt;br/>安全/权限/回滚]
+    WARDEN --> LIBRARIAN[meta-librarian&lt;br/>记忆/连续性]
+    WARDEN --> PRISM[meta-prism&lt;br/>质量审查]
+    WARDEN --> SCOUT[meta-scout&lt;br/>外部能力发现]
+    WARDEN --> CHRYSALIS[meta-chrysalis&lt;br/>演化写回]
+
+    GENESIS -.-> |SOUL.md 设计| ARTISAN
+    ARTISAN -.-> |技能负载反馈| GENESIS
+    CONDUCTOR -.-> |任务看板| WARDEN
+    SENTINEL -.-> |安全拦截| WARDEN
+    PRISM -.-> |审查报告| WARDEN
+    SCOUT -.-> |能力候选| ARTISAN
+    LIBRARIAN -.-> |上下文记忆| WARDEN
+    CHRYSALIS -.-> |scar / 写回建议| WARDEN
+
+    style WARDEN fill:#7c3aed,color:#fff
+    style CONDUCTOR fill:#60a5fa,color:#000
+    style GENESIS fill:#fbbf24,color:#000
+    style ARTISAN fill:#34d399,color:#000
+    style SENTINEL fill:#f87171,color:#fff
+    style LIBRARIAN fill:#a78bfa,color:#fff
+    style PRISM fill:#fb923c,color:#000
+    style SCOUT fill:#2dd4bf,color:#000
+    style CHRYSALIS fill:#84cc16,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="角色逐一详解">角色逐一详解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#角色逐一详解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="meta-warden元典狱长-总协调者">meta-warden（元典狱长）— 总协调者<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-warden元典狱长-总协调者" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>协调、仲裁、最终综合。作为 Meta_Kim 的公开前门</td></tr><tr><td><strong>在 8 阶段中</strong></td><td>Critical 阶段默认 owner、Meta-Review 判断者、Evolution 写回审批者</td></tr><tr><td><strong>不管什么</strong></td><td>不直接写代码；不充当实现 worker</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC Agent 定义，在 governed run 中作为主调度者被调用</td></tr></tbody></table></div>
+<h4 id="meta-conductor元指挥-工作流引擎">meta-conductor（元指挥）— 工作流引擎<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-conductor元指挥-工作流引擎" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>工作流编排、节奏控制、Task DAG 规划</td></tr><tr><td><strong>在 8 阶段中</strong></td><td>Fetch 和 Thinking 阶段的默认 owner</td></tr><tr><td><strong>关键输出</strong></td><td><code>dispatchBoard</code>（分派看板）、<code>workerTaskPackets</code>（任务包）、并行分组</td></tr><tr><td><strong>不管什么</strong></td><td>不做安全检查（那是 sentinel 的事）；不直接执行任务</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC Agent + Workflow 工具实现任务 DAG 编排</td></tr></tbody></table></div>
+<h4 id="meta-genesis元创世-agent-设计师">meta-genesis（元创世）— Agent 设计师<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-genesis元创世-agent-设计师" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>设计 agent 身份、SOUL.md、边界定义</td></tr><tr><td><strong>触发条件</strong></td><td>Fetch 证明存在能力缺口 → Thinking 决定创建新 agent → Type B 管线</td></tr><tr><td><strong>不管什么</strong></td><td>不管工具选型（那是 artisan 的事）；不管 agent 人设之外的东西</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC Agent 定义文件（<code>.claude/agents/*.md</code>）来创建/升级 agent</td></tr></tbody></table></div>
+<h4 id="meta-artisan元工匠-技能匹配师">meta-artisan（元工匠）— 技能匹配师<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-artisan元工匠-技能匹配师" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>技能（skill）、MCP、工具、命令的匹配和推荐</td></tr><tr><td><strong>工作方式</strong></td><td>根据任务需求，从能力清单中匹配最合适的武器（weapon）组合</td></tr><tr><td><strong>不管什么</strong></td><td>不管 agent 身份设计（那是 genesis 的事）</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC Skills 系统 + MCP 工具清单进行匹配；元角色可集成社区技能</td></tr></tbody></table></div>
+<h4 id="meta-sentinel元哨兵-安全守卫">meta-sentinel（元哨兵）— 安全守卫<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-sentinel元哨兵-安全守卫" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>安全审查、权限控制、回滚判断</td></tr><tr><td><strong>工作方式</strong></td><td>在执行阶段介入，拦截危险操作；在 Risk 牌触发时抢占</td></tr><tr><td><strong>不管什么</strong></td><td>不管工作节奏编排（那是 conductor 的事）</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC Hooks 实现自动化拦截（如危险命令拦截、git push 提醒）；通过 CC 权限系统控制</td></tr></tbody></table></div>
+<h4 id="meta-librarian元图书馆员-记忆管理者">meta-librarian（元图书馆员）— 记忆管理者<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-librarian元图书馆员-记忆管理者" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>记忆连续性、上下文管理、跨会话恢复</td></tr><tr><td><strong>工作方式</strong></td><td>在 run 开始时加载相关记忆，在 run 结束时保存关键发现</td></tr><tr><td><strong>不管什么</strong></td><td>不管代码执行</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC Memory 系统（<code>~/.claude/projects/*/memory/</code>）读写记忆文件</td></tr></tbody></table></div>
+<h4 id="meta-prism元棱镜-质量审查者">meta-prism（元棱镜）— 质量审查者<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-prism元棱镜-质量审查者" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>多维度质量审查（正确性、安全性、完整性、架构合规）</td></tr><tr><td><strong>在 8 阶段中</strong></td><td>Review 阶段的默认 owner</td></tr><tr><td><strong>关键输出</strong></td><td><code>reviewPacket.findings</code>：结构化的审查发现 + 严重等级 + 证据</td></tr><tr><td><strong>不管什么</strong></td><td>不管能力搜索（那是 scout 的事）</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC Agent + Review 标准合约执行；regulated_path 下运行 adversarial verify（3 个独立 skeptics）</td></tr></tbody></table></div>
+<h4 id="meta-scout元侦察兵-外部能力发现者">meta-scout（元侦察兵）— 外部能力发现者<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-scout元侦察兵-外部能力发现者" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>发现外部能力——在线搜索、社区 skill、新 MCP server、新工具</td></tr><tr><td><strong>工作方式</strong></td><td>当 Fetch 阶段本地能力不够时，向外搜索</td></tr><tr><td><strong>不管什么</strong></td><td>不管内部协调（那是 warden 的事）</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC WebSearch + <code>findskill</code> + MCP 发现机制实现</td></tr></tbody></table></div>
+<h4 id="meta-chrysalis元蛹-进化执行者">meta-chrysalis（元蛹）— 进化执行者<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-chrysalis元蛹-进化执行者" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td><strong>职责</strong></td><td>Evolution 阶段写回：scar 记录、agent 升级、能力缺口回填</td></tr><tr><td><strong>在 8 阶段中</strong></td><td>Evolution 阶段的默认 owner</td></tr><tr><td><strong>关键约束</strong></td><td><strong>不演化自己</strong>，也不绕过 Warden gate——所有写回需要 Warden 审批</td></tr><tr><td><strong>CC 实现</strong></td><td>通过 CC Memory + Graphify + canonical 源文件编辑实现</td></tr></tbody></table></div>
+<h3 id="能力优先分发流程">能力优先分发流程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#能力优先分发流程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>这是 Meta_Kim 与传统”调 agent X 干 Y”最关键的区别：</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    TASK[任务：需要什么能力？] --> DEFINE[定义所需能力类型]\n    DEFINE --> SEARCH{搜索能力声明}\n\n    SEARCH -->|找到| AGENT[已有 Agent&lt;br/>声明此能力]\n    SEARCH -->|找到| SKILL[已有 Skill&lt;br/>声明此能力]\n    SEARCH -->|找到| MCP[MCP Tool&lt;br/>声明此能力]\n    SEARCH -->|找到| CMD[Command/Script&lt;br/>声明此能力]\n    SEARCH -->|未找到| GAP[能力缺口]\n\n    AGENT --> MATCH{匹配检查}\n    SKILL --> MATCH\n    MCP --> MATCH\n    CMD --> MATCH\n\n    MATCH -->|Runtime 支持| SELECT[选定 owner + weapon]\n    MATCH -->|OS 不支持| FILTER[过滤，继续搜索]\n    MATCH -->|依赖冲突| FILTER\n\n    SELECT --> DISPATCH[分派 workerTaskPacket]\n    GAP --> TYPE_B[Type B 管线&lt;br/>创建/升级 Agent]\n\n    style SEARCH fill:#7c3aed,color:#fff\n    style GAP fill:#dc2626,color:#fff\n    style SELECT fill:#34d399,color:#000\n    style DISPATCH fill:#60a5fa,color:#000&quot;">flowchart TD
+    TASK[任务：需要什么能力？] --> DEFINE[定义所需能力类型]
+    DEFINE --> SEARCH{搜索能力声明}
+
+    SEARCH -->|找到| AGENT[已有 Agent&lt;br/>声明此能力]
+    SEARCH -->|找到| SKILL[已有 Skill&lt;br/>声明此能力]
+    SEARCH -->|找到| MCP[MCP Tool&lt;br/>声明此能力]
+    SEARCH -->|找到| CMD[Command/Script&lt;br/>声明此能力]
+    SEARCH -->|未找到| GAP[能力缺口]
+
+    AGENT --> MATCH{匹配检查}
+    SKILL --> MATCH
+    MCP --> MATCH
+    CMD --> MATCH
+
+    MATCH -->|Runtime 支持| SELECT[选定 owner + weapon]
+    MATCH -->|OS 不支持| FILTER[过滤，继续搜索]
+    MATCH -->|依赖冲突| FILTER
+
+    SELECT --> DISPATCH[分派 workerTaskPacket]
+    GAP --> TYPE_B[Type B 管线&lt;br/>创建/升级 Agent]
+
+    style SEARCH fill:#7c3aed,color:#fff
+    style GAP fill:#dc2626,color:#fff
+    style SELECT fill:#34d399,color:#000
+    style DISPATCH fill:#60a5fa,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p><strong>能力索引查找顺序</strong>：</p>
+<ol>
+<li><code>config/capability-index/</code> — Meta_Kim 内置能力索引</li>
+<li>工具端镜像 — <code>.claude/agents/</code>、<code>.codex/agents/</code> 等</li>
+<li>本地库存 — 项目内 agents、skills、MCP、commands</li>
+<li>全局库存 — <code>~/.claude/</code>、<code>~/.codex/</code> 等用户级能力</li>
+<li>外部发现 — meta-scout 搜索社区 skill、在线注册表</li>
+<li>Fallback — 仅在以上全部为空时触发</li>
+</ol>
+<h3 id="meta_kim-如何构建在-cc-基础能力之上">Meta_Kim 如何构建在 CC 基础能力之上<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta_kim-如何构建在-cc-基础能力之上" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Meta_Kim 不是从零发明的。它的每个治理机制都建立在 CC 的基础概念之上：</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    subgraph mk[\&quot;Meta_Kim 治理层\&quot;]\n        SPINE[8 阶段脊柱]\n        ROLES[9 个元角色]\n        CARDS[发牌机制]\n        PACKETS[协议产物]\n    end\n\n    subgraph cc[\&quot;Claude Code 基础能力\&quot;]\n        SKILL[Skills&lt;br/>meta-theory 本身是一个 CC skill]\n        AGENT[Agents&lt;br/>元角色是 CC agent 定义]\n        MCP[MCP&lt;br/>扩展元角色能力边界]\n        HOOK[Hooks&lt;br/>安全拦截 + 自动化]\n        MEMORY[Memory&lt;br/>跨会话记忆读写]\n        TOOLS[Tools&lt;br/>执行层依赖]\n        CMD[Commands&lt;br/>斜杠命令 + npm scripts]\n        WORKFLOW[Workflows&lt;br/>复杂 run 的并行编排]\n    end\n\n    SPINE --> SKILL\n    SPINE --> AGENT\n    ROLES --> AGENT\n    ROLES --> SKILL\n    CARDS --> HOOK\n    CARDS --> WORKFLOW\n    PACKETS --> MEMORY\n    PACKETS --> TOOLS\n    SPINE --> MCP\n    ROLES --> MCP\n    CARDS --> CMD\n\n    style mk fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff\n    style cc fill:#14532d,stroke:#22c55e,color:#dcfce7&quot;">flowchart LR
+    subgraph mk[&quot;Meta_Kim 治理层&quot;]
+        SPINE[8 阶段脊柱]
+        ROLES[9 个元角色]
+        CARDS[发牌机制]
+        PACKETS[协议产物]
+    end
+
+    subgraph cc[&quot;Claude Code 基础能力&quot;]
+        SKILL[Skills&lt;br/>meta-theory 本身是一个 CC skill]
+        AGENT[Agents&lt;br/>元角色是 CC agent 定义]
+        MCP[MCP&lt;br/>扩展元角色能力边界]
+        HOOK[Hooks&lt;br/>安全拦截 + 自动化]
+        MEMORY[Memory&lt;br/>跨会话记忆读写]
+        TOOLS[Tools&lt;br/>执行层依赖]
+        CMD[Commands&lt;br/>斜杠命令 + npm scripts]
+        WORKFLOW[Workflows&lt;br/>复杂 run 的并行编排]
+    end
+
+    SPINE --> SKILL
+    SPINE --> AGENT
+    ROLES --> AGENT
+    ROLES --> SKILL
+    CARDS --> HOOK
+    CARDS --> WORKFLOW
+    PACKETS --> MEMORY
+    PACKETS --> TOOLS
+    SPINE --> MCP
+    ROLES --> MCP
+    CARDS --> CMD
+
+    style mk fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff
+    style cc fill:#14532d,stroke:#22c55e,color:#dcfce7
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 概念</th><th>依赖的 CC 基础能力</th><th>说明</th></tr></thead><tbody><tr><td>8 阶段脊柱</td><td><strong>Skills</strong>、<strong>Agents</strong>、<strong>Hooks</strong></td><td>meta-theory 是一个 CC skill；脊柱通过 skill 定义触发和路由</td></tr><tr><td>9 个元角色</td><td><strong>Agents</strong></td><td>每个元角色是一个 CC agent 定义（<code>.claude/agents/*.md</code>）</td></tr><tr><td>能力优先分发</td><td><strong>Skills</strong>、<strong>MCP</strong>、<strong>Tools</strong></td><td>通过 CC skill 系统 + MCP 工具清单匹配 provider</td></tr><tr><td>协议产物</td><td><strong>Memory</strong>、<strong>Tools</strong></td><td>packet 通过 CC memory 写回；执行通过 CC tools</td></tr><tr><td>动态发牌</td><td><strong>Hooks</strong>、<strong>Workflows</strong></td><td>门控通过 hooks 实现；fan-out 通过 Workflow 工具</td></tr><tr><td>三层记忆</td><td><strong>Memory</strong>、<strong>MCP</strong>、<strong>Graphify</strong></td><td>分别利用 CC memory、MCP Memory Service、Graphify</td></tr><tr><td>危险操作拦截</td><td><strong>Hooks</strong></td><td>利用 CC hook 事件系统做 PreToolUse 拦截</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>核心洞察</strong>：Meta_Kim 不”替代”任何 CC 能力，而是在 CC 的能力之上<strong>叠加了一层治理逻辑</strong>。CC 的 Skills、Agents、Hooks、MCP、Memory、Workflows 是砖块，Meta_Kim 用这些砖块建造了一座有纪律的建筑。</p>
+</blockquote>
+<h2 id="-为什么重要">💡 为什么重要<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-为什么重要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>解决的问题</strong>：
+<ul>
+<li>“谁来做”不再凭感觉——能力优先分发让匹配有据可查</li>
+<li>“做完了怎么审”不再靠自觉——每个审查维度有明确的 owner</li>
+<li>“agent 边界模糊”有了硬边界——每个元角色明确列出”不管什么”</li>
+</ul>
+</li>
+<li><strong>带来的价值</strong>：
+<ul>
+<li><strong>可替换性</strong>：每个元角色可以被独立替换，不影响整体架构</li>
+<li><strong>可审查性</strong>：每个元角色的输出有明确的协议格式</li>
+<li><strong>可升级性</strong>：发现能力缺口后走 Type B 管线创建/升级 agent</li>
+</ul>
+</li>
+<li><strong>不使用时的影响</strong>：分发乱（谁都能干任何事）、审查漏（少审一个维度没人知道）、边界混（agent 职责重叠）</li>
+</ul>
+<h2 id="-实战示例">🎯 实战示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-实战示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1一次-governed-代码审查的元角色协作">示例 1：一次 governed 代码审查的元角色协作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1一次-governed-代码审查的元角色协作" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：审查一个跨 3 个文件的认证模块重构</p>
+<p><strong>操作</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;帮我审查认证模块重构的代码质量&quot;</span></span></code></pre></figure>
+<p><strong>元角色协作流程</strong>：</p>
+<ol>
+<li><strong>meta-warden</strong> 接收请求，判断需要进入 standard_path</li>
+<li><strong>meta-conductor</strong> 做 Fetch + Thinking：搜索可用审查能力</li>
+<li><strong>meta-artisan</strong> 匹配武器：发现 meta-prism（代码审查）+ ESLint（静态分析）+ git diff（变更范围）</li>
+<li><strong>meta-conductor</strong> 规划并行审查维度：正确性、安全性、性能，生成 <code>dispatchBoard</code></li>
+<li><strong>Execution</strong>：3 个独立 worker 并行审查</li>
+<li><strong>meta-prism</strong> 汇总审查发现，产出 <code>reviewPacket.findings</code></li>
+<li><strong>meta-warden</strong> 做 Meta-Review：审查标准本身是否合适</li>
+<li><strong>meta-chrysalis</strong> 记录本次审查模式，沉淀为 scar 或 skill 升级</li>
+</ol>
+<h3 id="示例-2能力缺口触发-type-b-管线">示例 2：能力缺口触发 Type B 管线<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2能力缺口触发-type-b-管线" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你需要一个专门的数据库迁移审查能力，但现有 agent 都不具备</p>
+<p><strong>操作</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;帮我审查这次数据库迁移的安全性和向后兼容性&quot;</span></span></code></pre></figure>
+<p><strong>流程</strong>：</p>
+<ol>
+<li>Fetch 发现 meta-prism 可以审安全性，但没有专门的”迁移兼容性”审查能力</li>
+<li>记录 <code>capabilityGapPacket</code></li>
+<li>如果这个缺口是项目持续需要的 → Type B 管线：<strong>meta-genesis</strong> 设计新 agent 身份 → <strong>meta-artisan</strong> 匹配工具负载 → <strong>meta-prism</strong> 审查 → <strong>meta-warden</strong> 审批 → 写回</li>
+</ol>
+<h3 id="示例-3meta-sentinel-安全拦截">示例 3：meta-sentinel 安全拦截<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-3meta-sentinel-安全拦截" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：worker 尝试执行 <code>rm -rf</code> 命令</p>
+<p><strong>流程</strong>：</p>
+<ol>
+<li><strong>meta-sentinel</strong> 通过 CC Hooks 的 PreToolUse 事件检测到危险命令</li>
+<li>触发 <strong>Risk 牌</strong>抢占——打断当前执行流程</li>
+<li>向用户确认：“检测到危险命令 <code>rm -rf</code>，是否确认执行？”</li>
+<li>用户确认后继续，或拒绝后回滚</li>
+</ol>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：理解每个元角色的”不管什么”——这比”职责”更重要，能帮你判断什么时候该找谁</li>
+<li><strong>DO</strong>：接受能力优先分发的匹配结果——如果系统选了你不认识的 provider，先验证其能力而不是拒绝</li>
+<li><strong>DON’T</strong>：不要让治理 agent 充当实现 worker——meta-warden 不应该写代码，meta-conductor 不应该做安全审查</li>
+<li><strong>TIP</strong>：如果反复遇到同类能力缺口，考虑走 Type B 管线创建一个持久的 agent 而不是每次都临时凑合</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>把元角色当万能 agent</td><td>让 meta-warden 直接写代码</td><td>元角色只做治理，执行由专业 provider 完成</td></tr><tr><td>跳过能力搜索直接指定 agent</td><td>”我知道 agent X 能干，直接用”</td><td>让 Fetch 先搜索，可能发现更好的 provider</td></tr><tr><td>元角色边界混淆</td><td>让 meta-conductor 同时做安全审查</td><td>每个元角色有明确的”不管什么”边界</td></tr><tr><td>忽视能力缺口</td><td>遇到缺口用临时方案凑合</td><td>记录 <code>capabilityGapPacket</code>，后续走 Type B 管线</td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../meta_kim/00-meta_kim-入门概览" class="internal internal-link alias" data-slug="meta_kim/00-meta_kim-入门概览">入门概览</a> — 9 个元角色在整体架构中的位置</li>
+<li><a href="../meta_kim/01-8-阶段脊柱与路径分类" class="internal internal-link alias" data-slug="meta_kim/01-8-阶段脊柱与路径分类">8 阶段脊柱</a> — 元角色在 8 阶段中的分工</li>
+<li><a href="../meta_kim/03-协议、门与动态发牌" class="internal internal-link alias" data-slug="meta_kim/03-协议、门与动态发牌">协议、门与发牌</a> — 元角色之间如何通过协议交接</li>
+<li><a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">CC Skills</a> — meta-theory skill 的实现载体</li>
+<li><a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">CC Agents</a> — 元角色的运行时实现</li>
+<li><a href="../claude-code/02-mcp-模型上下文协议" class="internal internal-link alias" data-slug="claude-code/02-mcp-模型上下文协议">CC MCP</a> — 扩展元角色能力边界的协议</li>
+<li><a href="../claude-code/06-hooks-钩子系统" class="internal internal-link alias" data-slug="claude-code/06-hooks-钩子系统">CC Hooks</a> — meta-sentinel 安全拦截的实现机制</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><code>canonical/agents/</code> — 9 个元角色的 agent 定义源文件</li>
+<li><code>canonical/skills/meta-theory/SKILL.md</code> — meta-theory skill 完整定义</li>
+<li><code>config/capability-index/</code> — 能力索引，搜索 provider 的事实来源</li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>下一步</strong>：阅读 <a href="../meta_kim/03-协议、门与动态发牌" class="internal internal-link alias" data-slug="meta_kim/03-协议、门与动态发牌">协议、门与动态发牌</a>，理解 Packet、Gate、Card 三种治理工具如何保证执行质量和灵活性。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-15" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#元角色体系与能力优先分发" data-for="元角色体系与能力优先分发">元角色体系与能力优先分发</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#9-个元角色全景" data-for="9-个元角色全景">9 个元角色全景</a></li><li class="depth-2"><a href="#角色逐一详解" data-for="角色逐一详解">角色逐一详解</a></li><li class="depth-2"><a href="#能力优先分发流程" data-for="能力优先分发流程">能力优先分发流程</a></li><li class="depth-2"><a href="#meta_kim-如何构建在-cc-基础能力之上" data-for="meta_kim-如何构建在-cc-基础能力之上">Meta_Kim 如何构建在 CC 基础能力之上</a></li><li class="depth-1"><a href="#-为什么重要" data-for="-为什么重要">💡 为什么重要</a></li><li class="depth-1"><a href="#-实战示例" data-for="-实战示例">🎯 实战示例</a></li><li class="depth-2"><a href="#示例-1一次-governed-代码审查的元角色协作" data-for="示例-1一次-governed-代码审查的元角色协作">示例 1：一次 governed 代码审查的元角色协作</a></li><li class="depth-2"><a href="#示例-2能力缺口触发-type-b-管线" data-for="示例-2能力缺口触发-type-b-管线">示例 2：能力缺口触发 Type B 管线</a></li><li class="depth-2"><a href="#示例-3meta-sentinel-安全拦截" data-for="示例-3meta-sentinel-安全拦截">示例 3：meta-sentinel 安全拦截</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../meta_kim/00-meta_kim-入门概览" class="internal">00-Meta_Kim 入门概览</a></li><li><a href="../meta_kim/01-8-阶段脊柱与路径分类" class="internal">01-8 阶段脊柱与路径分类</a></li><li><a href="../meta_kim/03-协议、门与动态发牌" class="internal">03-协议、门与动态发牌</a></li><li><a href="../meta_kim/04-三层记忆与进化闭环" class="internal">04-三层记忆与进化闭环</a></li><li><a href="../meta_kim/05-场景判断：何时用-meta-theory" class="internal">05-场景判断：何时用 meta-theory</a></li><li><a href="../meta_kim/06-实战案例：一次完整的-8-阶段运行" class="internal">06-实战案例：一次完整的 8 阶段运行</a></li><li><a href="../meta_kim/07-用户上下文agent的创建与演进" class="internal">07-用户上下文Agent的创建与演进</a></li><li><a href="../meta_kim/08-runtime-运行时：跨宿主的执行引擎与适配层" class="internal">08-Runtime 运行时：跨宿主的执行引擎与适配层</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>06-实战案例：一次完整的 8 阶段运行</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="06-实战案例：一次完整的 8 阶段运行"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="06-实战案例：一次完整的 8 阶段运行"/><meta name="twitter:description" content="实战案例：一次完整的 8 阶段运行 📖 概述 本文记录了一次真实的 Meta_Kim governed run（Run ID: meta-run-ac39aed4aaca），从任务输入到产物输出，完整覆盖 8 阶段脊柱。通过对运行产物的逐阶段分析，揭示 Meta_Kim 的治理机制在 Claude Code 基础设施上的底层映射关系。 任务输入：&quot;What should this project become as a product?&quot; 运行方式：npm run meta:theory:demo（等价于 node scripts/run-meta-theory-gove..."/><meta property="og:description" content="实战案例：一次完整的 8 阶段运行 📖 概述 本文记录了一次真实的 Meta_Kim governed run（Run ID: meta-run-ac39aed4aaca），从任务输入到产物输出，完整覆盖 8 阶段脊柱。通过对运行产物的逐阶段分析，揭示 Meta_Kim 的治理机制在 Claude Code 基础设施上的底层映射关系。 任务输入：&quot;What should this project become as a product?&quot; 运行方式：npm run meta:theory:demo（等价于 node scripts/run-meta-theory-gove..."/><meta property="og:image:alt" content="实战案例：一次完整的 8 阶段运行 📖 概述 本文记录了一次真实的 Meta_Kim governed run（Run ID: meta-run-ac39aed4aaca），从任务输入到产物输出，完整覆盖 8 阶段脊柱。通过对运行产物的逐阶段分析，揭示 Meta_Kim 的治理机制在 Claude Code 基础设施上的底层映射关系。 任务输入：&quot;What should this project become as a product?&quot; 运行方式：npm run meta:theory:demo（等价于 node scripts/run-meta-theory-gove..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/meta_kim/06-实战案例：一次完整的-8-阶段运行"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/meta_kim/06-实战案例：一次完整的-8-阶段运行"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="实战案例：一次完整的 8 阶段运行 📖 概述 本文记录了一次真实的 Meta_Kim governed run（Run ID: meta-run-ac39aed4aaca），从任务输入到产物输出，完整覆盖 8 阶段脊柱。通过对运行产物的逐阶段分析，揭示 Meta_Kim 的治理机制在 Claude Code 基础设施上的底层映射关系。 任务输入：&quot;What should this project become as a product?&quot; 运行方式：npm run meta:theory:demo（等价于 node scripts/run-meta-theory-gove..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/meta_kim/06-实战案例：一次完整的-8-阶段运行-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/meta_kim/06-实战案例：一次完整的-8-阶段运行-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/meta_kim/06-实战案例：一次完整的-8-阶段运行-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="meta_kim/06-实战案例：一次完整的-8-阶段运行" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-19" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-19" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../meta_kim/">Meta_Kim</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>06-实战案例：一次完整的 8 阶段运行</a></div></nav><h1 class="article-title">06-实战案例：一次完整的 8 阶段运行</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/meta-kim" class="internal internal-link tag-link">meta-kim</a><span class="note-properties-separator">, </span><a href="../tags/实战案例" class="internal internal-link tag-link">实战案例</a><span class="note-properties-separator">, </span><a href="../tags/8阶段" class="internal internal-link tag-link">8阶段</a><span class="note-properties-separator">, </span><a href="../tags/运行产物" class="internal internal-link tag-link">运行产物</a><span class="note-properties-separator">, </span><a href="../tags/底层映射" class="internal internal-link tag-link">底层映射</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-24T17:12:16.548Z">2026年6月25日</time><span>24分钟阅读</span></p><ul class="tags"><li><a href="../tags/meta-kim" class="internal tag-link">meta-kim</a></li><li><a href="../tags/实战案例" class="internal tag-link">实战案例</a></li><li><a href="../tags/8阶段" class="internal tag-link">8阶段</a></li><li><a href="../tags/运行产物" class="internal tag-link">运行产物</a></li><li><a href="../tags/底层映射" class="internal tag-link">底层映射</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="实战案例一次完整的-8-阶段运行">实战案例：一次完整的 8 阶段运行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实战案例一次完整的-8-阶段运行" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概述">📖 概述<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概述" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>本文记录了一次真实的 Meta_Kim governed run（Run ID: <code>meta-run-ac39aed4aaca</code>），从任务输入到产物输出，完整覆盖 8 阶段脊柱。通过对运行产物的逐阶段分析，揭示 Meta_Kim 的治理机制在 Claude Code 基础设施上的底层映射关系。</p>
+</blockquote>
+<p><strong>任务输入</strong>：<code>&quot;What should this project become as a product?&quot;</code></p>
+<p><strong>运行方式</strong>：<code>npm run meta:theory:demo</code>（等价于 <code>node scripts/run-meta-theory-governed-execution.mjs &quot;What should this project become as a product?&quot;</code>）</p>
+<p><strong>运行时间</strong>：2026-06-20</p>
+<p><strong>最终状态</strong>：<code>partial</code>（部分完成——8 阶段核心已通过，11 阶段业务流中 Review 阻塞、Revision/Feedback 等待外部输入）</p>
+<hr/>
+<h2 id="-运行前触发与分类">🔧 运行前：触发与分类<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-运行前触发与分类" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="入口触发">入口触发<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#入口触发" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当执行 <code>npm run meta:theory:demo</code> 时，入口脚本 <code>scripts/run-meta-theory-governed-execution.mjs</code> 首先调用 <code>classifyMetaTheoryEntry</code> 对任务进行分类：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>分类维度</th><th>值</th><th>含义</th></tr></thead><tbody><tr><td><code>taskClass</code></td><td>A</td><td>需要完整治理的 durable work</td></tr><tr><td><code>requestClass</code></td><td>execute</td><td>执行型任务</td></tr><tr><td><code>governanceFlow</code></td><td>complex_dev</td><td>复杂开发流程</td></tr><tr><td><code>triggerReasons</code></td><td>durable_artifact, verification_required, user_explicit_review</td><td>3 个触发信号</td></tr></tbody></table></div>
+<p><strong>底层映射</strong>：这里的”触发分类”本质上是 <strong>Meta_Kim skill 定义的触发规则</strong>在 Node.js 脚本中的等价实现。在真正的 Claude Code 会话中，这个分类由 meta-theory skill（<code>canonical/skills/meta-theory/SKILL.md</code>）通过 CC 的 <strong>Skill 系统</strong>（<a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">CC Skills</a>）自动完成——skill 定义中包含自然语言触发条件，任何 durable work 都会自动进入治理路线。</p>
+<hr/>
+<h2 id="-阶段-1critical--意图锁定">🔧 阶段 1：Critical — 意图锁定<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-阶段-1critical--意图锁定" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="实际行为">实际行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际行为" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Critical 阶段由 <strong>meta-warden</strong> 执行，产出了 <code>intentPacket</code>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;realIntent&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Run Meta_Kim governed execution for: What should this project become as a product?&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;trueUserIntent&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Produce a strict governed execution artifact for: What should this project become as a product?&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;successCriteria&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;The generated artifact validates through scripts/validate-run-artifact.mjs&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;without claiming release-grade public readiness.&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;nonGoals&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;Do not require private docs, publish, deploy,&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;or claim live runtime public-ready evidence.&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;blockingUnknowns&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: []</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>触发发牌</strong>：</p>
+<ul>
+<li><strong>Clarify 牌</strong>：发现目标或验收边界可能改变路线</li>
+<li><strong>Pause 牌</strong>（第 1 次）：检测到需要消化窗口或决策窗口</li>
+<li><strong>Pause 牌</strong>（第 2 次）：状态摘要后的消化窗口</li>
+</ul>
+<h3 id="文件变更">文件变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件变更" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>路径</th><th>说明</th></tr></thead><tbody><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></td><td><code>intentPacket</code> 嵌入在 JSON artifact 的 <code>intentPacket</code> 字段</td></tr><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.zh-CN.md</code></td><td>报告中的”判定摘要”和”开始原因”部分</td></tr></tbody></table></div>
+<h3 id="cc-底层映射分析">CC 底层映射分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射分析" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 行为</th><th>依赖的 CC 机制</th><th>映射关系</th></tr></thead><tbody><tr><td>intentPacket 结构化输出</td><td>CC <strong>Tools 系统</strong></td><td>工具调用产生结构化 JSON，而不是自由文本</td></tr><tr><td>”非目标”边界定义</td><td>CC <strong>Agent 系统</strong></td><td>meta-warden agent 的 prompt 定义中包含”必须列出 non-goals”的指令</td></tr><tr><td>追问澄清机制</td><td>CC <strong>对话能力</strong> + <strong>AskUserQuestion</strong></td><td>如果 intent 不明确，通过 CC 原生选择面追问；本次 demo 是 CLI 模式，跳过交互</td></tr><tr><td>意图作为后续阶段输入</td><td>CC <strong>Memory 系统</strong></td><td>intentPacket 写入 run artifact JSON，后续阶段读取——这相当于 CC 的 memory 读写，但 Meta_Kim 用的是<strong>结构化文件而非 markdown memory</strong></td></tr></tbody></table></div>
+<p><strong>关键洞察</strong>：Critical 阶段本质上把 CC 的”你问我答”变成了”先确认我们到底要什么，再动手”。在真正的 CC 会话中，如果意图模糊，这里会触发 CC 原生 <code>AskUserQuestion</code> 弹窗（<a href="../claude-code/06-hooks-钩子系统" class="internal internal-link alias" data-slug="claude-code/06-hooks-钩子系统">CC Hooks</a> 中的 <code>UserPromptSubmit</code> hook 也会在这一步注入上下文）。</p>
+<hr/>
+<h2 id="-阶段-2fetch--证据收集与能力发现">🔧 阶段 2：Fetch — 证据收集与能力发现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-阶段-2fetch--证据收集与能力发现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="实际行为-1">实际行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际行为-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Fetch 阶段由 <strong>meta-warden</strong>（demo 模式）或 <strong>meta-conductor</strong>（正式模式）执行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;projectsChecked&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;projectRef&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-kim-governed-execution-meta-run-ac39aed4aaca&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;checkMode&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;current_project&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;capabilityMatches&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;capabilityGaps&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;graphSources&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;sourceType&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;graph&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;sourceRef&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;graphify-out&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;projectLocalSources&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;sourceType&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;contract&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;sourceRef&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;config/contracts/workflow-contract.json&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">},</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;sourceType&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;runner&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;sourceRef&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;scripts/run-meta-theory-governed-execution.mjs&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>能力发现结果</strong>：</p>
+<ul>
+<li>检查了 <strong>12 类能力</strong>：skills、hooks、runtimeTools、agents、MCP、commands、prompts/rules、memory、graph、retrieval、dependencies、worker tasks</li>
+<li>来源 <strong>49 组</strong>：包括 canonical capability index、项目 runtime hook 库存、runtime tool provider 库存</li>
+<li>发现 <strong>496 条能力记录</strong>（输出到 <code>capability-inventory.json</code>，833 KB）</li>
+<li>能力缺口：<strong>0</strong></li>
+</ul>
+<p><strong>触发发牌</strong>：</p>
+<ul>
+<li><strong>Risk 牌</strong>：发现运行时或外部平台风险可能抢占执行</li>
+</ul>
+<h3 id="文件变更-1">文件变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件变更-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>路径</th><th>大小</th><th>说明</th></tr></thead><tbody><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/capability-inventory.json</code></td><td>833 KB</td><td>完整能力清单（496 条记录）</td></tr><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></td><td>3.5 MB</td><td><code>fetchPacket</code> + <code>capabilityInventory</code> 嵌入其中</td></tr><tr><td>读取</td><td><code>config/contracts/workflow-contract.json</code></td><td>—</td><td>读取 workflow 协议定义</td></tr><tr><td>读取</td><td><code>scripts/run-meta-theory-governed-execution.mjs</code></td><td>—</td><td>读取执行脚本自身</td></tr><tr><td>读取</td><td><code>graphify-out/</code></td><td>—</td><td>检查知识图谱是否存在</td></tr></tbody></table></div>
+<h3 id="cc-底层映射分析-1">CC 底层映射分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射分析-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 行为</th><th>依赖的 CC 机制</th><th>映射关系</th></tr></thead><tbody><tr><td>能力搜索（12 类 × 49 来源）</td><td>CC <strong>Skills 系统</strong> + <strong>MCP</strong> + <strong>Tools</strong></td><td>在 CC 会话中，Fetch 通过 <code>Skill()</code> 调用 <code>findskill</code>、通过 <code>WebSearch</code> 搜索在线能力、通过 <code>Glob</code>/<code>Grep</code> 扫描本地文件、通过 MCP 工具查询外部服务</td></tr><tr><td>capabilityInventory（496 条）</td><td>CC <strong>Tools</strong>（文件读写）</td><td>能力清单序列化到 JSON 文件——CC 中的等价行为是 agent 通过 <code>Read</code>/<code>Write</code> 工具维护项目上下文</td></tr><tr><td>graphSources 检查</td><td>CC <strong>Graphify</strong></td><td>检查 <code>graphify-out/</code> 是否存在图谱——在 CC 中通过 git hooks 自动维护</td></tr><tr><td>能力缺口判定</td><td>CC <strong>Agent 推理</strong></td><td>”没有缺口”是一个判断结果，来自 agent 对能力清单的比对</td></tr></tbody></table></div>
+<p><strong>关键洞察</strong>：Fetch 是 Meta_Kim “能力优先”理念的核心体现。在 CC 中，Fetch 的行为被分解为多个 CC 工具调用——Glob 扫文件、Grep 搜代码、MCP 查外部、WebSearch 搜社区。Meta_Kim 把这些分散的”搜索”统一成了一次<strong>结构化能力发现</strong>。</p>
+<hr/>
+<h2 id="-阶段-3thinking--路线规划与任务分发">🔧 阶段 3：Thinking — 路线规划与任务分发<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-阶段-3thinking--路线规划与任务分发" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="实际行为-2">实际行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际行为-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Thinking 阶段由 <strong>meta-conductor</strong> 执行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;designFrame&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;route_driven_dispatch&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;owner&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-conductor&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;weapon&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;workerTaskPackets&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;reviewOwner&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-prism&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;verificationOwner&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-prism&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;mergeOwner&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-conductor&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;workerTaskPackets&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;taskId&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-run-ac39aed4aaca-route-execution&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;owner&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-warden&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;role&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;warden&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;parallelGroups&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;route-execution&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>关键决策</strong>：</p>
+<ul>
+<li>路线：<strong>route_driven_dispatch</strong>（路线驱动分发）</li>
+<li>只有 1 个 worker task——因为 demo 问题相对简单，不需要并行 fan-out</li>
+<li>Worker 是 meta-warden，由 meta-conductor 合成</li>
+</ul>
+<p><strong>触发发牌</strong>：</p>
+<ul>
+<li><strong>Options 牌</strong>：发现存在多个可行路径，需要选择</li>
+<li><strong>Execute 牌</strong>：发现负责人、路线和验证条件已就绪</li>
+</ul>
+<h3 id="文件变更-2">文件变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件变更-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>路径</th><th>说明</th></tr></thead><tbody><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></td><td><code>thinkingPacket</code>、<code>dispatchBoard</code>、<code>workerTaskPackets</code>、<code>orchestrationTaskBoardPacket</code> 等 10+ 个 packet 结构</td></tr><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.zh-CN.md</code></td><td>报告中的”执行编排明细”和”下一步交给谁”部分</td></tr></tbody></table></div>
+<h3 id="cc-底层映射分析-2">CC 底层映射分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射分析-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 行为</th><th>依赖的 CC 机制</th><th>映射关系</th></tr></thead><tbody><tr><td>dispatchBoard（分派看板）</td><td>CC <strong>Plan Mode</strong>（<code>EnterPlanMode</code>）</td><td>Thinking 的规划行为在 CC 中可以用 Plan Mode 的结构化规划来承载——先计划、再执行</td></tr><tr><td>workerTaskPackets（任务包）</td><td>CC <strong>Workflows</strong>（<code>Workflow()</code> 工具）</td><td>当有 2+ 并行 worker 时，Meta_Kim 通过 <code>agent-teams-playbook</code> + CC Workflow 工具做 fan-out 编排。本次只有 1 个 worker，所以 <code>agentTeamsPlaybookPacket.status = not_required</code></td></tr><tr><td>route_driven_dispatch</td><td>CC <strong>Agent 系统</strong></td><td>Thinking 决定”谁干什么”——在 CC 中，这个决策通过 Agent 工具的分发来实现</td></tr><tr><td>方案对比（2+ 路径）</td><td>CC <strong>对话能力</strong> + <strong>AskUserQuestion</strong></td><td>当有多个可行方案时，通过 CC 原生选择面让用户选</td></tr></tbody></table></div>
+<p><strong>LangGraph 控制图</strong>：Thinking 阶段还产出了一个 <strong>9 节点、9 边、2 条件边、9 checkpoint</strong> 的 LangGraph-style 控制图。这不是真的引入了 LangGraph 依赖，而是用 LangGraph 的<strong>概念模型</strong>来描述 Meta_Kim 的状态机——每个阶段是一个节点，门控是条件边，packet 是状态。</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    C[Critical] -->|intent locked| F[Fetch]\n    F -->|capability found| T[Thinking]\n    T -->|route selected| E[Execution]\n    E -->|worker done| R[Review]\n    R -->|findings checked| MR[Meta-Review]\n    MR -->|standard verified| V[Verification]\n    V -->|evidence pass| EV[Evolution]\n\n    R -.->|conditional: findings > 0| E\n    V -.->|conditional: verification fail| E\n\n    style C fill:#fbbf24,color:#000\n    style F fill:#34d399,color:#000\n    style T fill:#60a5fa,color:#000\n    style E fill:#f87171,color:#fff\n    style R fill:#a78bfa,color:#fff\n    style MR fill:#a78bfa,color:#fff\n    style V fill:#34d399,color:#000\n    style EV fill:#fbbf24,color:#000&quot;">flowchart LR
+    C[Critical] -->|intent locked| F[Fetch]
+    F -->|capability found| T[Thinking]
+    T -->|route selected| E[Execution]
+    E -->|worker done| R[Review]
+    R -->|findings checked| MR[Meta-Review]
+    MR -->|standard verified| V[Verification]
+    V -->|evidence pass| EV[Evolution]
+
+    R -.->|conditional: findings > 0| E
+    V -.->|conditional: verification fail| E
+
+    style C fill:#fbbf24,color:#000
+    style F fill:#34d399,color:#000
+    style T fill:#60a5fa,color:#000
+    style E fill:#f87171,color:#fff
+    style R fill:#a78bfa,color:#fff
+    style MR fill:#a78bfa,color:#fff
+    style V fill:#34d399,color:#000
+    style EV fill:#fbbf24,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<hr/>
+<h2 id="-阶段-4execution--分派执行">🔧 阶段 4：Execution — 分派执行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-阶段-4execution--分派执行" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="实际行为-3">实际行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际行为-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Execution 阶段由 <strong>meta-conductor</strong> 编排：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;mainThreadRole&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;scope_delegate_review_synthesize&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;executionOwnerMode&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;workerTaskPackets&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;workerTaskPacketCount&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;workerExecutionEvidence&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;taskId&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-run-ac39aed4aaca-route-execution&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;owner&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;meta-warden&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;executed&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;externalAgentSpawned&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">false</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>mainThreadRole 解析</strong>：<code>scope_delegate_review_synthesize</code> 表示主线程的职责是<strong>定范围 → 分发 → 审查 → 合成</strong>，而不是自己执行所有工作。这是 Meta_Kim 的核心纪律——治理 agent 不充当实现 worker。</p>
+<p><strong>触发发牌</strong>：</p>
+<ul>
+<li><strong>Execute 牌</strong>：负责人、路线和验证条件已就绪</li>
+<li><strong>Fix 牌</strong>：审查或验证发现可修复点</li>
+</ul>
+<h3 id="文件变更-3">文件变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件变更-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>路径</th><th>说明</th></tr></thead><tbody><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></td><td><code>executionResult</code>、<code>workerResultPackets</code>、<code>workerExecutionEvidence</code></td></tr><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.zh-CN.md</code></td><td>报告中的”执行编排明细”表</td></tr></tbody></table></div>
+<h3 id="cc-底层映射分析-3">CC 底层映射分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射分析-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 行为</th><th>依赖的 CC 机制</th><th>映射关系</th></tr></thead><tbody><tr><td>workerTaskPacket 分发</td><td>CC <strong>Agent 工具</strong>（<code>Agent()</code> / subagent spawn）</td><td>每个 worker 在 CC 中对应一个 <code>Agent()</code> 调用或 subagent 实例。本次是 CLI demo，实际用了 Node.js 函数调用</td></tr><tr><td>并行执行</td><td>CC <strong>Workflows</strong>（<code>Workflow()</code> / <code>pipeline()</code>）</td><td>当 workerTasks 有 2+ 独立 lane 时，通过 CC Workflow 的 <code>pipeline()</code> 或 <code>parallel()</code> 并行执行</td></tr><tr><td>worker 边界隔离</td><td>CC <strong>Agent 定义</strong>（<code>.claude/agents/*.md</code>）</td><td>每个 worker 的能力边界由其 agent 定义中的”不管什么”列表约束</td></tr><tr><td>mergeOwner 合成</td><td>CC <strong>主线程 Agent</strong></td><td>meta-conductor 作为 mergeOwner，等所有 worker 完成后合并结果——等同于 CC 主 agent 调用多个子 agent 后汇总</td></tr><tr><td>executionEvidence</td><td>CC <strong>Memory</strong> + <strong>文件系统</strong></td><td>执行证据写入 JSON artifact 和 markdown 报告——CC 中还会写入 <code>~/.claude/projects/*/memory/</code></td></tr></tbody></table></div>
+<hr/>
+<h2 id="-阶段-5review--质量审查">🔧 阶段 5：Review — 质量审查<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-阶段-5review--质量审查" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="实际行为-4">实际行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际行为-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Review 阶段由 <strong>meta-prism</strong> 执行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;ownerCoverage&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;protocolCompliance&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;qualityGate&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;findings&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;severity&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;medium&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;description&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;上游 Critical/Fetch/Thinking 和结果质量检查已完成&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>6 项检查</strong>：</p>
+<ol>
+<li>Critical 锁定了正确的用户结果和成功标准</li>
+<li>Fetch 证据变更或证明路线合理</li>
+<li>Thinking 选定了 owner + weapon + dependency + runtime + OS + verification</li>
+<li>计划文件修改已读取目标文件并有 <code>fileChangeFactCard</code></li>
+<li>Execution 证据可重现</li>
+<li>无基础能力或 runtime-native 能力被删除/降级</li>
+</ol>
+<p><strong>触发发牌</strong>：无（Review 阶段不发牌——发牌在 Execution 完成后已经触发 Fix 牌）</p>
+<h3 id="文件变更-4">文件变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件变更-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>路径</th><th>说明</th></tr></thead><tbody><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></td><td><code>reviewPacket</code>、<code>reviewPacket.findings</code></td></tr></tbody></table></div>
+<h3 id="cc-底层映射分析-4">CC 底层映射分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射分析-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 行为</th><th>依赖的 CC 机制</th><th>映射关系</th></tr></thead><tbody><tr><td>6 项上游检查</td><td>CC <strong>Agent 推理</strong></td><td>meta-prism 通过其 agent 定义中的审查标准逐项检查——本质上是一个有特定 prompt 的 CC agent</td></tr><tr><td>findings 结构化输出</td><td>CC <strong>Tools</strong>（JSON schema）</td><td>findings 必须符合结构化格式——在 CC 中通过 tool 的 <code>input_schema</code> 强制</td></tr><tr><td>Adversarial verify（本次未触发）</td><td>CC <strong>多 Agent 并行</strong></td><td>如果是 regulated_path，会 spawn 3 个独立审查者并行证伪——在 CC 中用 3 个 <code>Agent()</code> 调用实现</td></tr><tr><td>qualityGate 判定</td><td>CC <strong>Hooks</strong></td><td>qualityGate 的结果可以触发 hook——如果 <code>qualityGate = fail</code>，Stop hook 会阻止会话结束</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-阶段-6meta-review--审查审查标准">🔧 阶段 6：Meta-Review — 审查”审查标准”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-阶段-6meta-review--审查审查标准" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="实际行为-5">实际行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际行为-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Meta-Review 由 <strong>meta-warden</strong> 执行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;reviewStandard&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;checked&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;biasCheck&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;passed&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;publicReadyGateCheck&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;passed&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p>确认审查标准本身没偏、没漏、没松。这一步是 Meta_Kim 区别于传统代码审查的关键——不只看代码质量，还看<strong>审查标准的质量</strong>。</p>
+<h3 id="文件变更-5">文件变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件变更-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>路径</th><th>说明</th></tr></thead><tbody><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></td><td><code>metaReviewPacket</code></td></tr></tbody></table></div>
+<h3 id="cc-底层映射分析-5">CC 底层映射分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射分析-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Meta-Review 在 CC 中没有直接的对应物——这恰恰是 Meta_Kim 的价值所在。传统的 CC 代码审查（通过 <code>/review</code> 或 agent）只做一次审查，不会再去审查”审查标准本身是否合适”。Meta_Kim 的 Meta-Review 实际上是用 <strong>第二个 agent（meta-warden）审查第一个 agent（meta-prism）的工作质量</strong>——在 CC 中体现为串行的两轮 Agent 调用。</p>
+<hr/>
+<h2 id="-阶段-7verification--证据验证">🔧 阶段 7：Verification — 证据验证<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-阶段-7verification--证据验证" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="实际行为-6">实际行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际行为-6" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Verification 阶段产出了四端 smoke 证据：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;evidence&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;runtime&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;claude&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,   </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;smoke_pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;failureClass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;projection_only&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">},</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;runtime&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;codex&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,    </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;smoke_pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;failureClass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;projection_only&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">},</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;runtime&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;cursor&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,   </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;smoke_pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;failureClass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;projection_only&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">},</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    {</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;runtime&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;openclaw&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;smoke_pass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;failureClass&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;projection_only&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;fuseMode&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;public_ready_and_release_gate&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>证据分层</strong>：</p>
+<ul>
+<li>四端都是 <code>smoke_pass</code>，不是 <code>live_pass</code></li>
+<li><code>failureClass = projection_only</code>：说明这只是投影 smoke 验证，不是真实的 runtime live 验证</li>
+<li><code>strictReleasePass = false</code>：不能用于发布级声明</li>
+</ul>
+<p><strong>触发发牌</strong>：</p>
+<ul>
+<li><strong>Verify 牌</strong>：发现需要新证据才能声称完成</li>
+</ul>
+<h3 id="文件变更-6">文件变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件变更-6" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>路径</th><th>说明</th></tr></thead><tbody><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></td><td><code>verificationResult</code>、<code>runtimeProjectionEvidence</code>、<code>runtimeEvidencePacket</code></td></tr><tr><td>执行</td><td><code>node scripts/eval-meta-agents.mjs --runtime=claude/codex/cursor/openclaw</code></td><td>四次 smoke 测试</td></tr></tbody></table></div>
+<h3 id="cc-底层映射分析-6">CC 底层映射分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射分析-6" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 行为</th><th>依赖的 CC 机制</th><th>映射关系</th></tr></thead><tbody><tr><td>Smoke 验证</td><td>CC <strong>Bash</strong> + <strong>脚本执行</strong></td><td>通过 <code>Bash</code> 工具执行 <code>node scripts/eval-meta-agents.mjs</code></td></tr><tr><td>Live 验证（本次未触发）</td><td>CC <strong>Bash</strong> + <strong>Agent</strong></td><td>在 CC 中需要真实运行测试命令、检查日志、确认产物</td></tr><tr><td>证据分层（smoke vs live）</td><td>CC <strong>Memory</strong></td><td>smoke/live 的标记需要持久化——在 CC 中写入 memory 文件</td></tr><tr><td>fuseMode 门控</td><td>CC <strong>Hooks</strong></td><td><code>public_ready_and_release_gate</code> 对应 CC 的 Stop hook——会话结束前检查证据是否充分</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-阶段-8evolution--经验写回">🔧 阶段 8：Evolution — 经验写回<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-阶段-8evolution--经验写回" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="实际行为-7">实际行为<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际行为-7" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;decision&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;none-with-reason&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;none-with-reason&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;reason&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;No long-term candidate was produced by this governed run.&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;candidateCount&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;canonicalWrites&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p>本次 run 没有产生需要写回的长期候选——demo 运行没有发现新的能力缺口、没有新的可复用模式、没有需要记录的失败伤疤。Evolution 阶段记录了 <code>none-with-reason</code>，而不是”偷偷跳过”。</p>
+<p><strong>触发发牌</strong>：</p>
+<ul>
+<li><strong>Nudge 牌</strong>：用户需要一个低成本的下一步</li>
+</ul>
+<h3 id="文件变更-7">文件变更<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件变更-7" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>路径</th><th>说明</th></tr></thead><tbody><tr><td>写入</td><td><code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></td><td><code>evolutionWritebackDecision</code>、<code>evolutionWritebackPacket</code>、<code>wardenWritebackFlow</code></td></tr></tbody></table></div>
+<h3 id="cc-底层映射分析-7">CC 底层映射分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射分析-7" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 行为</th><th>依赖的 CC 机制</th><th>映射关系</th></tr></thead><tbody><tr><td>writebackDecision</td><td>CC <strong>Memory 系统</strong></td><td><code>none-with-reason</code> 写入 memory——下次 run 可以读取这个记录</td></tr><tr><td>canonical writes（本次 0）</td><td>CC <strong>文件编辑</strong></td><td>如果有写回，会通过 <code>Edit</code>/<code>Write</code> 工具修改 <code>canonical/agents/*.md</code> 等源文件</td></tr><tr><td>Scar 记录（本次无）</td><td>CC <strong>Memory</strong> + <strong>Graphify</strong></td><td>失败模式写入 memory 的 scar 文件，并通过 Graphify 建立关联</td></tr><tr><td>compaction 包</td><td>CC <strong>Hooks</strong>（Stop hook）</td><td>会话结束时，Stop hook 自动写入 compaction 包（<code>.meta-kim/state/default/compaction/latest.json</code>），记录当前阶段和未完成事项</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-全链路总结">📊 全链路总结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-全链路总结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="产物全景图">产物全景图<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#产物全景图" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TB\n    subgraph input[\&quot;输入\&quot;]\n        TASK[\&quot;'What should this project become as a product?'\&quot;]\n    end\n\n    subgraph run[\&quot;npm run meta:theory:demo\&quot;]\n        S1[\&quot;Critical&lt;br/>intentPacket\&quot;]\n        S2[\&quot;Fetch&lt;br/>capabilityInventory&lt;br/>(496 records, 833 KB)\&quot;]\n        S3[\&quot;Thinking&lt;br/>dispatchBoard&lt;br/>(1 worker, 9-node LangGraph)\&quot;]\n        S4[\&quot;Execution&lt;br/>workerResult\&quot;]\n        S5[\&quot;Review&lt;br/>1 finding (medium)\&quot;]\n        S6[\&quot;Meta-Review&lt;br/>standard checked\&quot;]\n        S7[\&quot;Verification&lt;br/>4 × smoke_pass\&quot;]\n        S8[\&quot;Evolution&lt;br/>none-with-reason\&quot;]\n    end\n\n    subgraph artifacts[\&quot;运行产物\&quot;]\n        JSON[\&quot;.meta-kim/state/default/&lt;br/>governed-executions/&lt;br/>meta-run-ac39aed4aaca.json&lt;br/>(3.5 MB)\&quot;]\n        MD[\&quot;.meta-kim/state/default/&lt;br/>governed-executions/&lt;br/>meta-run-ac39aed4aaca.zh-CN.md&lt;br/>(25 KB)\&quot;]\n        CAP[\&quot;.meta-kim/state/default/&lt;br/>governed-executions/&lt;br/>capability-inventory.json&lt;br/>(833 KB)\&quot;]\n        LATEST[\&quot;.meta-kim/state/default/&lt;br/>governed-executions/&lt;br/>latest.json&lt;br/>(pointer)\&quot;]\n    end\n\n    TASK --> S1\n    S1 --> S2\n    S2 --> S3\n    S3 --> S4\n    S4 --> S5\n    S5 --> S6\n    S6 --> S7\n    S7 --> S8\n    S8 --> JSON\n    S8 --> MD\n    S2 --> CAP\n    S8 --> LATEST\n\n    style input fill:#fbbf24,color:#000\n    style run fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff\n    style artifacts fill:#14532d,stroke:#22c55e,color:#dcfce7&quot;">flowchart TB
+    subgraph input[&quot;输入&quot;]
+        TASK[&quot;'What should this project become as a product?'&quot;]
+    end
+
+    subgraph run[&quot;npm run meta:theory:demo&quot;]
+        S1[&quot;Critical&lt;br/>intentPacket&quot;]
+        S2[&quot;Fetch&lt;br/>capabilityInventory&lt;br/>(496 records, 833 KB)&quot;]
+        S3[&quot;Thinking&lt;br/>dispatchBoard&lt;br/>(1 worker, 9-node LangGraph)&quot;]
+        S4[&quot;Execution&lt;br/>workerResult&quot;]
+        S5[&quot;Review&lt;br/>1 finding (medium)&quot;]
+        S6[&quot;Meta-Review&lt;br/>standard checked&quot;]
+        S7[&quot;Verification&lt;br/>4 × smoke_pass&quot;]
+        S8[&quot;Evolution&lt;br/>none-with-reason&quot;]
+    end
+
+    subgraph artifacts[&quot;运行产物&quot;]
+        JSON[&quot;.meta-kim/state/default/&lt;br/>governed-executions/&lt;br/>meta-run-ac39aed4aaca.json&lt;br/>(3.5 MB)&quot;]
+        MD[&quot;.meta-kim/state/default/&lt;br/>governed-executions/&lt;br/>meta-run-ac39aed4aaca.zh-CN.md&lt;br/>(25 KB)&quot;]
+        CAP[&quot;.meta-kim/state/default/&lt;br/>governed-executions/&lt;br/>capability-inventory.json&lt;br/>(833 KB)&quot;]
+        LATEST[&quot;.meta-kim/state/default/&lt;br/>governed-executions/&lt;br/>latest.json&lt;br/>(pointer)&quot;]
+    end
+
+    TASK --> S1
+    S1 --> S2
+    S2 --> S3
+    S3 --> S4
+    S4 --> S5
+    S5 --> S6
+    S6 --> S7
+    S7 --> S8
+    S8 --> JSON
+    S8 --> MD
+    S2 --> CAP
+    S8 --> LATEST
+
+    style input fill:#fbbf24,color:#000
+    style run fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff
+    style artifacts fill:#14532d,stroke:#22c55e,color:#dcfce7
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="发牌事件时间线">发牌事件时间线<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#发牌事件时间线" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    CRITICAL[Critical] -->|Clarify 牌&lt;br/>Pause 牌×2| FETCH[Fetch]\n    FETCH -->|Risk 牌| THINKING[Thinking]\n    THINKING -->|Options 牌&lt;br/>Execute 牌| EXECUTION[Execution]\n    EXECUTION -->|Execute 牌&lt;br/>Fix 牌| VERIFY[Verification]\n    VERIFY -->|Verify 牌| EVOLUTION[Evolution]\n    EVOLUTION -->|Nudge 牌| END[run 结束]\n\n    style CRITICAL fill:#fbbf24,color:#000\n    style FETCH fill:#34d399,color:#000\n    style THINKING fill:#60a5fa,color:#000\n    style EXECUTION fill:#f87171,color:#fff\n    style VERIFY fill:#34d399,color:#000\n    style EVOLUTION fill:#fbbf24,color:#000&quot;">flowchart TD
+    CRITICAL[Critical] -->|Clarify 牌&lt;br/>Pause 牌×2| FETCH[Fetch]
+    FETCH -->|Risk 牌| THINKING[Thinking]
+    THINKING -->|Options 牌&lt;br/>Execute 牌| EXECUTION[Execution]
+    EXECUTION -->|Execute 牌&lt;br/>Fix 牌| VERIFY[Verification]
+    VERIFY -->|Verify 牌| EVOLUTION[Evolution]
+    EVOLUTION -->|Nudge 牌| END[run 结束]
+
+    style CRITICAL fill:#fbbf24,color:#000
+    style FETCH fill:#34d399,color:#000
+    style THINKING fill:#60a5fa,color:#000
+    style EXECUTION fill:#f87171,color:#fff
+    style VERIFY fill:#34d399,color:#000
+    style EVOLUTION fill:#fbbf24,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p><strong>发牌统计</strong>：9 次发牌事件，涉及 8 类牌（Clarify、Options、Risk、Execute、Verify、Fix、Pause、Nudge），Shrink scope 和 Rollback 被精准抑制。</p>
+<h3 id="11-阶段业务工作流">11 阶段业务工作流<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#11-阶段业务工作流" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>阶段</th><th>状态</th><th>评分</th><th>说明</th></tr></thead><tbody><tr><td>Direction</td><td>✅ done</td><td>100</td><td>方向已明确</td></tr><tr><td>Planning</td><td>✅ done</td><td>100</td><td>规划已完成</td></tr><tr><td>Execution</td><td>✅ done</td><td>100</td><td>执行已完成</td></tr><tr><td>Review</td><td>🚫 blocked</td><td>33</td><td>证据不足，需补</td></tr><tr><td>Meta-review</td><td>✅ done</td><td>67</td><td>弱触发通过</td></tr><tr><td>Revision</td><td>⏳ pending</td><td>67</td><td>等待上游</td></tr><tr><td>Verify</td><td>✅ done</td><td>100</td><td>验证已通过</td></tr><tr><td>Summary</td><td>✅ done</td><td>67</td><td>摘要已生成</td></tr><tr><td>Feedback</td><td>⏳ pending</td><td>100</td><td><strong>等待用户验收</strong></td></tr><tr><td>Evolve</td><td>⏭️ skipped</td><td>100</td><td>无可写回候选</td></tr><tr><td>Mirror</td><td>✅ done</td><td>100</td><td>四端镜像已同步</td></tr></tbody></table></div>
+<h3 id="cc-底层映射总表">CC 底层映射总表<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-底层映射总表" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Meta_Kim 阶段</th><th>核心 CC 机制</th><th>具体映射</th></tr></thead><tbody><tr><td><strong>入口分类</strong></td><td>Skills（<a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">CC Skills</a>）</td><td>meta-theory skill 通过自然语言触发条件自动判断是否进入治理</td></tr><tr><td><strong>Critical</strong></td><td>Agents + Tools + AskUserQuestion（<a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">CC Agents</a>）</td><td>meta-warden agent 驱动、结构化 JSON 输出、原生选择面追问</td></tr><tr><td><strong>Fetch</strong></td><td>Skills + MCP + WebSearch + Glob/Grep（<a href="../claude-code/02-mcp-模型上下文协议" class="internal internal-link alias" data-slug="claude-code/02-mcp-模型上下文协议">CC MCP</a>）</td><td>findskill 搜索、MCP 工具发现、WebSearch 在线搜索、本地文件扫描</td></tr><tr><td><strong>Thinking</strong></td><td>Plan Mode + Workflows（<a href="../claude-code/10-plan-mode-规划模式" class="internal internal-link alias" data-slug="claude-code/10-plan-mode-规划模式">CC Plan Mode</a>、<a href="../claude-code/08-workflows-工作流编排" class="internal internal-link alias" data-slug="claude-code/08-workflows-工作流编排">CC Workflows</a>）</td><td>结构化规划、dispatchBoard 任务分解、2+ 路径方案对比</td></tr><tr><td><strong>Execution</strong></td><td>Agent + Workflows（<a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">CC Agents</a>）</td><td><code>Agent()</code> 分发 worker、<code>Workflow()</code> fan-out 编排、subagent 边界隔离</td></tr><tr><td><strong>Review</strong></td><td>Agents + Hooks（<a href="../claude-code/06-hooks-钩子系统" class="internal internal-link alias" data-slug="claude-code/06-hooks-钩子系统">CC Hooks</a>）</td><td>meta-prism agent 审查、regulated_path 下 3 个并行 skeptics</td></tr><tr><td><strong>Meta-Review</strong></td><td>Agents</td><td>meta-warden 审查 meta-prism——CC 中没有等价物，这是 Meta_Kim 的独特价值</td></tr><tr><td><strong>Verification</strong></td><td>Bash + Tools + Hooks（<a href="../claude-code/03-tools-工具系统" class="internal internal-link alias" data-slug="claude-code/03-tools-工具系统">CC Tools</a>）</td><td>运行测试命令、检查日志产物、Stop hook 验证门控</td></tr><tr><td><strong>Evolution</strong></td><td>Memory + Graphify + Hooks（<a href="../claude-code/05-memory-记忆系统" class="internal internal-link alias" data-slug="claude-code/05-memory-记忆系统">CC Memory</a>）</td><td>writebackDecision 写入 memory、Scar 记录、Stop hook compaction</td></tr></tbody></table></div>
+<h3 id="能力调用真实性">能力调用真实性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#能力调用真实性" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>这是 Meta_Kim 的一个重要概念——不是所有”选中了”的能力都被真正调用了：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>能力家族</th><th>状态</th><th>说明</th></tr></thead><tbody><tr><td>worker_task</td><td><strong>invoked</strong></td><td>1 个 worker 真正执行了</td></tr><tr><td>prompt_rule</td><td><strong>applied</strong></td><td>治理合同和 abstract prompt capability 已生效</td></tr><tr><td>hook</td><td>selected_not_invoked</td><td>Hook 文件被匹配但不等于 hook 事件触发</td></tr><tr><td>skill</td><td>not_required</td><td>Skill 被选入 worker loadout 但没有独立的 skill runtime 调用证据</td></tr><tr><td>MCP</td><td>not_required</td><td>MCP provider 绑定不等于 MCP 调用</td></tr><tr><td>agent_subagent</td><td>not_required</td><td>没有 runtime Agent/subagent 工具调用证据——这是 CLI demo，不通过 CC Agent 工具</td></tr><tr><td>command_script</td><td>not_required</td><td>命令被选入 worker loadout 但没有新鲜命令输出</td></tr><tr><td>agent_teams_playbook</td><td>not_required</td><td>只有 1 个 worker，不需要 fan-out</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>为什么这个重要？</strong> 在真正的 CC 会话中，<code>agent_subagent</code> 会是 <code>invoked</code> 状态——因为 worker 通过 <code>Agent()</code> 工具调用。CLI demo 的区别恰好说明了 Meta_Kim 的分层架构：<strong>治理逻辑层不依赖特定的执行载体</strong>。</p>
+</blockquote>
+<hr/>
+<h2 id="-从这个案例中学到什么">🎯 从这个案例中学到什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-从这个案例中学到什么" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="1-8-阶段不是都要跑一遍">1. 8 阶段不是”都要跑一遍”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-8-阶段不是都要跑一遍" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>本次 run 中：</p>
+<ul>
+<li>Critical 产出意图 → 只有 1 个 worker → 不需要 agent-teams-playbook（<code>not_required</code>）</li>
+<li>Evolution 无可写回 → <code>none-with-reason</code>（不是”跳过”，是”有理由的不需要”）</li>
+<li>11 阶段中 Feedback 在等用户输入、Evolve 被跳过——<strong>真实的治理是有条件的推进，不是机械走过场</strong></li>
+</ul>
+<h3 id="2-协议packet是真正的运行产物">2. 协议（Packet）是真正的”运行产物”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-协议packet是真正的运行产物" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>所有 8 阶段的输出都物化为结构化的 packet，嵌入在 3.5 MB 的 JSON artifact 中。这份 artifact 包含了：</p>
+<ul>
+<li>50+ 个结构化 packet（intent、fetch、thinking、review、verification、evolution…）</li>
+<li>496 条能力清单</li>
+<li>4 端 smoke 验证证据</li>
+<li>9 次发牌事件详情</li>
+<li>11 阶段业务流状态</li>
+</ul>
+<p><strong>这是 Meta_Kim 和”一段聊天回复”的本质区别——聊天回复只能读，packet 可以被校验、被索引、被重放。</strong></p>
+<h3 id="3-cc-是手meta_kim-是脑">3. CC 是手，Meta_Kim 是脑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-cc-是手meta_kim-是脑" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Meta_Kim 不替代任何 CC 能力——Skills、Agents、MCP、Hooks、Memory、Workflows 照常工作。Meta_Kim 做的，是在这些”手”之上叠加了一层<strong>纪律</strong>：</p>
+<ul>
+<li>先确认要什么（Critical）→ 再搜索谁有这能力（Fetch）→ 规划怎么干（Thinking）→ 分发执行（Execution）→ 审查（Review）→ 再审查审查本身（Meta-Review）→ 验证（Verification）→ 沉淀经验（Evolution）</li>
+</ul>
+<h3 id="4-这次-demo-的局限性">4. 这次 Demo 的局限性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-这次-demo-的局限性" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>局限</th><th>说明</th><th>在真实 CC 会话中的表现</th></tr></thead><tbody><tr><td>CLI 模式</td><td>没有 CC 原生选择面 (AskUserQuestion)</td><td>CC 中会有弹窗/交互选项</td></tr><tr><td>单 worker</td><td>demo 任务简单，不需要 fan-out</td><td>复杂任务会有多 worker 并行</td></tr><tr><td>smoke_pass</td><td>只是投影验证，不是 live runtime</td><td>CC 中会有真实的测试命令输出</td></tr><tr><td>conversationNoticeEmitted = false</td><td>没有发出 CC 对话提示</td><td>CC 中会在对话中输出用户可见的进度</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：首次接触 Meta_Kim 时，先跑 <code>npm run meta:theory:demo</code> 看一遍完整链路——比读文档直观</li>
+<li><strong>DO</strong>：用 <code>npm run meta:theory:report -- --run-id latest</code> 查看可读报告，不要直接读 3.5MB 的 JSON artifact</li>
+<li><strong>DO</strong>：区分 demo 模式的 <code>smoke_pass</code> 和真实 CC 会话的 <code>live</code> 证据——前者是投影验证，后者是运行时证明</li>
+<li><strong>DON’T</strong>：不要在 demo 的 JSON artifact 中寻找”CC 原生选择面”的证据——demo 是 CLI 模式，不触发 <code>AskUserQuestion</code></li>
+<li><strong>DON’T</strong>：不要期望每次 demo run 都触发 Type B 管线创建 agent——demo 任务故意保持简单，Evolution 通常是 <code>none-with-reason</code></li>
+<li><strong>TIP</strong>：把 <code>.meta-kim/state/</code> 当成”治理的 git log”——每次 run 的 compaction 和 governed-execution 产物都可回溯</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>把 demo 当完整产品</td><td>看到 <code>status: partial</code>、<code>smoke_pass</code> 就认为 Meta_Kim 不完整</td><td>demo 是<strong>故意保持 partial</strong>——它不连接真实 LLM、不触发 CC 原生 UI，只是结构验证</td></tr><tr><td>混淆 compaction 和 governed-execution</td><td>找不到 run artifact 就去 <code>compaction/</code> 里翻</td><td>compaction 是 CC Stop hook 自动写的<strong>会话续跑包</strong>；governed-execution 是 demo/脚本生成的<strong>完整 artifact</strong></td></tr><tr><td>期望每次都有 Evolution 写回</td><td>看到 <code>none-with-reason</code> 觉得”什么都没沉淀”</td><td>Evolution 只在发现可复用模式、能力缺口、Scar 时才写回——demo run 没有触发条件是正常的</td></tr><tr><td>忽略 conversationNotice</td><td><code>conversationNoticeEmitted = false</code> 看起来像 bug</td><td>demo 脚本不发出 CC 对话通知——这是 CLI 模式的预期行为，真实 CC 会话中会通过 Stop hook 发出</td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../meta_kim/00-meta_kim-入门概览" class="internal internal-link alias" data-slug="meta_kim/00-meta_kim-入门概览">入门概览</a> — 四大机制全景</li>
+<li><a href="../meta_kim/01-8-阶段脊柱与路径分类" class="internal internal-link alias" data-slug="meta_kim/01-8-阶段脊柱与路径分类">8 阶段脊柱</a> — 每个阶段的协议和门控细节</li>
+<li><a href="../meta_kim/02-元角色体系与能力优先分发" class="internal internal-link alias" data-slug="meta_kim/02-元角色体系与能力优先分发">元角色体系</a> — 本次涉及的 meta-warden、meta-conductor、meta-prism</li>
+<li><a href="../meta_kim/03-协议、门与动态发牌" class="internal internal-link alias" data-slug="meta_kim/03-协议、门与动态发牌">协议、门与发牌</a> — 本次运行产生的 packet 和发牌事件</li>
+<li><a href="../meta_kim/04-三层记忆与进化闭环" class="internal internal-link alias" data-slug="meta_kim/04-三层记忆与进化闭环">三层记忆与进化</a> — Evolution 的 none-with-reason 判定</li>
+<li><a href="../meta_kim/05-场景判断：何时用-meta-theory" class="internal internal-link alias" data-slug="meta_kim/05-场景判断：何时用-meta-theory">场景判断</a> — 什么任务适合走治理路线</li>
+<li><a href="../claude-code/00-claude-code-入门概览" class="internal internal-link alias" data-slug="claude-code/00-claude-code-入门概览">CC 入门</a> — 所有 CC 基础概念的入口</li>
+<li><a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">CC Skills</a> — meta-theory skill 的实现载体</li>
+<li><a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">CC Agents</a> — worker 分发的执行载体</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>产物文件：<code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.zh-CN.md</code></li>
+<li>JSON artifact：<code>.meta-kim/state/default/governed-executions/meta-run-ac39aed4aaca.json</code></li>
+<li>能力清单：<code>.meta-kim/state/default/governed-executions/capability-inventory.json</code></li>
+<li>Demo 脚本：<code>scripts/run-meta-theory-governed-execution.mjs</code></li>
+<li>First-run 说明：<code>examples/first-run/README.md</code></li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>下一步</strong>：回到 <a href="../00-总览/ai学习知识库总览" class="internal internal-link alias" data-slug="00-总览/ai学习知识库总览">AI 学习知识库总览</a> 查看完整学习路径，或阅读 <a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">CC Agents</a> 理解 Meta_Kim worker 分发的底层机制。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-19" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#实战案例一次完整的-8-阶段运行" data-for="实战案例一次完整的-8-阶段运行">实战案例：一次完整的 8 阶段运行</a></li><li class="depth-1"><a href="#-概述" data-for="-概述">📖 概述</a></li><li class="depth-1"><a href="#-运行前触发与分类" data-for="-运行前触发与分类">🔧 运行前：触发与分类</a></li><li class="depth-2"><a href="#入口触发" data-for="入口触发">入口触发</a></li><li class="depth-1"><a href="#-阶段-1critical--意图锁定" data-for="-阶段-1critical--意图锁定">🔧 阶段 1：Critical — 意图锁定</a></li><li class="depth-2"><a href="#实际行为" data-for="实际行为">实际行为</a></li><li class="depth-2"><a href="#文件变更" data-for="文件变更">文件变更</a></li><li class="depth-2"><a href="#cc-底层映射分析" data-for="cc-底层映射分析">CC 底层映射分析</a></li><li class="depth-1"><a href="#-阶段-2fetch--证据收集与能力发现" data-for="-阶段-2fetch--证据收集与能力发现">🔧 阶段 2：Fetch — 证据收集与能力发现</a></li><li class="depth-2"><a href="#实际行为-1" data-for="实际行为-1">实际行为</a></li><li class="depth-2"><a href="#文件变更-1" data-for="文件变更-1">文件变更</a></li><li class="depth-2"><a href="#cc-底层映射分析-1" data-for="cc-底层映射分析-1">CC 底层映射分析</a></li><li class="depth-1"><a href="#-阶段-3thinking--路线规划与任务分发" data-for="-阶段-3thinking--路线规划与任务分发">🔧 阶段 3：Thinking — 路线规划与任务分发</a></li><li class="depth-2"><a href="#实际行为-2" data-for="实际行为-2">实际行为</a></li><li class="depth-2"><a href="#文件变更-2" data-for="文件变更-2">文件变更</a></li><li class="depth-2"><a href="#cc-底层映射分析-2" data-for="cc-底层映射分析-2">CC 底层映射分析</a></li><li class="depth-1"><a href="#-阶段-4execution--分派执行" data-for="-阶段-4execution--分派执行">🔧 阶段 4：Execution — 分派执行</a></li><li class="depth-2"><a href="#实际行为-3" data-for="实际行为-3">实际行为</a></li><li class="depth-2"><a href="#文件变更-3" data-for="文件变更-3">文件变更</a></li><li class="depth-2"><a href="#cc-底层映射分析-3" data-for="cc-底层映射分析-3">CC 底层映射分析</a></li><li class="depth-1"><a href="#-阶段-5review--质量审查" data-for="-阶段-5review--质量审查">🔧 阶段 5：Review — 质量审查</a></li><li class="depth-2"><a href="#实际行为-4" data-for="实际行为-4">实际行为</a></li><li class="depth-2"><a href="#文件变更-4" data-for="文件变更-4">文件变更</a></li><li class="depth-2"><a href="#cc-底层映射分析-4" data-for="cc-底层映射分析-4">CC 底层映射分析</a></li><li class="depth-1"><a href="#-阶段-6meta-review--审查审查标准" data-for="-阶段-6meta-review--审查审查标准">🔧 阶段 6：Meta-Review — 审查”审查标准”</a></li><li class="depth-2"><a href="#实际行为-5" data-for="实际行为-5">实际行为</a></li><li class="depth-2"><a href="#文件变更-5" data-for="文件变更-5">文件变更</a></li><li class="depth-2"><a href="#cc-底层映射分析-5" data-for="cc-底层映射分析-5">CC 底层映射分析</a></li><li class="depth-1"><a href="#-阶段-7verification--证据验证" data-for="-阶段-7verification--证据验证">🔧 阶段 7：Verification — 证据验证</a></li><li class="depth-2"><a href="#实际行为-6" data-for="实际行为-6">实际行为</a></li><li class="depth-2"><a href="#文件变更-6" data-for="文件变更-6">文件变更</a></li><li class="depth-2"><a href="#cc-底层映射分析-6" data-for="cc-底层映射分析-6">CC 底层映射分析</a></li><li class="depth-1"><a href="#-阶段-8evolution--经验写回" data-for="-阶段-8evolution--经验写回">🔧 阶段 8：Evolution — 经验写回</a></li><li class="depth-2"><a href="#实际行为-7" data-for="实际行为-7">实际行为</a></li><li class="depth-2"><a href="#文件变更-7" data-for="文件变更-7">文件变更</a></li><li class="depth-2"><a href="#cc-底层映射分析-7" data-for="cc-底层映射分析-7">CC 底层映射分析</a></li><li class="depth-1"><a href="#-全链路总结" data-for="-全链路总结">📊 全链路总结</a></li><li class="depth-2"><a href="#产物全景图" data-for="产物全景图">产物全景图</a></li><li class="depth-2"><a href="#发牌事件时间线" data-for="发牌事件时间线">发牌事件时间线</a></li><li class="depth-2"><a href="#11-阶段业务工作流" data-for="11-阶段业务工作流">11 阶段业务工作流</a></li><li class="depth-2"><a href="#cc-底层映射总表" data-for="cc-底层映射总表">CC 底层映射总表</a></li><li class="depth-2"><a href="#能力调用真实性" data-for="能力调用真实性">能力调用真实性</a></li><li class="depth-1"><a href="#-从这个案例中学到什么" data-for="-从这个案例中学到什么">🎯 从这个案例中学到什么</a></li><li class="depth-2"><a href="#1-8-阶段不是都要跑一遍" data-for="1-8-阶段不是都要跑一遍">1. 8 阶段不是”都要跑一遍”</a></li><li class="depth-2"><a href="#2-协议packet是真正的运行产物" data-for="2-协议packet是真正的运行产物">2. 协议（Packet）是真正的”运行产物”</a></li><li class="depth-2"><a href="#3-cc-是手meta_kim-是脑" data-for="3-cc-是手meta_kim-是脑">3. CC 是手，Meta_Kim 是脑</a></li><li class="depth-2"><a href="#4-这次-demo-的局限性" data-for="4-这次-demo-的局限性">4. 这次 Demo 的局限性</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../meta_kim/07-用户上下文agent的创建与演进" class="internal">07-用户上下文Agent的创建与演进</a></li><li><a href="../meta_kim/08-runtime-运行时：跨宿主的执行引擎与适配层" class="internal">08-Runtime 运行时：跨宿主的执行引擎与适配层</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

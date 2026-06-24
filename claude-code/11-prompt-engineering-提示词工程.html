@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>11-Prompt Engineering 提示词工程</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="11-Prompt Engineering 提示词工程"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="11-Prompt Engineering 提示词工程"/><meta name="twitter:description" content="Prompt Engineering：如何让 AI 精确理解你的意图 📖 概念 Prompt Engineering（提示词工程）是将模糊的人类意图转化为 AI 可精确执行的结构化指令的方法论。它不是”把话说长”，而是”把话说准”——让 AI 知道你要什么、不要什么、怎么算做完、怎么算做好。 在 Claude Code 的上下文中，Prompt Engineering 直接决定了： AI 是猜你的意思（高偏差）还是精准执行（低偏差） 复杂任务是一次性完成还是反复修正 产出物是”看起来能用”还是”确实验收通过” 核心公式 好 Prompt = 清晰角色 + 明确目标 + 边界范围 + 验收标准..."/><meta property="og:description" content="Prompt Engineering：如何让 AI 精确理解你的意图 📖 概念 Prompt Engineering（提示词工程）是将模糊的人类意图转化为 AI 可精确执行的结构化指令的方法论。它不是”把话说长”，而是”把话说准”——让 AI 知道你要什么、不要什么、怎么算做完、怎么算做好。 在 Claude Code 的上下文中，Prompt Engineering 直接决定了： AI 是猜你的意思（高偏差）还是精准执行（低偏差） 复杂任务是一次性完成还是反复修正 产出物是”看起来能用”还是”确实验收通过” 核心公式 好 Prompt = 清晰角色 + 明确目标 + 边界范围 + 验收标准..."/><meta property="og:image:alt" content="Prompt Engineering：如何让 AI 精确理解你的意图 📖 概念 Prompt Engineering（提示词工程）是将模糊的人类意图转化为 AI 可精确执行的结构化指令的方法论。它不是”把话说长”，而是”把话说准”——让 AI 知道你要什么、不要什么、怎么算做完、怎么算做好。 在 Claude Code 的上下文中，Prompt Engineering 直接决定了： AI 是猜你的意思（高偏差）还是精准执行（低偏差） 复杂任务是一次性完成还是反复修正 产出物是”看起来能用”还是”确实验收通过” 核心公式 好 Prompt = 清晰角色 + 明确目标 + 边界范围 + 验收标准..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/claude-code/11-prompt-engineering-提示词工程"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/claude-code/11-prompt-engineering-提示词工程"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Prompt Engineering：如何让 AI 精确理解你的意图 📖 概念 Prompt Engineering（提示词工程）是将模糊的人类意图转化为 AI 可精确执行的结构化指令的方法论。它不是”把话说长”，而是”把话说准”——让 AI 知道你要什么、不要什么、怎么算做完、怎么算做好。 在 Claude Code 的上下文中，Prompt Engineering 直接决定了： AI 是猜你的意思（高偏差）还是精准执行（低偏差） 复杂任务是一次性完成还是反复修正 产出物是”看起来能用”还是”确实验收通过” 核心公式 好 Prompt = 清晰角色 + 明确目标 + 边界范围 + 验收标准..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/claude-code/11-prompt-engineering-提示词工程-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/claude-code/11-prompt-engineering-提示词工程-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/claude-code/11-prompt-engineering-提示词工程-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="claude-code/11-prompt-engineering-提示词工程" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-12" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-12" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../claude-code/">Claude Code</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>11-Prompt Engineering 提示词工程</a></div></nav><h1 class="article-title">11-Prompt Engineering 提示词工程</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/claude-code" class="internal internal-link tag-link">claude-code</a><span class="note-properties-separator">, </span><a href="../tags/prompt-engineering" class="internal internal-link tag-link">prompt-engineering</a><span class="note-properties-separator">, </span><a href="../tags/提示词" class="internal internal-link tag-link">提示词</a><span class="note-properties-separator">, </span><a href="../tags/实战" class="internal internal-link tag-link">实战</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-24T17:12:16.537Z">2026年6月25日</time><span>40分钟阅读</span></p><ul class="tags"><li><a href="../tags/claude-code" class="internal tag-link">claude-code</a></li><li><a href="../tags/prompt-engineering" class="internal tag-link">prompt-engineering</a></li><li><a href="../tags/提示词" class="internal tag-link">提示词</a></li><li><a href="../tags/实战" class="internal tag-link">实战</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="prompt-engineering如何让-ai-精确理解你的意图">Prompt Engineering：如何让 AI 精确理解你的意图<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#prompt-engineering如何让-ai-精确理解你的意图" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Prompt Engineering（提示词工程）是<strong>将模糊的人类意图转化为 AI 可精确执行的结构化指令</strong>的方法论。它不是”把话说长”，而是”把话说准”——让 AI 知道你要什么、不要什么、怎么算做完、怎么算做好。</p>
+</blockquote>
+<p>在 Claude Code 的上下文中，Prompt Engineering 直接决定了：</p>
+<ul>
+<li>AI 是猜你的意思（高偏差）还是精准执行（低偏差）</li>
+<li>复杂任务是一次性完成还是反复修正</li>
+<li>产出物是”看起来能用”还是”确实验收通过”</li>
+</ul>
+<h3 id="核心公式">核心公式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心公式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>好 Prompt = 清晰角色 + 明确目标 + 边界范围 + 验收标准 + 输出格式
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>要素</th><th>回答的问题</th><th>缺失后果</th></tr></thead><tbody><tr><td><strong>角色</strong></td><td>AI 以什么专业身份来干活？</td><td>AI 用泛泛身份，产出缺少专业深度</td></tr><tr><td><strong>目标</strong></td><td>最终要达成什么结果？</td><td>AI 跑偏方向，做完了但做错了</td></tr><tr><td><strong>范围</strong></td><td>包含什么、不包含什么？</td><td>AI 越界修改不该动的东西</td></tr><tr><td><strong>验收标准</strong></td><td>怎么判断做完了、做好了？</td><td>“看起来完成了”但其实没达到你的心理预期</td></tr><tr><td><strong>输出格式</strong></td><td>结果以什么形式交付？</td><td>AI 给了大段文字但你其实要一个 JSON</td></tr></tbody></table></div>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="为什么-ai-会理解偏差">为什么 AI 会”理解偏差”？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#为什么-ai-会理解偏差" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    subgraph human[\&quot;你的大脑\&quot;]\n        INTENT[真实意图&lt;br/>100%]\n        EXPRESS[语言表达&lt;br/>损失 30%]\n    end\n\n    subgraph ai[\&quot;AI 的理解\&quot;]\n        PARSE[解析文字&lt;br/>损失 20%]\n        INFER[推理补全&lt;br/>猜对 70%&lt;br/>猜错 30%]\n    end\n\n    INTENT --> EXPRESS\n    EXPRESS -->|\&quot;你说的\&quot;| PARSE\n    PARSE --> INFER\n    INFER -->|\&quot;AI 做的\&quot;| RESULT[执行结果&lt;br/>可能偏离 50%+]\n\n    style INTENT fill:#fbbf24,color:#000\n    style EXPRESS fill:#f87171,color:#fff\n    style PARSE fill:#f87171,color:#fff\n    style INFER fill:#dc2626,color:#fff\n    style RESULT fill:#dc2626,color:#fff&quot;">flowchart LR
+    subgraph human[&quot;你的大脑&quot;]
+        INTENT[真实意图&lt;br/>100%]
+        EXPRESS[语言表达&lt;br/>损失 30%]
+    end
+
+    subgraph ai[&quot;AI 的理解&quot;]
+        PARSE[解析文字&lt;br/>损失 20%]
+        INFER[推理补全&lt;br/>猜对 70%&lt;br/>猜错 30%]
+    end
+
+    INTENT --> EXPRESS
+    EXPRESS -->|&quot;你说的&quot;| PARSE
+    PARSE --> INFER
+    INFER -->|&quot;AI 做的&quot;| RESULT[执行结果&lt;br/>可能偏离 50%+]
+
+    style INTENT fill:#fbbf24,color:#000
+    style EXPRESS fill:#f87171,color:#fff
+    style PARSE fill:#f87171,color:#fff
+    style INFER fill:#dc2626,color:#fff
+    style RESULT fill:#dc2626,color:#fff
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>你的意图经过<strong>两次衰减</strong>才到达 AI 的执行层：你说出来的已经损失了 30%，AI 解析又损失 20%，AI 推理补全时正确率只有约 70%。<strong>好的 Prompt Engineering 就是在每个衰减点上做补偿。</strong></p>
+<h3 id="prompt-engineering-的补偿策略">Prompt Engineering 的补偿策略<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#prompt-engineering-的补偿策略" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    subgraph before[\&quot;没有 PE 时\&quot;]\n        V1[模糊需求] --> L1[AI 猜测] --> R1[结果可能完全跑偏]\n    end\n\n    subgraph after[\&quot;有 PE 时\&quot;]\n        V2[结构化需求&lt;br/>+ 角色/目标/范围/标准/格式] --> L2[AI 精确执行] --> R2[结果可验收]\n    end\n\n    style V1 fill:#dc2626,color:#fff\n    style R1 fill:#dc2626,color:#fff\n    style V2 fill:#34d399,color:#000\n    style R2 fill:#34d399,color:#000&quot;">flowchart LR
+    subgraph before[&quot;没有 PE 时&quot;]
+        V1[模糊需求] --> L1[AI 猜测] --> R1[结果可能完全跑偏]
+    end
+
+    subgraph after[&quot;有 PE 时&quot;]
+        V2[结构化需求&lt;br/>+ 角色/目标/范围/标准/格式] --> L2[AI 精确执行] --> R2[结果可验收]
+    end
+
+    style V1 fill:#dc2626,color:#fff
+    style R1 fill:#dc2626,color:#fff
+    style V2 fill:#34d399,color:#000
+    style R2 fill:#34d399,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<hr/>
+<h2 id="-好坏对比示例6-组">🎯 好坏对比示例（6 组）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-好坏对比示例6-组" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1修-bug">示例 1：修 Bug<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1修-bug" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>❌ 坏 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;登录功能有 bug，帮我修一下&quot;</span></span></code></pre></figure>
+<p><strong>AI 可能的理解偏差</strong>：</p>
+<ul>
+<li>什么 bug？超时？报错？白屏？</li>
+<li>登录方式是什么？账号密码？SSO？OAuth？</li>
+<li>修到什么程度算修好？</li>
+</ul>
+<p><strong>✅ 好 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是前端调试工程师，熟悉 React + JWT 认证流程。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/role></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">修复用户在 token 过期后刷新页面时被踢回登录页而非自动刷新 token 的 bug。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/goal></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;scope></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 只修改 token 刷新逻辑，不改变登录流程、不修改后端 API</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/scope></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;context></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 技术栈：React 18 + axios + JWT</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 现象：用户登录后 15 分钟内正常，过期刷新后跳转登录页</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 预期：应自动用 refresh_token 换取新 access_token，用户无感知</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 相关文件：src/utils/apiClient.ts、src/hooks/useAuth.ts</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/context></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;success_criteria></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> token 过期后刷新页面，用户保持登录态</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不引入新的 console 报错</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> refresh_token 也过期时，才跳转登录页</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/success_criteria></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;output_format></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">先给根因分析（一句话），再给修改方案（改哪个文件、改什么），最后给验证方法。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/output_format></span></span></code></pre></figure>
+<p><strong>为什么好</strong>：角色给了专业方向，目标精确到具体现象和预期行为，范围防止 AI 越界改后端，验收标准让”修好”有据可查。</p>
+<hr/>
+<h3 id="示例-2新功能开发">示例 2：新功能开发<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2新功能开发" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>❌ 坏 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;帮我做一个用户反馈收集功能&quot;</span></span></code></pre></figure>
+<p><strong>AI 可能的理解偏差</strong>：</p>
+<ul>
+<li>前端表单？后端 API？数据库？全栈？</li>
+<li>反馈类型？文本？评分？截图？</li>
+<li>给谁看？管理员后台？公开页面？</li>
+</ul>
+<p><strong>✅ 好 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是全栈开发工程师，熟悉 React + Node.js + PostgreSQL。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/role></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">在现有应用中新增一个用户反馈收集功能：用户在页面右下角的悬浮按钮点击后弹出反馈表单，提交后写入数据库，管理员在后台可查看列表。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/goal></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;scope></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 包含：前端反馈弹窗组件、后端 POST API、数据库 migration、后台列表页</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不包含：邮件通知、反馈回复功能、反馈分类 AI 打标（后续迭代）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/scope></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;context></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 项目目录：frontend/src/、backend/src/、database/migrations/</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 现有 UI 库：Ant Design 5.x</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 现有 API 风格：RESTful，路由在 backend/src/routes/</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 用户已登录，可从 session 中取 userId</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 数据库已有 users 表</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/context></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;constraints></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 反馈内容需做 XSS 过滤</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不收集用户 IP 等隐私信息</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不修改现有路由结构</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/constraints></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;success_criteria></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 用户点击悬浮按钮 → 弹出表单 → 填写提交 → 看到&quot;感谢反馈&quot;提示</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 管理员访问 /admin/feedbacks → 看到分页列表</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 3 个核心文件以上有对应的测试</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/success_criteria></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;verification_plan></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 前端：打开页面，点击按钮，提交反馈，观察网络请求和 UI 反馈</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 后端：curl POST /api/feedbacks，检查数据库写入</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 管理员：访问后台，确认列表展示</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/verification_plan></span></span></code></pre></figure>
+<p><strong>为什么好</strong>：范围精确到 4 个交付物 + 3 个非目标，上下文给出了技术细节让 AI 不需要猜，约束防止安全漏洞，验证计划让”做完”可检验。</p>
+<hr/>
+<h3 id="示例-3代码审查">示例 3：代码审查<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-3代码审查" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>❌ 坏 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;帮我 review 一下最近改的代码&quot;</span></span></code></pre></figure>
+<p><strong>AI 可能的理解偏差</strong>：</p>
+<ul>
+<li>哪些文件？什么范围的改动？</li>
+<li>审查维度？只看 bug？还要看性能？风格？</li>
+<li>审查结果怎么给？口头评价？结构化报告？</li>
+</ul>
+<p><strong>✅ 好 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是资深代码审查员，擅长发现安全漏洞、性能问题和架构风险。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/role></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">审查最近 3 次 commit 中与认证模块相关的改动，关注安全性、错误处理和边界条件。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/goal></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;scope></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 包含：认证中间件、token 刷新逻辑、登录控制器</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不包含：UI 样式、文档、配置文件</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/scope></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;context></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 变更文件：git diff HEAD~3 -- 'src/auth/*</span><span style="--shiki-light:#24292E;--shiki-light-font-style:italic;--shiki-dark:#E1E4E8;--shiki-dark-font-style:italic;" data-token-type="punctuation">*' 'src/middleware/auth*</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">'</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 重点关注：JWT secret 处理、SQL 注入、XSS、race condition</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/context></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;output_format></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">按严重程度（CRITICAL > HIGH > MEDIUM > LOW）分类列出发现，每个发现附：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 文件位置和行号</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 问题描述</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 风险说明</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 修复建议（代码片段）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/output_format></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;success_criteria></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 每个安全相关文件至少被审查一次</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> CRITICAL/HIGH 发现必须有修复建议</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不遗漏任何 JWT、session、password 相关的代码路径</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/success_criteria></span></span></code></pre></figure>
+<p><strong>为什么好</strong>：范围限定了 commit 范围和文件路径，审查维度明确（安全+错误处理+边界），输出格式结构化，验收标准让审查质量可衡量。</p>
+<hr/>
+<h3 id="示例-4调研型任务不知道什么是好">示例 4：调研型任务——“不知道什么是好”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-4调研型任务不知道什么是好" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>❌ 坏 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;帮我研究一下 CI/CD pipeline 怎么做&quot;</span></span></code></pre></figure>
+<p><strong>AI 可能的理解偏差</strong>：</p>
+<ul>
+<li>给你一个概述（太浅）？给你完整配置（太深）？</li>
+<li>针对什么项目？什么规模？什么预算？</li>
+<li>“研究”到什么程度算完成？</li>
+</ul>
+<p><strong>✅ 好 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是 DevOps 工程师，熟悉 GitHub Actions、GitLab CI 和 Jenkins。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/role></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">帮我建立评判&quot;一个好的 CI/CD pipeline&quot;的标准，然后基于这些标准为我的项目设计一个 pipeline 方案。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/goal></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;scope></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 第一阶段：调研行业标准——一个好的 CI/CD pipeline 应该包含哪些阶段/门禁/指标</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 第二阶段：将调研结果转化为本项目适用的验收标准清单</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 第三阶段：给出具体的 pipeline 配置文件</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不包含：部署到生产环境、K8s 配置</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/scope></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;context></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 项目类型：React + Node.js 单体仓库（monorepo）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 团队规模：3 人</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 当前状态：无 CI/CD，手动部署</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 预算：免费方案优先（GitHub Actions free tier）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/context></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;instructions></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">第一阶段调研时，不要只给一个答案，而是给我：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">1.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 业界主流实践是什么（附来源）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">2.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不同项目规模/阶段的差异化建议</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">3.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 各实践的优劣对比</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">4.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 然后基于我的项目情况，推荐一个&quot;刚好够用&quot;的标准</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">第二阶段将标准物化为：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> Pipeline 必须包含的阶段（和每阶段的 pass/fail 条件）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 每个阶段的执行时间上限</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 哪些失败是 BLOCKING（阻止合并），哪些是 WARNING（提醒但不阻止）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/instructions></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;output_format></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">第一阶段：Markdown 表格（维度、标准、来源、适用条件）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">第二阶段：Markdown 清单（阶段、触发条件、pass/fail 条件、时间上限、阻断级别）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">第三阶段：YAML 配置文件</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/output_format></span></span></code></pre></figure>
+<p><strong>为什么好</strong>：这是”让 AI 先调研标准，再把标准注入任务”的经典模式——后面会详细展开这个方法论。</p>
+<hr/>
+<h3 id="示例-5重构任务">示例 5：重构任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-5重构任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>❌ 坏 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;重构这个模块，代码太乱了&quot;</span></span></code></pre></figure>
+<p><strong>AI 可能的理解偏差</strong>：</p>
+<ul>
+<li>“太乱”是什么标准？圈复杂度？重复代码？命名不规范？</li>
+<li>重构范围？只改内部实现不改接口？还是可以改数据结构？</li>
+<li>重构后怎么验证？功能不变怎么证明？</li>
+</ul>
+<p><strong>✅ 好 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是专注重构的软件工程师，遵循&quot;小步重构、保持可运行、有测试保护&quot;的原则。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/role></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">重构 src/services/orderService.ts，目标是降低圈复杂度到 10 以下、消除重复代码、提升可测试性，同时保持所有现有行为不变。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/goal></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;scope></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 包含：提取重复逻辑为独立函数、拆分大方法、引入接口分离关注点</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不包含：修改数据库 schema、修改 API 接口签名（对外接口不变）、修改 UI</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/scope></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;context></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 文件：src/services/orderService.ts（847 行，圈复杂度最高 34）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 现有测试：tests/services/orderService.test.ts（覆盖率为 62%）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 重构前先跑一次现有测试确认基线通过</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/context></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;constraints></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 每一步重构后必须保持现有测试全部通过</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 如果某步重构导致测试失败超过 2 次，回退该步并记录原因</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 不引入新的第三方依赖</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/constraints></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;success_criteria></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 所有函数的圈复杂度 ≤ 10</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 无重复代码块（相同逻辑出现 ≥2 次）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 现有测试 100% 通过</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 新增至少 3 个单元测试覆盖重构后提取的新函数</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/success_criteria></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;verification_plan></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 运行 npm run test -- tests/services/orderService.test.ts</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 运行 npx eslint --rule 'complexity: [error, 10]' src/services/</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 人工抽查 3 个提取后的函数，确认语义等价</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/verification_plan></span></span></code></pre></figure>
+<p><strong>为什么好</strong>：“太乱”被量化（圈复杂度 ≤ 10，消除重复），范围防止动不该动的东西，约束保证小步重构不回退，验证可执行。</p>
+<hr/>
+<h3 id="示例-6配置环境问题">示例 6：配置/环境问题<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-6配置环境问题" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>❌ 坏 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;帮我配一下环境&quot;</span></span></code></pre></figure>
+<p><strong>✅ 好 Prompt</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是开发环境配置工程师，熟悉 macOS 上的 Node.js 开发环境。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/role></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">在本机（macOS 14）上配置项目的完整开发环境，使 npm run dev 可以一键启动。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/goal></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;context></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 项目依赖：Node.js ≥ 22、PostgreSQL 16、Redis 7</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 当前状态：Node.js 已安装（v22.13），PostgreSQL 未安装，Redis 未安装</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 配置文件：.env.example 需要复制为 .env 并填写本地值</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/context></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;instructions></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">1.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 先检查当前环境缺什么（只检查，不安装）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">2.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 列出缺失项供我确认</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">3.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 确认后再逐个安装配置</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">4.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 每完成一步，验证该步确实生效</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/instructions></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;success_criteria></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> npm run dev 成功启动，无报错</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 数据库连接成功</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> Redis 连接成功</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 所有环境变量已填入（不要用默认密码）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/success_criteria></span></span></code></pre></figure>
+<hr/>
+<h2 id="-是否需要借助文档清晰化需求">📄 是否需要借助文档清晰化需求？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-是否需要借助文档清晰化需求" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="决策框架">决策框架<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#决策框架" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>文档不是银弹——它可以帮助，也可能拖慢。判断逻辑如下：</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    Q1{需求是否涉及&lt;br/>多个系统/接口/&lt;br/>历史决策？}\n    Q1 -->|是| DOC_NEED[✅ 需要文档]\n    Q1 -->|否| Q2{需求是否&lt;br/>一句话能说清&lt;br/>且无歧义？}\n    Q2 -->|是| DOC_NO[❌ 不需要文档&lt;br/>一句话 Prompt 即可]\n    Q2 -->|否| Q3{需求是否需要&lt;br/>精确的数据格式/&lt;br/>字段名/API 契约？}\n    Q3 -->|是| USE_FILE[✅ 把相关文件路径/&lt;br/>接口文档路径&lt;br/>直接写在 Prompt 里]\n    Q3 -->|否| USE_CONTEXT[✅ 在 Prompt 的&lt;br/>context 段写清楚]\n\n    style DOC_NEED fill:#34d399,color:#000\n    style DOC_NO fill:#60a5fa,color:#000\n    style USE_FILE fill:#34d399,color:#000\n    style USE_CONTEXT fill:#34d399,color:#000&quot;">flowchart TD
+    Q1{需求是否涉及&lt;br/>多个系统/接口/&lt;br/>历史决策？}
+    Q1 -->|是| DOC_NEED[✅ 需要文档]
+    Q1 -->|否| Q2{需求是否&lt;br/>一句话能说清&lt;br/>且无歧义？}
+    Q2 -->|是| DOC_NO[❌ 不需要文档&lt;br/>一句话 Prompt 即可]
+    Q2 -->|否| Q3{需求是否需要&lt;br/>精确的数据格式/&lt;br/>字段名/API 契约？}
+    Q3 -->|是| USE_FILE[✅ 把相关文件路径/&lt;br/>接口文档路径&lt;br/>直接写在 Prompt 里]
+    Q3 -->|否| USE_CONTEXT[✅ 在 Prompt 的&lt;br/>context 段写清楚]
+
+    style DOC_NEED fill:#34d399,color:#000
+    style DOC_NO fill:#60a5fa,color:#000
+    style USE_FILE fill:#34d399,color:#000
+    style USE_CONTEXT fill:#34d399,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="什么时候需要文档">什么时候需要文档<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么时候需要文档" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>场景</th><th>文档类型</th><th>怎么给 AI</th><th>示例</th></tr></thead><tbody><tr><td>跨系统集成</td><td>API 文档、接口契约</td><td>路径引用或粘贴关键字段</td><td>”按 docs/api-contract.md 中的 POST /webhooks 接口实现”</td></tr><tr><td>历史决策追溯</td><td>ADR、设计文档</td><td>引用决策结论</td><td>”根据 docs/adr/003-选择-JWT-而非-Session.md，实现 token 刷新”</td></tr><tr><td>数据格式约束</td><td>JSON Schema、Proto</td><td>粘贴 schema 定义</td><td>”输入必须符合以下 JSON Schema：{…}”</td></tr><tr><td>业务规则复杂</td><td>PRD、需求文档</td><td>粘贴核心规则段</td><td>”退款规则见下方，实现时严格遵循”</td></tr><tr><td>多人协作项目</td><td>CLAUDE.md、AGENTS.md</td><td>已在会话中自动加载</td><td>无需额外操作——CC 自动读</td></tr></tbody></table></div>
+<h3 id="什么时候不需要文档">什么时候不需要文档<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么时候不需要文档" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>场景</th><th>推荐做法</th></tr></thead><tbody><tr><td>单文件修改，逻辑简单</td><td>一句话 + context 段即可</td></tr><tr><td>探索型任务（“帮我看看这个项目是干嘛的”）</td><td>让 AI 自己读代码，不需要先写文档</td></tr><tr><td>写新文档作为产出物</td><td>在 Prompt 的 output_format 中指定格式即可</td></tr><tr><td>纯技术问题（“这个 tsconfig 配置项是什么意思”）</td><td>直接问</td></tr></tbody></table></div>
+<h3 id="文档辅助的最佳姿势">文档辅助的最佳姿势<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文档辅助的最佳姿势" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>不是”把整个文档贴进去”，而是<strong>精确引用</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- ✅ 好做法：精确引用 --></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;context></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 接口定义见 src/types/api.ts 的 CreateOrderRequest 接口</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 错误码规范见 docs/error-codes.md 第 3 节</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 遵循项目 CLAUDE.md 中列出的命名规范</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/context></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- ❌ 坏做法：无脑贴整个文档 --></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">请你读一下这 50 页 PRD，然后帮我实现第 3 章第 2 节的功能...</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">（AI 的上下文窗口被你塞满了不相关信息，有效注意力被稀释）</span></span></code></pre></figure>
+<hr/>
+<h2 id="️-是否需要图片">🖼️ 是否需要图片？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-是否需要图片" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="直接答案">直接答案<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#直接答案" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Claude Code 的本质是终端文本交互，不支持多模态图片输入。</strong> 所以你无法直接把截图/设计稿扔给 CC 说”照着这个做”。</p>
+<p>但你可以<strong>转换</strong>图片信息为文字描述：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>图片来源</th><th>转换方式</th><th>效果</th></tr></thead><tbody><tr><td>设计稿（Figma/MasterGo）</td><td>用 MCP（如 MasterGo MCP）直接从设计文件提取 DSL/SVG/样式数据</td><td>⭐⭐⭐ 最好的方式</td></tr><tr><td>UI 截图</td><td>用文字描述”布局：顶部导航栏 → 左侧侧边栏 → 右侧内容区”</td><td>⭐⭐ 信息有损失</td></tr><tr><td>架构图/流程图</td><td>用 Mermaid 代码描述，既清晰又可渲染</td><td>⭐⭐⭐ 推荐</td></tr><tr><td>数据库 ER 图</td><td>用文字描述表结构和关系</td><td>⭐⭐ 可行</td></tr><tr><td>手绘草图</td><td>用文字描述，再加交互行为说明</td><td>⭐ 信息损失大</td></tr></tbody></table></div>
+<h3 id="决策树">决策树<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#决策树" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    IMG[我有图片/设计稿] --> TYPE{什么类型？}\n    TYPE -->|设计稿| MCP[用 MCP 工具提取&lt;br/>设计数据直连 CC]\n    TYPE -->|架构/流程图| MERMAID[写成 Mermaid 代码&lt;br/>CC 可直接渲染]\n    TYPE -->|截图/手绘| TEXT[用文字描述&lt;br/>+ 关键尺寸/颜色/行为]\n    TYPE -->|数据表格| CSV[转成 CSV/Markdown 表格]\n\n    style MCP fill:#34d399,color:#000\n    style MERMAID fill:#34d399,color:#000\n    style TEXT fill:#f59e0b,color:#000\n    style CSV fill:#34d399,color:#000&quot;">flowchart TD
+    IMG[我有图片/设计稿] --> TYPE{什么类型？}
+    TYPE -->|设计稿| MCP[用 MCP 工具提取&lt;br/>设计数据直连 CC]
+    TYPE -->|架构/流程图| MERMAID[写成 Mermaid 代码&lt;br/>CC 可直接渲染]
+    TYPE -->|截图/手绘| TEXT[用文字描述&lt;br/>+ 关键尺寸/颜色/行为]
+    TYPE -->|数据表格| CSV[转成 CSV/Markdown 表格]
+
+    style MCP fill:#34d399,color:#000
+    style MERMAID fill:#34d399,color:#000
+    style TEXT fill:#f59e0b,color:#000
+    style CSV fill:#34d399,color:#000
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="实操建议">实操建议<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实操建议" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>设计稿 → MCP 直连</strong>：如果设计在 MasterGo 中，用 <code>mcp__masterGo__mcp__getDesignSections</code> 等工具直接提取设计 DSL，AI 能精确还原</li>
+<li><strong>流程/架构 → Mermaid</strong>：养成用 Mermaid 描述流程的习惯，既清晰又能渲染</li>
+<li><strong>截图 → 文字描述</strong>：至少描述布局结构、关键尺寸、颜色、交互行为</li>
+<li><strong>永远不要</strong>说”照着这个截图做”——CC 看不见图片</li>
+</ol>
+<hr/>
+<h2 id="-高级模式当不知道什么是好时让-ai-帮你定义">🔄 高级模式：当不知道”什么是好”时，让 AI 帮你定义<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-高级模式当不知道什么是好时让-ai-帮你定义" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>这是 Prompt Engineering 中最被低估的技巧。很多任务卡住不是因为 AI 不会做，而是因为<strong>你自己也不知道”做到什么程度才算好”</strong>。</p>
+<h3 id="模式名称调研标准注入验收rise">模式名称：调研→标准→注入→验收（RISE）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模式名称调研标准注入验收rise" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>Research → Inject Standards → Execute → Verify
+</code></pre>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    subgraph phase1[\&quot;阶段 1: AI 调研\&quot;]\n        R1[你: 帮我调研业界标准] --> R2[AI: 搜索 + 分析 + 对比]\n        R2 --> R3[产出: 评判标准清单&lt;br/>+ 分级建议 + 来源]\n    end\n\n    subgraph phase2[\&quot;阶段 2: 你确认\&quot;]\n        R3 --> U1[你: 审核标准&lt;br/>选择适用级别]\n    end\n\n    subgraph phase3[\&quot;阶段 3: 标准注入\&quot;]\n        U1 --> I1[将确认后的标准&lt;br/>写入正式 Prompt 的&lt;br/>success_criteria 段]\n    end\n\n    subgraph phase4[\&quot;阶段 4: AI 执行+验收\&quot;]\n        I1 --> E1[AI: 按标准执行]\n        E1 --> V1[AI: 按标准逐项验收]\n    end\n\n    style phase1 fill:#60a5fa,color:#000\n    style phase2 fill:#fbbf24,color:#000\n    style phase3 fill:#34d399,color:#000\n    style phase4 fill:#a78bfa,color:#fff&quot;">flowchart TD
+    subgraph phase1[&quot;阶段 1: AI 调研&quot;]
+        R1[你: 帮我调研业界标准] --> R2[AI: 搜索 + 分析 + 对比]
+        R2 --> R3[产出: 评判标准清单&lt;br/>+ 分级建议 + 来源]
+    end
+
+    subgraph phase2[&quot;阶段 2: 你确认&quot;]
+        R3 --> U1[你: 审核标准&lt;br/>选择适用级别]
+    end
+
+    subgraph phase3[&quot;阶段 3: 标准注入&quot;]
+        U1 --> I1[将确认后的标准&lt;br/>写入正式 Prompt 的&lt;br/>success_criteria 段]
+    end
+
+    subgraph phase4[&quot;阶段 4: AI 执行+验收&quot;]
+        I1 --> E1[AI: 按标准执行]
+        E1 --> V1[AI: 按标准逐项验收]
+    end
+
+    style phase1 fill:#60a5fa,color:#000
+    style phase2 fill:#fbbf24,color:#000
+    style phase3 fill:#34d399,color:#000
+    style phase4 fill:#a78bfa,color:#fff
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="完整实操示例从不知道什么是好到按标准交付">完整实操示例：从”不知道什么是好”到”按标准交付”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#完整实操示例从不知道什么是好到按标准交付" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="场景">场景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#场景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>你想在项目中引入<strong>代码审查流程</strong>，但你不知道：</p>
+<ul>
+<li>一个好的代码审查应该检查哪些维度？</li>
+<li>每个维度的通过标准是什么？</li>
+<li>不同严重级别怎么区分？</li>
+</ul>
+<h4 id="第一步调研-prompt你问-ai">第一步：调研 Prompt（你问 AI）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步调研-prompt你问-ai" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是软件工程质量专家，熟悉 Google、Microsoft、Amazon 等公司的代码审查实践。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/role></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">帮我建立一个&quot;好的代码审查&quot;的评判标准体系，然后应用到我的项目。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/goal></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;context></span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 我的项目：React + Node.js，团队 3 人，CI 用 GitHub Actions</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 当前问题：代码审查靠自觉，没有固定维度和标准</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 目标：形成为可操作的审查清单</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/context></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;instructions></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">请分两部分回答：</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation">**Part A — 业界调研**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">1.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 业界主流的代码审查维度有哪些（附来源）？</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">2.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 每个维度在不同严格级别下的标准是怎样的？</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">   -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 宽松（startup 阶段）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">   -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 标准（growth 阶段）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">   -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 严格（enterprise 阶段）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">3.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 严重级别分类的最佳实践（CRITICAL / HIGH / MEDIUM / LOW 的划分标准）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation">**Part B — 适配建议**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">基于我的项目情况（3 人团队，React + Node.js），推荐&quot;标准&quot;级别。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">逐项列出审查维度、检查项、pass/fail 条件。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/instructions></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;output_format></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Part A：Markdown 表格（维度、来源、宽松/标准/严格标准）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Part B：结构化的审查清单（维度、检查项、严重级别、pass 条件）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/output_format></span></span></code></pre></figure>
+<h4 id="ai-调研产出示例摘要">AI 调研产出（示例摘要）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ai-调研产出示例摘要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>来源</th><th>宽松</th><th>标准</th><th>严格</th></tr></thead><tbody><tr><td><strong>安全性</strong></td><td>OWASP Top 10, Google Secure Code Review Guide</td><td>无硬编码密钥</td><td>+ SQL 注入、XSS 防护</td><td>+ 完整的威胁建模</td></tr><tr><td><strong>正确性</strong></td><td>Microsoft Code Review Checklist</td><td>逻辑无明显错误</td><td>+ 边界条件、错误处理</td><td>+ 形式化验证</td></tr><tr><td><strong>性能</strong></td><td>Amazon Builder’s Library</td><td>无明显 N+1 查询</td><td>+ 时间复杂度 + 内存</td><td>+ 性能基准测试</td></tr><tr><td><strong>可维护性</strong></td><td>Clean Code, Google Style Guide</td><td>命名清晰</td><td>+ 圈复杂度 ≤ 10、DRY</td><td>+ 架构审查、SOLID</td></tr><tr><td><strong>测试覆盖</strong></td><td>Google Testing Blog</td><td>有测试</td><td>+ 关键路径 ≥ 80%</td><td>+ 分支覆盖 ≥ 90%</td></tr><tr><td><strong>可读性</strong></td><td>Airbnb JS Style Guide</td><td>格式一致</td><td>+ 注释解释”为什么”</td><td>+ 文档自动生成</td></tr></tbody></table></div>
+<p>推荐我的项目用<strong>标准级别</strong>，适配为 6 个维度 18 个检查项。</p>
+<h4 id="第二步你把标准注入到正式任务-prompt">第二步：你把标准注入到正式任务 Prompt<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步你把标准注入到正式任务-prompt" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是代码审查员。审查标准采用已确认的&quot;标准级别&quot;规范。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/role></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">审查本次 PR 中的所有变更，按以下标准逐项检查并出具审查报告。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/goal></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;success_criteria></span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- 以下标准来自上一轮 AI 调研 + 你确认的结果 --></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation">**安全性（CRITICAL）**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 无硬编码密钥/token/密码</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 所有用户输入经过校验和转义（防 XSS/SQL 注入）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 敏感操作有权限检查</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation">**正确性（HIGH）**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 边界条件已处理（空值、超长、负数、0）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 错误路径有适当的错误处理和用户提示</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 异步操作的竞态条件已考虑</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation">**性能（MEDIUM）**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 无 N+1 查询</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 循环或递归有明确的终止条件和复杂度约束</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation">**可维护性（MEDIUM）**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 新增函数圈复杂度 ≤ 10</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 无明显重复代码（相同逻辑块 ≥3 行且出现 ≥2 次）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 函数/变量命名自解释</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation">**测试覆盖（HIGH）**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 新增逻辑有对应的单元测试</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 关键路径的测试覆盖率 ≥ 80%</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation">**可读性（LOW）**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 复杂逻辑有注释解释&quot;为什么这么做&quot;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> [ ] 代码风格与项目现有风格一致</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/success_criteria></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;output_format></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">每个发现包含：维度、严重级别、文件位置、问题描述、修复建议。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">先列 CRITICAL/HIGH，再列 MEDIUM/LOW。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/output_format></span></span></code></pre></figure>
+<h4 id="为什么这个模式强大">为什么这个模式强大<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#为什么这个模式强大" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ol>
+<li><strong>你不是在凭空编标准</strong>——AI 调研了业界的实际做法，给你提供了有来源的依据</li>
+<li><strong>标准有分级</strong>——你知道”宽松/标准/严格”的差异，可以根据项目阶段选择</li>
+<li><strong>标准可复用</strong>——这次确认的标准，下次同类任务可以直接复用</li>
+<li><strong>验收可以逐项打钩</strong>——不再是”我觉得 ok”，而是 18 个检查项逐一判定</li>
+</ol>
+<hr/>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：每次写 Prompt 前先问自己 5 个问题——角色？目标？范围？验收标准？输出格式？</li>
+<li><strong>DO</strong>：把”非目标”写清楚——告诉 AI 不要做什么和告诉它做什么同样重要</li>
+<li><strong>DO</strong>：复杂需求先用 RISE 模式调研标准，再把标准注入任务</li>
+<li><strong>DO</strong>：在 context 段给出技术栈、文件路径、约束条件——不要让 AI 猜</li>
+<li><strong>DON’T</strong>：不要写”帮我做 XXX”一句话 Prompt 然后期待 AI 完美理解——你说的损失 30%，AI 解析又损失 20%</li>
+<li><strong>DON’T</strong>：不要把整份文档塞进 Prompt——精确引用关键段落</li>
+<li><strong>TIP</strong>：用 Mermaid 描述流程，用表格描述结构，用代码块描述格式——结构化的信息 AI 理解得更精确</li>
+<li><strong>TIP</strong>：需求不清时，先用一个”调研 Prompt”搞清楚标准，再用一个”执行 Prompt”按标准干活</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td><strong>需求膨胀</strong></td><td>你想做 A，Prompt 写得太大，AI 把 B/C/D 都做了</td><td>在 scope 段明确写”不包含 “</td></tr><tr><td><strong>过度约束</strong></td><td>Prompt 写得太死，AI 没有合理发挥空间</td><td>区分 hard constraint 和 soft guideline</td></tr><tr><td><strong>验收标准模糊</strong></td><td>”代码质量好”、“性能优化”这种无法判定</td><td>量化：圈复杂度 ≤ 10、响应时间 ≤ 200ms、覆盖率 ≥ 80%</td></tr><tr><td><strong>上下文缺失</strong></td><td>AI 不知道技术栈、项目结构、已有模式</td><td>在 context 段给出关键信息</td></tr><tr><td><strong>一次性超大 Prompt</strong></td><td>把所有需求写在一个超长 Prompt 里</td><td>拆成 RISE 模式：先调研标准 → 再按标准执行</td></tr><tr><td><strong>忽略非功能性需求</strong></td><td>只描述功能，不提安全/性能/可维护/可测试</td><td>在 success_criteria 中为每个非功能维度设标准</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-分层策略不是每次都手写全套-xml">🪜 分层策略：不是每次都手写全套 XML<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-分层策略不是每次都手写全套-xml" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>看完前面的 6 组对比示例，一个合理的问题是：<strong>难道每次问 AI 都要写这么一大串？</strong> 答案是：结构化 Prompt 不是让你每天手写的，它是一个<strong>分层的、有工具支撑的体系</strong>。</p>
+<h3 id="四层使用模型">四层使用模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#四层使用模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    Q[你的任务] --> L1{复杂度？}\n\n    L1 -->|\&quot;一句话能说清&lt;br/>改一行代码/问个问题\&quot;| T1[\&quot;**零层：直接说**&lt;br/>'这个函数干嘛的？'&lt;br/>'把这里改成 X'\&quot;]\n    L1 -->|\&quot;需要 2-3 个要素&lt;br/>改一个文件/修一个 bug\&quot;| T2[\&quot;**一层：要素补齐**&lt;br/>只在脑子里过 5 个问题&lt;br/>说出来时加上角色+目标+范围\&quot;]\n    L1 -->|\&quot;跨文件/多步骤&lt;br/>需要明确验收标准\&quot;| T3[\&quot;**二层：工具承载**&lt;br/>用 Plan Mode / Skill / CLAUDE.md&lt;br/>让工具替你做结构化\&quot;]\n    L1 -->|\&quot;复杂治理任务&lt;br/>安全/发布/跨平台\&quot;| T4[\&quot;**三层：Meta_Kim 接管**&lt;br/>自动走 8 阶段&lt;br/>你只需要正常说话\&quot;]\n\n    style T1 fill:#34d399,color:#000\n    style T2 fill:#60a5fa,color:#000\n    style T3 fill:#a78bfa,color:#fff\n    style T4 fill:#7c3aed,color:#fff&quot;">flowchart TD
+    Q[你的任务] --> L1{复杂度？}
+
+    L1 -->|&quot;一句话能说清&lt;br/>改一行代码/问个问题&quot;| T1[&quot;**零层：直接说**&lt;br/>'这个函数干嘛的？'&lt;br/>'把这里改成 X'&quot;]
+    L1 -->|&quot;需要 2-3 个要素&lt;br/>改一个文件/修一个 bug&quot;| T2[&quot;**一层：要素补齐**&lt;br/>只在脑子里过 5 个问题&lt;br/>说出来时加上角色+目标+范围&quot;]
+    L1 -->|&quot;跨文件/多步骤&lt;br/>需要明确验收标准&quot;| T3[&quot;**二层：工具承载**&lt;br/>用 Plan Mode / Skill / CLAUDE.md&lt;br/>让工具替你做结构化&quot;]
+    L1 -->|&quot;复杂治理任务&lt;br/>安全/发布/跨平台&quot;| T4[&quot;**三层：Meta_Kim 接管**&lt;br/>自动走 8 阶段&lt;br/>你只需要正常说话&quot;]
+
+    style T1 fill:#34d399,color:#000
+    style T2 fill:#60a5fa,color:#000
+    style T3 fill:#a78bfa,color:#fff
+    style T4 fill:#7c3aed,color:#fff
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="零层90-的日常交互直接说">零层（~90% 的日常交互）：直接说<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#零层90-的日常交互直接说" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;把 formatDate 的默认格式改成 ISO 8601&quot;</span></span>
+<span data-line><span>&quot;这个函数干嘛的？&quot;</span></span>
+<span data-line><span>&quot;跑一下测试&quot;</span></span></code></pre></figure>
+<p><strong>不需要结构化</strong>。CC 从项目上下文（CLAUDE.md、当前文件、git 状态）已经掌握了足够信息来做判断。零层不需要任何额外努力。</p>
+<h3 id="一层9-的交互要素补齐在心里过-5-个问题">一层（~9% 的交互）：要素补齐——在心里过 5 个问题<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#一层9-的交互要素补齐在心里过-5-个问题" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>不是写 XML 标签，而是<strong>脑子里过一遍核心公式，把缺失的要素加进一句话里</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>❌ &quot;修一下登录 bug&quot;</span></span>
+<span data-line> </span>
+<span data-line><span>✅ &quot;修一下登录 token 过期后被踢回首页的 bug。</span></span>
+<span data-line><span>    只改前端 token 刷新逻辑，不动后端。</span></span>
+<span data-line><span>    技术栈 React + axios。</span></span>
+<span data-line><span>    修完后 token 过期刷新时用户无感知。&quot;</span></span></code></pre></figure>
+<p>你多加了 3 句口语，但每句都对应一个要素：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>你加的</th><th>对应要素</th></tr></thead><tbody><tr><td>”token 过期后被踢回首页”</td><td>目标精确定位（不是笼统的”bug”）</td></tr><tr><td>“只改前端 token 刷新逻辑，不动后端”</td><td>范围约束</td></tr><tr><td>”react + axios”</td><td>上下文</td></tr><tr><td>”token 过期刷新时用户无感知”</td><td>验收标准</td></tr></tbody></table></div>
+<p><strong>没有 XML 标签，没有 markdown 代码块，只是多说了几句——但要素齐全了。</strong></p>
+<h3 id="二层1-的复杂任务工具承载写一次反复触发">二层（~1% 的复杂任务）：工具承载——写一次，反复触发<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#二层1-的复杂任务工具承载写一次反复触发" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>核心思想：<strong>结构化内容写一次，存到 CC 生态工具里，以后每次用一行触发——不需要重新写。</strong></p>
+<h4 id="cc-生态中的prompt-承载工具">CC 生态中的”Prompt 承载工具”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cc-生态中的prompt-承载工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>工具</th><th>做什么</th><th>写一次</th><th>怎么触发</th><th>适合场景</th></tr></thead><tbody><tr><td><strong>CLAUDE.md</strong></td><td>项目级常驻上下文</td><td>写一个文件</td><td>每次 CC 启动自动加载</td><td>项目技术栈、命名规范、架构约定</td></tr><tr><td><strong>Skills</strong></td><td>可安装/可触发的能力包</td><td>写一个 SKILL.md</td><td>自然语言触发词自动匹配</td><td>重复性任务流程（代码审查、部署检查）</td></tr><tr><td><strong>Commands</strong></td><td>快捷指令模板</td><td>写 <code>.claude/commands/xxx.md</code></td><td><code>/命令名</code></td><td>你经常做的固定操作</td></tr><tr><td><strong>Agents</strong></td><td>预定义角色的专业 agent</td><td>写 agent 定义文件</td><td><code>Agent(&quot;name&quot;)</code> 或自然语言匹配</td><td>专门负责某类任务的 AI</td></tr><tr><td><strong>Plan Mode</strong></td><td>先设计再动手的结构化规划</td><td>不需要写——CC 内置</td><td>复杂任务自动触发或手动进入</td><td>中大型功能开发</td></tr><tr><td><strong>Memory</strong></td><td>跨会话持久化偏好和规则</td><td>AI 在会话中自动写入</td><td>后续会话自动读取</td><td>你的偏好、习惯、项目特定规则</td></tr><tr><td><strong>HookPrompt</strong></td><td>用户输入自动优化层</td><td>安装一次</td><td>每次提交 Prompt 自动注入优化</td><td>所有对话——自动补齐结构化要素</td></tr></tbody></table></div>
+<h4 id="核心逻辑一次写好反复触发">核心逻辑：一次写好，反复触发<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心逻辑一次写好反复触发" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    subgraph write[\&quot;你写一次\&quot;]\n        CLAUDE_MD[\&quot;CLAUDE.md&lt;br/>项目上下文\&quot;]\n        SKILL[\&quot;Skill 定义&lt;br/>触发词 + 流程\&quot;]\n        COMMAND[\&quot;Command 模板&lt;br/>斜杠命令\&quot;]\n        AGENT_DEF[\&quot;Agent 定义&lt;br/>角色 + 边界\&quot;]\n        MEMORY[\&quot;Memory&lt;br/>偏好/规则\&quot;]\n    end\n\n    subgraph trigger[\&quot;每次自动/手动触发\&quot;]\n        AUTO[CC 启动时自动加载]\n        KEYWORD[自然语言触发词]\n        SLASH[/命令名]\n        AGENT_CALL[Agent 调用]\n        MEM_AUTO[会话中自动读写]\n    end\n\n    CLAUDE_MD --> AUTO\n    SKILL --> KEYWORD\n    COMMAND --> SLASH\n    AGENT_DEF --> AGENT_CALL\n    MEMORY --> MEM_AUTO\n\n    style write fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff\n    style trigger fill:#14532d,stroke:#22c55e,color:#dcfce7&quot;">flowchart LR
+    subgraph write[&quot;你写一次&quot;]
+        CLAUDE_MD[&quot;CLAUDE.md&lt;br/>项目上下文&quot;]
+        SKILL[&quot;Skill 定义&lt;br/>触发词 + 流程&quot;]
+        COMMAND[&quot;Command 模板&lt;br/>斜杠命令&quot;]
+        AGENT_DEF[&quot;Agent 定义&lt;br/>角色 + 边界&quot;]
+        MEMORY[&quot;Memory&lt;br/>偏好/规则&quot;]
+    end
+
+    subgraph trigger[&quot;每次自动/手动触发&quot;]
+        AUTO[CC 启动时自动加载]
+        KEYWORD[自然语言触发词]
+        SLASH[/命令名]
+        AGENT_CALL[Agent 调用]
+        MEM_AUTO[会话中自动读写]
+    end
+
+    CLAUDE_MD --> AUTO
+    SKILL --> KEYWORD
+    COMMAND --> SLASH
+    AGENT_DEF --> AGENT_CALL
+    MEMORY --> MEM_AUTO
+
+    style write fill:#1e1b4b,stroke:#7c3aed,color:#e0e7ff
+    style trigger fill:#14532d,stroke:#22c55e,color:#dcfce7
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h4 id="实战同一个任务三种用法">实战：同一个任务，三种用法<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实战同一个任务三种用法" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><strong>任务</strong>：给新 API 端点加单元测试。</p>
+<p><strong>❌ 每次手写全套 XML（累，不需要）</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- 每次都要写这 20 行？没人这么干。 --></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;role>你是测试工程师...&lt;/role></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;goal>给 POST /api/orders 加测试...&lt;/goal></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;scope>包含...不包含...&lt;/scope></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">...</span></span></code></pre></figure>
+<p><strong>✅ 用法 A：一层要素补齐（推荐）</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;给 POST /api/orders 加单元测试。覆盖正常请求、参数校验失败、</span></span>
+<span data-line><span>数据库写入失败三种情况。测试写在 tests/api/orders.test.ts。&quot;</span></span></code></pre></figure>
+<p>角色 CC 从项目上下文推断，目标清楚，范围自明。3 句话就够了。</p>
+<p><strong>✅ 用法 B：写成 Command 模板（一劳永逸）</strong>：</p>
+<p>在 <code>.claude/commands/add-tests.md</code> 写一次：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">请为以下 API 端点添加单元测试，覆盖：</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">1.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 正常请求成功路径</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">2.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 参数校验失败（必填缺失、类型错误、越界）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">3.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 内部错误（数据库/网络/第三方超时）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">4.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 边界条件（空值、超长输入、特殊字符）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">测试文件放在 tests/api/ 下，命名 {模块名}.test.ts。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">使用项目已有的 vitest + @testing-library 体系。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">确保每个测试有明确的 given/when/then 结构。</span></span></code></pre></figure>
+<p>以后每次用：<code>/add-tests POST /api/orders</code>——<strong>你输入了 5 个词，AI 收到了 10 行结构化指令。</strong></p>
+<p><strong>✅ 用法 C：让 Plan Mode 帮你结构化（零手写）</strong>：</p>
+<p>直接说：<code>&quot;给 POST /api/orders 加单元测试&quot;</code>，然后输入 <code>/plan</code> 进入 Plan Mode。CC 会自动走”理解需求 → 设计测试策略 → 展示计划给你确认 → 执行”的流程。<strong>你没有写结构化 Prompt，但 CC 内部走了完整的结构化流程。</strong></p>
+<h3 id="三层极少数meta_kim-自动接管">三层（极少数）：Meta_Kim 自动接管<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#三层极少数meta_kim-自动接管" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>对于跨模块重构、安全审查、发布前检查这类复杂治理任务：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>&quot;审查这次认证模块重构的安全性、正确性和性能&quot;</span></span></code></pre></figure>
+<p>安装了 Meta_Kim 后，<strong>你正常说话就行</strong>。Meta_Kim 的 meta-theory skill 会自动：</p>
+<ol>
+<li>Critical — 确认审查范围和成功标准</li>
+<li>Fetch — 搜索可用审查能力</li>
+<li>Thinking — 规划审查维度，选定 owner</li>
+<li>Execution — 分派执行</li>
+<li>Review + Meta-Review — 双重审查</li>
+<li>Verification — 验证每个发现</li>
+<li>Evolution — 沉淀经验</li>
+</ol>
+<h3 id="你已经在用的自动结构化">你已经在用的”自动结构化”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#你已经在用的自动结构化" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>回顾你当前看到的这个交互——你只输入了一段自然语言，但 HookPrompt 自动做了三件事：</p>
+<ol>
+<li>📝 <strong>原始输入</strong>：把你的原文逐字展示</li>
+<li>🔄 <strong>优化后的理解</strong>：拆成 Context / Task / Format 三段</li>
+<li>✅ <strong>优化后的完整提示词</strong>：生成带 <code>&lt;role></code> / <code>&lt;goal></code> / <code>&lt;scope></code> / <code>&lt;success_criteria></code> / <code>&lt;verification_plan></code> 标签的结构化版本</li>
+</ol>
+<p>这三个步骤是 <strong>HookPrompt 在你的输入到达 AI 之前自动注入的</strong>。你没有写任何 XML 标签——工具替你写了。CLAUDE.md 中的项目规则、graphify 知识图谱、已有的文件上下文，也都在后台自动加载——同样不需要你手动写。</p>
+<h3 id="工具速查什么时候用什么">工具速查：什么时候用什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工具速查什么时候用什么" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    START[接到一个任务] --> A{一句话能说清？}\n    A -->|是| ZERO[零层：直接说]\n    A -->|否| B{之前做过类似的？}\n    B -->|是,有 Command| CMD[\&quot;用 /命令 触发&lt;br/>你输入 5 个词\&quot;]\n    B -->|是,有 Skill| SK[\&quot;自然语言触发 Skill&lt;br/>你正常说话\&quot;]\n    B -->|否| C{需要明确验收标准？}\n    C -->|否| ONE[\&quot;一层：要素补齐&lt;br/>多写 2-3 句口语\&quot;]\n    C -->|是| D{涉及安全/发布/跨模块？}\n    D -->|是| MK[\&quot;三层：Meta_Kim 接管&lt;br/>你正常说话\&quot;]\n    D -->|否| TWO[\&quot;二层：Plan Mode&lt;br/>或写个 Command 模板\&quot;]\n\n    style ZERO fill:#34d399,color:#000\n    style CMD fill:#a78bfa,color:#fff\n    style SK fill:#a78bfa,color:#fff\n    style ONE fill:#60a5fa,color:#000\n    style MK fill:#7c3aed,color:#fff\n    style TWO fill:#a78bfa,color:#fff&quot;">flowchart TD
+    START[接到一个任务] --> A{一句话能说清？}
+    A -->|是| ZERO[零层：直接说]
+    A -->|否| B{之前做过类似的？}
+    B -->|是,有 Command| CMD[&quot;用 /命令 触发&lt;br/>你输入 5 个词&quot;]
+    B -->|是,有 Skill| SK[&quot;自然语言触发 Skill&lt;br/>你正常说话&quot;]
+    B -->|否| C{需要明确验收标准？}
+    C -->|否| ONE[&quot;一层：要素补齐&lt;br/>多写 2-3 句口语&quot;]
+    C -->|是| D{涉及安全/发布/跨模块？}
+    D -->|是| MK[&quot;三层：Meta_Kim 接管&lt;br/>你正常说话&quot;]
+    D -->|否| TWO[&quot;二层：Plan Mode&lt;br/>或写个 Command 模板&quot;]
+
+    style ZERO fill:#34d399,color:#000
+    style CMD fill:#a78bfa,color:#fff
+    style SK fill:#a78bfa,color:#fff
+    style ONE fill:#60a5fa,color:#000
+    style MK fill:#7c3aed,color:#fff
+    style TWO fill:#a78bfa,color:#fff
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="一句话总结">一句话总结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#一句话总结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<blockquote>
+<p><strong>结构化 Prompt 的核心是”要素齐全”，不是”格式繁重”。</strong> 90% 的情况一句话或要素补齐就够；9% 的情况用 Skill/Command/CLAUDE.md 一次写好反复触发；1% 的复杂治理交给 Meta_Kim 自动接管。你不需要给 AI 写论文——你需要在 CC 生态中建立<strong>可复用的结构化资产</strong>，然后每次用一行触发。</p>
+</blockquote>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../claude-code/00-claude-code-入门概览" class="internal internal-link alias" data-slug="claude-code/00-claude-code-入门概览">CC 入门概览</a> — 了解 AI 怎么处理你的输入</li>
+<li><a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">Skills 技能系统</a> — 好的 Skill 定义本身就是精心设计的 Prompt</li>
+<li><a href="../claude-code/03-tools-工具系统" class="internal internal-link alias" data-slug="claude-code/03-tools-工具系统">Tools 工具系统</a> — tool description 的写法直接影响 AI 调用工具的质量</li>
+<li><a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">Agents 代理系统</a> — agent 的 prompt 定义 = Prompt Engineering 的集大成应用</li>
+<li><a href="../claude-code/05-memory-记忆系统" class="internal internal-link alias" data-slug="claude-code/05-memory-记忆系统">Memory 记忆系统</a> — 把确认过的标准写入 memory，跨会话复用</li>
+<li><a href="../claude-code/10-plan-mode-规划模式" class="internal internal-link alias" data-slug="claude-code/10-plan-mode-规划模式">Plan Mode</a> — Plan Mode 本质上是把 Prompt Engineering 结构化到了 CC 的工具层面</li>
+<li><a href="../meta_kim/03-协议、门与动态发牌" class="internal internal-link alias" data-slug="meta_kim/03-协议、门与动态发牌">Meta_Kim 协议</a> — Meta_Kim 的协议思想来源：每个阶段明确交付契约</li>
+<li><a href="../meta_kim/05-场景判断：何时用-meta-theory" class="internal internal-link alias" data-slug="meta_kim/05-场景判断：何时用-meta-theory">Meta_Kim 场景判断</a> — 复杂任务用 Meta_Kim 治理，简单任务用好 Prompt 就行</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Anthropic 官方 Prompt Engineering Guide：<a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/" class="external external-link">https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>OWASP Top 10（安全审查标准来源）：<a href="https://owasp.org/www-project-top-ten/" class="external external-link">https://owasp.org/www-project-top-ten/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Google Engineering Practices — Code Review：<a href="https://google.github.io/eng-practices/review/" class="external external-link">https://google.github.io/eng-practices/review/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>下一步</strong>：选一个你最近的实际任务，按「四层模型」判断它属于哪一层——大部分人 90% 在零层和一层就够了。如果想更进一步，把你做过的重复任务写成一个 Command 模板（<code>.claude/commands/xxx.md</code>），体验”写一次，一行触发”。也可以阅读 <a href="../claude-code/10-plan-mode-规划模式" class="internal internal-link alias" data-slug="claude-code/10-plan-mode-规划模式">Plan Mode</a>、<a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">Skills</a>、<a href="../claude-code/09-slash-commands-斜杠命令" class="internal internal-link alias" data-slug="claude-code/09-slash-commands-斜杠命令">Commands</a> 了解工具承载层如何帮你自动结构化。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-12" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#prompt-engineering如何让-ai-精确理解你的意图" data-for="prompt-engineering如何让-ai-精确理解你的意图">Prompt Engineering：如何让 AI 精确理解你的意图</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-2"><a href="#核心公式" data-for="核心公式">核心公式</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#为什么-ai-会理解偏差" data-for="为什么-ai-会理解偏差">为什么 AI 会”理解偏差”？</a></li><li class="depth-2"><a href="#prompt-engineering-的补偿策略" data-for="prompt-engineering-的补偿策略">Prompt Engineering 的补偿策略</a></li><li class="depth-1"><a href="#-好坏对比示例6-组" data-for="-好坏对比示例6-组">🎯 好坏对比示例（6 组）</a></li><li class="depth-2"><a href="#示例-1修-bug" data-for="示例-1修-bug">示例 1：修 Bug</a></li><li class="depth-2"><a href="#示例-2新功能开发" data-for="示例-2新功能开发">示例 2：新功能开发</a></li><li class="depth-2"><a href="#示例-3代码审查" data-for="示例-3代码审查">示例 3：代码审查</a></li><li class="depth-2"><a href="#示例-4调研型任务不知道什么是好" data-for="示例-4调研型任务不知道什么是好">示例 4：调研型任务——“不知道什么是好”</a></li><li class="depth-2"><a href="#示例-5重构任务" data-for="示例-5重构任务">示例 5：重构任务</a></li><li class="depth-2"><a href="#示例-6配置环境问题" data-for="示例-6配置环境问题">示例 6：配置/环境问题</a></li><li class="depth-1"><a href="#-是否需要借助文档清晰化需求" data-for="-是否需要借助文档清晰化需求">📄 是否需要借助文档清晰化需求？</a></li><li class="depth-2"><a href="#决策框架" data-for="决策框架">决策框架</a></li><li class="depth-2"><a href="#什么时候需要文档" data-for="什么时候需要文档">什么时候需要文档</a></li><li class="depth-2"><a href="#什么时候不需要文档" data-for="什么时候不需要文档">什么时候不需要文档</a></li><li class="depth-2"><a href="#文档辅助的最佳姿势" data-for="文档辅助的最佳姿势">文档辅助的最佳姿势</a></li><li class="depth-1"><a href="#️-是否需要图片" data-for="️-是否需要图片">🖼️ 是否需要图片？</a></li><li class="depth-2"><a href="#直接答案" data-for="直接答案">直接答案</a></li><li class="depth-2"><a href="#决策树" data-for="决策树">决策树</a></li><li class="depth-2"><a href="#实操建议" data-for="实操建议">实操建议</a></li><li class="depth-1"><a href="#-高级模式当不知道什么是好时让-ai-帮你定义" data-for="-高级模式当不知道什么是好时让-ai-帮你定义">🔄 高级模式：当不知道”什么是好”时，让 AI 帮你定义</a></li><li class="depth-2"><a href="#模式名称调研标准注入验收rise" data-for="模式名称调研标准注入验收rise">模式名称：调研→标准→注入→验收（RISE）</a></li><li class="depth-2"><a href="#完整实操示例从不知道什么是好到按标准交付" data-for="完整实操示例从不知道什么是好到按标准交付">完整实操示例：从”不知道什么是好”到”按标准交付”</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-分层策略不是每次都手写全套-xml" data-for="-分层策略不是每次都手写全套-xml">🪜 分层策略：不是每次都手写全套 XML</a></li><li class="depth-2"><a href="#四层使用模型" data-for="四层使用模型">四层使用模型</a></li><li class="depth-2"><a href="#零层90-的日常交互直接说" data-for="零层90-的日常交互直接说">零层（~90% 的日常交互）：直接说</a></li><li class="depth-2"><a href="#一层9-的交互要素补齐在心里过-5-个问题" data-for="一层9-的交互要素补齐在心里过-5-个问题">一层（~9% 的交互）：要素补齐——在心里过 5 个问题</a></li><li class="depth-2"><a href="#二层1-的复杂任务工具承载写一次反复触发" data-for="二层1-的复杂任务工具承载写一次反复触发">二层（~1% 的复杂任务）：工具承载——写一次，反复触发</a></li><li class="depth-2"><a href="#三层极少数meta_kim-自动接管" data-for="三层极少数meta_kim-自动接管">三层（极少数）：Meta_Kim 自动接管</a></li><li class="depth-2"><a href="#你已经在用的自动结构化" data-for="你已经在用的自动结构化">你已经在用的”自动结构化”</a></li><li class="depth-2"><a href="#工具速查什么时候用什么" data-for="工具速查什么时候用什么">工具速查：什么时候用什么</a></li><li class="depth-2"><a href="#一句话总结" data-for="一句话总结">一句话总结</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

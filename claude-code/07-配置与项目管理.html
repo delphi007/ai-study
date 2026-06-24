@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>07-配置与项目管理</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="07-配置与项目管理"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="07-配置与项目管理"/><meta name="twitter:description" content="配置与项目管理 📖 概念 Claude Code 的配置系统是一个分层级、可继承的 JSON 配置架构，控制着 AI 的行为边界、工具权限、外观偏好和项目约定。配合 CLAUDE.md 项目指令文件和 Memory 系统，形成了”你在哪儿工作，AI 就怎么适配”的智能适配层。 配置管理不只是”改几个 JSON 字段”。它是团队标准化的基石——通过项目级 CLAUDE.md 和 settings.json，确保团队中每个人使用 Claude Code 时都遵循相同的规范、享有相同的工具和安全边界。 配置的层级体系 全局配置 (~/.claude/settings.json) ├── 用户级默认..."/><meta property="og:description" content="配置与项目管理 📖 概念 Claude Code 的配置系统是一个分层级、可继承的 JSON 配置架构，控制着 AI 的行为边界、工具权限、外观偏好和项目约定。配合 CLAUDE.md 项目指令文件和 Memory 系统，形成了”你在哪儿工作，AI 就怎么适配”的智能适配层。 配置管理不只是”改几个 JSON 字段”。它是团队标准化的基石——通过项目级 CLAUDE.md 和 settings.json，确保团队中每个人使用 Claude Code 时都遵循相同的规范、享有相同的工具和安全边界。 配置的层级体系 全局配置 (~/.claude/settings.json) ├── 用户级默认..."/><meta property="og:image:alt" content="配置与项目管理 📖 概念 Claude Code 的配置系统是一个分层级、可继承的 JSON 配置架构，控制着 AI 的行为边界、工具权限、外观偏好和项目约定。配合 CLAUDE.md 项目指令文件和 Memory 系统，形成了”你在哪儿工作，AI 就怎么适配”的智能适配层。 配置管理不只是”改几个 JSON 字段”。它是团队标准化的基石——通过项目级 CLAUDE.md 和 settings.json，确保团队中每个人使用 Claude Code 时都遵循相同的规范、享有相同的工具和安全边界。 配置的层级体系 全局配置 (~/.claude/settings.json) ├── 用户级默认..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/claude-code/07-配置与项目管理"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/claude-code/07-配置与项目管理"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="配置与项目管理 📖 概念 Claude Code 的配置系统是一个分层级、可继承的 JSON 配置架构，控制着 AI 的行为边界、工具权限、外观偏好和项目约定。配合 CLAUDE.md 项目指令文件和 Memory 系统，形成了”你在哪儿工作，AI 就怎么适配”的智能适配层。 配置管理不只是”改几个 JSON 字段”。它是团队标准化的基石——通过项目级 CLAUDE.md 和 settings.json，确保团队中每个人使用 Claude Code 时都遵循相同的规范、享有相同的工具和安全边界。 配置的层级体系 全局配置 (~/.claude/settings.json) ├── 用户级默认..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/claude-code/07-配置与项目管理-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/claude-code/07-配置与项目管理-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/claude-code/07-配置与项目管理-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="claude-code/07-配置与项目管理" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-8" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-8" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../claude-code/">Claude Code</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>07-配置与项目管理</a></div></nav><h1 class="article-title">07-配置与项目管理</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/claude-code" class="internal internal-link tag-link">claude-code</a><span class="note-properties-separator">, </span><a href="../tags/配置" class="internal internal-link tag-link">配置</a><span class="note-properties-separator">, </span><a href="../tags/项目管理" class="internal internal-link tag-link">项目管理</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-19T16:32:52.000Z">2026年6月20日</time><span>19分钟阅读</span></p><ul class="tags"><li><a href="../tags/claude-code" class="internal tag-link">claude-code</a></li><li><a href="../tags/配置" class="internal tag-link">配置</a></li><li><a href="../tags/项目管理" class="internal tag-link">项目管理</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="配置与项目管理">配置与项目管理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置与项目管理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Claude Code 的配置系统是一个<strong>分层级、可继承的 JSON 配置架构</strong>，控制着 AI 的行为边界、工具权限、外观偏好和项目约定。配合 <code>CLAUDE.md</code> 项目指令文件和 Memory 系统，形成了”你在哪儿工作，AI 就怎么适配”的智能适配层。</p>
+</blockquote>
+<p>配置管理不只是”改几个 JSON 字段”。它是<strong>团队标准化</strong>的基石——通过项目级 <code>CLAUDE.md</code> 和 <code>settings.json</code>，确保团队中每个人使用 Claude Code 时都遵循相同的规范、享有相同的工具和安全边界。</p>
+<h3 id="配置的层级体系">配置的层级体系<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置的层级体系" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>全局配置 (~/.claude/settings.json)
+  ├── 用户级默认值：权限策略、主题、模型偏好
+  │
+  └── 项目配置 (.claude/settings.json)
+        ├── 项目级覆盖：项目特有的权限、MCP、Hooks
+        │
+        └── 项目指令 (CLAUDE.md)
+              └── 项目架构、约定、禁止事项、偏好
+</code></pre>
+<h3 id="各配置文件的职责">各配置文件的职责<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#各配置文件的职责" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>文件</th><th>位置</th><th>内容</th><th>影响范围</th></tr></thead><tbody><tr><td><code>settings.json</code></td><td><code>~/.claude/</code></td><td>用户全局设置</td><td>所有项目</td></tr><tr><td><code>settings.json</code></td><td><code>.claude/</code></td><td>项目级设置（覆盖全局）</td><td>当前项目</td></tr><tr><td><code>settings.local.json</code></td><td><code>.claude/</code></td><td>本地设置（不提交 git）</td><td>当前项目（仅本机）</td></tr><tr><td><code>CLAUDE.md</code></td><td>项目根目录</td><td>项目指令和约定</td><td>当前项目</td></tr><tr><td><code>AGENTS.md</code></td><td>项目根目录</td><td>子代理专用指令</td><td>当前项目的子代理</td></tr><tr><td><code>keybindings.json</code></td><td><code>~/.claude/</code></td><td>快捷键绑定</td><td>所有项目</td></tr></tbody></table></div>
+<h2 id="-完整目录树">📂 完整目录树<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-完整目录树" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>以下是 Claude Code 配置体系的<strong>完整目录树</strong>，所有概念的文件位置都能在此找到。</p>
+</blockquote>
+<pre><code>项目根目录/
+├── CLAUDE.md                        ← 项目指令文件
+├── AGENTS.md                        ← 子代理指令文件
+└── .claude/                         ← Claude Code 项目配置根目录
+    ├── settings.json                ← 项目配置（权限、MCP、Hooks、模型等）
+    ├── settings.local.json          ← 本地覆盖（不提交 Git）
+    ├── agents/                      ← 项目自定义子代理 [[04-Agents 代理系统]]
+    │   └── &lt;agent-name>.md          ←   单文件定义（Markdown 格式）
+    ├── skills/                      ← 项目自定义技能 [[01-Skills 技能系统]]
+    │   └── &lt;skill-name>/            ←   每个 Skill 一个目录
+    │       └── SKILL.md             ←   核心定义（触发词 + 指令）
+    ├── commands/                    ← 项目自定义斜杠命令 [[09-Slash Commands 斜杠命令]]
+    │   └── &lt;command-name>.md        ←   单文件定义
+    ├── hooks/                       ← Hook 脚本存储 [[06-Hooks 钩子系统]]
+    │   └── *.sh / *.js / *.py       ←   可执行脚本
+    └── worktrees/                   ← Agent 工作树隔离（自动管理）[[04-Agents 代理系统]]
+        └── &lt;agent-id>/              ←   临时工作副本
+
+用户全局目录 (~/.claude/)：
+~/.claude/
+├── settings.json                    ← 全局默认配置（所有项目共享）
+├── keybindings.json                 ← 快捷键绑定
+├── agents/                          ← 全局自定义代理
+│   └── &lt;agent-name>.md
+├── skills/                          ← 全局自定义技能
+│   └── &lt;skill-name>/
+│       └── SKILL.md
+├── commands/                        ← 全局自定义命令
+│   └── &lt;command-name>.md
+├── hooks/                           ← 全局 Hook 脚本
+│   └── *.sh / *.js / *.py
+├── projects/                        ← 按项目隔离的数据
+│   └── &lt;project-hash>/              ←   每个项目的唯一 hash
+│       └── memory/                  ←   Memory 存储 [[05-Memory 记忆系统]]
+│           ├── MEMORY.md            ←   记忆索引
+│           └── &lt;memory-name>.md     ←   单条记忆文件
+└── workflows/                       ← 全局 Workflow 脚本 [[08-Workflows 工作流编排]]
+    └── &lt;workflow-name>.js
+
+项目本地（不在项目目录内，仅出现在 ~/.claude/projects/&lt;hash>/）：
+~/.claude/projects/&lt;hash>/
+├── memory/                          ← 项目 Memory
+└── .claude/                         ← 会话级状态（自动管理）
+</code></pre>
+<p><strong>配置加载优先级</strong>（高到低）：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:center;">优先级</th><th>来源</th><th>说明</th></tr></thead><tbody><tr><td style="text-align:center;">1</td><td><code>.claude/settings.local.json</code></td><td>个人本地覆盖，不提交 Git</td></tr><tr><td style="text-align:center;">2</td><td><code>.claude/settings.json</code></td><td>项目配置，提交 Git 供团队共享</td></tr><tr><td style="text-align:center;">3</td><td><code>~/.claude/settings.json</code></td><td>全局默认，所有项目的基础配置</td></tr></tbody></table></div>
+<p><strong>各概念在目录树中的入口</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>概念</th><th>目录/文件入口</th><th>对应文章</th></tr></thead><tbody><tr><td>Skills</td><td><code>.claude/skills/</code>、<code>~/.claude/skills/</code></td><td><a href="../claude-code/01-skills-技能系统" class="internal internal-link alias" data-slug="claude-code/01-skills-技能系统">01-Skills 技能系统</a></td></tr><tr><td>MCP</td><td><code>.claude/settings.json</code> → <code>mcpServers</code></td><td><a href="../claude-code/02-mcp-模型上下文协议" class="internal internal-link alias" data-slug="claude-code/02-mcp-模型上下文协议">02-MCP 模型上下文协议</a></td></tr><tr><td>Tools</td><td>内置（CLI）+ <code>.claude/settings.json</code> → <code>mcpServers</code></td><td><a href="../claude-code/03-tools-工具系统" class="internal internal-link alias" data-slug="claude-code/03-tools-工具系统">03-Tools 工具系统</a></td></tr><tr><td>Agents</td><td><code>.claude/agents/</code>、<code>~/.claude/agents/</code>、<code>AGENTS.md</code></td><td><a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">04-Agents 代理系统</a></td></tr><tr><td>Memory</td><td><code>~/.claude/projects/&lt;hash>/memory/</code></td><td><a href="../claude-code/05-memory-记忆系统" class="internal internal-link alias" data-slug="claude-code/05-memory-记忆系统">05-Memory 记忆系统</a></td></tr><tr><td>Hooks</td><td><code>.claude/settings.json</code> → <code>hooks</code>、<code>.claude/hooks/</code></td><td><a href="../claude-code/06-hooks-钩子系统" class="internal internal-link alias" data-slug="claude-code/06-hooks-钩子系统">06-Hooks 钩子系统</a></td></tr><tr><td>Workflows</td><td><code>.claude/workflows/</code>（计划中）、<code>~/.claude/workflows/</code></td><td><a href="../claude-code/08-workflows-工作流编排" class="internal internal-link alias" data-slug="claude-code/08-workflows-工作流编排">08-Workflows 工作流编排</a></td></tr><tr><td>Slash Commands</td><td><code>.claude/commands/</code>、<code>~/.claude/commands/</code></td><td><a href="../claude-code/09-slash-commands-斜杠命令" class="internal internal-link alias" data-slug="claude-code/09-slash-commands-斜杠命令">09-Slash Commands 斜杠命令</a></td></tr><tr><td>Plan Mode</td><td>内置工具（EnterPlanMode/ExitPlanMode）</td><td><a href="../claude-code/10-plan-mode-规划模式" class="internal internal-link alias" data-slug="claude-code/10-plan-mode-规划模式">10-Plan Mode 规划模式</a></td></tr><tr><td>配置</td><td><code>.claude/settings.json</code>、<code>CLAUDE.md</code></td><td><a href="../claude-code/07-配置与项目管理" class="internal internal-link alias" data-slug="claude-code/07-配置与项目管理">07-配置与项目管理</a></td></tr></tbody></table></div>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>配置系统通过<strong>分层合并 + 受管注入</strong>的方式工作。项目配置覆盖全局配置，CLAUDE.md 内容作为系统提示词注入，Memory 在会话启动时加载。</p>
+</blockquote>
+<h3 id="配置加载流程">配置加载流程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置加载流程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant CLI as CLI 入口\n    participant Global as ~/.claude/settings.json\n    participant Project as .claude/settings.json\n    participant CLAUDE_MD as CLAUDE.md\n    participant Memory as Memory 系统\n    participant Session as 会话上下文\n    \n    CLI->>Global: 加载全局基础配置\n    CLI->>Project: 加载项目配置（覆盖全局）\n    CLI->>CLAUDE_MD: 读取项目指令\n    CLI->>Memory: 加载相关记忆\n    CLI->>Session: 合并注入到会话系统提示词\n    \n    Note over Session: 配置层级：全局 &lt; 项目 &lt; 本地\n    Note over Session: 注入顺序：CLAUDE.md → Memory → 对话历史&quot;">sequenceDiagram
+    participant CLI as CLI 入口
+    participant Global as ~/.claude/settings.json
+    participant Project as .claude/settings.json
+    participant CLAUDE_MD as CLAUDE.md
+    participant Memory as Memory 系统
+    participant Session as 会话上下文
+    
+    CLI->>Global: 加载全局基础配置
+    CLI->>Project: 加载项目配置（覆盖全局）
+    CLI->>CLAUDE_MD: 读取项目指令
+    CLI->>Memory: 加载相关记忆
+    CLI->>Session: 合并注入到会话系统提示词
+    
+    Note over Session: 配置层级：全局 &lt; 项目 &lt; 本地
+    Note over Session: 注入顺序：CLAUDE.md → Memory → 对话历史
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="settingsjson-的核心配置块">settings.json 的核心配置块<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#settingsjson-的核心配置块" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">  // ─── 权限管理 ───</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;permissions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;allow&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm test:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,           </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 允许特定命令模式</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git diff:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,           </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 使用通配符</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Read&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,                        </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 允许整个工具</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;WebSearch&quot;</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">                    // 允许网络搜索</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;ask&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git push:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,            </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 推送前确认</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(rm:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,                  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 删除前确认</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(curl:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,                </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 外部请求确认</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Write(~/.zshrc)&quot;</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">              // 修改敏感文件确认</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;deny&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(rm -rf /*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,            </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 禁止危险命令</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(> /dev/sda)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,           </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 禁止写入设备</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Edit(~/.ssh/*)&quot;</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">              // 禁止修改 SSH 配置</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  },</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">  // ─── MCP 服务器配置 ───</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;mcpServers&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;github&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;stdio&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;command&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;npx&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;args&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;-y&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;@anthropic/mcp-server-github&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">      &quot;env&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: { </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;GITHUB_TOKEN&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;${GITHUB_TOKEN}&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  },</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">  // ─── Hooks 配置 ───</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;hooks&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;SessionStart&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      { </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">&quot;command&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;node .claude/hooks/load-context.js&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;PostToolUse&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      { </span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;matcher&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Write|Edit&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">        &quot;command&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;npx prettier --write ${CLAUDE_TOOL_FILE_PATH}&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  },</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">  // ─── 外观与行为 ───</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;model&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;claude-sonnet-4-6&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,     </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 默认模型</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;theme&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;system&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,                 </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 主题</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;showTokens&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,                 </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 显示 Token 用量</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;autoCompact&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,                </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 自动压缩上下文</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;compactThreshold&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.8</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,            </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// 压缩阈值</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">  // ─── 环境变量 ───</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;env&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;NODE_ENV&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;development&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;DEBUG&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;claude:*&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<h3 id="claudemd-的最佳结构">CLAUDE.md 的最佳结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#claudemd-的最佳结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>CLAUDE.md 是整个配置体系中最重要的文件——它定义了”在这个项目中，AI 应该如何工作”。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># CLAUDE.md — 项目指令文件</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 项目概述</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- 一段话描述项目是什么、为谁做、核心功能 --></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 技术架构</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- 关键的技术栈、目录结构、设计模式 --></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 编码规范</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- 命名约定、文件组织、代码风格 --></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 禁止事项</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- AI 绝对不应该做的事情 --></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 工作流偏好</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- 你偏好的协作方式 --></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## Git 约定</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- Commit message 格式、分支策略 --></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 测试要求</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">&lt;!-- 测试框架、覆盖率要求、测试运行方式 --></span></span></code></pre></figure>
+<h2 id="-为什么重要">💡 为什么重要<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-为什么重要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>一句话适配</strong>：新成员 clone 项目后，Claude Code 自动理解项目约定</li>
+<li><strong>团队一致性</strong>：所有成员使用相同的 AI 行为标准</li>
+<li><strong>安全边界</strong>：通过权限配置精确控制 AI 的能力范围</li>
+<li><strong>环境自适应</strong>：在不同项目中，AI 自动切换不同的行为模式</li>
+</ul>
+<h2 id="-实战示例">🎯 实战示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-实战示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1为团队项目配置完整的-claude-code-环境">示例 1：为团队项目配置完整的 Claude Code 环境<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1为团队项目配置完整的-claude-code-环境" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你作为 Tech Lead，需要为团队的项目配置 Claude Code，确保所有成员使用时遵循相同的规范。</p>
+<p><strong>操作步骤</strong>：</p>
+<p><strong>第一步：创建 <code>.claude/settings.local.json</code> 模板（不提交到 Git）</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">// .claude/settings.local.json.example（复制为 settings.local.json）</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;permissions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;allow&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npx:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(pnpm:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git diff:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git status:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git log:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git branch:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(node:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(tsc:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Read&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Write&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Edit&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Glob&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Grep&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;WebSearch&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;WebFetch&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;ask&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git push:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git commit:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm publish:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(docker:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(rm:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(sudo:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;deny&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(rm -rf /:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(> /dev/:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(curl:*) | Bash(wget:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>第二步：创建详细的 CLAUDE.md</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># CLAUDE.md — Team E-Commerce Platform</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 项目概述</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">B2C 电商平台，包含 3 个微服务：API Gateway、订单服务、商品服务。</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">技术栈：TypeScript + Node.js + Prisma + PostgreSQL + Redis。</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 目录结构</span></span></code></pre></figure>
+<p>src/
+├── api/          # API 路由和中间件
+├── services/     # 业务逻辑层
+├── models/       # Prisma Schema 生成的类型
+├── stores/       # Zustand 状态管理
+├── utils/        # 纯函数工具
+└── types/        # 共享类型定义</p>
+<pre><code>
+## 编码规范
+- 所有函数必须显式声明返回类型（禁止依赖类型推断）
+- 错误处理：service 层抛出自定义 `AppError`，api 层用 error middleware 捕获
+- 命名：文件名 kebab-case，变量 camelCase，类型 PascalCase
+- 导入顺序：Node 内置 → 第三方 → 内部模块（空行分隔）
+
+## 禁止事项
+- ❌ 禁止使用 `any` 类型——用 `unknown` + 类型守卫
+- ❌ 禁止直接在组件中调用 API——通过 service 层
+- ❌ 禁止硬编码配置值——使用环境变量
+- ❌ 禁止引入新依赖而不在 CLAUDE.md 中记录
+
+## 工作流偏好
+- 新功能先写类型定义和接口，再写实现
+- 所有 PR 必须包含测试
+- 优先使用 pnpm，备用 npm
+- 回复用中文，代码注释用英文
+
+## Git 约定
+- Commit: [Conventional Commits](https://www.conventionalcommits.org/)
+  格式：`type(scope): description`
+- 分支：`feature/xxx`, `fix/xxx`, `refactor/xxx`
+
+## 测试要求
+- 单元测试：Vitest，文件与源文件同目录
+- 集成测试：`__tests__/integration/`
+- 运行：`pnpm test`（全量），`pnpm test:watch`（监听模式）
+</code></pre>
+<p><strong>第三步：验证配置</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 新成员加入后，只需：</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">git</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> clone</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">rep</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">o</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">cd</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">rep</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">o</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 复制本地配置模板</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">cp</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> .claude/settings.local.json.example</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> .claude/settings.local.json</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 开始工作——AI 自动理解项目一切</span></span></code></pre></figure>
+<p><strong>结果</strong>：任何团队成员打开 Claude Code 后，AI 自动：</p>
+<ul>
+<li>理解项目是电商平台，使用 TypeScript + Prisma</li>
+<li>遵循编码规范（禁止 any、函数显式返回类型）</li>
+<li>使用 pnpm 而非 npm</li>
+<li>新功能按”先类型 → 再实现 → 加测试”的流程</li>
+<li>禁止硬编码配置值</li>
+<li>回复用中文，代码注释用英文</li>
+</ul>
+<p><strong>原理分析</strong>：这是配置系统的<strong>团队标准化</strong>能力。<code>CLAUDE.md</code> 将团队的隐性知识（编码偏好、架构约定、禁止事项）转化为 AI 可读取的显式指令。<code>.gitignore</code> 中排除 <code>settings.local.json</code>，但保留 <code>.example</code> 模板。新成员克隆项目后，AI 即刻理解项目的一切，无需手动解释。</p>
+<h3 id="示例-2多项目配置文件管理策略模式">示例 2：多项目配置文件管理——策略模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2多项目配置文件管理策略模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你同时维护 4 个项目：一个 React 前端、一个 Node.js 后端、一个 Flutter 移动端、一个 Python 数据管道。每个项目需要不同的 AI 行为。</p>
+<p><strong>操作步骤</strong>：</p>
+<p>为每个项目配置专属的行为策略：</p>
+<p><strong>React 前端项目</strong> (<code>.claude/settings.json</code>)：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;model&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;claude-sonnet-4-6&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;permissions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;allow&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm run dev:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm run build:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm test:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npx vitest:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npx playwright:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>CLAUDE.md（React 前端）</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 前端项目约定</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 使用 React 18 + TypeScript + Vite</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 样式：Tailwind CSS，禁止写内联 style</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 组件：每个组件一个文件夹（index.tsx + styles.ts + test.tsx）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 状态：简单状态用 useState，跨组件用 Zustand</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> AI 回复策略：UI 生成时，先展示组件结构再写代码</span></span></code></pre></figure>
+<p><strong>Python 数据管道项目</strong> (<code>.claude/settings.json</code>)：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;model&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;claude-haiku-4-5&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;permissions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;allow&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(python:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(poetry:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(pytest:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(ruff:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;ask&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(python * --production:*)&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(poetry add:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>CLAUDE.md（Python 数据管道）</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## 数据管道项目约定</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 使用 Python 3.12 + Polars（不用 Pandas）</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 包管理：Poetry</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 代码质量：ruff format + ruff check，禁止未格式化的代码</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 类型标注：所有函数必须有完整类型标注</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> 数据安全：禁止打印或记录原始用户数据</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> AI 回复策略：数据分析任务时，先展示查询计划再执行</span></span></code></pre></figure>
+<p><strong>全局配置</strong> (<code>~/.claude/settings.json</code>)：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;theme&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;dark&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;showTokens&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;autoCompact&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">  &quot;env&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">    &quot;EDITOR&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;code&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p><strong>结果</strong>：</p>
+<ul>
+<li>进入 React 前端目录：AI 用 Sonnet 模型，自动用 Tailwind，文件按组件文件夹组织</li>
+<li>进入 Python 管道目录：AI 用 Haiku 模型（更便宜），自动用 Polars，严格类型标注</li>
+<li>进入 Flutter 项目：AI 自动使用 Flutter Skills</li>
+<li>进入 Node.js 后端：AI 自动遵循 Prisma 和 RESTful 约定</li>
+<li>全局设置（主题、Token 显示）在所有项目中生效</li>
+</ul>
+<p><strong>原理分析</strong>：这展示了配置系统的<strong>环境自适应</strong>能力。项目级配置覆盖全局配置，CLAUDE.md 为每个项目注入不同的行为指令。模型选择（Sonnet vs Haiku）可以根据项目复杂度灵活调整——前端 UI 生成需要强推理能力（Sonnet），数据管道处理更多是机械性的代码生成（Haiku 足够，且更便宜）。这种”每项目一策略”的配置管理是<strong>项目管理</strong>层面的最佳实践。</p>
+<h3 id="示例-3动态权限策略开发-vs-生产环境">示例 3：动态权限策略——开发 vs 生产环境<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-3动态权限策略开发-vs-生产环境" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你希望在开发环境和接近生产的预发布环境中有不同的权限策略。开发时可以自由执行，预发布时需要谨慎。</p>
+<p><strong>操作步骤</strong>：</p>
+<p>创建环境感知的配置脚本：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">#!/bin/bash</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># .claude/scripts/setup-env.sh</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 根据当前环境生成对应的 settings.local.json</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">ENV</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">${1</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">:-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">development</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">}</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">case</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> $ENV </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">in</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">  development</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">)</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">    cat</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> ></span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> .claude/settings.local.json</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;&lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 'EOF'</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">{</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;permissions&quot;: {</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;allow&quot;: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm:*)&quot;, &quot;Bash(pnpm:*)&quot;, &quot;Bash(npx:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git:*)&quot;, &quot;Bash(node:*)&quot;, &quot;Bash(tsc:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(docker-compose:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Read&quot;, &quot;Write&quot;, &quot;Edit&quot;, &quot;Glob&quot;, &quot;Grep&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;WebSearch&quot;, &quot;WebFetch&quot;</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    ],</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;ask&quot;: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git push:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    ],</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;deny&quot;: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(kubectl apply:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(terraform apply:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(aws *:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(gcloud *:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    ]</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  },</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;env&quot;: { &quot;DEPLOY_ENV&quot;: &quot;development&quot; }</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">}</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">EOF</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ;;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    </span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;" data-token-type="regexp">  staging</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">)</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">    cat</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> ></span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> .claude/settings.local.json</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;&lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> 'EOF'</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">{</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;permissions&quot;: {</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;allow&quot;: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm:*)&quot;, &quot;Bash(pnpm:*)&quot;, &quot;Bash(npx:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git diff:*)&quot;, &quot;Bash(git status:*)&quot;, &quot;Bash(git log:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(node:*)&quot;, &quot;Bash(tsc:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Read&quot;, &quot;Write&quot;, &quot;Edit&quot;, &quot;Glob&quot;, &quot;Grep&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;WebSearch&quot;, &quot;WebFetch&quot;</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    ],</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;ask&quot;: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git push:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(git commit:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm version:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(npm publish:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(docker push:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(kubectl:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(terraform:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(aws:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(gcloud:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    ],</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;deny&quot;: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(kubectl delete:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(terraform destroy:*)&quot;,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;Bash(aws * delete:*)&quot;</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    ]</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  },</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;env&quot;: { &quot;DEPLOY_ENV&quot;: &quot;staging&quot; }</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">}</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">EOF</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    ;;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">esac</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">echo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;✅ Claude Code 环境已设为: </span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">$ENV</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;</span></span></code></pre></figure>
+<p>使用：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 日常开发</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">bash</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> .claude/scripts/setup-env.sh</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> development</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 接近发布时</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">bash</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> .claude/scripts/setup-env.sh</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> staging</span></span></code></pre></figure>
+<p><strong>Claude Code 中的对应行为</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 开发环境：</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;帮我清理所有 Docker 容器，重建开发环境&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  </span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → AI 执行 docker-compose down &amp;&amp; docker-compose up -d（允许）</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 预发布环境：  </span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;帮我更新 staging 环境的 K8s 配置&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → AI 说：&quot;检测到当前是 staging 环境，K8s 操作需要手动确认。</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">#     这是修改后的配置 diff，请审查后我帮你执行。&quot;</span></span></code></pre></figure>
+<p><strong>原理分析</strong>：这个示例展示了配置系统的<strong>动态安全策略</strong>。通过脚本切换 <code>settings.local.json</code>，同一台机器上的同一个项目可以有不同的权限模式。开发时自由操作不担心破坏什么；预发布时谨慎操作防止事故。这是 DevOps 思维在 AI 编程助手配置中的应用——将环境意识融入 AI 的行为边界。</p>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：<code>.claude/settings.local.json</code> 加入 <code>.gitignore</code>——它包含个人偏好和本地路径</li>
+<li><strong>DO</strong>：提供 <code>.claude/settings.local.json.example</code> 模板，方便新成员快速上手</li>
+<li><strong>DO</strong>：CLAUDE.md 应该具体到”在这个项目中做什么、不做什么”，而非泛泛而谈</li>
+<li><strong>DO</strong>：定期 Review CLAUDE.md——项目演进时，AI 指令也要更新</li>
+<li><strong>DON’T</strong>：在 CLAUDE.md 中写”尽可能好”——写具体的检查项和标准</li>
+<li><strong>DON’T</strong>：把所有东西都放全局配置——项目特定配置应该放在项目中</li>
+<li><strong>TIP</strong>：用 <code>claude /config</code> 交互式修改配置，避免 JSON 语法错误</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>CLAUDE.md 过长</td><td>占用大量上下文窗口，影响 AI 表现</td><td>保持在 200 行以内，详细信息通过 Memory 管理</td></tr><tr><td>设置冲突</td><td>全局和项目配置的同一项不一致</td><td>理解合并规则：项目覆盖全局，local 覆盖项目</td></tr><tr><td>过于宽松的权限</td><td>AI 执行了意外的 git push 或 npm publish</td><td>对不可逆操作始终使用 <code>ask</code>，生产环境用 <code>deny</code></td></tr><tr><td>配置未同步</td><td>团队成员的 CLAUDE.md 版本不一致</td><td>将 CLAUDE.md 纳入 Git，作为代码审查的一部分</td></tr><tr><td>忽略本地配置</td><td>settings.local.json 未加入 .gitignore</td><td>确保 .gitignore 包含 <code>.claude/settings.local.json</code></td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../claude-code/00-claude-code-入门概览" class="internal internal-link alias" data-slug="claude-code/00-claude-code-入门概览">Claude Code 入门概览</a> — 配置系统在整体架构中的位置</li>
+<li><a href="../claude-code/02-mcp-模型上下文协议" class="internal internal-link alias" data-slug="claude-code/02-mcp-模型上下文协议">MCP 协议</a> — MCP Server 在 settings.json 中配置</li>
+<li><a href="../claude-code/05-memory-记忆系统" class="internal internal-link alias" data-slug="claude-code/05-memory-记忆系统">Memory 记忆系统</a> — CLAUDE.md vs Memory：指令 vs 知识</li>
+<li><a href="../claude-code/06-hooks-钩子系统" class="internal internal-link alias" data-slug="claude-code/06-hooks-钩子系统">Hooks 钩子系统</a> — Hooks 在 settings.json 中配置</li>
+<li><a href="../claude-code/09-slash-commands-斜杠命令" class="internal internal-link alias" data-slug="claude-code/09-slash-commands-斜杠命令">Slash Commands 斜杠命令</a> — 自定义命令存储在 <code>.claude/commands/</code></li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>🎉 专题完成！</strong> 你已学完 Claude Code 基本使用的全部 11 篇文章。
+回到 <a href="../00-总览/ai学习知识库总览" class="internal internal-link alias" data-slug="00-总览/ai学习知识库总览">AI学习知识库总览</a> 查看完整知识地图。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-8" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#配置与项目管理" data-for="配置与项目管理">配置与项目管理</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-2"><a href="#配置的层级体系" data-for="配置的层级体系">配置的层级体系</a></li><li class="depth-2"><a href="#各配置文件的职责" data-for="各配置文件的职责">各配置文件的职责</a></li><li class="depth-1"><a href="#-完整目录树" data-for="-完整目录树">📂 完整目录树</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#配置加载流程" data-for="配置加载流程">配置加载流程</a></li><li class="depth-2"><a href="#settingsjson-的核心配置块" data-for="settingsjson-的核心配置块">settings.json 的核心配置块</a></li><li class="depth-2"><a href="#claudemd-的最佳结构" data-for="claudemd-的最佳结构">CLAUDE.md 的最佳结构</a></li><li class="depth-1"><a href="#-为什么重要" data-for="-为什么重要">💡 为什么重要</a></li><li class="depth-1"><a href="#-实战示例" data-for="-实战示例">🎯 实战示例</a></li><li class="depth-2"><a href="#示例-1为团队项目配置完整的-claude-code-环境" data-for="示例-1为团队项目配置完整的-claude-code-环境">示例 1：为团队项目配置完整的 Claude Code 环境</a></li><li class="depth-2"><a href="#示例-2多项目配置文件管理策略模式" data-for="示例-2多项目配置文件管理策略模式">示例 2：多项目配置文件管理——策略模式</a></li><li class="depth-2"><a href="#示例-3动态权限策略开发-vs-生产环境" data-for="示例-3动态权限策略开发-vs-生产环境">示例 3：动态权限策略——开发 vs 生产环境</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../claude-code/00-claude-code-入门概览" class="internal">00-Claude Code 入门概览</a></li><li><a href="../claude-code/02-mcp-模型上下文协议" class="internal">02-MCP 模型上下文协议</a></li><li><a href="../claude-code/05-memory-记忆系统" class="internal">05-Memory 记忆系统</a></li><li><a href="../claude-code/06-hooks-钩子系统" class="internal">06-Hooks 钩子系统</a></li><li><a href="../claude-code/07-配置与项目管理" class="internal">07-配置与项目管理</a></li><li><a href="../claude-code/09-slash-commands-斜杠命令" class="internal">09-Slash Commands 斜杠命令</a></li><li><a href="../claude-code/10-plan-mode-规划模式" class="internal">10-Plan Mode 规划模式</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>

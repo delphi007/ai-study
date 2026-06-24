@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>01-Skills 技能系统</title><meta charset="utf-8"/><link rel="preload" href="../index-47d9ba67.css" as="style"/><link rel="preload" href="../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="AI 学习知识库"/><meta property="og:title" content="01-Skills 技能系统"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="01-Skills 技能系统"/><meta name="twitter:description" content="Skills 技能系统 📖 概念 Skills 是 Claude Code 的可安装能力扩展单元。每个 Skill 是一个包含特定领域知识、工作流程和指令的独立模块。当用户提出匹配的需求时，Skill 会被自动发现并加载，为 Claude Code 注入该领域的专业能力——如同给 AI 安装了一个”专业应用”。 Skill 不是简单的”提示词模板”。它是一套完整的能力契约：定义了触发条件、工作流程、工具使用模式和输出规范。Skills 让 Claude Code 从”通用助手”变成”领域专家”。 Skills 的层级结构 层级说明示例内置 SkillsClaude Code 自带的官方技能c..."/><meta property="og:description" content="Skills 技能系统 📖 概念 Skills 是 Claude Code 的可安装能力扩展单元。每个 Skill 是一个包含特定领域知识、工作流程和指令的独立模块。当用户提出匹配的需求时，Skill 会被自动发现并加载，为 Claude Code 注入该领域的专业能力——如同给 AI 安装了一个”专业应用”。 Skill 不是简单的”提示词模板”。它是一套完整的能力契约：定义了触发条件、工作流程、工具使用模式和输出规范。Skills 让 Claude Code 从”通用助手”变成”领域专家”。 Skills 的层级结构 层级说明示例内置 SkillsClaude Code 自带的官方技能c..."/><meta property="og:image:alt" content="Skills 技能系统 📖 概念 Skills 是 Claude Code 的可安装能力扩展单元。每个 Skill 是一个包含特定领域知识、工作流程和指令的独立模块。当用户提出匹配的需求时，Skill 会被自动发现并加载，为 Claude Code 注入该领域的专业能力——如同给 AI 安装了一个”专业应用”。 Skill 不是简单的”提示词模板”。它是一套完整的能力契约：定义了触发条件、工作流程、工具使用模式和输出规范。Skills 让 Claude Code 从”通用助手”变成”领域专家”。 Skills 的层级结构 层级说明示例内置 SkillsClaude Code 自带的官方技能c..."/><meta property="og:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="delphi007.github.io/ai-study"/><meta property="og:url" content="https://delphi007.github.io/ai-study/claude-code/01-skills-技能系统"/><meta property="twitter:url" content="https://delphi007.github.io/ai-study/claude-code/01-skills-技能系统"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Skills 技能系统 📖 概念 Skills 是 Claude Code 的可安装能力扩展单元。每个 Skill 是一个包含特定领域知识、工作流程和指令的独立模块。当用户提出匹配的需求时，Skill 会被自动发现并加载，为 Claude Code 注入该领域的专业能力——如同给 AI 安装了一个”专业应用”。 Skill 不是简单的”提示词模板”。它是一套完整的能力契约：定义了触发条件、工作流程、工具使用模式和输出规范。Skills 让 Claude Code 从”通用助手”变成”领域专家”。 Skills 的层级结构 层级说明示例内置 SkillsClaude Code 自带的官方技能c..."/><meta name="generator" content="Quartz"/><link href="../index-47d9ba67.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-caf7c009.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://delphi007.github.io/ai-study/claude-code/01-skills-技能系统-og-image.webp"/><meta property="og:image:url" content="https://delphi007.github.io/ai-study/claude-code/01-skills-技能系统-og-image.webp"/><meta name="twitter:image" content="https://delphi007.github.io/ai-study/claude-code/01-skills-技能系统-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="claude-code/01-skills-技能系统" data-basepath="/ai-study"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">AI 学习知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-2" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-2" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../claude-code/">Claude Code</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>01-Skills 技能系统</a></div></nav><h1 class="article-title">01-Skills 技能系统</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../tags/claude-code" class="internal internal-link tag-link">claude-code</a><span class="note-properties-separator">, </span><a href="../tags/skills" class="internal internal-link tag-link">skills</a><span class="note-properties-separator">, </span><a href="../tags/技能" class="internal internal-link tag-link">技能</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-06-19T16:32:52.000Z">2026年6月20日</time><span>11分钟阅读</span></p><ul class="tags"><li><a href="../tags/claude-code" class="internal tag-link">claude-code</a></li><li><a href="../tags/skills" class="internal tag-link">skills</a></li><li><a href="../tags/技能" class="internal tag-link">技能</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="skills-技能系统">Skills 技能系统<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#skills-技能系统" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="-概念">📖 概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Skills 是 Claude Code 的<strong>可安装能力扩展单元</strong>。每个 Skill 是一个包含特定领域知识、工作流程和指令的独立模块。当用户提出匹配的需求时，Skill 会被自动发现并加载，为 Claude Code 注入该领域的专业能力——如同给 AI 安装了一个”专业应用”。</p>
+</blockquote>
+<p>Skill 不是简单的”提示词模板”。它是一套完整的<strong>能力契约</strong>：定义了触发条件、工作流程、工具使用模式和输出规范。Skills 让 Claude Code 从”通用助手”变成”领域专家”。</p>
+<h3 id="skills-的层级结构">Skills 的层级结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#skills-的层级结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>层级</th><th>说明</th><th>示例</th></tr></thead><tbody><tr><td><strong>内置 Skills</strong></td><td>Claude Code 自带的官方技能</td><td><code>code-review</code>, <code>security-review</code>, <code>verify</code></td></tr><tr><td><strong>社区 Skills</strong></td><td>通过 <code>findskill</code> 发现和安装</td><td><code>flutter-ui-ux</code>, <code>deep-research</code></td></tr><tr><td><strong>项目 Skills</strong></td><td>项目 <code>.claude/skills/</code> 目录下的自定义技能</td><td>项目专属的部署流程、代码生成模板</td></tr><tr><td><strong>用户 Skills</strong></td><td>全局 <code>~/.claude/skills/</code> 下的个人技能</td><td>个人偏好的工作流</td></tr></tbody></table></div>
+<h2 id="-工作原理">🔧 工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Skills 系统通过<strong>触发词匹配 + 能力注入 + 工具编排</strong>三层机制工作。</p>
+</blockquote>
+<h3 id="skills-的完整生命周期">Skills 的完整生命周期<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#skills-的完整生命周期" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant User as 用户\n    participant CLI as CLI 入口\n    participant Registry as Skill 注册表\n    participant Skill as 匹配的 Skill\n    participant Tools as 工具层\n    \n    User->>CLI: 输入自然语言指令\n    CLI->>Registry: 扫描已安装 Skills 的触发词\n    Registry-->>CLI: 返回匹配的 Skill 列表\n    CLI->>Skill: 加载 Skill 定义和指令\n    Skill->>CLI: 注入领域知识和操作指南\n    CLI->>Tools: 按 Skill 定义调用工具\n    Tools-->>CLI: 返回执行结果\n    CLI-->>User: 输出 Skill 增强后的结果&quot;">sequenceDiagram
+    participant User as 用户
+    participant CLI as CLI 入口
+    participant Registry as Skill 注册表
+    participant Skill as 匹配的 Skill
+    participant Tools as 工具层
+    
+    User->>CLI: 输入自然语言指令
+    CLI->>Registry: 扫描已安装 Skills 的触发词
+    Registry-->>CLI: 返回匹配的 Skill 列表
+    CLI->>Skill: 加载 Skill 定义和指令
+    Skill->>CLI: 注入领域知识和操作指南
+    CLI->>Tools: 按 Skill 定义调用工具
+    Tools-->>CLI: 返回执行结果
+    CLI-->>User: 输出 Skill 增强后的结果
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="关键机制">关键机制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#关键机制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>触发词匹配</strong>：每个 Skill 在 <code>description</code> 中声明触发词（中英文均可），Claude Code 在收到用户输入时扫描匹配</li>
+<li><strong>上下文注入</strong>：匹配成功后，Skill 的完整指令被注入当前会话的系统提示词</li>
+<li><strong>工具编排</strong>：Skill 的指令中包含工具使用策略，指导 Agent 何时调用哪个工具</li>
+<li><strong>优先级策略</strong>：项目 Skills > 用户全局 Skills > 社区 Skills > 内置 Skills</li>
+</ol>
+<h3 id="skill-的文件结构">Skill 的文件结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#skill-的文件结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>.claude/skills/my-skill/
+├── SKILL.md          # 核心定义：触发词、描述、指令
+├── scripts/          # 可选：辅助脚本
+│   └── helper.sh
+├── templates/        # 可选：代码模板
+│   └── component.tsx
+└── references/       # 可选：参考文档
+    └── api-docs.md
+</code></pre>
+<h2 id="-目录树位置">📂 目录树位置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-目录树位置" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>Skills 按作用范围存储在两级目录中，项目级优先于全局级。</p>
+</blockquote>
+<pre><code>项目根目录/
+└── .claude/
+    └── skills/                          ← 项目 Skills（仅当前项目可用）
+        └── &lt;skill-name>/
+            └── SKILL.md                 ← 核心定义文件（触发词 + 指令）
+
+用户全局目录 (~/.claude/)：
+~/.claude/
+└── skills/                              ← 全局 Skills（所有项目可用）
+    └── &lt;skill-name>/
+        └── SKILL.md
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>位置</th><th>作用范围</th><th style="text-align:center;">优先级</th><th>适用场景</th></tr></thead><tbody><tr><td><code>.claude/skills/&lt;name>/SKILL.md</code></td><td>当前项目</td><td style="text-align:center;">🔴 最高</td><td>团队共享的 API 生成规范、部署流程</td></tr><tr><td><code>~/.claude/skills/&lt;name>/SKILL.md</code></td><td>所有项目</td><td style="text-align:center;">🟡 次之</td><td>个人偏好的代码风格、通用工作流</td></tr></tbody></table></div>
+<p><strong>优先级规则</strong>：项目 Skills > 用户全局 Skills > 社区 Skills > 内置 Skills。同名 Skill 按此顺序覆盖。</p>
+<p><strong>Skills 发现的其它来源</strong>：</p>
+<ul>
+<li>内置 Skills：编译在 Claude Code CLI 内部（如 <code>code-review</code>、<code>security-review</code>）</li>
+<li>社区 Skills：通过 <code>findskill</code> 搜索并安装（实际安装到 <code>~/.claude/skills/</code>）</li>
+</ul>
+<h2 id="-为什么重要">💡 为什么重要<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-为什么重要" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>专业化</strong>：将通用 AI 转化为特定领域的专家，如 Flutter 开发、安全审查、UX 设计</li>
+<li><strong>可复用</strong>：一次创建，团队共享，跨项目使用</li>
+<li><strong>标准化</strong>：将团队的最佳实践编码为 Skill，新人也能产出高质量工作</li>
+<li><strong>生态扩展</strong>：通过社区 Skills 获取他人的专业能力</li>
+</ul>
+<h2 id="-实战示例">🎯 实战示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-实战示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="示例-1创建项目专属的-api-生成-skill">示例 1：创建项目专属的 API 生成 Skill<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1创建项目专属的-api-生成-skill" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你的团队使用固定的 API 设计规范（RESTful、特定命名约定、统一错误格式）。每次创建新端点都要重复相同的样板代码。</p>
+<p><strong>操作步骤</strong>：</p>
+<p>创建 <code>.claude/skills/api-generator/SKILL.md</code>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="markdown" data-theme="github-light github-dark"><code data-language="markdown" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation"># API Generator Skill</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## Description</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Generate REST API endpoints following our team's conventions.</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Triggers: &quot;create API&quot;, &quot;新接口&quot;, &quot;REST endpoint&quot;, &quot;API endpoint&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;" data-token-type="punctuation">## Instructions</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">When generating API endpoints, follow these rules:</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">1.</span><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation"> **Route Convention**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">: All routes use </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">`/api/v1/{resource}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> prefix</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">2.</span><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation"> **File Structure**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">: </span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">   -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> Route handler: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">`src/routes/{resource}.ts`</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">   -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> Validation: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">`src/validators/{resource}.ts`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> (using Zod)</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">   -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> Service: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">`src/services/{resource}.ts`</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">   -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> Types: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="punctuation">`src/types/{resource}.ts`</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;" data-token-type="important">3.</span><span style="--shiki-light:#24292E;--shiki-light-font-weight:bold;--shiki-dark:#E1E4E8;--shiki-dark-font-weight:bold;" data-token-type="punctuation"> **Error Format**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">:</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">   ```typescript</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal">   { </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">error</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: { </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">code</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: string, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">message</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: string, details</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">?:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> any } }</span></span></code></pre></figure>
+<ol start="4">
+<li><strong>Response Format</strong>:
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="typescript" data-theme="github-light github-dark"><code data-language="typescript" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{ </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">data</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">T</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">meta</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: { page</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">?:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> number, total</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">?:</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="normal"> number } }</span></span></code></pre></figure>
+</li>
+<li>Always include: input validation, error handling, TypeScript types, unit tests</li>
+</ol>
+<pre><code>
+**使用**：
+
+```bash
+&quot;create API endpoint for user registration with email/password&quot;
+</code></pre>
+<p><strong>结果</strong>：Claude Code 自动按团队规范生成 4 个文件，包含完整的验证、错误处理、类型定义和测试。</p>
+<p><strong>原理分析</strong>：项目 Skill 的优先级最高，Claude Code 将其指令注入后，所有代码生成都遵循团队规范。这是<strong>标准化</strong>能力的核心体现——将隐性知识（团队偏好）转化为显性规则（Skill 定义）。</p>
+<h3 id="示例-2组合使用社区-skills-进行代码审查">示例 2：组合使用社区 Skills 进行代码审查<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2组合使用社区-skills-进行代码审查" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你正在开发一个 Flutter 应用，完成了登录页面。想在合并前进行全面的代码审查：安全检查、UI/UX 评估、代码简化。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 首先安装需要的 Skills（一次性）</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;find a skill for Flutter UI development&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → 安装 flutter-ui-ux</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;find a skill for security review&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  </span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → 安装 security-review</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;find a skill for code simplification&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># → 安装 simplify</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 然后在开发中使用：</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;review the login page using security-review and simplify skills&quot;</span></span></code></pre></figure>
+<p><strong>结果</strong>：三个 Skill 各自从不同维度审查代码：</p>
+<ol>
+<li><code>security-review</code>：检查 token 存储安全、输入验证、SQL 注入防护</li>
+<li><code>flutter-ui-ux</code>：检查响应式布局、动画性能、无障碍支持</li>
+<li><code>simplify</code>：识别冗余代码、可复用的 widget、过度嵌套</li>
+</ol>
+<p><strong>原理分析</strong>：多个 Skills 可以叠加使用，每个 Skill 注入不同领域的专业知识。这体现了 Skills 系统的<strong>可组合性</strong>——不同 Skill 之间不冲突，Agent 会综合多个视角给出全面反馈。</p>
+<h3 id="示例-3用-skills-搭建项目规划工作流">示例 3：用 Skills 搭建项目规划工作流<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-3用-skills-搭建项目规划工作流" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>场景</strong>：你作为 Tech Lead，需要为一个新功能做完整的技术规划：需求分析 → 架构设计 → 任务分解 → 风险评估。</p>
+<p><strong>操作步骤</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 第一步：需求分析</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;use the planning-with-files skill to help me break down </span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">a user story: 'As an admin, I want to bulk import users from CSV'&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 第二步：架构设计</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;使用 ux-design:lean-ux skill，为这个功能设计假设和实验方案&quot;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 第三步：实现计划</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">&quot;create a detailed implementation plan with file-level tasks,</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">use the planning skill to track everything&quot;</span></span></code></pre></figure>
+<p><strong>结果</strong>：</p>
+<ol>
+<li><code>planning-with-files</code>：创建 <code>task_plan.md</code>、<code>findings.md</code>、<code>progress.md</code>，将需求分解为可追踪的任务</li>
+<li><code>lean-ux</code>：产出假设陈述、MVP 范围、实验设计方案</li>
+<li>Agent 综合两个 Skill 的输出，生成文件级的实现计划</li>
+</ol>
+<p><strong>原理分析</strong>：这个示例展示了 Skills 在<strong>项目规划</strong>中的价值。每个 Skill 提供一种结构化的思维框架（任务拆解、精益实验、实现规划），Agent 将这些框架组合为完整的项目规划文档。这不是”写代码”，而是”设计解决方案”。</p>
+<h2 id="-最佳实践">✅ 最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>DO</strong>：为团队重复性工作创建项目 Skill（API 生成、组件脚手架、部署流程）</li>
+<li><strong>DO</strong>：在 Skill 的 description 中同时包含中英文触发词，覆盖多语言团队</li>
+<li><strong>DO</strong>：Skill 指令应具体、可执行，包含代码示例和反例</li>
+<li><strong>DON’T</strong>：过度创建 Skill——如果只用一次，直接用自然语言描述即可</li>
+<li><strong>DON’T</strong>：在 Skill 中写”尽可能好”这类模糊指令——给出具体标准</li>
+<li><strong>TIP</strong>：使用 <code>skill-creator</code> Skill 来创建和优化你的自定义 Skills</li>
+</ol>
+<h2 id="️-常见陷阱">⚠️ 常见陷阱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-常见陷阱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>陷阱</th><th>表现</th><th>解决方案</th></tr></thead><tbody><tr><td>触发词过于宽泛</td><td>Skill 在不相关的场景被激活</td><td>使用具体、独特的触发词组合</td></tr><tr><td>指令过长</td><td>Skill 占用过多上下文，影响其他任务</td><td>保持 Skill 指令精简，引用外部文档</td></tr><tr><td>权限未配置</td><td>Skill 需要的工具因权限不足无法使用</td><td>在 <code>settings.json</code> 中为 Skill 所需工具配置 <code>allow</code></td></tr><tr><td>未及时更新</td><td>Skill 规范与团队实践脱节</td><td>定期 Review 和更新项目 Skills</td></tr></tbody></table></div>
+<h2 id="-关联概念">🔗 关联概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-关联概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../claude-code/00-claude-code-入门概览" class="internal internal-link alias" data-slug="claude-code/00-claude-code-入门概览">Claude Code 入门概览</a> — Skills 在整个架构中的位置</li>
+<li><a href="../claude-code/02-mcp-模型上下文协议" class="internal internal-link alias" data-slug="claude-code/02-mcp-模型上下文协议">MCP 协议</a> — Skills vs MCP：两种不同的扩展方式</li>
+<li><a href="../claude-code/03-tools-工具系统" class="internal internal-link alias" data-slug="claude-code/03-tools-工具系统">Tools 工具系统</a> — Skills 是 Tools 的编排层</li>
+<li><a href="../claude-code/04-agents-代理系统" class="internal internal-link alias" data-slug="claude-code/04-agents-代理系统">Agents 代理系统</a> — Skills 如何与 Agent 系统协作</li>
+<li><a href="../claude-code/05-memory-记忆系统" class="internal internal-link alias" data-slug="claude-code/05-memory-记忆系统">Memory 记忆系统</a> — Skills + Memory：持久化的专业能力</li>
+<li><a href="../claude-code/08-workflows-工作流编排" class="internal internal-link alias" data-slug="claude-code/08-workflows-工作流编排">Workflows 工作流编排</a> — Workflows + Skills：给 Agent 装备专业技能</li>
+</ul>
+<h2 id="-扩展阅读">📚 扩展阅读<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-扩展阅读" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>官方文档：<a href="https://docs.anthropic.com/en/docs/claude-code/skills" class="external external-link">Claude Code Skills<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><code>skill-creator</code> Skill：直接在 Claude Code 中说 “create a new skill”</li>
+</ul>
+<hr/>
+<blockquote>
+<p><strong>下一步</strong>：阅读 <a href="../claude-code/02-mcp-模型上下文协议" class="internal internal-link alias" data-slug="claude-code/02-mcp-模型上下文协议">MCP 协议</a> 了解如何接入外部工具和数据源。</p>
+</blockquote></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-2" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#skills-技能系统" data-for="skills-技能系统">Skills 技能系统</a></li><li class="depth-1"><a href="#-概念" data-for="-概念">📖 概念</a></li><li class="depth-2"><a href="#skills-的层级结构" data-for="skills-的层级结构">Skills 的层级结构</a></li><li class="depth-1"><a href="#-工作原理" data-for="-工作原理">🔧 工作原理</a></li><li class="depth-2"><a href="#skills-的完整生命周期" data-for="skills-的完整生命周期">Skills 的完整生命周期</a></li><li class="depth-2"><a href="#关键机制" data-for="关键机制">关键机制</a></li><li class="depth-2"><a href="#skill-的文件结构" data-for="skill-的文件结构">Skill 的文件结构</a></li><li class="depth-1"><a href="#-目录树位置" data-for="-目录树位置">📂 目录树位置</a></li><li class="depth-1"><a href="#-为什么重要" data-for="-为什么重要">💡 为什么重要</a></li><li class="depth-1"><a href="#-实战示例" data-for="-实战示例">🎯 实战示例</a></li><li class="depth-2"><a href="#示例-1创建项目专属的-api-生成-skill" data-for="示例-1创建项目专属的-api-生成-skill">示例 1：创建项目专属的 API 生成 Skill</a></li><li class="depth-2"><a href="#示例-2组合使用社区-skills-进行代码审查" data-for="示例-2组合使用社区-skills-进行代码审查">示例 2：组合使用社区 Skills 进行代码审查</a></li><li class="depth-2"><a href="#示例-3用-skills-搭建项目规划工作流" data-for="示例-3用-skills-搭建项目规划工作流">示例 3：用 Skills 搭建项目规划工作流</a></li><li class="depth-1"><a href="#-最佳实践" data-for="-最佳实践">✅ 最佳实践</a></li><li class="depth-1"><a href="#️-常见陷阱" data-for="️-常见陷阱">⚠️ 常见陷阱</a></li><li class="depth-1"><a href="#-关联概念" data-for="-关联概念">🔗 关联概念</a></li><li class="depth-1"><a href="#-扩展阅读" data-for="-扩展阅读">📚 扩展阅读</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../00-总览/ai学习知识库总览" class="internal">AI学习知识库总览</a></li><li><a href="../claude-code/00-claude-code-入门概览" class="internal">00-Claude Code 入门概览</a></li><li><a href="../claude-code/02-mcp-模型上下文协议" class="internal">02-MCP 模型上下文协议</a></li><li><a href="../claude-code/03-tools-工具系统" class="internal">03-Tools 工具系统</a></li><li><a href="../claude-code/04-agents-代理系统" class="internal">04-Agents 代理系统</a></li><li><a href="../claude-code/05-memory-记忆系统" class="internal">05-Memory 记忆系统</a></li><li><a href="../claude-code/07-配置与项目管理" class="internal">07-配置与项目管理</a></li><li><a href="../claude-code/08-workflows-工作流编排" class="internal">08-Workflows 工作流编排</a></li><li><a href="../claude-code/09-slash-commands-斜杠命令" class="internal">09-Slash Commands 斜杠命令</a></li><li><a href="../claude-code/11-prompt-engineering-提示词工程" class="internal">11-Prompt Engineering 提示词工程</a></li><li><a href="../meta_kim/00-meta_kim-入门概览" class="internal">00-Meta_Kim 入门概览</a></li><li><a href="../meta_kim/02-元角色体系与能力优先分发" class="internal">02-元角色体系与能力优先分发</a></li><li><a href="../meta_kim/06-实战案例：一次完整的-8-阶段运行" class="internal">06-实战案例：一次完整的 8 阶段运行</a></li><li><a href="../meta_kim/07-用户上下文agent的创建与演进" class="internal">07-用户上下文Agent的创建与演进</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">📂 GitHub 源码</a></li><li><a href="https://obsidian.md">🏠 Obsidian Vault</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-afde6a04.js" type="module" data-persist="true"></script></html>
